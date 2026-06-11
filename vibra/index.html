@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vibra • just be</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        
+        :root {
+            --accent: #a5b4fc;
+        }
+        
+        body {
+            font-family: 'Inter', system_ui, sans-serif;
+        }
+        
+        .font-display {
+            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
+            font-weight: 600;
+            letter-spacing: -0.025em;
+        }
+
+        .vibe-bg {
+            transition: background 800ms cubic-bezier(0.23, 1.0, 0.32, 1);
+        }
+
+        .theme-btn {
+            transition: all 0.2s cubic-bezier(0.23, 1.0, 0.32, 1);
+        }
+        
+        .theme-btn.active {
+            transform: scale(1.05);
+            box-shadow: 0 0 0 1px white, 0 10px 15px -3px rgb(0 0 0 / 0.2);
+        }
+
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .vibe-label {
+            font-size: 13px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .particle-canvas {
+            mix-blend-mode: screen;
+            opacity: 0.9;
+        }
+
+        .glass {
+            background: rgba(255,255,255, 0.08);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255, 0.1);
+        }
+
+        .section-header {
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .ambient-glow {
+            box-shadow: 0 0 20px rgba(165, 180, 252, 0.15);
+        }
+    </style>
+</head>
+<body class="bg-zinc-950 text-white overflow-hidden">
+    <!-- Background Layer -->
+    <div id="bg-layer" 
+         class="fixed inset-0 vibe-bg z-0"
+         style="background: linear-gradient(180deg, #0a2318 0%, #0f2c22 40%, #052010 100%);">
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particles" 
+            class="fixed inset-0 z-10 pointer-events-none particle-canvas"></canvas>
+
+    <!-- UI Overlay -->
+    <div class="fixed inset-0 z-20 pointer-events-none">
+        
+        <!-- Top Navigation -->
+        <div class="flex items-center justify-between px-8 pt-8 pb-4 pointer-events-auto">
+            <!-- Logo -->
+            <div>
+                <div class="flex items-center gap-x-3">
+                    <div class="w-8 h-8 rounded-2xl bg-white/10 flex items-center justify-center">
+                        <i class="fa-solid fa-infinity text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-display text-3xl font-semibold tracking-tighter">vibra</span>
+                    </div>
+                </div>
+                <div class="text-[10px] text-white/50 -mt-1 ml-11 tracking-[2px]">JUST BE</div>
+            </div>
+
+            <!-- Top Controls -->
+            <div class="flex items-center gap-x-2">
+                <!-- Sound Toggle -->
+                <div class="flex items-center glass rounded-3xl px-1 py-1 shadow-xl">
+                    <button id="sound-toggle"
+                            class="flex items-center justify-center w-11 h-11 rounded-3xl hover:bg-white/10 active:bg-white/20 transition-colors"
+                            title="Toggle ambient sound (Space)">
+                        <i class="fa-solid fa-volume-up text-xl text-white/90" id="sound-icon"></i>
+                    </button>
+                    
+                    <div class="w-px h-5 bg-white/20 mx-1"></div>
+                    
+                    <input type="range" id="volume-slider" 
+                           class="accent-white/70 w-20 mx-2" 
+                           min="0" max="100" step="1" value="65">
+                </div>
+
+                <!-- Random Button -->
+                <button id="random-btn"
+                        class="flex items-center justify-center w-11 h-11 glass rounded-3xl hover:bg-white/10 active:bg-white/20 transition-all active:scale-95"
+                        title="Random vibe (R)">
+                    <i class="fa-solid fa-dice text-lg text-white/90"></i>
+                </button>
+
+                <!-- Fullscreen -->
+                <button id="fullscreen-btn"
+                        class="flex items-center justify-center w-11 h-11 glass rounded-3xl hover:bg-white/10 active:bg-white/20 transition-all active:scale-95"
+                        title="Toggle fullscreen (F)">
+                    <i class="fa-solid fa-expand text-lg text-white/90"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Centered Theme Label (subtle) -->
+        <div id="theme-label-container"
+             class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[120%] pointer-events-none z-30">
+            <div id="theme-label"
+                 class="px-5 py-1.5 rounded-3xl glass text-center opacity-0 transition-all duration-500">
+                <span id="theme-name" class="font-medium text-sm tracking-wide text-white/90"></span>
+            </div>
+        </div>
+
+        <!-- Bottom Theme Selector -->
+        <div class="fixed bottom-0 left-0 right-0 pb-8 px-6 pointer-events-auto z-40">
+            <div class="max-w-[1100px] mx-auto">
+                <div class="flex items-center justify-center gap-x-2 overflow-x-auto hide-scrollbar pb-1 snap-x snap-mandatory"
+                     id="theme-selector">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Subtle keyboard hint -->
+    <div class="fixed bottom-3 right-6 text-[10px] text-white/30 pointer-events-none z-30 hidden md:block">
+        1–6 themes • space sound • r random • f fullscreen
+    </div>
+
+    <script>
+        // Tailwind script
+        function initializeTailwind() {
+            document.documentElement.style.setProperty('--accent', '#a5b4fc');
+        }
+
+        // Theme definitions
+        const themes = {
+            forest: {
+                id: 'forest',
+                name: 'Enchanted Grove',
+                icon: '🌿',
+                gradient: 'linear-gradient(180deg, #0a2318 0%, #0f2c22 35%, #052010 100%)',
+                particleType: 'fireflies',
+                soundType: 'forest',
+                accent: '#86efac'
+            },
+            aurora: {
+                id: 'aurora',
+                name: 'Aurora Peaks',
+                icon: '🌌',
+                gradient: 'linear-gradient(180deg, #0b1429 0%, #111b3a 45%, #1a2247 100%)',
+                particleType: 'aurora',
+                soundType: 'pad',
+                accent: '#67e8f9'
+            },
+            beach: {
+                id: 'beach',
+                name: 'Golden Shores',
+                icon: '🏖️',
+                gradient: 'linear-gradient(180deg, #1e2a4a 0%, #f4a261 32%, #e07a5f 58%, #c85a4a 100%)',
+                particleType: 'sparkle',
+                soundType: 'waves',
+                accent: '#fcd34d'
+            },
+            cyber: {
+                id: 'cyber',
+                name: 'Neon Veil',
+                icon: '🌃',
+                gradient: 'linear-gradient(180deg, #0a0a14 0%, #120d1f 100%)',
+                particleType: 'neon-rain',
+                soundType: 'cyber',
+                accent: '#67e8f9'
+            },
+            rain: {
+                id: 'rain',
+                name: 'Hearth Rain',
+                icon: '🌧️',
+                gradient: 'linear-gradient(180deg, #1f2520 0%, #2a2f28 45%, #1a1f1a 100%)',
+                particleType: 'rain',
+                soundType: 'rain',
+                accent: '#94a3b8'
+            },
+            cosmos: {
+                id: 'cosmos',
+                name: 'Celestial Drift',
+                icon: '✧',
+                gradient: 'linear-gradient(180deg, #05050c 0%, #0a0a1f 55%, #0f0a2e 100%)',
+                particleType: 'stars',
+                soundType: 'drone',
+                accent: '#c084fc'
+            }
+        };
+
+        // State
+        let currentTheme = 'forest';
+        let currentParticleType = 'fireflies';
+        let particles = [];
+        let animationFrame = null;
+        let canvas, ctx;
+        let audioCtx = null;
+        let soundNodes = [];
+        let masterGain = null;
+        let isSoundPlaying = false;
+        let currentSoundType = null;
+
+        // Initialize canvas
+        function initCanvas() {
+            canvas = document.getElementById('particles');
+            ctx = canvas.getContext('2d', { alpha: true });
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+        }
+
+        // Create initial particles based on type
+        function createParticles(type) {
+            particles = [];
+            const w = canvas.width;
+            const h = canvas.height;
+
+            if (type === 'fireflies') {
+                for (let i = 0; i < 45; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h * 0.9,
+                        size: Math.random() * 2.8 + 1.4,
+                        speedX: (Math.random() - 0.5) * 0.35,
+                        speedY: (Math.random() - 0.5) * 0.25,
+                        alpha: Math.random() * 0.5 + 0.45,
+                        twinkle: Math.random() * 0.06 + 0.025,
+                        phase: Math.random() * Math.PI * 2,
+                        hue: 75 + Math.random() * 25
+                    });
+                }
+            } 
+            else if (type === 'aurora') {
+                // Aurora ribbons + particles
+                for (let i = 0; i < 28; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h * 0.65,
+                        size: Math.random() * 3.5 + 2,
+                        speedX: (Math.random() - 0.5) * 0.15,
+                        speedY: Math.random() * 0.08 + 0.02,
+                        alpha: Math.random() * 0.35 + 0.25,
+                        phase: Math.random() * Math.PI * 2,
+                        hue: 140 + Math.random() * 80,
+                        ribbon: Math.random() > 0.6
+                    });
+                }
+            } 
+            else if (type === 'sparkle') {
+                for (let i = 0; i < 60; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        size: Math.random() * 2.2 + 0.8,
+                        speedX: (Math.random() - 0.5) * 0.4,
+                        speedY: (Math.random() - 0.5) * 0.15,
+                        alpha: Math.random() * 0.4 + 0.3,
+                        twinkle: Math.random() * 0.08 + 0.03,
+                        phase: Math.random() * Math.PI * 2
+                    });
+                }
+            } 
+            else if (type === 'neon-rain') {
+                for (let i = 0; i < 160; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        length: Math.random() * 22 + 9,
+                        speed: Math.random() * 7 + 11,
+                        alpha: Math.random() * 0.45 + 0.35,
+                        tilt: (Math.random() - 0.5) * 1.5,
+                        hue: Math.random() > 0.5 ? 190 : 320
+                    });
+                }
+            } 
+            else if (type === 'rain') {
+                for (let i = 0; i < 180; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        length: Math.random() * 18 + 8,
+                        speed: Math.random() * 9 + 13,
+                        alpha: Math.random() * 0.35 + 0.25,
+                        tilt: (Math.random() - 0.5) * 0.8
+                    });
+                }
+            } 
+            else if (type === 'stars') {
+                for (let i = 0; i < 220; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        size: Math.random() * 1.8 + 0.6,
+                        alpha: Math.random() * 0.7 + 0.3,
+                        twinkle: Math.random() * 0.04 + 0.015,
+                        phase: Math.random() * Math.PI * 2,
+                        driftX: (Math.random() - 0.5) * 0.03,
+                        driftY: (Math.random() - 0.5) * 0.015
+                    });
+                }
+                // Add a few larger prominent stars
+                for (let i = 0; i < 12; i++) {
+                    particles.push({
+                        x: Math.random() * w,
+                        y: Math.random() * h,
+                        size: Math.random() * 2.5 + 1.8,
+                        alpha: 0.85,
+                        twinkle: 0.02,
+                        phase: Math.random() * Math.PI * 2,
+                        driftX: (Math.random() - 0.5) * 0.01,
+                        driftY: (Math.random() - 0.5) * 0.008,
+                        bright: true
+                    });
+                }
+            }
+        }
+
+        // Main animation loop
+        function animateParticles() {
+            if (!ctx || !canvas) return;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const w = canvas.width;
+            const h = canvas.height;
+            const time = Date.now();
+
+            for (let i = 0; i < particles.length; i++) {
+                const p = particles[i];
+
+                if (currentParticleType === 'fireflies') {
+                    // Gentle floating + twinkle
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    p.phase += 0.015;
+                    
+                    // Soft edge wrapping
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h * 0.9;
+                    if (p.y > h * 0.95) p.y = h * 0.1;
+
+                    const twinkle = Math.sin(time * p.twinkle + p.phase) * 0.35 + 0.65;
+                    const alpha = p.alpha * twinkle;
+
+                    ctx.save();
+                    ctx.shadowBlur = 18;
+                    ctx.shadowColor = `hsla(${p.hue}, 100%, 75%, ${alpha})`;
+                    ctx.fillStyle = `hsla(${p.hue}, 100%, 85%, ${alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+
+                } else if (currentParticleType === 'aurora') {
+                    p.x += p.speedX;
+                    p.y += p.speedY;
+                    p.phase += 0.008;
+
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < h * 0.15) p.y = h * 0.75;
+                    if (p.y > h * 0.75) p.y = h * 0.2;
+
+                    const alpha = p.alpha * (0.7 + Math.sin(time * 0.0012 + p.phase) * 0.3);
+
+                    if (p.ribbon) {
+                        // Draw flowing ribbon
+                        ctx.save();
+                        ctx.strokeStyle = `hsla(${p.hue}, 90%, 75%, ${alpha * 0.7})`;
+                        ctx.lineWidth = p.size * 1.8;
+                        ctx.shadowBlur = 25;
+                        ctx.shadowColor = `hsla(${p.hue}, 100%, 70%, ${alpha * 0.5})`;
+                        
+                        ctx.beginPath();
+                        const startY = p.y;
+                        ctx.moveTo(p.x - 80, startY);
+                        
+                        for (let j = 0; j < 5; j++) {
+                            const px = p.x - 80 + (j * 40);
+                            const py = startY + Math.sin(time * 0.0008 + p.phase + j) * 18;
+                            ctx.lineTo(px, py);
+                        }
+                        ctx.stroke();
+                        ctx.restore();
+                    } else {
+                        // Glowing orbs
+                        ctx.save();
+                        ctx.shadowBlur = 22;
+                        ctx.shadowColor = `hsla(${p.hue}, 100%, 70%, ${alpha})`;
+                        ctx.fillStyle = `hsla(${p.hue}, 95%, 80%, ${alpha})`;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size * 0.9, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.restore();
+                    }
+
+                } else if (currentParticleType === 'sparkle') {
+                    p.x += p.speedX * 0.6;
+                    p.y += p.speedY * 0.4;
+                    p.phase += 0.02;
+
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    if (p.y > h) p.y = 0;
+
+                    const twinkle = Math.sin(time * p.twinkle + p.phase) * 0.4 + 0.6;
+                    const alpha = p.alpha * twinkle;
+
+                    ctx.save();
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = `rgba(255, 230, 180, ${alpha})`;
+                    ctx.fillStyle = `rgba(255, 245, 210, ${alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+
+                } else if (currentParticleType === 'neon-rain') {
+                    p.y += p.speed;
+                    p.x += p.tilt * 0.3;
+
+                    if (p.y > h) {
+                        p.y = -p.length * 2;
+                        p.x = Math.random() * w;
+                    }
+
+                    ctx.save();
+                    ctx.strokeStyle = `hsla(${p.hue}, 100%, 80%, ${p.alpha})`;
+                    ctx.lineWidth = 1.5;
+                    ctx.shadowBlur = 8;
+                    ctx.shadowColor = `hsla(${p.hue}, 100%, 75%, ${p.alpha * 0.6})`;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p.x + p.tilt * 2, p.y + p.length);
+                    ctx.stroke();
+                    ctx.restore();
+
+                } else if (currentParticleType === 'rain') {
+                    p.y += p.speed;
+                    p.x += p.tilt * 0.2;
+
+                    if (p.y > h) {
+                        p.y = -p.length * 1.5;
+                        p.x = Math.random() * w;
+                    }
+
+                    ctx.save();
+                    ctx.strokeStyle = `rgba(180, 200, 210, ${p.alpha})`;
+                    ctx.lineWidth = 1.2;
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(p.x, p.y);
+                    ctx.lineTo(p.x + p.tilt, p.y + p.length);
+                    ctx.stroke();
+                    ctx.restore();
+
+                } else if (currentParticleType === 'stars') {
+                    p.x += p.driftX;
+                    p.y += p.driftY;
+                    p.phase += p.twinkle;
+
+                    // Gentle wrapping
+                    if (p.x < 0) p.x = w;
+                    if (p.x > w) p.x = 0;
+                    if (p.y < 0) p.y = h;
+                    if (p.y > h) p.y = 0;
+
+                    const twinkle = Math.sin(time * p.twinkle + p.phase) * 0.35 + 0.65;
+                    let alpha = p.alpha * twinkle;
+                    let size = p.size;
+
+                    if (p.bright) {
+                        alpha = p.alpha * (0.75 + Math.sin(time * 0.0018 + p.phase) * 0.25);
+                        size = p.size * (0.9 + Math.sin(time * 0.002 + p.phase) * 0.1);
+                    }
+
+                    ctx.save();
+                    if (p.bright) {
+                        ctx.shadowBlur = 14;
+                        ctx.shadowColor = `rgba(255, 255, 255, ${alpha * 0.6})`;
+                    }
+                    ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            }
+
+            animationFrame = requestAnimationFrame(animateParticles);
+        }
+
+        function startParticles(type) {
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+            currentParticleType = type;
+            createParticles(type);
+            animateParticles();
+        }
+
+        // Audio System
+        function initAudioContext() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                masterGain = audioCtx.createGain();
+                masterGain.gain.value = 0.65;
+                masterGain.connect(audioCtx.destination);
+            }
+        }
+
+        function stopAmbientSound() {
+            soundNodes.forEach(node => {
+                try {
+                    if (node.stop) node.stop();
+                    if (node.disconnect) node.disconnect();
+                } catch (e) {}
+            });
+            soundNodes = [];
+            isSoundPlaying = false;
+            updateSoundUI();
+        }
+
+        function createNoiseBuffer(duration = 3) {
+            const bufferSize = audioCtx.sampleRate * duration;
+            const buffer = audioCtx.createBuffer(1, bufferSize, audioCtx.sampleRate);
+            const data = buffer.getChannelData(0);
+            
+            let b0 = 0, b1 = 0, b2 = 0, b3 = 0, b4 = 0, b5 = 0, b6 = 0;
+            
+            for (let i = 0; i < bufferSize; i++) {
+                const white = Math.random() * 2 - 1;
+                b0 = 0.99886 * b0 + white * 0.0555179;
+                b1 = 0.99332 * b1 + white * 0.0750759;
+                b2 = 0.96900 * b2 + white * 0.1538520;
+                b3 = 0.86650 * b3 + white * 0.3104856;
+                b4 = 0.55000 * b4 + white * 0.5329522;
+                b5 = -0.7616 * b5 - white * 0.0168980;
+                const pink = b0 + b1 + b2 + b3 + b4 + b5 + b6 + white * 0.5362;
+                b6 = white * 0.115926;
+                data[i] = pink * 0.11;
+            }
+            return buffer;
+        }
+
+        function playAmbientSound(soundType) {
+            stopAmbientSound();
+            initAudioContext();
+            
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+
+            currentSoundType = soundType;
+            const volume = parseFloat(document.getElementById('volume-slider').value) / 100;
+
+            if (soundType === 'rain' || soundType === 'forest') {
+                // Pink noise rain / wind
+                const noiseBuffer = createNoiseBuffer(4);
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = noiseBuffer;
+                noise.loop = true;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = soundType === 'rain' ? 1400 : 850;
+
+                const gain = audioCtx.createGain();
+                gain.gain.value = soundType === 'rain' ? 0.55 * volume : 0.38 * volume;
+
+                // Gentle modulation
+                const lfo = audioCtx.createOscillator();
+                lfo.type = 'sine';
+                lfo.frequency.value = 0.08;
+
+                const lfoGain = audioCtx.createGain();
+                lfoGain.gain.value = 0.12;
+
+                lfo.connect(lfoGain);
+                lfoGain.connect(gain.gain);
+
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(masterGain);
+
+                noise.start();
+                lfo.start();
+
+                soundNodes.push(noise, filter, gain, lfo, lfoGain);
+
+            } else if (soundType === 'waves') {
+                // Ocean waves - modulated noise
+                const noiseBuffer = createNoiseBuffer(5);
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = noiseBuffer;
+                noise.loop = true;
+
+                const filter = audioCtx.createBiquadFilter();
+                filter.type = 'lowpass';
+                filter.frequency.value = 650;
+
+                const gain = audioCtx.createGain();
+                gain.gain.value = 0.42 * volume;
+
+                const lfo = audioCtx.createOscillator();
+                lfo.type = 'sine';
+                lfo.frequency.value = 0.065;
+
+                const lfoGain = audioCtx.createGain();
+                lfoGain.gain.value = 0.35;
+
+                lfo.connect(lfoGain);
+                lfoGain.connect(gain.gain);
+
+                noise.connect(filter);
+                filter.connect(gain);
+                gain.connect(masterGain);
+
+                noise.start();
+                lfo.start();
+
+                soundNodes.push(noise, filter, gain, lfo, lfoGain);
+
+            } else if (soundType === 'pad' || soundType === 'drone') {
+                // Ethereal pad / cosmic drone
+                const notes = soundType === 'pad' ? [58, 65, 72, 79] : [48, 55, 62, 69]; // MIDI notes
+                const gains = [];
+
+                notes.forEach((note, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    osc.type = idx % 2 === 0 ? 'sine' : 'triangle';
+                    osc.frequency.value = 440 * Math.pow(2, (note - 69) / 12);
+                    
+                    // Slight detune for width
+                    if (idx === 1 || idx === 3) osc.detune.value = 7;
+
+                    const oscGain = audioCtx.createGain();
+                    oscGain.gain.value = (soundType === 'pad' ? 0.18 : 0.22) * volume * (idx === 0 ? 1 : 0.85);
+
+                    const filter = audioCtx.createBiquadFilter();
+                    filter.type = 'lowpass';
+                    filter.frequency.value = soundType === 'pad' ? 1200 : 850;
+
+                    // Slow movement LFO
+                    const lfo = audioCtx.createOscillator();
+                    lfo.type = 'sine';
+                    lfo.frequency.value = 0.04 + (idx * 0.008);
+
+                    const lfoGain = audioCtx.createGain();
+                    lfoGain.gain.value = 0.08;
+
+                    lfo.connect(lfoGain);
+                    lfoGain.connect(osc.frequency);
+
+                    osc.connect(filter);
+                    filter.connect(oscGain);
+                    oscGain.connect(masterGain);
+
+                    osc.start();
+                    lfo.start();
+
+                    soundNodes.push(osc, filter, oscGain, lfo, lfoGain);
+                    gains.push(oscGain);
+                });
+
+            } else if (soundType === 'cyber') {
+                // Low drone + high digital texture
+                const drone = audioCtx.createOscillator();
+                drone.type = 'sawtooth';
+                drone.frequency.value = 38;
+
+                const droneFilter = audioCtx.createBiquadFilter();
+                droneFilter.type = 'lowpass';
+                droneFilter.frequency.value = 180;
+
+                const droneGain = audioCtx.createGain();
+                droneGain.gain.value = 0.28 * volume;
+
+                drone.connect(droneFilter);
+                droneFilter.connect(droneGain);
+                droneGain.connect(masterGain);
+                drone.start();
+
+                // High digital shimmer
+                const noiseBuffer = createNoiseBuffer(2);
+                const noise = audioCtx.createBufferSource();
+                noise.buffer = noiseBuffer;
+                noise.loop = true;
+
+                const highFilter = audioCtx.createBiquadFilter();
+                highFilter.type = 'bandpass';
+                highFilter.frequency.value = 2400;
+                highFilter.Q.value = 4;
+
+                const highGain = audioCtx.createGain();
+                highGain.gain.value = 0.09 * volume;
+
+                const lfo = audioCtx.createOscillator();
+                lfo.type = 'sine';
+                lfo.frequency.value = 0.7;
+
+                const lfoGain = audioCtx.createGain();
+                lfoGain.gain.value = 180;
+
+                lfo.connect(lfoGain);
+                lfoGain.connect(highFilter.frequency);
+
+                noise.connect(highFilter);
+                highFilter.connect(highGain);
+                highGain.connect(masterGain);
+
+                noise.start();
+                lfo.start();
+
+                soundNodes.push(drone, droneFilter, droneGain, noise, highFilter, highGain, lfo, lfoGain);
+            }
+
+            isSoundPlaying = true;
+            updateSoundUI();
+        }
+
+        function updateSoundUI() {
+            const icon = document.getElementById('sound-icon');
+            if (isSoundPlaying) {
+                icon.classList.remove('fa-volume-up');
+                icon.classList.add('fa-volume-down');
+                icon.style.color = '#a5b4fc';
+            } else {
+                icon.classList.remove('fa-volume-down');
+                icon.classList.add('fa-volume-up');
+                icon.style.color = '';
+            }
+        }
+
+        function toggleSound() {
+            if (!audioCtx) initAudioContext();
+            
+            if (isSoundPlaying) {
+                stopAmbientSound();
+            } else {
+                const theme = themes[currentTheme];
+                playAmbientSound(theme.soundType);
+            }
+        }
+
+        function setVolume(val) {
+            if (masterGain) {
+                masterGain.gain.value = val / 100;
+            }
+        }
+
+        // Set active theme
+        function setTheme(themeId, playSound = true) {
+            const theme = themes[themeId];
+            if (!theme) return;
+
+            currentTheme = themeId;
+
+            // Update background
+            const bgLayer = document.getElementById('bg-layer');
+            bgLayer.style.background = theme.gradient;
+
+            // Update particles
+            startParticles(theme.particleType);
+
+            // Update active button state
+            document.querySelectorAll('.theme-btn').forEach(btn => {
+                btn.classList.remove('active', 'ring-1', 'ring-white/70');
+                if (btn.dataset.theme === themeId) {
+                    btn.classList.add('active', 'ring-1', 'ring-white/70');
+                }
+            });
+
+            // Show subtle theme label
+            showThemeLabel(theme.name);
+
+            // Handle sound
+            if (playSound && isSoundPlaying) {
+                playAmbientSound(theme.soundType);
+            }
+
+            // Save preference
+            localStorage.setItem('vibra-last-theme', themeId);
+        }
+
+        function showThemeLabel(name) {
+            const container = document.getElementById('theme-label-container');
+            const label = document.getElementById('theme-name');
+            
+            label.textContent = name;
+            container.style.opacity = '1';
+            container.style.transform = 'translate(-50%, -120%)';
+
+            setTimeout(() => {
+                container.style.transitionDuration = '600ms';
+                container.style.opacity = '0';
+                setTimeout(() => {
+                    container.style.transitionDuration = '500ms';
+                }, 600);
+            }, 1400);
+        }
+
+        // Build theme selector UI
+        function buildThemeSelector() {
+            const container = document.getElementById('theme-selector');
+            container.innerHTML = '';
+
+            Object.keys(themes).forEach((key, index) => {
+                const theme = themes[key];
+                
+                const btn = document.createElement('button');
+                btn.className = `theme-btn flex-shrink-0 snap-start flex flex-col items-center justify-center px-5 py-3.5 rounded-3xl glass min-w-[108px] active:scale-[0.985] transition-all`;
+                btn.dataset.theme = key;
+                
+                if (key === currentTheme) {
+                    btn.classList.add('active', 'ring-1', 'ring-white/70');
+                }
+
+                btn.innerHTML = `
+                    <div class="text-3xl mb-1.5">${theme.icon}</div>
+                    <div class="text-xs font-medium tracking-wide text-center leading-tight">${theme.name}</div>
+                `;
+
+                btn.addEventListener('click', () => {
+                    setTheme(key);
+                });
+
+                container.appendChild(btn);
+            });
+        }
+
+        function setRandomTheme() {
+            const keys = Object.keys(themes);
+            let newKey = keys[Math.floor(Math.random() * keys.length)];
+            
+            // Avoid picking the same theme
+            if (newKey === currentTheme && keys.length > 1) {
+                newKey = keys[(keys.indexOf(currentTheme) + 1) % keys.length];
+            }
+            
+            setTheme(newKey);
+        }
+
+        function toggleFullscreen() {
+            if (!document.fullscreenElement) {
+                document.documentElement.requestFullscreen().catch(() => {});
+            } else {
+                document.exitFullscreen().catch(() => {});
+            }
+        }
+
+        // Keyboard controls
+        function setupKeyboardControls() {
+            document.addEventListener('keydown', (e) => {
+                if (e.target.tagName === 'INPUT') return;
+
+                switch(e.key.toLowerCase()) {
+                    case ' ':
+                        e.preventDefault();
+                        toggleSound();
+                        break;
+                    case 'r':
+                        setRandomTheme();
+                        break;
+                    case 'f':
+                        toggleFullscreen();
+                        break;
+                    case '1': setTheme('forest'); break;
+                    case '2': setTheme('aurora'); break;
+                    case '3': setTheme('beach'); break;
+                    case '4': setTheme('cyber'); break;
+                    case '5': setTheme('rain'); break;
+                    case '6': setTheme('cosmos'); break;
+                }
+            });
+
+            // Prevent space from scrolling
+            window.addEventListener('keydown', function(e) {
+                if (e.key === ' ' && e.target === document.body) {
+                    e.preventDefault();
+                }
+            });
+        }
+
+        function setupControls() {
+            // Sound toggle
+            document.getElementById('sound-toggle').addEventListener('click', toggleSound);
+
+            // Volume slider
+            const volumeSlider = document.getElementById('volume-slider');
+            volumeSlider.addEventListener('input', (e) => {
+                setVolume(e.target.value);
+            });
+
+            // Random button
+            document.getElementById('random-btn').addEventListener('click', setRandomTheme);
+
+            // Fullscreen
+            document.getElementById('fullscreen-btn').addEventListener('click', toggleFullscreen);
+
+            // Volume default
+            volumeSlider.value = 65;
+        }
+
+        function loadLastTheme() {
+            const last = localStorage.getItem('vibra-last-theme');
+            if (last && themes[last]) {
+                return last;
+            }
+            return 'forest';
+        }
+
+        // Initialize everything
+        function initializeVibra() {
+            initializeTailwind();
+            initCanvas();
+
+            // Load last used theme or default
+            const startingTheme = loadLastTheme();
+            currentTheme = startingTheme;
+
+            // Set initial background
+            const bgLayer = document.getElementById('bg-layer');
+            bgLayer.style.background = themes[startingTheme].gradient;
+
+            // Build UI
+            buildThemeSelector();
+
+            // Start particles
+            startParticles(themes[startingTheme].particleType);
+
+            // Setup controls
+            setupControls();
+            setupKeyboardControls();
+
+            // Set initial volume
+            setTimeout(() => {
+                const vol = document.getElementById('volume-slider');
+                if (vol) setVolume(vol.value);
+            }, 300);
+
+            // Subtle welcome label on first load
+            setTimeout(() => {
+                const container = document.getElementById('theme-label-container');
+                const label = document.getElementById('theme-name');
+                label.textContent = themes[startingTheme].name;
+                container.style.transitionDuration = '0ms';
+                container.style.opacity = '0.9';
+                
+                setTimeout(() => {
+                    container.style.transitionDuration = '900ms';
+                    container.style.opacity = '0';
+                }, 1600);
+            }, 800);
+
+            // Easter egg: click on background to intensify particles briefly
+            document.getElementById('bg-layer').addEventListener('click', () => {
+                if (particles.length > 0) {
+                    const originalCount = particles.length;
+                    // Temporarily add more particles
+                    const w = canvas.width;
+                    const h = canvas.height;
+                    
+                    for (let i = 0; i < 25; i++) {
+                        if (currentParticleType === 'fireflies') {
+                            particles.push({
+                                x: Math.random() * w,
+                                y: Math.random() * h,
+                                size: Math.random() * 2.5 + 1.2,
+                                speedX: (Math.random() - 0.5) * 0.6,
+                                speedY: (Math.random() - 0.5) * 0.4,
+                                alpha: 0.9,
+                                twinkle: 0.04,
+                                phase: Math.random() * Math.PI * 2,
+                                hue: 80 + Math.random() * 20
+                            });
+                        } else if (currentParticleType === 'stars') {
+                            particles.push({
+                                x: Math.random() * w,
+                                y: Math.random() * h,
+                                size: Math.random() * 2 + 1,
+                                alpha: 0.95,
+                                twinkle: 0.03,
+                                phase: Math.random() * Math.PI * 2,
+                                driftX: (Math.random() - 0.5) * 0.02,
+                                driftY: (Math.random() - 0.5) * 0.01
+                            });
+                        }
+                    }
+                    
+                    // Remove extra after a while
+                    setTimeout(() => {
+                        if (particles.length > originalCount) {
+                            particles.splice(originalCount, particles.length - originalCount);
+                        }
+                    }, 2800);
+                }
+            });
+
+            // Make sure initial theme button is active
+            setTimeout(() => {
+                document.querySelectorAll('.theme-btn').forEach(btn => {
+                    if (btn.dataset.theme === startingTheme) {
+                        btn.classList.add('active', 'ring-1', 'ring-white/70');
+                    }
+                });
+            }, 100);
+
+            console.log('%c[vibra] Pure vibe website initialized ✨', 'color:#64748b');
+        }
+
+        // Boot the app
+        window.onload = initializeVibra;
+    </script>
+</body>
+</html>
