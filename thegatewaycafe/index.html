@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Gateway CafÃ© â€” Hobson, Montana</title>
+<meta name="description" content="The Gateway CafÃ© â€” a vintage 50s diner in Hobson, Montana, the original Gateway to the Judith Basin. Best burgers in the county, scratch breakfasts, milkshakes, boba & fun sodas. Spin the record and have a look.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --vinyl:#15110E;
+  --vinyl-2:#211A15;
+  --cream:#F6EBD4;
+  --cream-2:#FBF4E4;
+  --teal:#1FA6A0;
+  --teal-deep:#157C77;
+  --tomato:#E2553B;
+  --tomato-deep:#C03E29;
+  --mustard:#E8A93C;
+  --ink:#2A2018;
+  --ink-soft:#6A5A48;
+  --pink:#E98AA6;
+  --label:#E2553B;
+  --line:rgba(42,32,24,.14);
+  --script:'Pacifico', cursive;
+  --head:'Oswald', sans-serif;
+  --body:'Poppins', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--cream);color:var(--ink);line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+::selection{background:var(--tomato);color:var(--cream)}
+.wrap{width:min(1100px,92%);margin:0 auto}
+.eyebrow{font-family:var(--head);font-weight:600;font-size:.8rem;letter-spacing:.24em;text-transform:uppercase;color:var(--teal-deep)}
+.script{font-family:var(--script)}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}
+  .platter,.tonearm,.disc-spin{animation:none !important}
+  *{transition-duration:.001s !important}
+}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;padding:12px 0;transition:background .3s,box-shadow .3s}
+nav.solid{background:var(--vinyl);box-shadow:0 5px 20px rgba(0,0,0,.3)}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{font-family:var(--script);font-size:1.4rem;text-decoration:none;color:var(--cream);line-height:1}
+.brand .by{font-family:var(--head);font-size:.55rem;letter-spacing:.26em;text-transform:uppercase;color:var(--mustard);display:block;margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:24px;list-style:none}
+.nav-links a{text-decoration:none;font-family:var(--head);font-weight:500;font-size:.9rem;letter-spacing:.1em;text-transform:uppercase;color:var(--cream);opacity:.9}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--mustard);opacity:1}
+.nav-call{background:var(--tomato);color:var(--cream) !important;padding:9px 17px;border-radius:999px;opacity:1 !important}
+.nav-call:hover{background:var(--tomato-deep)}
+.menu-btn{display:none;background:none;border:2px solid var(--cream);color:var(--cream);border-radius:999px;padding:7px 14px;font-family:var(--head);font-size:.82rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer}
+@media (max-width:820px){
+  .nav-links{position:fixed;inset:60px 12px auto 12px;background:var(--vinyl-2);border:2px solid var(--teal);border-radius:16px;flex-direction:column;align-items:stretch;padding:18px;gap:14px;display:none;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+  .nav-links.open{display:flex}.nav-call{text-align:center}.menu-btn{display:block}
+}
+
+/* ---------- hero ---------- */
+header{padding:140px 0 70px;position:relative;overflow:hidden;
+  background:radial-gradient(70% 60% at 50% 0%, rgba(31,166,160,.14), transparent 65%)}
+.hero{display:grid;grid-template-columns:1.02fr .98fr;gap:40px;align-items:center}
+.hero .est{display:inline-flex;align-items:center;gap:10px;margin-bottom:14px}
+.hero .est .yr{font-family:var(--head);font-weight:700;background:var(--vinyl);color:var(--mustard);padding:3px 10px;border-radius:6px;font-size:.74rem;letter-spacing:.1em}
+.hero h1{font-family:var(--script);font-size:clamp(3rem,8.5vw,5.6rem);line-height:.95;color:var(--tomato);text-shadow:2px 3px 0 rgba(42,32,24,.12)}
+.hero h1 .sub{display:block;font-family:var(--head);font-weight:700;font-size:clamp(1rem,3vw,1.5rem);letter-spacing:.32em;text-transform:uppercase;color:var(--teal-deep);margin-top:10px;text-shadow:none}
+.hero p.lede{color:var(--ink-soft);max-width:440px;margin:22px 0 26px;font-size:1.08rem}
+.status{display:inline-flex;align-items:center;gap:9px;font-family:var(--head);font-weight:600;font-size:.84rem;letter-spacing:.06em;text-transform:uppercase;background:var(--cream-2);border:2px solid var(--ink);padding:8px 16px;border-radius:999px;margin-bottom:24px}
+.status .pip{width:9px;height:9px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal)}
+.status.closed .pip{background:var(--tomato);box-shadow:0 0 8px var(--tomato)}
+.cta-row{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;text-decoration:none;font-family:var(--head);font-weight:600;letter-spacing:.08em;text-transform:uppercase;border-radius:999px;padding:13px 26px;font-size:.92rem;transition:transform .15s,background .2s,color .2s;border:2px solid transparent;cursor:pointer}
+.btn:active{transform:scale(.97)}
+.btn-tomato{background:var(--tomato);color:var(--cream)}.btn-tomato:hover{background:var(--tomato-deep)}
+.btn-teal{border-color:var(--teal-deep);color:var(--teal-deep)}.btn-teal:hover{background:var(--teal-deep);color:var(--cream)}
+
+/* hero record (decorative, slow spin) */
+.hero-disc{display:flex;justify-content:center;position:relative}
+.disc{width:min(380px,82%);aspect-ratio:1;border-radius:50%;position:relative;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, #1a1410 0 2px, #221a14 2px 5px),
+    radial-gradient(circle at 38% 32%, rgba(255,255,255,.06), transparent 40%),
+    var(--vinyl);
+  box-shadow:0 26px 50px rgba(0,0,0,.45), inset 0 0 0 2px rgba(255,255,255,.04);
+  display:flex;align-items:center;justify-content:center;
+}
+.disc-spin{animation:spin 14s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.disc .lbl{width:42%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 50%, #fff 0 5%, var(--teal) 5% 100%);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:var(--cream);
+  box-shadow:inset 0 0 0 4px rgba(0,0,0,.15)}
+.disc .lbl .car{font-size:1.6rem;line-height:1}
+.disc .lbl .nm{font-family:var(--script);font-size:1.05rem;margin-top:2px}
+.disc .lbl .yr{font-family:var(--head);font-size:.55rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.disc::after{content:"";position:absolute;width:5px;height:5px;border-radius:50%;background:#0c0906;z-index:2}
+.hero-disc .arm{position:absolute;top:6%;right:4%;width:40%;height:8px;background:linear-gradient(90deg,var(--chrome,#c8ccd0),#9aa0a6);border-radius:6px;transform-origin:right center;transform:rotate(24deg);box-shadow:0 4px 10px rgba(0,0,0,.3)}
+.hero-disc .arm::before{content:"";position:absolute;left:-6px;top:-3px;width:18px;height:14px;background:var(--tomato);border-radius:3px}
+@media (max-width:820px){.hero{grid-template-columns:1fr;text-align:center}.hero p.lede{margin-left:auto;margin-right:auto}.cta-row{justify-content:center}.hero-disc{order:-1;margin-bottom:8px}}
+
+/* ---------- marquee strip ---------- */
+.strip{background:var(--vinyl);color:var(--cream);overflow:hidden;border-top:4px solid var(--tomato);border-bottom:4px solid var(--teal)}
+.strip-track{display:flex;width:max-content;animation:scroll 34s linear infinite;padding:11px 0}
+.strip span{font-family:var(--head);font-weight:600;font-size:.84rem;letter-spacing:.16em;text-transform:uppercase;white-space:nowrap;padding:0 20px;display:flex;align-items:center;gap:20px}
+.strip .note{color:var(--mustard)}
+@keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion: reduce){.strip-track{animation:none;flex-wrap:wrap;width:100%}}
+
+/* ---------- story ---------- */
+.story{padding:88px 0}
+.story-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:50px;align-items:center}
+.story h2{font-family:var(--script);font-size:clamp(2rem,5vw,3rem);line-height:1.1;color:var(--tomato);margin:10px 0 18px}
+.story p{color:var(--ink-soft);margin-bottom:15px;font-size:1.05rem}
+.story p strong{color:var(--ink)}
+.ticket{background:var(--cream-2);border:2px solid var(--ink);border-radius:14px;padding:26px;box-shadow:8px 8px 0 var(--teal)}
+.ticket .badge{display:inline-block;font-family:var(--head);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;background:var(--tomato);color:var(--cream);padding:5px 12px;border-radius:999px;margin-bottom:14px}
+.ticket blockquote{font-size:1.16rem;line-height:1.5;font-weight:500;font-style:italic}
+.ticket figcaption{margin-top:14px;font-family:var(--head);font-weight:600;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--teal-deep)}
+@media (max-width:820px){.story-grid{grid-template-columns:1fr;gap:38px}.ticket{box-shadow:6px 6px 0 var(--teal)}}
+
+/* ===== THE TURNTABLE MENU ===== */
+.jukebox{padding:80px 0 96px;background:
+  radial-gradient(60% 50% at 50% 0,rgba(226,85,59,.08),transparent 65%)}
+.jb-head{text-align:center;max-width:600px;margin:0 auto 14px}
+.jb-head h2{font-family:var(--script);font-size:clamp(2rem,5vw,3rem);color:var(--tomato);margin:8px 0 8px}
+.jb-head p{color:var(--ink-soft)}
+.deck{display:grid;grid-template-columns:1fr 1.25fr;gap:30px;align-items:center;margin-top:30px}
+/* the turntable */
+.turntable{position:relative;aspect-ratio:1;width:100%;max-width:440px;margin:0 auto;
+  background:linear-gradient(160deg,var(--vinyl-2),var(--vinyl));border-radius:24px;
+  box-shadow:0 26px 54px rgba(0,0,0,.45), inset 0 0 0 2px rgba(255,255,255,.05);
+  padding:8%}
+.platter{width:100%;height:100%;border-radius:50%;position:relative;cursor:pointer;
+  background:
+    repeating-radial-gradient(circle at 50% 50%, #181210 0 2px, #221a14 2px 5px),
+    var(--vinyl);
+  box-shadow:inset 0 0 0 2px rgba(255,255,255,.05), 0 8px 20px rgba(0,0,0,.4);
+  display:flex;align-items:center;justify-content:center;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.platter.spinning{animation:spin 3.4s linear infinite}
+.platter .label{width:46%;aspect-ratio:1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+  background:radial-gradient(circle at 50% 50%, var(--cream) 0 6%, var(--label) 6% 100%);color:var(--cream);
+  box-shadow:inset 0 0 0 4px rgba(0,0,0,.12);padding:10px;transition:background .4s}
+.platter .label .side{font-family:var(--head);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;opacity:.85}
+.platter .label .ttl{font-family:var(--script);font-size:1.3rem;line-height:1.05;margin:4px 0}
+.platter .label .cnt{font-family:var(--head);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;opacity:.85}
+.platter::after{content:"";position:absolute;width:6px;height:6px;border-radius:50%;background:#0c0906;z-index:3}
+/* tonearm */
+.tonearm{position:absolute;top:10%;right:9%;width:42%;height:9px;transform-origin:right center;
+  transform:rotate(28deg);transition:transform .9s cubic-bezier(.2,.7,.2,1);z-index:4}
+.tonearm.on{transform:rotate(13deg)}
+.tonearm .bar{position:absolute;inset:0;background:linear-gradient(90deg,#c8ccd0,#9aa0a6);border-radius:6px;box-shadow:0 3px 8px rgba(0,0,0,.35)}
+.tonearm .pivot{position:absolute;right:-10px;top:-8px;width:26px;height:26px;border-radius:50%;background:#b6bbc0;box-shadow:0 3px 8px rgba(0,0,0,.35)}
+.tonearm .head{position:absolute;left:-8px;top:-5px;width:20px;height:18px;background:var(--tomato);border-radius:3px}
+/* speed buttons = section selector */
+.controls{display:flex;flex-direction:column;gap:10px}
+.controls .ctitle{font-family:var(--head);font-weight:600;font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+.track-btn{display:flex;align-items:center;gap:14px;width:100%;text-align:left;cursor:pointer;
+  background:var(--cream-2);border:2px solid var(--line);border-radius:12px;padding:13px 16px;transition:all .16s}
+.track-btn:hover{transform:translateX(4px);border-color:var(--teal)}
+.track-btn[aria-selected="true"]{border-color:var(--tomato);background:#fff;box-shadow:4px 4px 0 var(--tomato)}
+.track-btn .tnum{font-family:var(--head);font-weight:700;font-size:1rem;width:34px;height:34px;flex:0 0 auto;border-radius:50%;background:var(--vinyl);color:var(--mustard);display:flex;align-items:center;justify-content:center}
+.track-btn[aria-selected="true"] .tnum{background:var(--tomato);color:#fff}
+.track-btn .tmeta{flex:1}
+.track-btn .tn{font-family:var(--head);font-weight:600;font-size:1.02rem;letter-spacing:.04em;text-transform:uppercase;line-height:1.1}
+.track-btn .td{font-size:.8rem;color:var(--ink-soft)}
+.track-btn .tar{font-family:var(--head);color:var(--teal-deep);font-weight:700}
+@media (max-width:860px){.deck{grid-template-columns:1fr;gap:26px}.turntable{max-width:300px}}
+
+/* now playing = the menu list */
+.nowplaying{margin-top:34px;background:var(--cream-2);border:2px solid var(--ink);border-radius:16px;overflow:hidden;box-shadow:0 18px 40px rgba(42,32,24,.14)}
+.np-head{display:flex;align-items:center;gap:14px;padding:16px 22px;background:var(--vinyl);color:var(--cream)}
+.np-head .eq{display:flex;align-items:flex-end;gap:3px;height:22px}
+.np-head .eq i{width:4px;background:var(--mustard);border-radius:2px;animation:eq 1s ease-in-out infinite}
+.np-head .eq i:nth-child(2){animation-delay:.2s}.np-head .eq i:nth-child(3){animation-delay:.4s}.np-head .eq i:nth-child(4){animation-delay:.1s}
+@keyframes eq{0%,100%{height:6px}50%{height:22px}}
+.np-head .npttl{font-family:var(--head);font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.np-head .npttl small{display:block;font-size:.66rem;opacity:.7;letter-spacing:.16em}
+.np-body{padding:8px 0}
+.mitem{display:grid;grid-template-columns:30px 1fr auto;gap:12px;align-items:baseline;padding:13px 24px;border-bottom:1px solid var(--line)}
+.mitem:last-child{border-bottom:none}
+.mitem .tk{font-family:var(--head);font-size:.82rem;color:var(--teal-deep);font-weight:700}
+.mitem .nm{font-family:var(--head);font-weight:600;font-size:1.06rem;letter-spacing:.02em}
+.mitem .md{font-size:.9rem;color:var(--ink-soft);margin-top:2px;line-height:1.45}
+.mitem .md b{color:var(--tomato);font-weight:600}
+.mitem .pr{font-family:var(--head);font-weight:700;font-size:1.05rem;color:var(--tomato);white-space:nowrap;text-align:right}
+.mitem .pr small{display:block;font-size:.66rem;color:var(--ink-soft);font-weight:500;letter-spacing:.04em}
+.np-foot{padding:16px 24px;background:var(--cream);border-top:2px dashed var(--line);font-size:.84rem;color:var(--ink-soft);text-align:center}
+.np-foot b{color:var(--ink)}
+
+/* ---------- visit ---------- */
+.visit{padding:84px 0 96px}
+.visit-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:50px;align-items:stretch}
+.visit h2{font-family:var(--script);font-size:clamp(2rem,5vw,3rem);color:var(--tomato);margin:10px 0 22px}
+.info-list{list-style:none;border-top:3px solid var(--teal)}
+.info-list li{display:flex;justify-content:space-between;gap:16px;padding:15px 2px;border-bottom:1px solid var(--line);align-items:baseline;flex-wrap:wrap}
+.info-list .k{font-family:var(--head);font-weight:600;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-deep)}
+.info-list .v{font-weight:600;font-size:.99rem;text-align:right}
+.info-list .v a{text-decoration:none;border-bottom:2px solid var(--tomato)}
+.visit .cta-row{margin-top:24px}
+.map-frame{border-radius:16px;overflow:hidden;border:3px solid var(--ink);min-height:350px;background:var(--cream-2)}
+.map-frame iframe{width:100%;height:100%;min-height:350px;border:0}
+@media (max-width:860px){.visit-grid{grid-template-columns:1fr}}
+
+/* ---------- footer ---------- */
+footer.site{background:var(--vinyl);color:var(--cream);padding:50px 0 40px;text-align:center}
+footer.site .fbrand{font-family:var(--script);font-size:1.7rem;color:var(--mustard)}
+footer.site .fsub{font-family:var(--head);font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;opacity:.7;margin:8px 0 18px}
+footer.site p{font-size:.82rem;opacity:.55;max-width:520px;margin:0 auto}
+a:focus-visible,button:focus-visible{outline:3px solid var(--teal);outline-offset:3px;border-radius:6px}
+</style>
+</head>
+<body>
+
+<nav id="nav" aria-label="Main">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top">The Gateway CafÃ©<span class="by">Hobson Â· Montana</span></a>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#story">Our Story</a></li>
+      <li><a href="#menu">The Records</a></li>
+      <li><a href="#visit">Visit</a></li>
+      <li><a class="nav-call" href="tel:+14064235615">(406) 423-5615</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header id="top">
+  <div class="wrap hero">
+    <div>
+      <div class="est"><span class="eyebrow">A vintage 50s diner</span><span class="yr">est. Hobson, MT</span></div>
+      <h1>The Gateway CafÃ©<span class="sub">Hobson Â· Montana</span></h1>
+      <p class="lede">The original Gateway to the Judith Basin â€” now a chrome-and-cream '50s diner serving the best burgers in the county, scratch breakfasts, hand-spun shakes, and a wall of fun sodas. Drop the needle and have a look.</p>
+      <div class="status" id="statusPill"><span class="pip"></span><span id="statusText">Open</span></div>
+      <div class="cta-row">
+        <a class="btn btn-tomato" href="#menu">Flip the records</a>
+        <a class="btn btn-teal" href="https://www.google.com/maps/dir/?api=1&destination=101+3rd+St+S,+Hobson,+MT+59452" target="_blank" rel="noopener">Directions</a>
+      </div>
+    </div>
+    <div class="hero-disc">
+      <div class="disc disc-spin" aria-hidden="true">
+        <div class="lbl"><span class="car">ðŸš—</span><span class="nm">Gateway</span><span class="yr">CafÃ© Â· 50s</span></div>
+      </div>
+      <div class="arm" aria-hidden="true"></div>
+    </div>
+  </div>
+</header>
+
+<div class="strip" aria-hidden="true">
+  <div class="strip-track" id="stripTrack">
+    <span>Best burgers in the county <i class="note">â™ª</i> Scratch-baked goods daily <i class="note">â™ª</i> Hand-spun milkshakes &amp; the Big Train <i class="note">â™ª</i> Boba &amp; fun sodas <i class="note">â™ª</i> Breakfast served all day <i class="note">â™ª</i> Gluten-free options available <i class="note">â™ª</i> A vintage 50s diner in Hobson <i class="note">â™ª</i></span>
+  </div>
+</div>
+
+<section class="story" id="story">
+  <div class="wrap story-grid">
+    <div class="reveal">
+      <span class="eyebrow">Why "Gateway"?</span>
+      <h2>The gateway to the Judith Basin.</h2>
+      <p>Long before the diner, Hobson was the freight-wagon crossing of the Judith River â€” the way through, between Fort Benton and the Musselshell country. Folks called it <strong>the Gateway to the Judith Basin</strong>. The cafÃ© took the name and ran with it.</p>
+      <p>Today it's a vintage-'50s diner: teal and chrome, checkerboard floors, a classic car on the sign, and a record always ready to spin. Family-friendly, open early and late, and known around Judith Basin County for <strong>the best burger you'll find for miles</strong> â€” plus boba, Italian sodas, and milkshakes thick enough to stand a spoon in.</p>
+      <p>A welcome break from the long Montana road, with service that's warm and personable â€” the rare kind that makes 179 people feel like a crowd.</p>
+    </div>
+    <div class="reveal">
+      <figure class="ticket">
+        <span class="badge">â˜…â˜…â˜…â˜…â˜… Â· Off the road</span>
+        <blockquote>"Hidden along the long stretches of Montana farmland, the Gateway CafÃ© was a welcome break from the road. Service was warm and personable â€” that rare balance."</blockquote>
+        <figcaption>â€” a traveler, Judith Basin</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="jukebox" id="menu">
+  <div class="wrap">
+    <div class="jb-head reveal">
+      <span class="eyebrow">Now spinning</span>
+      <h2>Pick a record.</h2>
+      <p>Five sides on the turntable â€” drop the needle on any one and the tracklist plays below.</p>
+    </div>
+    <div class="deck">
+      <div>
+        <div class="turntable">
+          <div class="platter" id="platter" role="button" tabindex="0" aria-label="Record platter â€” shows the selected menu section">
+            <div class="label" id="platterLabel">
+              <span class="side">Side A</span>
+              <span class="ttl" id="platterTtl">Burgers</span>
+              <span class="cnt" id="platterCnt">11 tracks</span>
+            </div>
+          </div>
+          <div class="tonearm on" id="tonearm" aria-hidden="true">
+            <span class="bar"></span><span class="pivot"></span><span class="head"></span>
+          </div>
+        </div>
+      </div>
+      <div class="controls" role="tablist" aria-label="Menu sections" id="controls">
+        <div class="ctitle">â–¸ Select a side</div>
+      </div>
+    </div>
+
+    <div class="nowplaying reveal">
+      <div class="np-head">
+        <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+        <div class="npttl" id="npTitle">Burgers<small id="npSub"></small></div>
+      </div>
+      <div class="np-body" id="npBody"></div>
+      <div class="np-foot" id="npFoot"></div>
+    </div>
+  </div>
+</section>
+
+<section class="visit" id="visit">
+  <div class="wrap visit-grid">
+    <div class="reveal">
+      <span class="eyebrow">Find the cafÃ©</span>
+      <h2>Right on 3rd Street.</h2>
+      <ul class="info-list">
+        <li><span class="k">Address</span><span class="v">101 3rd St S, Hobson, MT 59452</span></li>
+        <li><span class="k">Phone</span><span class="v"><a href="tel:+14064235615">(406) 423-5615</a></span></li>
+        <li><span class="k">Friâ€“Tue</span><span class="v">7 AM â€“ 8 PM</span></li>
+        <li><span class="k">Wedâ€“Thu</span><span class="v">Closed</span></li>
+        <li><span class="k">Serving</span><span class="v">Breakfast Â· lunch Â· dinner</span></li>
+        <li><span class="k">Good to know</span><span class="v">Gluten-free options +$3 Â· family friendly</span></li>
+      </ul>
+      <div class="cta-row">
+        <a class="btn btn-tomato" href="tel:+14064235615">Call the cafÃ©</a>
+        <a class="btn btn-teal" href="https://www.google.com/maps/dir/?api=1&destination=101+3rd+St+S,+Hobson,+MT+59452" target="_blank" rel="noopener">Directions</a>
+      </div>
+    </div>
+    <div class="map-frame reveal">
+      <iframe title="Map to The Gateway CafÃ©" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        src="https://maps.google.com/maps?q=101%203rd%20St%20S%2C%20Hobson%2C%20MT%2059452&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fbrand">The Gateway CafÃ©</div>
+    <div class="fsub">A vintage 50s diner Â· Hobson, Montana</div>
+    <p>101 3rd St S, Hobson, MT 59452 Â· (406) 423-5615<br>Â© <span id="yr"></span> The Gateway CafÃ© Â· menu &amp; prices subject to change Â· check us out on Facebook</p>
+  </div>
+</footer>
+
+<script>
+/* ===== MENU "RECORDS" ===== */
+const SIDES = [
+  {side:"Side A", name:"Burgers", labelColor:"#E2553B", foot:"Comes with your choice of side: fries, tots, onion rings, sweet potato fries, or side salad. <b>Onion rings & sweet potato fries +$1.</b>", items:[
+    ["Pizza Burger","16.00","Mozzarella cheese, marinara sauce, and pepperoni."],
+    ["Hawaiian Burger","16.00","Grilled pineapple and teriyaki sauce."],
+    ["Juneberry Burger","16.00","Elderberry jam and cream cheese."],
+    ["Double Cheese Burger","15.00","Cheddar, lettuce, tomato, onion, and pickle."],
+    ["Breakfast Burger","15.00","One egg with your choice of breakfast meat."],
+    ["Texas Burger","15.00","American cheese, onion rings, and BBQ sauce."],
+    ["Bacon Cheese Burger","14.00","Bacon, cheddar, lettuce, tomato, onion, and pickle."],
+    ["Tilly Burger","14.00","Strawberry jam, jalapeÃ±os, and pepper jack cheese."],
+    ["Mushroom Swiss","14.00","Mushrooms and Swiss cheese."],
+    ["Cheese Burger","13.00","Cheddar, lettuce, tomato, onion, and pickle."],
+    ["Hamburger","12.00","Lettuce, tomato, onion, and pickle."]
+  ]},
+  {side:"Side B", name:"Breakfast", labelColor:"#1FA6A0", foot:"Gluten-free options available +$3. <b>Additions (with a meal):</b> egg $2 Â· bacon $2 Â· sausage $2 Â· toast $1 Â· biscuit $2 Â· croissant $2 Â· hash browns $2.", items:[
+    ["2 Waffle Plate","15.00","Waffles with an egg and choice of bacon or sausage."],
+    ["Charlie Russell Omelette","15.00","Eggs with onions, bell peppers, mushrooms, ground sausage, cheese, tomato, and green onion. Served with toast."],
+    ["Breakfast Burger","15.00","Toasted bun, signature patty, fried egg, cheese, and choice of bacon or sausage."],
+    ["2 Biscuits & Gravy","14.00","Two homemade biscuits topped with house sausage gravy, with 2 eggs & choice of meat."],
+    ["Short Stack Plate","14.00","Pancakes with an egg and choice of bacon or sausage."],
+    ["French Toast Plate","14.00","Two slices of French toast with an egg and choice of bacon or sausage."],
+    ["Eggs Benedict","14.00","English muffin topped with eggs, ham, and hollandaise. Served with potatoes."],
+    ["Breakfast Sandwich","12.00","Choice of bread topped with an egg, cheddar, and bacon or sausage."],
+    ["Build Your Own Plate","12.00","Choice of bacon or sausage, 2 eggs, choice of toast or potatoes."],
+    ["Breakfast Burrito","13.00","Scrambled egg, bacon or sausage, potatoes, and shredded cheese in a flour tortilla."],
+    ["Breakfast Quesadilla","13.00","Scrambled egg, sausage, and cheese grilled flat. Served with a hash brown."],
+    ["1 Biscuit & Gravy","10.00","Homemade biscuit topped with sausage gravy, with 1 egg & choice of meat."],
+    ["Cheese Omelette","10.00","Eggs with cheese, served with toast. Add ham or veggies for a few dollars."]
+  ]},
+  {side:"Side C", name:"Milkshakes", labelColor:"#E98AA6", foot:"Sizes: <b>S $7 Â· M $8 Â· L $9.</b> The <b>Big Train</b> â€” vanilla or chocolate with a scoop of protein powder and a shot of espresso â€” S $9 Â· M $10 Â· L $11.", items:[
+    ["Banana Split","S $7 / M $8 / L $9",""],
+    ["Root Beer Float","S $7 / M $8 / L $9",""],
+    ["Caramel Apple","S $7 / M $8 / L $9",""],
+    ["Pumpkin Pie","S $7 / M $8 / L $9",""],
+    ["Cookies & Cream","S $7 / M $8 / L $9",""],
+    ["Creamsicle","S $7 / M $8 / L $9",""],
+    ["Cinnabon","S $7 / M $8 / L $9",""],
+    ["Vanilla Â· Chocolate Â· Strawberry","S $7 / M $8 / L $9","The classics, hand-spun."],
+    ["Raspberry Â· Blueberry Â· Watermelon","S $7 / M $8 / L $9","Fruity & cold."],
+    ["The Big Train","S $9 / M $10 / L $11","<b>Vanilla or chocolate</b> with a scoop of protein powder and a shot of espresso."],
+    ["Just Get a Scoop","3.00","Vanilla, pumpkin, or apple."]
+  ]},
+  {side:"Side D", name:"Fun Sodas & Boba", labelColor:"#E8A93C", foot:"Add popping boba to any specialty soda for <b>+$1</b>. Boba teas built on tapioca pearls.", items:[
+    ["Babe Bubbles","â€”","Raspberry, peach, vanilla, heavy whip, and Mountain Dew."],
+    ["Bloody Wild","â€”","Mango, strawberry, and Mountain Dew."],
+    ["Blushing Dragon","â€”","Peach, strawberry, and Mountain Dew."],
+    ["Pink Thriller","â€”","Watermelon, peach, strawberry, and 7up."],
+    ["Life's A Peach","â€”","Vanilla, peach, half & half, and Dr. Pepper."],
+    ["Blue Elixer","â€”","Blue raspberry, lemonade, and 7up."],
+    ["Battery Cremes","â€”","Butterscotch, vanilla, heavy whip, and root beer."],
+    ["Taro Boba","â€”","Taro with tapioca pearls."],
+    ["Green Tea Boba","â€”","Green tea with tapioca pearls."],
+    ["Horchata Boba","â€”","Horchata with tapioca pearls."]
+  ]},
+  {side:"Side E", name:"Sides & Extras", labelColor:"#157C77", foot:"Mix & match â€” every burger comes with one. <b>Consuming raw or undercooked meats may increase your risk of foodborne illness.</b>", items:[
+    ["French Fries","incl.","Included with any burger."],
+    ["Tater Tots","incl.","Included with any burger."],
+    ["Side Salad","incl.","Included with any burger."],
+    ["Onion Rings","+1.00",""],
+    ["Sweet Potato Fries","+1.00",""],
+    ["Gluten-Free Swap","+3.00","Available on most items."]
+  ]}
+];
+
+const controls = document.getElementById('controls');
+const platter = document.getElementById('platter');
+const platterLabel = document.getElementById('platterLabel');
+const platterTtl = document.getElementById('platterTtl');
+const platterCnt = document.getElementById('platterCnt');
+const tonearm = document.getElementById('tonearm');
+const npTitle = document.getElementById('npTitle');
+const npSub = document.getElementById('npSub');
+const npBody = document.getElementById('npBody');
+const npFoot = document.getElementById('npFoot');
+let current = 0;
+
+function fmtPrice(p){
+  if(p==='incl.') return 'incl.';
+  if(p==='â€”') return '<span style="color:var(--ink-soft);font-weight:500">ask</span>';
+  if(/[a-z$/+]/i.test(p)) return p;
+  return '$'+p;
+}
+function renderSide(i, spin){
+  const s = SIDES[i];
+  current = i;
+  // platter label
+  platterLabel.style.background = `radial-gradient(circle at 50% 50%, var(--cream) 0 6%, ${s.labelColor} 6% 100%)`;
+  platterLabel.querySelector('.side').textContent = s.side;
+  platterTtl.textContent = s.name;
+  platterCnt.textContent = s.items.length + ' tracks';
+  // now playing
+  npTitle.firstChild.textContent = s.name;
+  npSub.textContent = s.side + ' Â· ' + s.items.length + ' items';
+  npBody.innerHTML = s.items.map((it,idx)=>{
+    const [n,p,d] = it;
+    return `<div class="mitem">
+      <span class="tk">${('0'+(idx+1)).slice(-2)}</span>
+      <span><span class="nm">${n}</span>${d?`<div class="md">${d}</div>`:''}</span>
+      <span class="pr">${fmtPrice(p)}</span>
+    </div>`;
+  }).join('');
+  npFoot.innerHTML = s.foot;
+  // tabs
+  controls.querySelectorAll('.track-btn').forEach((b,bi)=>b.setAttribute('aria-selected', bi===i?'true':'false'));
+  // spin animation
+  if(spin){
+    tonearm.classList.remove('on');
+    platter.classList.add('spinning');
+    setTimeout(()=>{ tonearm.classList.add('on'); }, 380);
+    clearTimeout(platter._t);
+    platter._t = setTimeout(()=>platter.classList.remove('spinning'), 2600);
+  }
+}
+
+SIDES.forEach((s,i)=>{
+  const b=document.createElement('button');
+  b.className='track-btn'; b.setAttribute('role','tab'); b.setAttribute('aria-selected', i===0?'true':'false');
+  b.innerHTML = `<span class="tnum">${String.fromCharCode(65+i)}</span>
+    <span class="tmeta"><span class="tn">${s.name}</span><span class="td">${s.items.length} items</span></span>
+    <span class="tar">â–¸</span>`;
+  b.addEventListener('click',()=>renderSide(i,true));
+  controls.appendChild(b);
+});
+platter.addEventListener('click',()=>renderSide((current+1)%SIDES.length, true));
+platter.addEventListener('keydown',e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();renderSide((current+1)%SIDES.length,true);} });
+renderSide(0,false);
+
+/* ===== open/closed â€” Fri-Tue 7-20, Wed-Thu closed (Mountain Time) ===== */
+(function(){
+  try{
+    const now=new Date(new Date().toLocaleString('en-US',{timeZone:'America/Denver'}));
+    const d=now.getDay(), mins=now.getHours()*60+now.getMinutes();
+    const pill=document.getElementById('statusPill'), txt=document.getElementById('statusText');
+    let open=false,label='Closed Wed & Thu';
+    if(d===3||d===4){ open=false; label='Closed Wed & Thu Â· back Friday'; }
+    else { open = mins>=420 && mins<1200; label = open?'Open now Â· closes 8 PM':'Opens 7 AM'; }
+    if(!open) pill.classList.add('closed');
+    txt.textContent=label;
+  }catch(e){}
+})();
+
+/* ===== nav / strip / reveal ===== */
+const nav=document.getElementById('nav'), menuBtn=document.getElementById('menuBtn'), navLinks=document.getElementById('navLinks');
+addEventListener('scroll',()=>nav.classList.toggle('solid',scrollY>30),{passive:true});
+nav.classList.toggle('solid',scrollY>30);
+menuBtn.addEventListener('click',()=>{const o=navLinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',o);});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navLinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}));
+const st=document.getElementById('stripTrack'); st.innerHTML+=st.innerHTML;
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.getElementById('yr').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
