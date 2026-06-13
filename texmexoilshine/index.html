@@ -3,103 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tex-Mex Oil & Shine | Mobile Detailing & Maintenance Paris, TX</title>
+    <title>Tex-Mex Oil & Shine | Premium Mobile Detailing Paris, TX</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2 family=Montserrat:wght@400;700;900&family=Space+Grotesk:wght@500;700;900&display=swap" rel="stylesheet">
     
     <style>
         body {
             font-family: 'Montserrat', sans-serif;
-            background-color: #0b0b0b;
+            background-color: #050505;
         }
         .heading-font {
             font-family: 'Space Grotesk', sans-serif;
         }
         .glass-panel {
-            background: rgba(22, 22, 22, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(15, 15, 15, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.04);
         }
         .glow-red:hover {
-            box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+            box-shadow: 0 0 25px rgba(239, 68, 68, 0.3);
         }
-        /* Custom Custom Scrollbar */
+        
+        /* EXACT HALF-IMAGE CROP MECHANISM */
+        .flyer-crop-container {
+            position: relative;
+            width: 100%;
+            height: 480px; 
+            overflow: hidden;
+            border-radius: 16px;
+            background: #000;
+        }
+        .flyer-target-img {
+            position: absolute;
+            width: 100%;
+            height: 200%; /* Accounts for the stacked layout of the original image */
+            left: 0;
+            object-fit: fill;
+            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        /* English State: Crop to show top 50% */
+        body.lang-en .flyer-target-img {
+            top: 0;
+            transform: translateY(0);
+        }
+        /* Spanish State: Crop to show bottom 50% */
+        body.lang-es .flyer-target-img {
+            top: 0;
+            transform: translateY(-50%);
+        }
+
+        /* DYNAMIC CULTURE COLOR ACCENTS */
+        /* English - Texas Colors (Red, White, Blue) */
+        body.lang-en .culture-gradient {
+            background: linear-gradient(to right, #ef4444, #ffffff, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        /* Spanish - Mexico Colors (Green, White, Red) */
+        body.lang-es .culture-gradient {
+            background: linear-gradient(to right, #22c55e, #ffffff, #ef4444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
         ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0b0b0b; }
+        ::-webkit-scrollbar-track { background: #050505; }
         ::-webkit-scrollbar-thumb { background: #222; border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: #ef4444; }
     </style>
 </head>
-<body class="text-gray-100 overflow-x-hidden">
+<body class="text-gray-100 overflow-x-hidden lang-en">
 
-    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-zinc-800 transition-all duration-300">
+    <nav class="fixed top-0 left-0 w-full z-50 glass-panel border-b border-zinc-900/80">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <div class="flex items-center gap-3">
-                <div class="relative w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center font-black text-xl tracking-tighter border border-white/20 shadow-lg shadow-red-600/20">
-                    <span class="text-white">T</span><span class="text-green-500">M</span>
+                <div class="w-11 h-11 bg-red-600 rounded-xl flex items-center justify-center font-black text-lg border border-white/10 shadow-lg">
+                    <span class="text-white">T</span><span class="text-white/80">M</span>
                 </div>
                 <div>
                     <span class="block text-lg font-black tracking-wider text-white uppercase heading-font">Tex-Mex</span>
-                    <span class="block text-xs text-zinc-400 font-bold tracking-widest -mt-1 uppercase">Oil & Shine</span>
+                    <span class="block text-[10px] text-zinc-500 font-bold tracking-widest -mt-1 uppercase">Oil & Shine</span>
                 </div>
             </div>
 
-            <div class="hidden md:flex items-center gap-8 font-bold text-sm tracking-wide uppercase">
-                <a href="#services" class="hover:text-red-500 transition-colors" data-en="Services" data-es="Servicios">Services</a>
-                <a href="#pricing" class="hover:text-red-500 transition-colors" data-en="Instant Estimator" data-es="Cotizador">Instant Estimator</a>
-                <a href="#maintenance" class="hover:text-red-500 transition-colors" data-en="Oil & Tires" data-es="Aceite y Llantas">Oil & Tires</a>
+            <div class="hidden md:flex items-center gap-8 font-bold text-xs tracking-widest uppercase">
+                <a href="#services" class="hover:text-red-500 transition-colors" data-en="Menu Prices" data-es="Precios de Menú">Menu Prices</a>
+                <a href="#master-builder" class="hover:text-red-500 transition-colors" data-en="Master Builder" data-es="Constructor Maestro">Master Builder</a>
             </div>
 
             <div class="flex items-center gap-4">
-                <button id="langToggle" class="relative w-16 h-8 bg-zinc-800 rounded-full p-1 cursor-pointer transition-colors duration-300 focus:outline-none border border-zinc-700" aria-label="Toggle Language">
-                    <div id="langKnob" class="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center text-[10px] font-black text-white transition-transform duration-300 transform translate-x-0">EN</div>
+                <button id="langToggle" class="relative w-16 h-8 bg-zinc-900 rounded-full p-1 cursor-pointer border border-zinc-800 focus:outline-none" aria-label="Toggle Language">
+                    <div id="langKnob" class="w-6 h-6 bg-red-600 rounded-full flex items-center justify-center text-[10px] font-black text-white transition-all duration-300">EN</div>
                 </button>
                 
-                <a href="tel:90340119361" class="hidden sm:flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 px-5 h-11 rounded-lg text-sm font-black uppercase tracking-wider transition-all transform hover:-translate-y-0.5 shadow-lg shadow-red-600/20 glow-red">
-                    <i class="fa-solid fa-phone-volume"></i>
-                    <span data-en="Call / Text" data-es="Llamar / Texto">Call / Text</span>
+                <a href="tel:90340119361" class="hidden sm:flex items-center gap-2 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 px-4 h-11 rounded-xl text-xs font-black uppercase tracking-wider text-white transition-all">
+                    <i class="fa-solid fa-phone text-red-500"></i> <span>903.401.9361</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden bg-radial from-zinc-900 via-zinc-950 to-black">
-        <div class="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-red-600 via-transparent to-transparent"></div>
+    <section class="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden bg-radial from-zinc-900 via-zinc-950 to-black">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-red-600 via-transparent to-transparent"></div>
         
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center py-12">
             <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-                <div class="inline-flex items-center gap-2 bg-red-950/50 border border-red-500/30 px-4 py-1.5 rounded-full text-red-400 text-xs font-bold uppercase tracking-widest mx-auto lg:mx-0">
-                    <i class="fa-solid fa-location-dot"></i> Paris, Texas & Surrounding Areas
+                <div class="inline-flex items-center gap-2 bg-zinc-900 border border-zinc-800 px-4 py-2 rounded-full text-zinc-400 text-xs font-black uppercase tracking-widest">
+                    <i class="fa-solid fa-location-dot text-red-500"></i> Paris, Texas & Surrounding Areas
                 </div>
-                <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight leading-none text-white uppercase heading-font">
-                    <span data-en="We Come To You!" data-es="¡Nosotros Vamos A Ti!">We Come To You!</span><br>
-                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-white to-green-500">You Don't Come To Us.</span>
+                <h1 class="text-4xl sm:text-6xl lg:text-8xl font-black tracking-tight leading-none text-white uppercase heading-font">
+                    <span data-en="We Come To You!" data-es="¡Vamos A Ti!">We Come To You!</span><br>
+                    <span class="culture-gradient">You Don't Come To Us.</span>
                 </h1>
-                <p class="text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0 font-medium" data-en="Premium mobile detailing, precision oil changes, and tire rotations managed directly at your driveway. Owned by Jerred Guerra." data-es="Detallado móvil premium, cambio de aceite de precisión y rotación de llantas directamente en tu entrada. Propiedad de Jerred Guerra.">
-                    Premium mobile detailing, precision oil changes, and tire rotations managed directly at your driveway. Owned by Jerred Guerra.
+                <p class="text-base sm:text-lg text-zinc-400 max-w-xl mx-auto lg:mx-0 font-medium" data-en="Premium mobile detailing and driveway maintenance. Owned and operated by Jerred Guerra." data-es="Detallado móvil premium y mantenimiento en tu entrada. Propiedad y operación de Jerred Guerra.">
+                    Premium mobile detailing and driveway maintenance. Owned and operated by Jerred Guerra.
                 </p>
+
+                <div class="inline-flex items-center gap-4 p-4 bg-zinc-900/80 rounded-2xl border border-zinc-800 max-w-md shadow-xl text-left">
+                    <div class="w-12 h-12 rounded-xl bg-red-600 flex items-center justify-center text-white text-xl shrink-0 shadow-lg shadow-red-600/20"><i class="fa-solid fa-snowflake"></i></div>
+                    <div>
+                        <span class="block font-black text-xs text-red-500 uppercase tracking-wider" data-en="Free Bonus Pack" data-es="Paquete de Bono Gratis">Free Bonus Pack</span>
+                        <span class="block text-sm font-bold text-zinc-200 mt-0.5" data-en="Get a free custom koozie with every detail. Keep your drink ice-cold while your ride gets a premium spa day." data-es="Llévate un koozie personalizado gratis con cada detalle. Mantén tu bebida fría mientras consentimos tu vehículo.">Get a free custom koozie with every detail. Keep your drink ice-cold while your ride gets a premium spa day.</span>
+                    </div>
+                </div>
                 
-                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-4">
-                    <a href="#pricing" class="w-full sm:w-auto text-center bg-white text-black hover:bg-zinc-200 px-8 py-4 rounded-xl font-black uppercase tracking-wider transition-all transform hover:-translate-y-1 text-sm shadow-xl">
-                        <span data-en="Explore Packages" data-es="Explorar Paquetes">Explore Packages</span>
-                    </a>
-                    <a href="https://google.com" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 px-8 py-4 rounded-xl font-bold text-sm tracking-wide transition-all">
-                        <div class="flex text-amber-400 gap-0.5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                        <span class="text-zinc-300" data-en="Top Rated on Google" data-es="Excelente en Google">Top Rated on Google</span>
+                <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                    <a href="#master-builder" class="w-full sm:w-auto text-center bg-red-600 text-white hover:bg-red-500 px-8 py-4 rounded-xl font-black uppercase tracking-wider text-xs transition-all glow-red">
+                        <span data-en="Open Master Builder Console" data-es="Abrir Consola de Construcción">Open Master Builder Console</span>
                     </a>
                 </div>
             </div>
             
-            <div class="lg:col-span-5 relative flex justify-center">
-                <div class="absolute inset-0 bg-gradient-to-tr from-red-600/10 to-green-600/10 rounded-3xl filter blur-2xl transform rotate-6"></div>
-                <div class="relative glass-panel p-4 rounded-3xl border border-zinc-800 w-full max-w-md shadow-2xl">
-                    <img src="image.png" alt="Tex-Mex Oil & Shine Menu Showcase" class="rounded-2xl w-full object-cover shadow-inner bg-black" onerror="this.src='https://images.unsplash.com/photo-1601362840469-51e4d8d59085?auto=format&fit=crop&w=600&q=80'">
-                    <div class="absolute -bottom-4 -right-4 bg-zinc-900 border-2 border-red-600 text-white font-black text-center py-3 px-5 rounded-2xl transform rotate-3 shadow-2xl">
-                        <span class="block text-2xl heading-font">903.401.9361</span>
-                        <span class="block text-[10px] tracking-widest text-zinc-400 uppercase font-bold" data-en="CALL OR TEXT ANYTIME" data-es="LLAMA O ENVÍA TEXTO">CALL OR TEXT ANYTIME</span>
+            <div class="lg:col-span-5 relative w-full max-w-md mx-auto">
+                <div class="absolute inset-0 bg-gradient-to-tr from-red-600/5 to-zinc-500/5 rounded-2xl filter blur-xl"></div>
+                <div class="relative glass-panel p-2.5 rounded-2xl border border-zinc-800 shadow-2xl">
+                    <div class="flyer-crop-container">
+                        <img id="flyerAsset" src="image.png" alt="Tex-Mex Premium Flyer" class="flyer-target-img" onerror="this.src='image_fc00e4.jpg'">
                     </div>
                 </div>
             </div>
@@ -108,332 +150,286 @@
 
     <section id="services" class="py-24 bg-zinc-950 relative border-t border-zinc-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
-                <h2 class="text-3xl sm:text-5xl font-black tracking-tight uppercase heading-font" data-en="Choose Your Polish" data-es="Elige Tu Acabado">Choose Your Polish</h2>
-                <p class="text-zinc-400" data-en="Select your vehicle class below to view precisely calibrated interior and exterior services." data-es="Selecciona tu clase de vehículo a continuación para ver servicios interiores y exteriores calibrados.">Select your vehicle class below to view precisely calibrated interior and exterior services.</p>
-                
-                <div class="inline-flex p-1.5 bg-zinc-900 rounded-xl border border-zinc-800 mt-4">
-                    <button id="btnCar" class="px-6 py-2.5 rounded-lg font-black text-xs uppercase tracking-wider transition-all duration-200 bg-red-600 text-white shadow-md cursor-pointer" data-en="Cars" data-es="Autos">Cars</button>
-                    <button id="btnTruck" class="px-6 py-2.5 rounded-lg font-black text-xs uppercase tracking-wider transition-all duration-200 text-zinc-400 hover:text-white cursor-pointer" data-en="Trucks / SUVs" data-es="Trocas / SUVs">Trucks / SUVs</button>
-                </div>
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-4">
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight uppercase heading-font text-white" data-en="Standard Price Matrix" data-es="Matriz de Precios Estándar">Standard Price Matrix</h2>
+                <p class="text-zinc-400 text-sm" data-en="Clear, high-contrast flat pricing parameters for reference. Use our builder below to customize your project." data-es="Parámetros de precios claros y de alto contraste como referencia. Usa nuestro constructor para personalizar.">Clear, high-contrast flat pricing parameters for reference. Use our builder below to customize your project.</p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="glass-panel p-8 rounded-3xl space-y-6 flex flex-col justify-between border-t-4 border-t-zinc-600">
-                    <div class="space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-zinc-900 flex items-center justify-center text-zinc-400 text-xl border border-zinc-800"><i class="fa-solid fa-couch"></i></div>
-                        <h3 class="text-2xl font-black tracking-tight uppercase heading-font" data-en="Interior Detailing" data-es="Detallado Interior">Interior Detailing</h3>
-                        <hr class="border-zinc-800">
-                        
-                        <div class="space-y-4">
-                            <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800/60">
-                                <div class="flex justify-between font-bold text-sm mb-1"><span data-en="Basic Interior" data-es="Básico Interior">Basic Interior</span> <span class="text-red-500 pricing-val" data-car="$75" data-truck="$85">$75</span></div>
-                                <p class="text-xs text-zinc-500" data-en="Vacuum, dash & console wipe down, door panels, cup holders, interior glass." data-es="Aspirado, limpieza de tablero y consola, paneles de puertas, portavasos, vidrios.">Vacuum, dash & console wipe down, door panels, cup holders, interior glass.</p>
-                            </div>
-                            <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800/60">
-                                <div class="flex justify-between font-bold text-sm mb-1"><span data-en="Deep Interior" data-es="Interior Profundo">Deep Interior</span> <span class="text-red-500 pricing-val" data-car="$110" data-truck="$130">$110</span></div>
-                                <p class="text-xs text-zinc-500" data-en="Everything in Basic plus carpet & seat shampoo, stain treatment, vent cleaning." data-es="Todo lo del básico más shampoo en alfombras y asientos, tratamiento de manchas, limpieza de ventilas.">Everything in Basic plus carpet & seat shampoo, stain treatment, vent cleaning.</p>
-                            </div>
-                            <div class="p-4 bg-zinc-950 rounded-xl border border-red-900/40 relative overflow-hidden">
-                                <div class="absolute top-0 right-0 bg-red-600 text-white font-black text-[8px] uppercase tracking-widest px-2 py-0.5 rounded-bl">PRO</div>
-                                <div class="flex justify-between font-bold text-sm mb-1"><span data-en="Premium Interior" data-es="Interior Premium">Premium Interior</span> <span class="text-red-500 pricing-val" data-car="$180" data-truck="$200">$180</span></div>
-                                <p class="text-xs text-zinc-500" data-en="Deep extraction, leather cleaning & conditioning, heavy stain removal, odor treatment." data-es="Extracción profunda, limpieza y acondicionamiento de cuero, eliminación de manchas difíciles, tratamiento de olores.">Deep extraction, leather cleaning & conditioning, heavy stain removal, odor treatment.</p>
-                            </div>
-                        </div>
+                <div class="glass-panel p-8 rounded-2xl space-y-6 border-t-2 border-zinc-800">
+                    <h3 class="text-lg font-black uppercase tracking-tight heading-font text-red-500" data-en="Interior Details" data-es="Detalles Interiores">Interior Details</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="border-b border-zinc-900 pb-3"><div class="flex justify-between font-black text-white"><span>Basic</span> <span>Cars $75 / Trucks $85</span></div><p class="text-xs text-zinc-500 mt-1">Vacuum, dash, console, glass, door panels, cup holders.</p></div>
+                        <div class="border-b border-zinc-900 pb-3"><div class="flex justify-between font-black text-white"><span>Deep</span> <span>Cars $110 / Trucks $130</span></div><p class="text-xs text-zinc-500 mt-1">Carpet & seat shampoo, heavy stain treatment, vent purge.</p></div>
+                        <div><div class="flex justify-between font-black text-white"><span>Premium</span> <span>Cars $180 / Trucks $200</span></div><p class="text-xs text-zinc-500 mt-1">Extraction, leather treatment, deep conditioning, odor extraction.</p></div>
                     </div>
-                    <div class="pt-4 text-xs font-bold text-zinc-500 flex items-center gap-2 bg-zinc-900/30 p-3 rounded-xl border border-zinc-900"><i class="fa-regular fa-clock text-red-500"></i> Est: 2 - 2.5 Hours</div>
                 </div>
 
-                <div class="glass-panel p-8 rounded-3xl space-y-6 flex flex-col justify-between border-t-4 border-t-zinc-600">
-                    <div class="space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-zinc-900 flex items-center justify-center text-zinc-400 text-xl border border-zinc-800"><i class="fa-solid fa-car-burst"></i></div>
-                        <h3 class="text-2xl font-black tracking-tight uppercase heading-font" data-en="Exterior Detailing" data-es="Detallado Exterior">Exterior Detailing</h3>
-                        <hr class="border-zinc-800">
-                        
-                        <div class="space-y-4">
-                            <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800/60">
-                                <div class="flex justify-between font-bold text-sm mb-1"><span data-en="Basic Exterior" data-es="Básico Exterior">Basic Exterior</span> <span class="text-red-500 pricing-val" data-car="$55" data-truck="$65">$55</span></div>
-                                <p class="text-xs text-zinc-500" data-en="Hand wash, wheel cleaning, tire shine, exterior windows." data-es="Lavado a mano, limpieza de rines, brillo de llantas, vidrios exteriores.">Hand wash, wheel cleaning, tire shine, exterior windows.</p>
-                            </div>
-                            <div class="p-4 bg-zinc-900/50 rounded-xl border border-zinc-800/60">
-                                <div class="flex justify-between font-bold text-sm mb-1"><span data-en="Standard Exterior" data-es="Exterior Estándar">Standard Exterior</span> <span class="text-red-500 pricing-val" data-car="$110" data-truck="$130">$110</span></div>
-                                <p class="text-xs text-zinc-500" data-en="Basic wash plus hand wax, trim wipe down, wheel well cleaning." data-es="Lavado básico más cera a mano, limpieza de molduras, guardafangos.">Basic wash plus hand wax, trim wipe down, wheel well cleaning.</p>
-                            </div>
-                            <div class="p-4 bg-zinc-950 rounded-xl border border-red-900/40 relative overflow-hidden">
-                                <div class="absolute top-0 right-0 bg-red-600 text-white font-black text-[8px] uppercase tracking-widest px-2 py-0.5 rounded-bl">PRO</div>
-                                <div class="flex justify-between font-bold text-sm mb-1"><span data-en="Premium Exterior" data-es="Exterior Premium">Premium Exterior</span> <span class="text-red-500 pricing-val" data-car="$200" data-truck="$230">$200</span></div>
-                                <p class="text-xs text-zinc-500" data-en="Clay bar treatment, paint wax, decontamination, premium wax or sealant, deep wheel cleaning." data-es="Tratamiento de clay bar, descontaminación de pintura, cera premium o sellador, limpieza profunda de rines.">Clay bar treatment, paint wax, decontamination, premium wax or sealant, deep wheel cleaning.</p>
-                            </div>
-                        </div>
+                <div class="glass-panel p-8 rounded-2xl space-y-6 border-t-2 border-zinc-800">
+                    <h3 class="text-lg font-black uppercase tracking-tight heading-font text-red-500" data-en="Exterior Details" data-es="Detalles Exteriores">Exterior Details</h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="border-b border-zinc-900 pb-3"><div class="flex justify-between font-black text-white"><span>Basic Wash</span> <span>Cars $55 / Trucks $65</span></div><p class="text-xs text-zinc-500 mt-1">Hand wash, wheel clean, premium tire shine, exterior glass.</p></div>
+                        <div class="border-b border-zinc-900 pb-3"><div class="flex justify-between font-black text-white"><span>Standard Wax</span> <span>Cars $110 / Trucks $130</span></div><p class="text-xs text-zinc-500 mt-1">Basic wash + premium hand wax application and trim wipe down.</p></div>
+                        <div><div class="flex justify-between font-black text-white"><span>Premium Elite</span> <span>Cars $200 / Trucks $230</span></div><p class="text-xs text-zinc-500 mt-1">Clay bar processing, iron decontamination, long-lasting sealant protective layer.</p></div>
                     </div>
-                    <div class="pt-4 text-xs font-bold text-zinc-500 flex items-center gap-2 bg-zinc-900/30 p-3 rounded-xl border border-zinc-900"><i class="fa-regular fa-clock text-red-500"></i> Est: 2 - 3 Hours</div>
                 </div>
 
-                <div class="glass-panel p-8 rounded-3xl space-y-6 flex flex-col justify-between border-t-4 border-t-red-600 relative overflow-hidden bg-radial from-red-950/20 via-zinc-900/40 to-zinc-900">
-                    <div class="absolute top-4 right-4 bg-red-600 text-white font-black text-[10px] tracking-widest uppercase px-3 py-1 rounded-full shadow-lg" data-en="Best Value" data-es="Mejor Valor">Best Value</div>
-                    <div class="space-y-4">
-                        <div class="w-12 h-12 rounded-xl bg-red-600/10 flex items-center justify-center text-red-500 text-xl border border-red-500/20 shadow-md"><i class="fa-solid fa-boxes-stacked"></i></div>
-                        <h3 class="text-2xl font-black tracking-tight uppercase heading-font" data-en="Detail Combos" data-es="Paquetes Combinados">Detail Combos</h3>
-                        <hr class="border-zinc-800">
-                        
-                        <div class="space-y-4">
-                            <div class="p-4 bg-zinc-900/80 rounded-xl border border-zinc-800">
-                                <div class="flex justify-between font-bold text-sm mb-1"><span data-en="Basic Combo" data-es="Combo Básico">Basic Combo</span> <span class="text-red-500 pricing-val" data-car="$120" data-truck="$140">$120</span></div>
-                                <p class="text-xs text-zinc-400 font-medium" data-en="Basic Interior + Basic Exterior" data-es="Interior Básico + Exterior Básico">Basic Interior + Basic Exterior</p>
-                            </div>
-                            <div class="p-4 bg-red-900/10 rounded-xl border border-red-500/30">
-                                <div class="flex justify-between font-bold text-sm mb-1"><span data-en="Popular Combo" data-es="Combo Popular">Popular Combo</span> <span class="text-red-400 pricing-val" data-car="$180" data-truck="$200">$180</span></div>
-                                <p class="text-xs text-zinc-300 font-medium" data-en="Deep Interior + Standard Exterior" data-es="Interior Profundo + Exterior Estándar">Deep Interior + Standard Exterior</p>
-                            </div>
-                            <div class="p-4 bg-zinc-900/80 rounded-xl border border-zinc-800">
-                                <div class="flex justify-between font-bold text-sm mb-1"><span data-en="Premium Full Detail" data-es="Detalle Premium Completo">Premium Full Detail</span> <span class="text-red-500 pricing-val" data-car="$350" data-truck="$390">$350</span></div>
-                                <p class="text-xs text-zinc-400 font-medium" data-en="Premium Interior + Premium Exterior" data-es="Interior Premium + Exterior Premium">Premium Interior + Premium Exterior</p>
-                            </div>
-                        </div>
+                <div class="glass-panel p-8 rounded-2xl space-y-6 border-t-2 border-red-600 bg-zinc-900/30">
+                    <h3 class="text-lg font-black uppercase tracking-tight heading-font text-white flex items-center justify-between">
+                        <span data-en="Combo Packs" data-es="Paquetes Combinados">Combo Packs</span>
+                        <span class="text-[9px] bg-red-600 text-white font-black px-2 py-0.5 rounded">BEST VALUE</span>
+                    </h3>
+                    <div class="space-y-4 text-sm">
+                        <div class="border-b border-zinc-800 pb-3"><div class="flex justify-between font-black text-white"><span>Basic Combo</span> <span class="text-red-500">Cars $120 / Trucks $140</span></div><p class="text-xs text-zinc-500 mt-1">Basic Interior + Basic Exterior combined asset wash.</p></div>
+                        <div class="border-b border-zinc-800 pb-3"><div class="flex justify-between font-black text-white"><span>Popular Combo</span> <span class="text-red-500">Cars $180 / Trucks $200</span></div><p class="text-xs text-zinc-500 mt-1">Deep Interior detailing matched with standard exterior wax protection.</p></div>
+                        <div><div class="flex justify-between font-black text-white"><span>Premium Full</span> <span class="text-red-500">Cars $350 / Trucks $390</span></div><p class="text-xs text-zinc-500 mt-1">Top-tier full interior extraction paired with high-end exterior clay bar decontamination.</p></div>
                     </div>
-                    
-                    <a href="tel:90340119361" class="w-full text-center bg-red-600 hover:bg-red-500 text-white font-black text-xs uppercase tracking-widest py-3.5 rounded-xl shadow-lg shadow-red-600/10 transition-all glow-red block mt-4" data-en="Book Combo Pack" data-es="Reservar Combo">
-                        Book Combo Pack
-                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="pricing" class="py-24 bg-black relative border-t border-zinc-900">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="master-builder" class="py-24 bg-black relative border-t border-zinc-900">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <h2 class="text-3xl sm:text-5xl font-black tracking-tight uppercase heading-font" data-en="Instant Cost Estimator" data-es="Cotizador Instantáneo">Instant Cost Estimator</h2>
-                <p class="text-zinc-500 text-sm" data-en="Mix and match add-ons dynamically to approximate your absolute custom package value instantly." data-es="Combina servicios adicionales dinámicamente para aproximar el valor de tu paquete personalizado al instante.">Mix and match add-ons dynamically to approximate your absolute custom package value instantly.</p>
+                <h2 class="text-3xl sm:text-5xl font-black tracking-tight uppercase heading-font text-white" data-en="The Master Builder Console" data-es="Consola del Constructor Maestro">The Master Builder Console</h2>
+                <p class="text-zinc-500 text-sm" data-en="Build your comprehensive custom service order from detailing to fluid mechanical labor in one organized workspace." data-es="Construye tu orden completa, desde detallado hasta fluidos mecánicos, en un espacio de trabajo organizado."></p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-                <div class="md:col-span-7 space-y-4">
-                    <h4 class="text-xs font-black tracking-widest text-zinc-400 uppercase mb-2" data-en="Select Pro Add-On Layer" data-es="Seleccionar Servicios Adicionales">Select Pro Add-On Layer</h4>
+            <div class="glass-panel rounded-2xl overflow-hidden border border-zinc-800/80 grid grid-cols-1 lg:grid-cols-12 shadow-2xl">
+                
+                <div class="lg:col-span-7 p-6 sm:p-8 space-y-8 bg-zinc-950/40">
                     
-                    <label class="flex items-center justify-between p-4 bg-zinc-900 rounded-2xl border border-zinc-800 cursor-pointer select-none transition-all hover:border-zinc-700">
-                        <div class="flex items-center gap-4">
-                            <input type="checkbox" value="30" class="addon-checkbox w-5 h-5 rounded accent-red-600 cursor-pointer">
-                            <div>
-                                <span class="block font-bold text-sm" data-en="Engine Bay Cleaning" data-es="Limpieza de Motor">Engine Bay Cleaning</span>
-                                <span class="block text-xs text-zinc-500" data-en="Degreasing and protective plastic sealing" data-es="Desengrasado y sellado protector de plásticos">Degreasing and protective plastic sealing</span>
-                            </div>
+                    <div class="space-y-3">
+                        <label class="block text-xs font-black tracking-widest text-zinc-400 uppercase" data-en="Step 1: Vehicle Sizing Class" data-es="Paso 1: Clase de Tamaño del Vehículo">Step 1: Vehicle Sizing Class</label>
+                        <div class="grid grid-cols-2 gap-3 p-1 bg-zinc-900 rounded-xl border border-zinc-800">
+                            <button id="classCar" class="py-3 rounded-lg font-black text-xs uppercase tracking-wider transition-all bg-red-600 text-white shadow-md cursor-pointer">
+                                <i class="fa-solid fa-car mr-2"></i> <span data-en="Car" data-es="Auto">Car</span>
+                            </button>
+                            <button id="classTruck" class="py-3 rounded-lg font-black text-xs uppercase tracking-wider transition-all text-zinc-500 hover:text-white cursor-pointer">
+                                <i class="fa-solid fa-truck mr-2"></i> <span data-en="Truck / SUV / Van" data-es="Troca / SUV">Truck / SUV / Van</span>
+                            </button>
                         </div>
-                        <span class="font-black text-red-500 text-sm">+$30</span>
-                    </label>
-
-                    <label class="flex items-center justify-between p-4 bg-zinc-900 rounded-2xl border border-zinc-800 cursor-pointer select-none transition-all hover:border-zinc-700">
-                        <div class="flex items-center gap-4">
-                            <input type="checkbox" value="35" class="addon-checkbox w-5 h-5 rounded accent-red-600 cursor-pointer">
-                            <div>
-                                <span class="block font-bold text-sm" data-en="Headlight Restoration" data-es="Restauración de Faros">Headlight Restoration</span>
-                                <span class="block text-xs text-zinc-500" data-en="Oxidation extraction and clear coat shielding" data-es="Extracción de oxidación y protección de capa transparente">Oxidation extraction and clear coat shielding</span>
-                            </div>
-                        </div>
-                        <span class="font-black text-red-500 text-sm">+$35</span>
-                    </label>
-
-                    <label class="flex items-center justify-between p-4 bg-zinc-900 rounded-2xl border border-zinc-800 cursor-pointer select-none transition-all hover:border-zinc-700">
-                        <div class="flex items-center gap-4">
-                            <input type="checkbox" value="40" class="addon-checkbox w-5 h-5 rounded accent-red-600 cursor-pointer">
-                            <div>
-                                <span class="block font-bold text-sm" data-en="Pet Hair Removal" data-es="Remoción de Pelo de Mascota">Pet Hair Removal</span>
-                                <span class="block text-xs text-zinc-500" data-en="Deep mechanical fabric extraction" data-es="Extracción mecánica profunda en telas">Deep mechanical fabric extraction</span>
-                            </div>
-                        </div>
-                        <span class="font-black text-red-500 text-sm">+$40</span>
-                    </label>
-
-                    <label class="flex items-center justify-between p-4 bg-zinc-900 rounded-2xl border border-zinc-800 cursor-pointer select-none transition-all hover:border-zinc-700">
-                        <div class="flex items-center gap-4">
-                            <input type="checkbox" value="50" class="addon-checkbox w-5 h-5 rounded accent-red-600 cursor-pointer">
-                            <div>
-                                <span class="block font-bold text-sm" data-en="Odor Treatment" data-es="Tratamiento de Olor">Odor Treatment</span>
-                                <span class="block text-xs text-zinc-500" data-en="Enzyme counter-agents targeting foundational smells" data-es="Contrarrestores enzimáticos para eliminar olores de raíz">Enzyme counter-agents targeting foundational smells</span>
-                            </div>
-                        </div>
-                        <span class="font-black text-red-500 text-sm">+$50</span>
-                    </label>
-                </div>
-
-                <div class="md:col-span-5 bg-gradient-to-b from-zinc-900 to-zinc-950 p-8 rounded-3xl border border-zinc-800 sticky top-28 space-y-6">
-                    <h3 class="text-lg font-black uppercase tracking-tight heading-font" data-en="Your Custom Matrix" data-es="Tu Matriz Personalizada">Your Custom Matrix</h3>
-                    
-                    <div class="space-y-3 text-sm font-medium text-zinc-400">
-                        <div class="flex justify-between"><span data-en="Base Tier Selection" data-es="Selección Base">Base Tier Selection</span><span id="calcBasePrice" class="text-white font-bold">$0</span></div>
-                        <div class="flex justify-between"><span data-en="Add-On Matrix Subtotal" data-es="Subtotal de Adicionales">Add-On Matrix Subtotal</span><span id="calcAddonPrice" class="text-white font-bold">$0</span></div>
-                        <hr class="border-zinc-800 my-2">
-                        <div class="flex justify-between items-baseline"><span class="text-white font-bold text-base" data-en="Estimated Value" data-es="Valor Estimado">Estimated Value</span><span id="calcTotal" class="text-3xl font-black text-red-500 heading-font">$0</span></div>
                     </div>
 
-                    <div class="bg-zinc-950 border border-zinc-800 p-4 rounded-xl text-[11px] text-zinc-500 font-semibold space-y-1">
-                        <p data-en="* Travel fee applies for sites located > 10 miles outside Paris, Texas." data-es="* Se aplica cargo por viaje para sitios a más de 10 millas fuera de Paris, Texas.">* Travel fee applies for sites located > 10 miles outside Paris, Texas.</p>
-                        <p data-en="* Final confirmation executed via live text review." data-es="* Confirmación final ejecutada mediante revisión de texto en vivo.">* Final confirmation executed via live text review.</p>
+                    <div class="space-y-3">
+                        <label class="block text-xs font-black tracking-widest text-zinc-400 uppercase" data-en="Step 2: Base Combo Package Selection" data-es="Paso 2: Selección de Paquete Base Combo">Step 2: Base Combo Package Selection</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center gap-4 p-4 bg-zinc-900/40 hover:bg-zinc-900/80 rounded-xl border border-zinc-800/60 cursor-pointer select-none transition-all">
+                                <input type="radio" name="masterComboDeck" value="120" data-truck="140" class="master-radio w-4 h-4 accent-red-600">
+                                <div class="flex-1 flex justify-between items-center"><span class="font-bold text-sm text-zinc-200">Basic Combo Pack</span><span class="text-red-500 font-bold font-mono text-sm combo-price-lbl">$120</span></div>
+                            </label>
+                            <label class="flex items-center gap-4 p-4 bg-zinc-900/40 hover:bg-zinc-900/80 rounded-xl border border-red-900/30 cursor-pointer select-none transition-all">
+                                <input type="radio" name="masterComboDeck" value="180" data-truck="200" checked class="master-radio w-4 h-4 accent-red-600">
+                                <div class="flex-1 flex justify-between items-center"><span class="font-bold text-sm text-white flex items-center gap-2">Popular Combo Pack <span class="bg-red-600 text-white text-[7px] font-black px-1 rounded uppercase">Hot</span></span><span class="text-red-400 font-bold font-mono text-sm combo-price-lbl">$180</span></div>
+                            </label>
+                            <label class="flex items-center gap-4 p-4 bg-zinc-900/40 hover:bg-zinc-900/80 rounded-xl border border-zinc-800/60 cursor-pointer select-none transition-all">
+                                <input type="radio" name="masterComboDeck" value="350" data-truck="390" class="master-radio w-4 h-4 accent-red-600">
+                                <div class="flex-1 flex justify-between items-center"><span class="font-bold text-sm text-zinc-200">Premium Full Detail Pack</span><span class="text-red-500 font-bold font-mono text-sm combo-price-lbl">$350</span></div>
+                            </label>
+                        </div>
                     </div>
 
-                    <a id="textQuoteBtn" href="tel:90340119361" class="w-full text-center bg-white text-black hover:bg-zinc-200 font-black text-xs uppercase tracking-widest py-4 rounded-xl shadow-xl transition-all block">
-                        <span data-en="Lock In Appraised Quote" data-es="Asegurar Mi Cotización">Lock In Appraised Quote</span>
-                    </a>
+                    <div class="space-y-3">
+                        <label class="block text-xs font-black tracking-widest text-zinc-400 uppercase" data-en="Step 3: Add Mechanical Upgrades & Pro Services" data-es="Paso 3: Añadir Servicios Pro y Mecánicos">Step 3: Add Mechanical Upgrades & Pro Services</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="flex items-center justify-between p-3.5 bg-zinc-900/30 hover:bg-zinc-900/80 rounded-xl border border-zinc-800 cursor-pointer transition-all">
+                                <div class="flex items-center gap-3"><input type="checkbox" value="45" class="master-addon-cb w-4 h-4 accent-red-600"><span class="text-xs font-bold text-zinc-300" data-en="Standard Oil Change Labor" data-es="Mano de Obra Cambio de Aceite">Standard Oil Change Labor</span></div>
+                                <span class="text-xs font-black text-red-500 font-mono">+$45</span>
+                            </label>
+                            <label class="flex items-center justify-between p-3.5 bg-zinc-900/30 hover:bg-zinc-900/80 rounded-xl border border-zinc-800 cursor-pointer transition-all">
+                                <div class="flex items-center gap-3"><input type="checkbox" value="25" class="master-addon-cb w-4 h-4 accent-red-600"><span class="text-xs font-bold text-zinc-300" data-en="Tire Rotation Bundle" data-es="Rotación de Llantas Incluida">Tire Rotation Bundle</span></div>
+                                <span class="text-xs font-black text-red-500 font-mono">+$25</span>
+                            </label>
+                            <label class="flex items-center justify-between p-3.5 bg-zinc-900/30 hover:bg-zinc-900/80 rounded-xl border border-zinc-800 cursor-pointer transition-all">
+                                <div class="flex items-center gap-3"><input type="checkbox" value="30" class="master-addon-cb w-4 h-4 accent-red-600"><span class="text-xs font-bold text-zinc-300" data-en="Engine Bay Polish" data-es="Pulido de Motor">Engine Bay Polish</span></div>
+                                <span class="text-xs font-black text-red-500 font-mono">+$30</span>
+                            </label>
+                            <label class="flex items-center justify-between p-3.5 bg-zinc-900/30 hover:bg-zinc-900/80 rounded-xl border border-zinc-800 cursor-pointer transition-all">
+                                <div class="flex items-center gap-3"><input type="checkbox" value="35" class="master-addon-cb w-4 h-4 accent-red-600"><span class="text-xs font-bold text-zinc-300" data-en="Headlight Shield Restoration" data-es="Restauración de Faros">Headlight Shield</span></div>
+                                <span class="text-xs font-black text-red-500 font-mono">+$35</span>
+                            </label>
+                            <label class="flex items-center justify-between p-3.5 bg-zinc-900/30 hover:bg-zinc-900/80 rounded-xl border border-zinc-800 cursor-pointer transition-all">
+                                <div class="flex items-center gap-3"><input type="checkbox" value="40" class="master-addon-cb w-4 h-4 accent-red-600"><span class="text-xs font-bold text-zinc-300" data-en="Pet Hair Extraction" data-es="Remoción de Pelo de Mascota">Pet Hair Extraction</span></div>
+                                <span class="text-xs font-black text-red-500 font-mono">+$40</span>
+                            </label>
+                            <label class="flex items-center justify-between p-3.5 bg-zinc-900/30 hover:bg-zinc-900/80 rounded-xl border border-zinc-800 cursor-pointer transition-all">
+                                <div class="flex items-center gap-3"><input type="checkbox" value="50" class="master-addon-cb w-4 h-4 accent-red-600"><span class="text-xs font-bold text-zinc-300" data-en="Odor Elimination Enzy" data-es="Tratamiento de Eliminación de Olor">Odor Elimination</span></div>
+                                <span class="text-xs font-black text-red-500 font-mono">+$50</span>
+                            </label>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="lg:col-span-5 p-6 sm:p-8 flex flex-col justify-between bg-gradient-to-b from-zinc-900 to-zinc-950 border-t lg:border-t-0 lg:border-l border-zinc-800/80">
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center pb-4 border-b border-zinc-800">
+                            <h3 class="text-base font-black uppercase tracking-tight heading-font text-white" data-en="Live Appraised Quote" data-es="Cotización en Vivo">Live Appraised Quote</h3>
+                            <span class="bg-zinc-800 text-red-400 text-[8px] font-black uppercase tracking-widest px-2 py-1 rounded border border-zinc-700/60 flex items-center gap-1">
+                                <i class="fa-solid fa-gift text-red-500"></i> + FREE KOOZIE INCLUDED
+                            </span>
+                        </div>
+
+                        <div class="space-y-3 text-xs font-bold text-zinc-400">
+                            <div class="flex justify-between"><span data-en="Core Base Package" data-es="Paquete Base Central">Core Base Package</span><span id="mxBaseOut" class="text-white font-mono">$180</span></div>
+                            <div class="flex justify-between"><span data-en="Consolidated Addons" data-es="Subtotal de Adicionales">Consolidated Addons</span><span id="mxAddonOut" class="text-white font-mono">$0</span></div>
+                            <div class="pt-2.5 flex justify-between items-baseline border-t border-zinc-800">
+                                <span class="text-sm font-black text-white uppercase" data-en="Estimated Balance" data-es="Balance Estimado">Estimated Balance</span>
+                                <span id="mxTotalOut" class="text-4xl font-black text-red-500 heading-font font-mono">$180</span>
+                            </div>
+                        </div>
+
+                        <form id="masterInquiryForm" action="https://formspree.io/f/placeholder" method="POST" class="space-y-3 pt-4 border-t border-zinc-800">
+                            <input type="hidden" name="_to" value="jerred.guerra54@gmail.com">
+                            <input type="hidden" name="_subject" value="New Master Workspace Detailing Lead - Tex-Mex Oil & Shine">
+                            <input type="hidden" id="formSpecClass" name="Selected Frame Class" value="Car">
+                            <input type="hidden" id="formSpecFinalQuote" name="Calculated Estimate" value="$180">
+
+                            <label class="block text-[9px] font-black tracking-widest text-zinc-500 uppercase" data-en="Submit Parameters to Jerred Guerra" data-es="Enviar Parámetros a Jerred Guerra">Submit Parameters to Jerred Guerra</label>
+                            
+                            <input type="text" name="Client Name" required placeholder="Your Full Name" data-en-placeholder="Your Full Name" data-es-placeholder="Tu Nombre Completo" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-500 rounded-xl px-4 py-3 text-xs font-medium text-white placeholder-zinc-600 outline-none transition-all">
+                            
+                            <input type="email" name="Client Email" required placeholder="Email Address" data-en-placeholder="Email Address" data-es-placeholder="Correo Electrónico" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-500 rounded-xl px-4 py-3 text-xs font-medium text-white placeholder-zinc-600 outline-none transition-all">
+                            
+                            <input type="text" name="Vehicle Spec Details" required placeholder="Vehicle Year, Make, & Model" data-en-placeholder="Vehicle Year, Make, & Model" data-es-placeholder="Año, Marca y Modelo del Vehículo" class="w-full bg-zinc-950 border border-zinc-800 focus:border-red-500 rounded-xl px-4 py-3 text-xs font-medium text-white placeholder-zinc-600 outline-none transition-all">
+
+                            <button type="submit" class="w-full text-center bg-white text-black hover:bg-zinc-200 font-black text-xs uppercase tracking-widest py-4 rounded-xl shadow-xl transition-all cursor-pointer block mt-2">
+                                <span data-en="Email Appraised Quote To Jerred" data-es="Enviar Presupuesto por Correo">Email Appraised Quote To Jerred</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <section id="maintenance" class="py-24 bg-zinc-950 relative border-t border-zinc-900">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
-                <div class="text-red-500 text-xs font-black tracking-widest uppercase"><i class="fa-solid fa-screwdriver-wrench"></i> Mobile Mechanical Support</div>
-                <h2 class="text-3xl sm:text-5xl font-black tracking-tight uppercase heading-font" data-en="Oil Change & Tire Rotation" data-es="Cambio de Aceite y Rotación">Oil Change & Tire Rotation</h2>
-                <p class="text-zinc-500 text-sm" data-en="Precision labor brought directly to your driveway. Oil & filter must be supplied on-site or requested prior." data-es="Mano de obra de precisión llevada directo a tu entrada. Aceite y filtro no incluidos en el precio base.">Precision labor brought directly to your driveway. Oil & filter must be supplied on-site or requested prior.</p>
+    <footer class="bg-black border-t border-zinc-900 py-12 text-[10px] text-zinc-600 font-medium">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-center sm:text-left space-y-1">
+                <p class="text-xs font-black text-zinc-500 heading-font uppercase tracking-wider">&copy; 2026 Tex-Mex Oil & Shine. All Rights Reserved.</p>
+                <p data-en="Operational Architecture deployed for Jerred Guerra. Paris, Texas." data-es="Arquitectura Operativa implementada para Jerred Guerra. Paris, Texas.">Operational Architecture deployed for Jerred Guerra. Paris, Texas.</p>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-                <div class="glass-panel p-6 rounded-2xl border-b-2 border-b-zinc-800 space-y-2">
-                    <span class="text-xs text-zinc-500 font-bold block uppercase" data-en="Labor Charge" data-es="Mano de Obra">Labor Charge</span>
-                    <h4 class="font-bold text-sm uppercase text-white" data-en="Standard Oil Labor" data-es="Mano de Obra Estándar">Standard Oil Labor</h4>
-                    <div class="text-3xl font-black text-red-500 heading-font">$45</div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border-b-2 border-b-zinc-800 space-y-2">
-                    <span class="text-xs text-zinc-500 font-bold block uppercase" data-en="Labor Charge" data-es="Mano de Obra">Labor Charge</span>
-                    <h4 class="font-bold text-sm uppercase text-white" data-en="Synthetic Blend" data-es="Mezcla Sintética">Synthetic Blend</h4>
-                    <div class="text-3xl font-black text-red-500 heading-font">$65</div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border-b-2 border-b-zinc-800 space-y-2">
-                    <span class="text-xs text-zinc-500 font-bold block uppercase" data-en="Labor Charge" data-es="Mano de Obra">Labor Charge</span>
-                    <h4 class="font-bold text-sm uppercase text-white" data-en="Full Synthetic" data-es="Sintético Completo">Full Synthetic</h4>
-                    <div class="text-3xl font-black text-red-500 heading-font">$85</div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border-b-2 border-b-red-600 space-y-2">
-                    <span class="text-xs text-red-400 font-bold block uppercase" data-en="Bundled Asset" data-es="Paquete Con Servicio">Bundled Asset</span>
-                    <h4 class="font-bold text-sm uppercase text-white" data-en="Tire Rotation (with service)" data-es="Rotación (con servicio)">Tire Rotation (with service)</h4>
-                    <div class="text-3xl font-black text-red-500 heading-font">$25</div>
-                </div>
-                <div class="glass-panel p-6 rounded-2xl border-b-2 border-b-zinc-800 space-y-2">
-                    <span class="text-xs text-zinc-500 font-bold block uppercase" data-en="Standalone" data-es="Servicio Solo">Standalone</span>
-                    <h4 class="font-bold text-sm uppercase text-white" data-en="Tire Rotation Only" data-es="Solo Rotación de Llantas">Tire Rotation Only</h4>
-                    <div class="text-3xl font-black text-red-500 heading-font">$35</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-black border-t border-zinc-900 py-12 text-xs text-zinc-600 font-medium">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
-            <div class="text-center md:text-left space-y-1">
-                <p class="text-sm font-bold text-zinc-400 heading-font uppercase tracking-wide">&copy; 2026 Tex-Mex Oil & Shine. All Rights Reserved.</p>
-                <p data-en="Proudly serving Paris, Texas. Operational Execution engineered by Jerred Guerra." data-es="Orgullosamente sirviendo a Paris, Texas. Ejecución Operativa diseñada por Jerred Guerra.">Proudly serving Paris, Texas. Operational Execution engineered by Jerred Guerra.</p>
-            </div>
-            
-            <div class="flex items-center gap-6 text-xl">
-                <a href="https://facebook.com" target="_blank" class="text-zinc-500 hover:text-white transition-colors" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                <a href="https://google.com" target="_blank" class="text-zinc-500 hover:text-white transition-colors" aria-label="Google Business"><i class="fa-brands fa-google"></i></a>
+            <div class="flex items-center gap-6 text-base">
+                <a href="https://facebook.com" target="_blank" class="text-zinc-600 hover:text-white transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                <a href="https://google.com" target="_blank" class="text-zinc-600 hover:text-white transition-colors"><i class="fa-brands fa-google"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
-        // State Vectors
-        let currentLang = 'en';
-        let currentVehicleType = 'car'; // 'car' or 'truck'
+        // State Systems Vectors
+        let activeLanguage = 'en';
+        let activeFrameClass = 'car'; // 'car' or 'truck'
 
-        // Element Mappings
+        // DOM Mapping Targets
         const langToggle = document.getElementById('langToggle');
         const langKnob = document.getElementById('langKnob');
-        const btnCar = document.getElementById('btnCar');
-        const btnTruck = document.getElementById('btnTruck');
-        const pricingVals = document.querySelectorAll('.pricing-val');
-        const addonCheckboxes = document.querySelectorAll('.addon-checkbox');
-        const calcBasePriceEl = document.getElementById('calcBasePrice');
-        const calcAddonPriceEl = document.getElementById('calcAddonPrice');
-        const calcTotalEl = document.getElementById('calcTotal');
-        const textQuoteBtn = document.getElementById('textQuoteBtn');
+        const classCar = document.getElementById('classCar');
+        const classTruck = document.getElementById('classTruck');
+        const comboRadioDeck = document.querySelectorAll('.master-radio');
+        const comboPriceLabels = document.querySelectorAll('.combo-price-lbl');
+        const masterAddonCheckboxes = document.querySelectorAll('.master-addon-cb');
+        
+        const mxBaseOut = document.getElementById('mxBaseOut');
+        const mxAddonOut = document.getElementById('mxAddonOut');
+        const mxTotalOut = document.getElementById('mxTotalOut');
+        
+        const formSpecClass = document.getElementById('formSpecClass');
+        const formSpecFinalQuote = document.getElementById('formSpecFinalQuote');
+        const masterInquiryForm = document.getElementById('masterInquiryForm');
 
-        // Bilingual Mapping Engine
-        function setLanguage(lang) {
-            currentLang = lang;
-            document.querySelectorAll('[data-en]').forEach(el => {
-                el.textContent = el.getAttribute(`data-${lang}`);
-            });
-            
-            // Adjust toggle switch visuals
+        // Language Translation Core Handler
+        function triggerLanguageState(lang) {
+            activeLanguage = lang;
             if(lang === 'es') {
+                document.body.classList.replace('lang-en', 'lang-es');
                 langKnob.style.transform = 'translateX(32px)';
                 langKnob.textContent = 'ES';
                 langKnob.classList.replace('bg-red-600', 'bg-green-600');
             } else {
+                document.body.classList.replace('lang-es', 'lang-en');
                 langKnob.style.transform = 'translateX(0px)';
                 langKnob.textContent = 'EN';
                 langKnob.classList.replace('bg-green-600', 'bg-red-600');
             }
-            updateTextSmsLink();
-        }
 
-        // Pricing Matrix Engine
-        function updatePricingLayout() {
-            pricingVals.forEach(val => {
-                const updatedPrice = val.getAttribute(`data-${currentVehicleType}`);
-                val.textContent = updatedPrice;
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.textContent = el.getAttribute(`data-${lang}`);
             });
-            recalculateInstantCost();
+            
+            document.querySelectorAll('[data-en-placeholder]').forEach(el => {
+                el.setAttribute('placeholder', el.getAttribute(`data-${lang}-placeholder`));
+            });
         }
 
-        function recalculateInstantCost() {
-            // Assume the Popular Combo for the selected vehicle type as the reactive base baseline
-            const baseValue = currentVehicleType === 'car' ? 180 : 200;
-            
-            let addonsTotal = 0;
-            addonCheckboxes.forEach(cb => {
-                if(cb.checked) {
-                    addonsTotal += parseInt(cb.value);
+        // Mathematical Computation Pipeline
+        function calculateWorkspaceMetrics() {
+            let coreSelectedBase = 0;
+
+            // Compute Base Package Dynamic Toggles
+            comboRadioDeck.forEach((radio, index) => {
+                const standardCarCost = parseInt(radio.value);
+                const largeTruckCost = parseInt(radio.getAttribute('data-truck'));
+                const activeContextValue = activeFrameClass === 'car' ? standardCarCost : largeTruckCost;
+                
+                comboPriceLabels[index].textContent = `$${activeContextValue}`;
+                
+                if(radio.checked) {
+                    coreSelectedBase = activeContextValue;
                 }
             });
 
-            const finalTotal = baseValue + addonsTotal;
+            // Loop and add checked accessory selections
+            let runningAddonTotal = 0;
+            masterAddonCheckboxes.forEach(cb => {
+                if(cb.checked) {
+                    runningAddonTotal += parseInt(cb.value);
+                }
+            });
 
-            // Render Output UI
-            calcBasePriceEl.textContent = `$${baseValue}`;
-            calcAddonPriceEl.textContent = `$${addonsTotal}`;
-            calcTotalEl.textContent = `$${finalTotal}`;
-            
-            updateTextSmsLink(finalTotal);
+            const overallSumTotal = coreSelectedBase + runningAddonTotal;
+
+            // Print values to interface output blocks
+            mxBaseOut.textContent = `$${coreSelectedBase}`;
+            mxAddonOut.textContent = `$${runningAddonTotal}`;
+            mxTotalOut.textContent = `$${overallSumTotal}`;
+
+            // Deliver finalized computations into parameters for the active Form Engine
+            formSpecClass.value = activeFrameClass === 'car' ? 'Standard Car' : 'Truck / SUV / Van';
+            formSpecFinalQuote.value = `$${overallSumTotal}`;
         }
 
-        function updateTextSmsLink(totalPrice = 180) {
-            const vehicleLabel = currentVehicleType === 'car' ? 'Car' : 'Truck/SUV';
-            const baseMsg = currentLang === 'en' 
-                ? `Hi Jerred, I would like to book a mobile detail estimate for my ${vehicleLabel}. Estimated package value: $${totalPrice}.`
-                : `Hola Jerred, me gustaría reservar un presupuesto de detallado móvil para mi ${vehicleLabel}. Valor estimado: $${totalPrice}.`;
-            
-            // Format dynamic anchor target for modern smartphones
-            textQuoteBtn.href = `sms:+190340119361?body=${encodeURIComponent(baseMsg)}`;
-        }
-
-        // Event Hook Attachments
+        // Listener Attachment Deployments
         langToggle.addEventListener('click', () => {
-            setLanguage(currentLang === 'en' ? 'es' : 'en');
+            triggerLanguageState(activeLanguage === 'en' ? 'es' : 'en');
         });
 
-        btnCar.addEventListener('click', () => {
-            currentVehicleType = 'car';
-            btnCar.className = "px-6 py-2.5 rounded-lg font-black text-xs uppercase tracking-wider transition-all duration-200 bg-red-600 text-white shadow-md cursor-pointer";
-            btnTruck.className = "px-6 py-2.5 rounded-lg font-black text-xs uppercase tracking-wider transition-all duration-200 text-zinc-400 hover:text-white cursor-pointer";
-            updatePricingLayout();
+        classCar.addEventListener('click', () => {
+            activeFrameClass = 'car';
+            classCar.className = "py-3 rounded-lg font-black text-xs uppercase tracking-wider transition-all bg-red-600 text-white shadow-md cursor-pointer";
+            classTruck.className = "py-3 rounded-lg font-black text-xs uppercase tracking-wider transition-all text-zinc-500 hover:text-white cursor-pointer";
+            calculateWorkspaceMetrics();
         });
 
-        btnTruck.addEventListener('click', () => {
-            currentVehicleType = 'truck';
-            btnTruck.className = "px-6 py-2.5 rounded-lg font-black text-xs uppercase tracking-wider transition-all duration-200 bg-red-600 text-white shadow-md cursor-pointer";
-            btnCar.className = "px-6 py-2.5 rounded-lg font-black text-xs uppercase tracking-wider transition-all duration-200 text-zinc-400 hover:text-white cursor-pointer";
-            updatePricingLayout();
+        classTruck.addEventListener('click', () => {
+            activeFrameClass = 'truck';
+            classTruck.className = "py-3 rounded-lg font-black text-xs uppercase tracking-wider transition-all bg-red-600 text-white shadow-md cursor-pointer";
+            classCar.className = "py-3 rounded-lg font-black text-xs uppercase tracking-wider transition-all text-zinc-500 hover:text-white cursor-pointer";
+            calculateWorkspaceMetrics();
         });
 
-        addonCheckboxes.forEach(cb => {
-            cb.addEventListener('change', recalculateInstantCost);
+        comboRadioDeck.forEach(radio => radio.addEventListener('change', calculateWorkspaceMetrics));
+        masterAddonCheckboxes.forEach(cb => cb.addEventListener('change', calculateWorkspaceMetrics));
+
+        masterInquiryForm.addEventListener('submit', () => {
+            const progressString = activeLanguage === 'en' ? 'Sending Custom Order Specs...' : 'Enviando Especificaciones...';
+            masterInquiryForm.querySelector('button[type="submit"] span').textContent = progressString;
         });
 
-        // Initialize App Matrix Lifecycle
-        setLanguage('en');
-        updatePricingLayout();
+        // Initialize Lifecycle execution
+        triggerLanguageState('en');
+        calculateWorkspaceMetrics();
     </script>
 </body>
 </html>
