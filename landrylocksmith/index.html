@@ -3,17 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LANDRY LOCKSMITH • Convenience Unlocked | 24/7 Conroe TX</title>
-    <meta name="description" content="Family-owned 24/7 locksmith in Conroe, Willis, Huntsville & surrounding areas. Automotive, Residential & Commercial lock services. No hidden fees. Licensed, bonded & insured. Call 936-777-5210">
+    <title>LANDRY LOCKSMITH • Precision Unlocked | 24/7 Conroe TX</title>
+    <meta name="description" content="Family-owned 24/7 locksmith in Conroe, Willis, Huntsville & surrounding areas. Automotive, Residential & Commercial. No hidden fees. Licensed, bonded & insured.">
+    
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+    
+    <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Leaflet -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Space+Grotesk:wght@500;600&amp;display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
         
         :root {
+            --void: #050505;
+            --steel: #111111;
             --gold: #C9A962;
-            --dark: #0B0B0B;
-            --steel: #2A3F4F;
+            --brass: #B8860B;
+            --luminous: #E8D48A;
         }
         
         body {
@@ -21,16 +31,22 @@
         }
         
         .heading-font {
-            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
-            font-weight: 600;
-            letter-spacing: -0.025em;
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            letter-spacing: -0.04em;
         }
 
         .metallic-gold {
-            background: linear-gradient(145deg, #C9A962 0%, #A88A4A 50%, #C9A962 100%);
+            background: linear-gradient(145deg, #C9A962 0%, #E8D48A 35%, #C9A962 70%, #B8860B 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: 200% 200%;
+            animation: metallic-shift 4s ease infinite;
+        }
+
+        @keyframes metallic-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 200% 50%; }
         }
 
         .section-header {
@@ -41,49 +57,36 @@
         .section-header::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -10px;
             left: 0;
-            width: 60%;
-            height: 2px;
+            width: 55%;
+            height: 3px;
             background: linear-gradient(to right, #C9A962, transparent);
         }
 
         .lock-bg {
             background-image: 
-                linear-gradient(rgba(201, 169, 98, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(201, 169, 98, 0.03) 1px, transparent 1px);
-            background-size: 24px 24px;
+                linear-gradient(rgba(201, 169, 98, 0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 169, 98, 0.035) 1px, transparent 1px);
+            background-size: 28px 28px;
         }
 
-        .key-pattern {
-            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill-rule='evenodd'%3E%3Cpath d='M30 15c-8.284 0-15 6.716-15 15 0 8.284 6.716 15 15 15 8.284 0 15-6.716 15-15 0-8.284-6.716-15-15-15zm0 4c6.075 0 11 4.925 11 11s-4.925 11-11 11-11-4.925-11-11 4.925-11 11-11z' fill='%23C9A962' fill-opacity='0.06'/%3E%3Cpath d='M30 22c-4.418 0-8 3.582-8 8s3.582 8 8 8 8-3.582 8-8-3.582-8-8-8zm0 3c2.761 0 5 2.239 5 5s-2.239 5-5 5-5-2.239-5-5 2.239-5 5-5z' fill='%23C9A962' fill-opacity='0.04'/%3E%3C/g%3E%3C/svg%3E");
-            background-size: 60px 60px;
-        }
-
-        .nav-active {
-            color: #C9A962;
-            position: relative;
-        }
-        
-        .nav-active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 100%;
-            height: 1px;
-            background: #C9A962;
+        .nav-scrolled {
+            background: rgba(5, 5, 5, 0.96);
+            backdrop-filter: blur(16px);
         }
 
         .service-card {
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
         }
         
         .service-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            transform: translateY(-12px);
+            box-shadow: 0 30px 70px -15px rgb(0 0 0 / 0.5), 
+                       0 0 0 1px rgba(201, 169, 98, 0.2);
+            border-color: #C9A962;
         }
         
         .service-card::before {
@@ -91,57 +94,50 @@
             position: absolute;
             top: 0;
             left: -100%;
-            width: 50%;
+            width: 45%;
             height: 100%;
             background: linear-gradient(
                 90deg,
                 transparent,
-                rgba(201, 169, 98, 0.08),
+                rgba(232, 212, 138, 0.12),
                 transparent
             );
-            transition: 0.6s;
+            transition: 0.7s;
         }
         
         .service-card:hover::before {
-            left: 250%;
-        }
-
-        .lock-icon {
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .service-card:hover .lock-icon {
-            transform: rotate(8deg) scale(1.05);
-        }
-
-        .key-icon {
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .service-card:hover .key-icon {
-            transform: translateX(4px) rotate(12deg);
+            left: 300%;
         }
 
         .metallic-btn {
-            background: linear-gradient(145deg, #C9A962, #A88A4A);
-            transition: all 0.3s cubic-bezier(0.23, 1.0, 0.32, 1);
+            background: linear-gradient(145deg, #C9A962, #B8860B);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgb(184 134 11 / 0.4);
         }
         
         .metallic-btn:hover {
-            background: linear-gradient(145deg, #D4B97A, #B89A5A);
-            transform: translateY(-1px);
-            box-shadow: 0 10px 15px -3px rgb(201 169 98 / 0.3), 0 4px 6px -4px rgb(201 169 98 / 0.3);
+            background: linear-gradient(145deg, #E8D48A, #C9A962);
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px -10px rgb(201 169 98 / 0.5);
         }
 
         .metallic-btn:active {
-            transform: scale(0.985);
+            transform: scale(0.985) translateY(0);
         }
 
-        .section-divider {
-            height: 1px;
-            background: linear-gradient(to right, transparent, #3A3A3A, transparent);
+        .premium-shadow {
+            box-shadow: 0 25px 60px -15px rgb(0 0 0 / 0.6);
+        }
+
+        .gold-glow {
+            box-shadow: 0 0 20px rgba(201, 169, 98, 0.3),
+                        0 0 40px rgba(201, 169, 98, 0.15);
+        }
+
+        .stat-number {
+            font-variant-numeric: tabular-nums;
         }
 
         .elegant-quote {
@@ -151,26 +147,55 @@
         .elegant-quote::before {
             content: '“';
             position: absolute;
-            top: -20px;
-            left: -10px;
-            font-size: 120px;
+            top: -28px;
+            left: -8px;
+            font-size: 140px;
             line-height: 1;
             color: #C9A962;
-            opacity: 0.15;
-            font-family: Georgia, serif;
+            opacity: 0.12;
+            font-family: 'Playfair Display', Georgia, serif;
         }
 
-        .nav-scrolled {
-            background: rgba(11, 11, 11, 0.95);
-            backdrop-filter: blur(12px);
+        .map-container {
+            border: 1px solid #2A2A2A;
+            box-shadow: inset 0 0 60px rgba(0,0,0,0.6);
         }
 
-        .mechanism-bg {
-            background: radial-gradient(circle at 50% 30%, rgba(201, 169, 98, 0.06) 0%, transparent 70%);
+        /* Animated key background */
+        .key-float {
+            position: absolute;
+            opacity: 0.06;
+            pointer-events: none;
+            animation: key-drift 25s linear infinite;
+        }
+        
+        @keyframes key-drift {
+            0% { transform: translateY(40px) rotate(0deg); }
+            100% { transform: translateY(-120px) rotate(25deg); }
         }
 
-        .stat-number {
-            font-variant-numeric: tabular-nums;
+        .key-float:nth-child(2) { animation-duration: 32s; animation-delay: -8s; opacity: 0.04; }
+        .key-float:nth-child(3) { animation-duration: 28s; animation-delay: -15s; opacity: 0.05; }
+
+        /* Master Turn Lock Styles */
+        #master-lock {
+            transition: filter 0.4s ease;
+        }
+        
+        #master-lock.unlocked {
+            filter: drop-shadow(0 0 25px rgba(201, 169, 98, 0.6));
+        }
+
+        .tumbler {
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .precision-badge {
+            animation: precision-pop 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+        }
+
+        .lock-cylinder {
+            transition: all 0.4s ease;
         }
 
         .service-pill {
@@ -178,82 +203,36 @@
         }
         
         .service-pill:hover {
-            background-color: #1F2937;
-            transform: translateX(4px);
+            background-color: #1A1A1A;
             border-color: #C9A962;
-        }
-
-        .modal {
-            animation: modalEnter 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        @keyframes modalEnter {
-            from {
-                opacity: 0;
-                transform: translateY(40px) scale(0.96);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        .key-turn {
-            animation: keyTurn 1.2s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-        }
-
-        .lock tumbler {
-            transition: transform 0.3s ease;
-        }
-
-        .premium-shadow {
-            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
-        }
-
-        .gold-text {
-            color: #C9A962;
-        }
-
-        .map-container {
-            border: 1px solid #3A3A3A;
-            border-radius: 16px;
-            overflow: hidden;
-        }
-
-        .custom-marker {
-            background: #C9A962;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            border: 3px solid #0B0B0B;
-            box-shadow: 0 0 0 4px rgba(201, 169, 98, 0.3);
+            transform: translateX(3px);
         }
     </style>
 </head>
-<body class="bg-[#0B0B0B] text-[#F0EDE6] overflow-x-hidden">
+<body class="bg-[#050505] text-[#F5F2EB] overflow-x-hidden">
+    
     <!-- NAV -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0B0B0B]/90 backdrop-blur-lg border-b border-white/10">
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#050505]/90 backdrop-blur-xl border-b border-white/10">
         <div class="max-w-screen-2xl mx-auto">
             <div class="px-8 py-5 flex items-center justify-between">
                 <!-- Logo -->
-                <div class="flex items-center gap-x-3">
-                    <div class="flex items-center justify-center w-11 h-11 rounded-2xl bg-gradient-to-br from-[#C9A962] to-[#A88A4A] p-1.5 shadow-inner">
-                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M20.5 8.5L25 13M25 13L20.5 17.5M25 13H12.5C10.0147 13 8 15.0147 8 17.5V23.5" stroke="#0B0B0B" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="20.5" cy="8.5" r="3" stroke="#0B0B0B" stroke-width="2.5"/>
-                            <path d="M8 23.5H4.5V27.5H8" stroke="#0B0B0B" stroke-width="2.5" stroke-linecap="round"/>
+                <div class="flex items-center gap-x-3.5">
+                    <div class="flex items-center justify-center w-11 h-11 rounded-2xl bg-gradient-to-br from-[#C9A962] via-[#E8D48A] to-[#B8860B] p-1.5 shadow-inner">
+                        <svg width="30" height="30" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M20.5 8.5L25 13M25 13L20.5 17.5M25 13H12.5C10.0147 13 8 15.0147 8 17.5V23.5" stroke="#050505" stroke-width="2.75" stroke-linecap="round" stroke-linejoin="round"/>
+                            <circle cx="20.5" cy="8.5" r="3.25" stroke="#050505" stroke-width="2.5"/>
                         </svg>
                     </div>
                     <div>
-                        <div class="font-semibold tracking-[-1.5px] text-2xl heading-font">LANDRY</div>
-                        <div class="text-[10px] text-[#C9A962] -mt-1.5 tracking-[3px] font-medium">LOCKSMITH</div>
+                        <div class="font-semibold tracking-[-2px] text-3xl heading-font">LANDRY</div>
+                        <div class="text-[10px] text-[#C9A962] -mt-1.5 tracking-[4px] font-medium">LOCKSMITH</div>
                     </div>
                 </div>
 
                 <!-- Desktop Nav -->
-                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
+                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium tracking-wide">
                     <a href="#services" class="hover:text-[#C9A962] transition-colors">Services</a>
-                    <a href="#why-us" class="hover:text-[#C9A962] transition-colors">Why Landry</a>
+                    <a href="#why-us" class="hover:text-[#C9A962] transition-colors">The Standard</a>
                     <a href="#areas" class="hover:text-[#C9A962] transition-colors">Service Area</a>
                     <a href="#contact" class="hover:text-[#C9A962] transition-colors">Contact</a>
                 </div>
@@ -261,7 +240,7 @@
                 <!-- CTA -->
                 <div class="flex items-center gap-x-3">
                     <a href="tel:9367775210" 
-                       class="hidden sm:flex items-center gap-x-2.5 px-5 py-2.5 rounded-2xl text-sm font-semibold border border-white/20 hover:bg-white/5 transition-all active:scale-[0.985]">
+                       class="hidden sm:flex items-center gap-x-2.5 px-6 py-2.5 rounded-2xl text-sm font-semibold border border-white/20 hover:bg-white/5 transition-all active:scale-[0.985]">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2 3 3 0 013 3v1m0 0v1m0-1h9m-9 0a2 2 0 01-2 2v8a2 2 0 002 2h9a2 2 0 002-2v-8a2 2 0 01-2-2m0 0V5" />
                         </svg>
@@ -269,11 +248,10 @@
                     </a>
                     
                     <button onclick="openQuoteModal()"
-                            class="metallic-btn text-[#0B0B0B] px-6 py-2.5 rounded-2xl text-sm font-semibold flex items-center gap-x-2 shadow-lg active:scale-[0.985]">
+                            class="metallic-btn text-[#050505] px-7 py-2.5 rounded-2xl text-sm font-semibold flex items-center gap-x-2 shadow-xl active:scale-[0.985]">
                         <span>Request Service</span>
                     </button>
 
-                    <!-- Mobile Menu -->
                     <button id="mobile-menu-btn"
                             class="md:hidden w-11 h-11 flex items-center justify-center rounded-2xl border border-white/10 hover:bg-white/5 transition-colors"
                             onclick="toggleMobileMenu()">
@@ -287,55 +265,126 @@
     </nav>
 
     <!-- HERO -->
-    <header class="min-h-[100dvh] pt-16 flex items-center relative overflow-hidden bg-[#0B0B0B]">
-        <!-- Background Effects -->
-        <div class="absolute inset-0 lock-bg"></div>
-        <div class="absolute inset-0 key-pattern opacity-40"></div>
+    <header class="min-h-[100dvh] pt-16 flex items-center relative overflow-hidden bg-[#050505]">
+        <!-- Animated Key Background -->
+        <div class="absolute inset-0 lock-bg opacity-60"></div>
         
-        <!-- Subtle animated gradient orbs -->
-        <div class="absolute top-1/4 right-1/4 w-[600px] h-[600px] bg-[#C9A962] opacity-[0.035] rounded-full blur-[120px]"></div>
-        <div class="absolute bottom-1/3 left-1/3 w-[400px] h-[400px] bg-[#3A5F7B] opacity-[0.04] rounded-full blur-[100px]"></div>
+        <!-- Floating Keys -->
+        <svg class="key-float w-16 h-16 top-[18%] left-[8%]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M42 22L52 32L42 42M52 32H22C18.6863 32 16 34.6863 16 38V48" stroke="#C9A962" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="42" cy="22" r="6" stroke="#C9A962" stroke-width="3"/>
+        </svg>
+        <svg class="key-float w-12 h-12 top-[32%] right-[12%]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M42 22L52 32L42 42M52 32H22C18.6863 32 16 34.6863 16 38V48" stroke="#C9A962" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="42" cy="22" r="5" stroke="#C9A962" stroke-width="2.5"/>
+        </svg>
+        <svg class="key-float w-20 h-20 bottom-[22%] left-[15%]" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M42 22L52 32L42 42M52 32H22C18.6863 32 16 34.6863 16 38V48" stroke="#C9A962" stroke-width="3.5" stroke-linecap="round"/>
+            <circle cx="42" cy="22" r="7" stroke="#C9A962" stroke-width="3.5"/>
+        </svg>
 
         <div class="max-w-screen-2xl mx-auto px-8 pt-8 pb-16 relative z-10">
-            <div class="max-w-5xl">
-                <!-- Badge -->
-                <div class="inline-flex items-center gap-x-2 px-4 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
-                    <div class="w-2 h-2 bg-[#C9A962] rounded-full animate-pulse"></div>
-                    <span class="text-xs font-semibold tracking-[1.5px] text-[#C9A962]">FAMILY OWNED • EST. CONROE, TX</span>
-                </div>
-
-                <h1 class="text-[92px] sm:text-[108px] md:text-[120px] leading-[0.86] font-semibold tracking-[-6.5px] heading-font mb-2">
-                    CONVENIENCE.<br>
-                    <span class="metallic-gold">UNLOCKED.</span>
-                </h1>
+            <div class="grid lg:grid-cols-12 gap-x-8 items-center">
                 
-                <p class="max-w-lg text-2xl text-[#C9A962]/90 font-light tracking-tight mb-4">
-                    24/7 locksmith mastery for Conroe,<br>Willis, Huntsville &amp; beyond.
-                </p>
-
-                <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-8">
-                    <a href="tel:9367775210" 
-                       class="metallic-btn inline-flex items-center justify-center gap-x-3 text-[#0B0B0B] text-lg font-semibold px-9 py-4 rounded-3xl shadow-xl active:scale-[0.985] w-full sm:w-auto">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2 3 3 0 013 3v1m0 0v1m0-1h9m-9 0a2 2 0 01-2 2v8a2 2 0 002 2h9a2 2 0 002-2v-8a2 2 0 01-2-2m0 0V5" />
-                        </svg>
-                        <span>CALL 936-777-5210</span>
-                    </a>
-                    
-                    <button onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })" 
-                            class="inline-flex items-center justify-center gap-x-3 text-lg font-semibold px-8 py-4 rounded-3xl border border-white/20 hover:bg-white/5 active:bg-white/10 transition-all w-full sm:w-auto">
-                        EXPLORE SERVICES
-                    </button>
-                </div>
-
-                <div class="mt-12 flex items-center gap-x-8 text-sm">
-                    <div class="flex -space-x-2">
-                        <div class="w-7 h-7 bg-zinc-700 rounded-full border border-[#0B0B0B]"></div>
-                        <div class="w-7 h-7 bg-zinc-600 rounded-full border border-[#0B0B0B]"></div>
-                        <div class="w-7 h-7 bg-zinc-500 rounded-full border border-[#0B0B0B]"></div>
+                <!-- Text Content -->
+                <div class="lg:col-span-7 max-w-3xl">
+                    <div class="inline-flex items-center gap-x-2 px-5 py-1.5 rounded-full bg-white/5 border border-white/10 mb-6">
+                        <div class="w-2 h-2 bg-[#C9A962] rounded-full animate-pulse"></div>
+                        <span class="text-xs font-semibold tracking-[2px] text-[#C9A962]">FAMILY OWNED • EST. CONROE, TX</span>
                     </div>
-                    <div class="text-[#C9A962]/70 text-xs tracking-widest">TRUSTED BY HUNDREDS OF LOCALS</div>
+
+                    <h1 class="text-[86px] sm:text-[102px] md:text-[118px] leading-[0.82] font-bold tracking-[-7.5px] heading-font mb-3">
+                        PRECISION.<br>
+                        <span class="metallic-gold">UNLOCKED.</span>
+                    </h1>
+                    
+                    <p class="max-w-lg text-2xl text-[#C9A962]/90 font-light tracking-tight mb-8">
+                        24/7 master locksmith for Conroe,<br>Willis, Huntsville &amp; beyond.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                        <a href="tel:9367775210" 
+                           class="metallic-btn inline-flex items-center justify-center gap-x-3 text-[#050505] text-lg font-semibold px-10 py-4 rounded-3xl shadow-2xl active:scale-[0.985] w-full sm:w-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2 3 3 0 013 3v1m0 0v1m0-1h9m-9 0a2 2 0 01-2 2v8a2 2 0 002 2h9a2 2 0 002-2v-8a2 2 0 01-2-2m0 0V5" />
+                            </svg>
+                            <span>CALL 936-777-5210</span>
+                        </a>
+                        
+                        <button onclick="document.getElementById('services').scrollIntoView({ behavior: 'smooth' })" 
+                                class="inline-flex items-center justify-center gap-x-3 text-lg font-semibold px-9 py-4 rounded-3xl border border-white/20 hover:bg-white/5 active:bg-white/10 transition-all w-full sm:w-auto">
+                            EXPLORE THE CRAFT
+                        </button>
+                    </div>
+
+                    <div class="mt-10 flex items-center gap-x-8 text-sm">
+                        <div class="flex -space-x-2">
+                            <div class="w-7 h-7 bg-zinc-700 rounded-full border border-[#050505]"></div>
+                            <div class="w-7 h-7 bg-zinc-600 rounded-full border border-[#050505]"></div>
+                            <div class="w-7 h-7 bg-zinc-500 rounded-full border border-[#050505]"></div>
+                        </div>
+                        <div class="text-[#C9A962]/60 text-xs tracking-widest">TRUSTED BY HUNDREDS OF LOCALS</div>
+                    </div>
                 </div>
+
+                <!-- SIGNATURE ELEMENT: MASTER TURN -->
+                <div class="lg:col-span-5 mt-12 lg:mt-0 flex justify-center lg:justify-end">
+                    <div class="relative">
+                        <div class="text-center mb-3">
+                            <div class="uppercase tracking-[3px] text-xs text-[#C9A962] font-semibold">THE CRAFT IN YOUR HANDS</div>
+                            <div class="text-sm text-white/50">Click &amp; drag the key</div>
+                        </div>
+                        
+                        <!-- Interactive Lock -->
+                        <div id="master-turn-container" 
+                             class="relative w-[280px] h-[280px] flex items-center justify-center cursor-grab active:cursor-grabbing select-none">
+                            
+                            <svg id="master-lock" width="280" height="280" viewBox="0 0 280 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Lock Body -->
+                                <rect x="65" y="95" width="150" height="130" rx="18" ry="18" fill="#111111" stroke="#2A2A2A" stroke-width="8"/>
+                                <rect x="65" y="95" width="150" height="130" rx="18" ry="18" fill="none" stroke="#C9A962" stroke-width="2" opacity="0.6"/>
+                                
+                                <!-- Keyhole Plate -->
+                                <rect x="95" y="130" width="90" height="60" rx="8" fill="#0A0A0A"/>
+                                
+                                <!-- Keyhole -->
+                                <circle cx="140" cy="155" r="14" fill="#050505"/>
+                                <rect x="133" y="155" width="14" height="28" fill="#050505"/>
+                                
+                                <!-- Shackle -->
+                                <path d="M95 95 Q95 45 140 45 Q185 45 185 95" fill="none" stroke="#B8860B" stroke-width="22" stroke-linecap="round"/>
+                                <path d="M95 95 Q95 45 140 45 Q185 45 185 95" fill="none" stroke="#C9A962" stroke-width="8" stroke-linecap="round"/>
+                                
+                                <!-- KEY GROUP -->
+                                <g id="key-group" style="transform-origin: 140px 155px;">
+                                    <!-- Key Shaft -->
+                                    <rect x="140" y="148" width="95" height="14" rx="3" fill="#E8D48A"/>
+                                    <!-- Key Head -->
+                                    <circle cx="235" cy="155" r="22" fill="#C9A962"/>
+                                    <circle cx="235" cy="155" r="13" fill="#050505"/>
+                                    <!-- Key Teeth -->
+                                    <rect x="155" y="162" width="12" height="9" fill="#B8860B"/>
+                                    <rect x="175" y="162" width="10" height="7" fill="#B8860B"/>
+                                    <rect x="192" y="162" width="14" height="11" fill="#B8860B"/>
+                                </g>
+                            </svg>
+                            
+                            <!-- Unlocked Badge -->
+                            <div id="unlocked-badge" 
+                                 class="hidden absolute -bottom-3 left-1/2 -translate-x-1/2 px-6 py-1.5 rounded-full bg-[#050505] border border-[#C9A962] text-xs tracking-[2px] font-semibold text-[#C9A962]">
+                                PRECISION ENGAGED
+                            </div>
+                        </div>
+                        
+                        <div class="text-center mt-2">
+                            <button onclick="resetMasterTurn()" 
+                                    class="text-xs text-white/40 hover:text-white/70 transition-colors underline decoration-dotted">
+                                RESET
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
             </div>
         </div>
 
@@ -349,8 +398,8 @@
     </header>
 
     <!-- TRUST BAR -->
-    <div class="border-b border-white/10 bg-[#111111]">
-        <div class="max-w-screen-2xl mx-auto px-8 py-5">
+    <div class="border-b border-white/10 bg-[#0A0A0A]">
+        <div class="max-w-screen-2xl mx-auto px-8 py-6">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-y-6 text-center md:text-left">
                 <div class="flex items-center justify-center md:justify-start gap-x-3">
                     <div class="w-9 h-9 rounded-2xl bg-[#C9A962]/10 flex items-center justify-center flex-shrink-0">
@@ -359,8 +408,8 @@
                         </svg>
                     </div>
                     <div>
-                        <div class="font-semibold text-sm">24/7 EMERGENCY SERVICE</div>
-                        <div class="text-xs text-white/50">Always on call. Always ready.</div>
+                        <div class="font-semibold text-sm">24/7 EMERGENCY RESPONSE</div>
+                        <div class="text-xs text-white/50">Average arrival under 25 minutes</div>
                     </div>
                 </div>
                 
@@ -371,8 +420,8 @@
                         </svg>
                     </div>
                     <div>
-                        <div class="font-semibold text-sm">NO HIDDEN FEES</div>
-                        <div class="text-xs text-white/50">Transparent quote before we arrive</div>
+                        <div class="font-semibold text-sm">NO HIDDEN FEES • EVER</div>
+                        <div class="text-xs text-white/50">Transparent quote before dispatch</div>
                     </div>
                 </div>
                 
@@ -384,7 +433,7 @@
                     </div>
                     <div>
                         <div class="font-semibold text-sm">LICENSED • BONDED • INSURED</div>
-                        <div class="text-xs text-white/50">Full protection for your peace of mind</div>
+                        <div class="text-xs text-white/50">Full protection on every job</div>
                     </div>
                 </div>
                 
@@ -395,32 +444,31 @@
                         </svg>
                     </div>
                     <div>
-                        <div class="font-semibold text-sm">FAMILY OWNED &amp; OPERATED</div>
-                        <div class="text-xs text-white/50">Mason Landry • Personal service</div>
+                        <div class="font-semibold text-sm">TRUE FAMILY CRAFTSMANSHIP</div>
+                        <div class="text-xs text-white/50">Mason Landry • Personal oversight</div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- SERVICES SECTION -->
+    <!-- SERVICES -->
     <section id="services" class="max-w-screen-2xl mx-auto px-8 pt-20 pb-16">
         <div class="max-w-3xl mb-12">
-            <div class="uppercase tracking-[3px] text-xs text-[#C9A962] font-semibold mb-3">THE CRAFT</div>
-            <h2 class="text-6xl sm:text-7xl heading-font tracking-[-3.5px] leading-none">Three Mechanisms.<br>One Master Key.</h2>
-            <p class="mt-5 text-xl text-white/70 max-w-md">Whether it's your vehicle, your home, or your business — we approach every lock with surgical precision and decades of hands-on mastery.</p>
+            <div class="uppercase tracking-[3.5px] text-xs text-[#C9A962] font-semibold mb-3">THE MECHANISMS</div>
+            <h2 class="text-6xl sm:text-7xl heading-font tracking-[-3.5px] leading-none">Three systems.<br>One master key.</h2>
+            <p class="mt-5 text-xl text-white/70 max-w-md">Whether it’s your vehicle, your home, or your business — we approach every lock with surgical precision and decades of hands-on mastery.</p>
         </div>
 
-        <!-- Service Category Cards -->
         <div class="grid md:grid-cols-3 gap-6">
             
             <!-- AUTOMOTIVE -->
-            <div onclick="openServiceModal('automotive')" class="service-card group cursor-pointer bg-[#111111] border border-white/10 rounded-3xl p-8 hover:border-[#C9A962]/40 flex flex-col">
+            <div onclick="openServiceModal('automotive')" class="service-card group cursor-pointer bg-[#111111] border border-white/10 rounded-3xl p-8 hover:border-[#C9A962]/50 flex flex-col">
                 <div class="flex justify-between items-start mb-8">
-                    <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#C9A962]/10 to-transparent border border-[#C9A962]/20">
-                        <svg class="lock-icon w-9 h-9 text-[#C9A962]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.75">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6m12 0a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#C9A962]/10 to-transparent border border-[#C9A962]/30">
+                        <svg class="lock-icon w-9 h-9 text-[#C9A962]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6m12 0a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                         </svg>
                     </div>
                     <div class="text-right">
@@ -446,12 +494,11 @@
             </div>
 
             <!-- RESIDENTIAL -->
-            <div onclick="openServiceModal('residential')" class="service-card group cursor-pointer bg-[#111111] border border-white/10 rounded-3xl p-8 hover:border-[#C9A962]/40 flex flex-col">
+            <div onclick="openServiceModal('residential')" class="service-card group cursor-pointer bg-[#111111] border border-white/10 rounded-3xl p-8 hover:border-[#C9A962]/50 flex flex-col">
                 <div class="flex justify-between items-start mb-8">
-                    <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#C9A962]/10 to-transparent border border-[#C9A962]/20">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#C9A962]/10 to-transparent border border-[#C9A962]/30">
                         <svg class="lock-icon w-9 h-9 text-[#C9A962]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1v-5m0 0h10m-6 4v-4m6 0v4m-6-4h6" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 7v4m0 0v4m0-4h4m-4 0H7" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1v-5m0 0h10m-6 4v-4m6 0v4m-6-4h6"/>
                         </svg>
                     </div>
                     <div class="text-right">
@@ -477,12 +524,11 @@
             </div>
 
             <!-- COMMERCIAL -->
-            <div onclick="openServiceModal('commercial')" class="service-card group cursor-pointer bg-[#111111] border border-white/10 rounded-3xl p-8 hover:border-[#C9A962]/40 flex flex-col">
+            <div onclick="openServiceModal('commercial')" class="service-card group cursor-pointer bg-[#111111] border border-white/10 rounded-3xl p-8 hover:border-[#C9A962]/50 flex flex-col">
                 <div class="flex justify-between items-start mb-8">
-                    <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#C9A962]/10 to-transparent border border-[#C9A962]/20">
+                    <div class="w-16 h-16 flex items-center justify-center rounded-2xl bg-gradient-to-br from-[#C9A962]/10 to-transparent border border-[#C9A962]/30">
                         <svg class="lock-icon w-9 h-9 text-[#C9A962]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 01-2-2H7a2 2 0 01-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 01-2-2H7a2 2 0 01-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                         </svg>
                     </div>
                     <div class="text-right">
@@ -509,12 +555,12 @@
         </div>
     </section>
 
-    <!-- WHY US / THE PROMISE -->
+    <!-- WHY US / THE STANDARD -->
     <section id="why-us" class="bg-[#111111] border-y border-white/10 py-16">
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="grid md:grid-cols-12 gap-x-12 gap-y-12 items-center">
                 <div class="md:col-span-5">
-                    <div class="uppercase tracking-[3px] text-xs text-[#C9A962] font-semibold mb-3">THE LANDRY STANDARD</div>
+                    <div class="uppercase tracking-[3.5px] text-xs text-[#C9A962] font-semibold mb-3">THE LANDRY STANDARD</div>
                     <h2 class="text-6xl heading-font tracking-[-3px] leading-[0.92]">We don’t just open locks.<br>We protect what matters.</h2>
                     
                     <div class="mt-8 text-lg text-white/70 max-w-md">
@@ -529,7 +575,7 @@
 
                 <div class="md:col-span-7">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div class="bg-[#0B0B0B] p-7 rounded-3xl border border-white/5">
+                        <div class="bg-[#050505] p-7 rounded-3xl border border-white/5">
                             <div class="flex gap-x-4">
                                 <div class="mt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#C9A962]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -538,26 +584,26 @@
                                 </div>
                                 <div>
                                     <div class="font-semibold mb-1">Lightning Response</div>
-                                    <div class="text-sm text-white/60">Most calls answered within minutes. Technicians often on-site in under 30 minutes across our service area.</div>
+                                    <div class="text-sm text-white/60">Most calls answered within minutes. Technicians often on-site in under 25 minutes.</div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="bg-[#0B0B0B] p-7 rounded-3xl border border-white/5">
+                        <div class="bg-[#050505] p-7 rounded-3xl border border-white/5">
                             <div class="flex gap-x-4">
                                 <div class="mt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#C9A962]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 8.944 11.922a11.96 11.96 0 01-1.944-.072" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" />
                                     </svg>
                                 </div>
                                 <div>
                                     <div class="font-semibold mb-1">Upfront Pricing</div>
-                                    <div class="text-sm text-white/60">We diagnose over the phone and give you a final quote before we dispatch. No surprises. Ever.</div>
+                                    <div class="text-sm text-white/60">We diagnose over the phone and give you a final quote before we dispatch. No surprises.</div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="bg-[#0B0B0B] p-7 rounded-3xl border border-white/5">
+                        <div class="bg-[#050505] p-7 rounded-3xl border border-white/5">
                             <div class="flex gap-x-4">
                                 <div class="mt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#C9A962]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -566,12 +612,12 @@
                                 </div>
                                 <div>
                                     <div class="font-semibold mb-1">Latest Technology</div>
-                                    <div class="text-sm text-white/60">Advanced key programming equipment for transponders, smart keys, and high-security cylinders across all makes and models.</div>
+                                    <div class="text-sm text-white/60">Advanced key programming for transponders, smart keys, and high-security cylinders across all makes and models.</div>
                                 </div>
                             </div>
                         </div>
                         
-                        <div class="bg-[#0B0B0B] p-7 rounded-3xl border border-white/5">
+                        <div class="bg-[#050505] p-7 rounded-3xl border border-white/5">
                             <div class="flex gap-x-4">
                                 <div class="mt-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#C9A962]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -580,7 +626,7 @@
                                 </div>
                                 <div>
                                     <div class="font-semibold mb-1">True Family Craft</div>
-                                    <div class="text-sm text-white/60">Mason Landry personally oversees quality. This is not a franchise — it’s our name on every job.</div>
+                                    <div class="text-sm text-white/60">Mason Landry personally oversees every job. This is not a franchise — it’s our name on every lock.</div>
                                 </div>
                             </div>
                         </div>
@@ -594,14 +640,13 @@
     <section class="max-w-screen-2xl mx-auto px-8 py-20">
         <div class="flex justify-between items-end mb-10">
             <div>
-                <div class="uppercase tracking-[3px] text-xs text-[#C9A962] font-semibold mb-2">REAL VOICES</div>
+                <div class="uppercase tracking-[3.5px] text-xs text-[#C9A962] font-semibold mb-2">REAL VOICES</div>
                 <h2 class="text-6xl heading-font tracking-[-2.5px]">Trusted by the community.</h2>
             </div>
             <div class="hidden md:block text-xs text-white/40 max-w-[200px] text-right">Every review is from a real customer in our service area.</div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6">
-            <!-- Testimonial 1 -->
             <div class="bg-[#111111] border border-white/10 p-8 rounded-3xl elegant-quote">
                 <div class="text-[#C9A962] text-2xl mb-6">★★★★★</div>
                 <p class="text-lg leading-tight">"Super fast and very professional. Called and within 10 minutes he made it to me. Will recommend to anybody."</p>
@@ -613,7 +658,6 @@
                 </div>
             </div>
             
-            <!-- Testimonial 2 -->
             <div class="bg-[#111111] border border-white/10 p-8 rounded-3xl elegant-quote">
                 <div class="text-[#C9A962] text-2xl mb-6">★★★★★</div>
                 <p class="text-lg leading-tight">"By far the best around, fairly priced, prompt and professional. Will recommend and go to again should I ever need to."</p>
@@ -625,7 +669,6 @@
                 </div>
             </div>
             
-            <!-- Testimonial 3 -->
             <div class="bg-[#111111] border border-white/10 p-8 rounded-3xl elegant-quote">
                 <div class="text-[#C9A962] text-2xl mb-6">★★★★★</div>
                 <p class="text-lg leading-tight">"Came at a timely manner and helped within minutes. Very professional and would definitely recommend Mr. Mason!"</p>
@@ -644,7 +687,7 @@
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="grid lg:grid-cols-2 gap-x-16 gap-y-10 items-center">
                 <div>
-                    <div class="uppercase tracking-[3px] text-xs text-[#C9A962] font-semibold mb-3">MOBILE TO YOU</div>
+                    <div class="uppercase tracking-[3.5px] text-xs text-[#C9A962] font-semibold mb-3">MOBILE TO YOU</div>
                     <h2 class="text-6xl heading-font tracking-[-3px] leading-none mb-6">Wherever you are,<br>we bring the key.</h2>
                     
                     <div class="max-w-md text-lg text-white/70">
@@ -661,9 +704,9 @@
                     </div>
                 </div>
 
-                <!-- Interactive Map -->
+                <!-- Map -->
                 <div>
-                    <div class="map-container bg-[#0B0B0B] p-2 rounded-3xl">
+                    <div class="map-container bg-[#050505] p-2 rounded-3xl">
                         <div id="map" class="w-full h-[340px] rounded-2xl overflow-hidden z-0"></div>
                     </div>
                     <div class="text-center text-[10px] text-white/40 mt-3 tracking-widest">FULLY MOBILE • WE COME TO YOU 24/7</div>
@@ -676,10 +719,10 @@
     <div class="max-w-screen-2xl mx-auto px-8 py-20 text-center">
         <div class="max-w-2xl mx-auto">
             <div class="text-[#C9A962] text-sm tracking-[4px] font-semibold mb-3">READY WHEN YOU ARE</div>
-            <h2 class="text-6xl sm:text-7xl heading-font tracking-[-3.5px] leading-none">Locked out right now?<br>We're already on the way.</h2>
+            <h2 class="text-6xl sm:text-7xl heading-font tracking-[-3.5px] leading-none">Locked out right now?<br>We’re already on the way.</h2>
             
             <div class="mt-9 flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="tel:9367775210" class="metallic-btn text-[#0B0B0B] text-xl font-semibold px-14 py-5 rounded-3xl flex items-center justify-center gap-x-3 shadow-2xl active:scale-[0.985]">
+                <a href="tel:9367775210" class="metallic-btn text-[#050505] text-xl font-semibold px-14 py-5 rounded-3xl flex items-center justify-center gap-x-3 shadow-2xl active:scale-[0.985]">
                     <span>CALL 936-777-5210</span>
                 </a>
                 <button onclick="openQuoteModal()" class="text-xl font-semibold px-10 py-5 rounded-3xl border border-white/20 hover:bg-white/5 transition-all flex items-center justify-center gap-x-3">
@@ -687,7 +730,7 @@
                 </button>
             </div>
             
-            <div class="mt-6 text-xs text-white/40">Average response time under 30 minutes • No hidden fees • Licensed, bonded &amp; insured</div>
+            <div class="mt-6 text-xs text-white/40">Average response under 25 minutes • No hidden fees • Licensed, bonded &amp; insured</div>
         </div>
     </div>
 
@@ -696,14 +739,14 @@
         <div class="max-w-screen-2xl mx-auto px-8">
             <div class="flex flex-col md:flex-row justify-between gap-y-10">
                 <div>
-                    <div class="flex items-center gap-x-3 mb-5">
-                        <div class="flex items-center justify-center w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C9A962] to-[#A88A4A] p-1.5">
+                    <div class="flex items-center gap-x-3.5 mb-5">
+                        <div class="flex items-center justify-center w-9 h-9 rounded-2xl bg-gradient-to-br from-[#C9A962] via-[#E8D48A] to-[#B8860B] p-1.5">
                             <svg width="26" height="26" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M20.5 8.5L25 13M25 13L20.5 17.5M25 13H12.5C10.0147 13 8 15.0147 8 17.5V23.5" stroke="#0B0B0B" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round"/>
-                                <circle cx="20.5" cy="8.5" r="2.75" stroke="#0B0B0B" stroke-width="2.25"/>
+                                <path d="M20.5 8.5L25 13M25 13L20.5 17.5M25 13H12.5C10.0147 13 8 15.0147 8 17.5V23.5" stroke="#050505" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                <circle cx="20.5" cy="8.5" r="3" stroke="#050505" stroke-width="2.5"/>
                             </svg>
                         </div>
-                        <div class="font-semibold text-2xl tracking-[-1.2px] heading-font">LANDRY LOCKSMITH</div>
+                        <div class="font-semibold text-2xl tracking-[-1.5px] heading-font">LANDRY LOCKSMITH</div>
                     </div>
                     <div class="text-sm text-white/50 max-w-[260px]">Precision craftsmanship. Family values. 24/7 reliability across Conroe and surrounding Texas communities.</div>
                 </div>
@@ -713,7 +756,7 @@
                         <div class="font-semibold mb-3 text-xs tracking-widest text-white/40">NAVIGATE</div>
                         <div class="space-y-[9px] text-white/80">
                             <div><a href="#services" class="hover:text-[#C9A962]">Services</a></div>
-                            <div><a href="#why-us" class="hover:text-[#C9A962]">Why Landry</a></div>
+                            <div><a href="#why-us" class="hover:text-[#C9A962]">The Standard</a></div>
                             <div><a href="#areas" class="hover:text-[#C9A962]">Service Area</a></div>
                         </div>
                     </div>
@@ -740,32 +783,24 @@
 
     <!-- SERVICE MODALS -->
     <div id="service-modal" onclick="if (event.target.id === 'service-modal') closeServiceModal()" class="hidden fixed inset-0 bg-black/90 z-[70] flex items-center justify-center p-4">
-        <div onclick="event.stopImmediatePropagation()" class="bg-[#0B0B0B] border border-white/10 w-full max-w-3xl rounded-3xl overflow-hidden premium-shadow">
-            
-            <!-- Modal Header -->
+        <div onclick="event.stopImmediatePropagation()" class="bg-[#050505] border border-white/10 w-full max-w-3xl rounded-3xl overflow-hidden premium-shadow">
             <div class="px-8 py-6 border-b border-white/10 flex items-center justify-between bg-[#111111]">
                 <div id="modal-header-content" class="flex items-center gap-x-4"></div>
-                <button onclick="closeServiceModal()" class="w-10 h-10 flex items-center justify-center text-white/50 hover:text-white transition-colors rounded-2xl hover:bg-white/5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6h12v12" />
-                    </svg>
-                </button>
+                <button onclick="closeServiceModal()" class="w-10 h-10 flex items-center justify-center text-white/50 hover:text-white transition-colors rounded-2xl hover:bg-white/5">✕</button>
             </div>
             
-            <div id="modal-body-content" class="p-8 max-h-[65vh] overflow-auto">
-                <!-- Populated by JS -->
-            </div>
+            <div id="modal-body-content" class="p-8 max-h-[65vh] overflow-auto"></div>
             
             <div class="px-8 py-5 border-t border-white/10 bg-[#111111] flex items-center justify-between text-sm">
                 <div class="text-white/50">Need immediate help? <span class="font-mono text-[#C9A962]">936-777-5210</span></div>
-                <button onclick="closeServiceModal(); openQuoteModal()" class="metallic-btn text-[#0B0B0B] text-xs font-semibold px-6 py-2.5 rounded-2xl">REQUEST THIS SERVICE</button>
+                <button onclick="closeServiceModal(); openQuoteModal()" class="metallic-btn text-[#050505] text-xs font-semibold px-6 py-2.5 rounded-2xl">REQUEST THIS SERVICE</button>
             </div>
         </div>
     </div>
 
-    <!-- QUOTE / CONTACT MODAL -->
+    <!-- QUOTE MODAL -->
     <div id="quote-modal" onclick="if (event.target.id === 'quote-modal') closeQuoteModal()" class="hidden fixed inset-0 bg-black/90 z-[80] flex items-center justify-center p-4">
-        <div onclick="event.stopImmediatePropagation()" class="bg-[#0B0B0B] border border-white/10 w-full max-w-lg rounded-3xl overflow-hidden">
+        <div onclick="event.stopImmediatePropagation()" class="bg-[#050505] border border-white/10 w-full max-w-lg rounded-3xl overflow-hidden">
             <div class="px-8 pt-8 pb-6">
                 <div class="flex justify-between items-start">
                     <div>
@@ -779,17 +814,17 @@
                     <div class="grid grid-cols-2 gap-4">
                         <div>
                             <label class="text-xs text-white/50 block mb-1.5">YOUR NAME</label>
-                            <input type="text" id="form-name" required class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/50 rounded-2xl px-5 py-3 text-sm outline-none">
+                            <input type="text" id="form-name" required class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/60 rounded-2xl px-5 py-3 text-sm outline-none">
                         </div>
                         <div>
                             <label class="text-xs text-white/50 block mb-1.5">PHONE NUMBER</label>
-                            <input type="tel" id="form-phone" required class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/50 rounded-2xl px-5 py-3 text-sm outline-none font-mono">
+                            <input type="tel" id="form-phone" required class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/60 rounded-2xl px-5 py-3 text-sm outline-none font-mono">
                         </div>
                     </div>
                     
                     <div>
                         <label class="text-xs text-white/50 block mb-1.5">SERVICE NEEDED</label>
-                        <select id="form-service" required class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/50 rounded-2xl px-5 py-3 text-sm outline-none">
+                        <select id="form-service" required class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/60 rounded-2xl px-5 py-3 text-sm outline-none">
                             <option value="">Select a category...</option>
                             <option value="Automotive">Automotive Locksmith</option>
                             <option value="Residential">Residential Locksmith</option>
@@ -801,15 +836,15 @@
                     
                     <div>
                         <label class="text-xs text-white/50 block mb-1.5">LOCATION / CITY</label>
-                        <input type="text" id="form-location" value="Conroe, TX" class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/50 rounded-2xl px-5 py-3 text-sm outline-none">
+                        <input type="text" id="form-location" value="Conroe, TX" class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/60 rounded-2xl px-5 py-3 text-sm outline-none">
                     </div>
                     
                     <div>
                         <label class="text-xs text-white/50 block mb-1.5">DETAILS OR NOTES</label>
-                        <textarea id="form-message" rows="3" placeholder="Locked out? Lost keys? Need rekey? Tell us what happened..." class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/50 rounded-3xl px-5 py-4 text-sm outline-none resize-y"></textarea>
+                        <textarea id="form-message" rows="3" placeholder="Locked out? Lost keys? Need rekey? Tell us what happened..." class="w-full bg-[#111111] border border-white/10 focus:border-[#C9A962]/60 rounded-3xl px-5 py-4 text-sm outline-none resize-y"></textarea>
                     </div>
                     
-                    <button type="submit" class="metallic-btn w-full py-4 text-[#0B0B0B] rounded-3xl font-semibold text-base mt-2 active:scale-[0.985]">
+                    <button type="submit" class="metallic-btn w-full py-4 text-[#050505] rounded-3xl font-semibold text-base mt-2 active:scale-[0.985]">
                         SEND REQUEST — WE'LL CALL YOU SHORTLY
                     </button>
                 </form>
@@ -821,22 +856,20 @@
 
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Tailwind script
+        // Tailwind config
         function initializeTailwind() {
-            document.documentElement.style.setProperty('--accent-gold', '#C9A962');
-            
             tailwind.config = {
                 theme: {
                     extend: {
                         fontFamily: {
-                            'grotesk': ['Space Grotesk', 'Inter', 'system-ui', 'sans-serif']
+                            'playfair': ['Playfair Display', 'Georgia', 'serif']
                         }
                     }
                 }
             };
         }
 
-        // Navbar scroll behavior
+        // Navbar
         function initNavbar() {
             const navbar = document.getElementById('navbar');
             
@@ -847,39 +880,17 @@
                     navbar.classList.remove('nav-scrolled', 'shadow-xl');
                 }
             });
-            
-            // Active nav highlighting (simple)
-            const navLinks = document.querySelectorAll('nav a[href^="#"]');
-            window.addEventListener('scroll', () => {
-                let current = '';
-                document.querySelectorAll('section[id]').forEach(section => {
-                    const sectionTop = section.offsetTop;
-                    if (scrollY >= sectionTop - 200) {
-                        current = section.getAttribute('id');
-                    }
-                });
-                
-                navLinks.forEach(link => {
-                    link.classList.remove('nav-active');
-                    if (link.getAttribute('href') === `#${current}`) {
-                        link.classList.add('nav-active');
-                    }
-                });
-            });
         }
 
         // Mobile menu
         function toggleMobileMenu() {
-            const menuBtn = document.getElementById('mobile-menu-btn');
             const icon = document.getElementById('menu-icon');
-            
-            // Simple mobile menu implementation
             const mobileNav = document.createElement('div');
             mobileNav.className = `fixed inset-0 bg-black/95 z-[60] md:hidden flex flex-col pt-20 px-8`;
             mobileNav.innerHTML = `
                 <div class="flex flex-col text-3xl font-semibold tracking-tighter space-y-6">
                     <a href="#services" class="py-1 hover:text-[#C9A962] transition-colors">Services</a>
-                    <a href="#why-us" class="py-1 hover:text-[#C9A962] transition-colors">Why Landry</a>
+                    <a href="#why-us" class="py-1 hover:text-[#C9A962] transition-colors">The Standard</a>
                     <a href="#areas" class="py-1 hover:text-[#C9A962] transition-colors">Service Area</a>
                     <a href="#contact" class="py-1 hover:text-[#C9A962] transition-colors">Contact</a>
                     
@@ -887,14 +898,13 @@
                         <a href="tel:9367775210" class="flex items-center gap-x-3 text-[#C9A962] text-xl">
                             <span>Call 936-777-5210</span>
                         </a>
-                        <button onclick="closeMobileMenu(this); openQuoteModal()" class="mt-4 metallic-btn w-full py-4 text-[#0B0B0B] rounded-3xl font-semibold">Request Service</button>
+                        <button onclick="closeMobileMenu(this); openQuoteModal()" class="mt-4 metallic-btn w-full py-4 text-[#050505] rounded-3xl font-semibold">Request Service</button>
                     </div>
                 </div>
             `;
             
             document.body.appendChild(mobileNav);
             
-            // Close on link click
             mobileNav.querySelectorAll('a').forEach(a => {
                 a.onclick = () => {
                     mobileNav.remove();
@@ -919,52 +929,28 @@
             if (icon) icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />`;
         }
 
-        // Service Modals Data
+        // Service Data
         const serviceData = {
             automotive: {
                 title: "Automotive Locksmith",
                 icon: `<svg class="w-9 h-9 text-[#C9A962]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6m12 0a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`,
                 subtitle: "Vehicle Security Systems • Transponder Programming • Roadside Assistance",
                 description: "Modern vehicles are rolling fortresses. Our technicians carry the latest diagnostic and programming equipment to handle virtually any make and model — from basic key duplication to complex transponder and smart key systems.",
-                services: [
-                    "Car Lockout & Unlock Service", "Keys Locked Inside Vehicle", "Car Key Duplication", 
-                    "Broken Key Extraction", "Lost Car Keys Replacement", "Car Lock Picking", 
-                    "Jammed Door Lock Repair", "Ignition Switch Replacement", "Ignition Cylinder Change",
-                    "Ignition Repair & Rekey", "VATS (Vehicle Anti-Theft System) Service", "Transponder Key Programming",
-                    "Car Key Remote Control Programming", "Smart Key / Proximity Key Programming", 
-                    "Trunk Lockout & Trunk Release", "Motorcycle Locksmith Services", "Car Door Lock Change / Rekey",
-                    "Key Fob Battery Replacement & Programming", "High-Security Vehicle Key Systems"
-                ]
+                services: ["Car Lockout & Unlock Service", "Keys Locked Inside Vehicle", "Car Key Duplication", "Broken Key Extraction", "Lost Car Keys Replacement", "Car Lock Picking", "Jammed Door Lock Repair", "Ignition Switch Replacement", "Ignition Cylinder Change", "Ignition Repair & Rekey", "VATS Service", "Transponder Key Programming", "Car Key Remote Programming", "Smart Key / Proximity Programming", "Trunk Lockout & Release", "Motorcycle Locksmith", "Car Door Lock Change / Rekey", "Key Fob Battery & Programming", "High-Security Vehicle Keys"]
             },
             residential: {
                 title: "Residential Locksmith",
                 icon: `<svg class="w-9 h-9 text-[#C9A962]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1v-5m0 0h10m-6 4v-4m6 0v4m-6-4h6"/></svg>`,
                 subtitle: "Home Security • Rekeying • High-Security Upgrades • Emergency Response",
                 description: "Your home should feel like a fortress. We provide complete residential locksmith services from simple re-keys to full security overhauls, including high-security deadbolts, smart locks, and reinforced entry points.",
-                services: [
-                    "House Lockout Service", "Lost House Keys Replacement", "Lock Rekeying (All Locks)", 
-                    "Lock Repair & Maintenance", "New Lock Installation", "Change Locks (Full Service)",
-                    "Broken Key Extraction", "Door Reinforcement & Security Plates", "Entry Door Lock Upgrades",
-                    "Deadbolt Installation & Repair", "Mailbox Lock Replacement", "Window Lock Repair & Installation",
-                    "Garage Door Lock Service", "Gate Lock Installation & Repair", "Safe Services & Safe Opening",
-                    "Storage Unit Lockouts", "Digital / Smart Lock Installation", "Home Security System Integration",
-                    "CCTV & Access Control for Homes", "Key Duplication (High Security)"
-                ]
+                services: ["House Lockout Service", "Lost House Keys Replacement", "Lock Rekeying (All Locks)", "Lock Repair & Maintenance", "New Lock Installation", "Change Locks (Full Service)", "Broken Key Extraction", "Door Reinforcement & Security Plates", "Entry Door Lock Upgrades", "Deadbolt Installation & Repair", "Mailbox Lock Replacement", "Window Lock Repair & Installation", "Garage Door Lock Service", "Gate Lock Installation & Repair", "Safe Services & Safe Opening", "Storage Unit Lockouts", "Digital / Smart Lock Installation", "Home Security Integration", "CCTV & Access Control", "Key Duplication (High Security)"]
             },
             commercial: {
                 title: "Commercial Locksmith",
                 icon: `<svg class="w-9 h-9 text-[#C9A962]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.6"><path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 01-2-2H7a2 2 0 01-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>`,
                 subtitle: "Master Key Systems • Access Control • Panic Hardware • Business Security",
-                description: "Businesses depend on reliable security that scales. We specialize in complex commercial solutions including master key systems, IC core cylinders, access control integration, and rapid-response commercial lockouts that keep your operations moving.",
-                services: [
-                    "Business Lockout Service", "Commercial Lock Repair", "Master Key System Design & Implementation",
-                    "IC Core Rekeying & Cylinder Changes", "Push Bar / Panic Hardware Installation", "Access Control Systems",
-                    "Rekeying for Multiple Doors", "High-Security Commercial Locks", "Keyless Entry & Electronic Access",
-                    "File Cabinet & Desk Lock Services", "Storefront Door Lock Repair", "Emergency Exit Hardware",
-                    "Building Security Audits", "Multi-Tenant Property Key Systems", "Commercial Safe Services",
-                    "CCTV Integration Support", "Door Closer Installation & Repair", "Full Building Rekey Projects",
-                    "After-Hours Emergency Commercial Service"
-                ]
+                description: "Businesses depend on reliable security that scales. We specialize in complex commercial solutions including master key systems, IC core cylinders, access control integration, and rapid-response commercial lockouts.",
+                services: ["Business Lockout Service", "Commercial Lock Repair", "Master Key System Design", "IC Core Rekeying & Cylinder Changes", "Push Bar / Panic Hardware", "Access Control Systems", "Rekeying for Multiple Doors", "High-Security Commercial Locks", "Keyless Entry & Electronic Access", "File Cabinet & Desk Locks", "Storefront Door Lock Repair", "Emergency Exit Hardware", "Building Security Audits", "Multi-Tenant Key Systems", "Commercial Safe Services", "CCTV Integration Support", "Door Closer Installation", "Full Building Rekey Projects", "After-Hours Emergency Service"]
             }
         };
 
@@ -998,7 +984,7 @@
             ).join('');
             
             bodyContent.innerHTML = `
-                <div class="prose prose-invert max-w-none">
+                <div>
                     <p class="text-white/70 text-[15px]">${data.description}</p>
                     
                     <div class="mt-8">
@@ -1026,7 +1012,6 @@
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
             
-            // Focus first input
             setTimeout(() => {
                 const nameInput = document.getElementById('form-name');
                 if (nameInput) nameInput.focus();
@@ -1041,11 +1026,8 @@
         
         function submitQuoteForm(e) {
             e.preventDefault();
-            
             const form = document.getElementById('quote-form');
-            const originalContent = form.innerHTML;
             
-            // Simulate sending
             form.innerHTML = `
                 <div class="py-10 text-center">
                     <div class="mx-auto w-16 h-16 rounded-full bg-[#C9A962]/10 flex items-center justify-center mb-5">
@@ -1061,24 +1043,160 @@
                     </div>
                 </div>
             `;
-            
-            // In a real site, this would POST to a backend or email service
-            console.log('%c[Landry Locksmith] Quote form submitted successfully (demo)', 'color:#666');
-            
-            // Reset form after close (for demo reuse)
-            setTimeout(() => {
-                if (!document.getElementById('quote-modal').classList.contains('hidden')) {
-                    // keep success state until closed
-                }
-            }, 4000);
         }
 
-        // Initialize Leaflet Map
+        // Master Turn Interactive Lock
+        let isDragging = false;
+        let currentRotation = 0;
+        let hasUnlocked = false;
+
+        function initMasterTurn() {
+            const container = document.getElementById('master-turn-container');
+            const keyGroup = document.getElementById('key-group');
+            const lock = document.getElementById('master-lock');
+            const badge = document.getElementById('unlocked-badge');
+            
+            if (!container || !keyGroup) return;
+
+            const centerX = 140;
+            const centerY = 155;
+            const maxRotation = 92;
+            const minRotation = -8;
+
+            function updateRotation(angle) {
+                currentRotation = Math.max(minRotation, Math.min(maxRotation, angle));
+                keyGroup.setAttribute('transform', `rotate(${currentRotation} ${centerX} ${centerY})`);
+                
+                // Visual feedback during turn
+                if (currentRotation > 45) {
+                    lock.style.filter = `drop-shadow(0 0 ${8 + (currentRotation - 45) * 0.6}px rgba(201, 169, 98, 0.4))`;
+                }
+            }
+
+            function checkUnlock() {
+                if (currentRotation >= 82 && !hasUnlocked) {
+                    hasUnlocked = true;
+                    lock.classList.add('unlocked');
+                    badge.classList.remove('hidden');
+                    badge.classList.add('precision-badge');
+                    
+                    // Extra glow pulse
+                    setTimeout(() => {
+                        lock.style.filter = 'drop-shadow(0 0 35px rgba(201, 169, 98, 0.65))';
+                    }, 80);
+                    
+                    // Reset glow after a moment
+                    setTimeout(() => {
+                        if (lock.classList.contains('unlocked')) {
+                            lock.style.filter = 'drop-shadow(0 0 25px rgba(201, 169, 98, 0.5))';
+                        }
+                    }, 1200);
+                }
+            }
+
+            // Mouse / Touch handlers
+            function startDrag(e) {
+                isDragging = true;
+                container.style.cursor = 'grabbing';
+            }
+
+            function endDrag() {
+                isDragging = false;
+                container.style.cursor = 'grab';
+                checkUnlock();
+            }
+
+            function doDrag(e) {
+                if (!isDragging) return;
+                
+                const rect = container.getBoundingClientRect();
+                const mouseX = (e.clientX || e.touches[0].clientX) - rect.left;
+                const mouseY = (e.clientY || e.touches[0].clientY) - rect.top;
+                
+                // Calculate angle from center of lock
+                const deltaX = mouseX - centerX;
+                const deltaY = mouseY - centerY;
+                let angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+                
+                // Convert to rotation range we want (roughly horizontal key movement)
+                angle = (angle + 90) * 0.85;
+                
+                updateRotation(angle);
+            }
+
+            // Event listeners
+            container.addEventListener('mousedown', startDrag);
+            container.addEventListener('touchstart', startDrag, { passive: true });
+            
+            window.addEventListener('mousemove', doDrag);
+            window.addEventListener('touchmove', doDrag, { passive: true });
+            
+            window.addEventListener('mouseup', endDrag);
+            window.addEventListener('touchend', endDrag);
+            
+            // Click to toggle a little
+            container.addEventListener('click', (e) => {
+                if (!isDragging && !hasUnlocked) {
+                    const newAngle = currentRotation > 40 ? 0 : 88;
+                    updateRotation(newAngle);
+                    if (newAngle > 80) checkUnlock();
+                }
+            });
+
+            // Keyboard accessibility
+            container.setAttribute('tabindex', '0');
+            container.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const newAngle = currentRotation > 40 ? 0 : 88;
+                    updateRotation(newAngle);
+                    if (newAngle > 80) checkUnlock();
+                }
+            });
+
+            // Initial subtle hint animation
+            setTimeout(() => {
+                if (!hasUnlocked && currentRotation === 0) {
+                    keyGroup.style.transition = 'transform 1.2s cubic-bezier(0.23,1,0.32,1)';
+                    updateRotation(28);
+                    setTimeout(() => {
+                        if (!isDragging && !hasUnlocked) {
+                            updateRotation(0);
+                            keyGroup.style.transition = '';
+                        }
+                    }, 1100);
+                }
+            }, 2800);
+        }
+
+        function resetMasterTurn() {
+            const keyGroup = document.getElementById('key-group');
+            const lock = document.getElementById('master-lock');
+            const badge = document.getElementById('unlocked-badge');
+            
+            if (!keyGroup || !lock) return;
+            
+            keyGroup.style.transition = 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+            keyGroup.setAttribute('transform', 'rotate(0 140 155)');
+            
+            lock.classList.remove('unlocked');
+            lock.style.filter = '';
+            badge.classList.add('hidden');
+            badge.classList.remove('precision-badge');
+            
+            setTimeout(() => {
+                keyGroup.style.transition = '';
+            }, 600);
+            
+            currentRotation = 0;
+            hasUnlocked = false;
+        }
+
+        // Map
         function initMap() {
             const mapContainer = document.getElementById('map');
             if (!mapContainer || typeof L === 'undefined') return;
             
-            // Conroe, TX coordinates
             const conroeLat = 30.3119;
             const conroeLng = -95.4560;
             
@@ -1089,148 +1207,84 @@
                 dragging: true
             }).setView([conroeLat, conroeLng], 10);
             
-            // Dark themed map tiles (CartoDB Dark Matter)
             L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
                 maxZoom: 19,
                 subdomains: 'abcd'
             }).addTo(map);
             
-            // Custom gold marker icon
             const goldIcon = L.divIcon({
                 className: 'custom-marker',
-                iconSize: [14, 14],
-                iconAnchor: [7, 7],
+                iconSize: [15, 15],
+                iconAnchor: [7.5, 7.5],
                 popupAnchor: [0, -8]
             });
             
-            // Main marker - Conroe
             const marker = L.marker([conroeLat, conroeLng], { icon: goldIcon }).addTo(map);
             marker.bindPopup(`
                 <div style="font-size:13px; line-height:1.3; color:#111;">
-                    <strong>Landry Locksmith HQ</strong><br>
+                    <strong>Landry Locksmith</strong><br>
                     <span style="color:#666;">Conroe, Texas</span><br>
-                    <span style="font-size:11px;">Fully Mobile • 24/7 Dispatch</span>
+                    <span style="font-size:11px;">Fully Mobile • 24/7</span>
                 </div>
-            `, { closeButton: false, offset: [0, -2] });
+            `, { closeButton: false });
             
-            // Additional service area markers
             const willisMarker = L.marker([30.425, -95.48], { icon: goldIcon }).addTo(map);
             willisMarker.bindPopup(`<div style="font-size:12px"><strong>Willis</strong><br>Service Area</div>`);
             
             const huntsvilleMarker = L.marker([30.7235, -95.5508], { icon: goldIcon }).addTo(map);
             huntsvilleMarker.bindPopup(`<div style="font-size:12px"><strong>Huntsville</strong><br>Service Area</div>`);
             
-            // Gentle fit bounds
             setTimeout(() => {
                 map.fitBounds([
-                    [30.15, -95.75],
-                    [30.85, -95.15]
-                ], { padding: [30, 30], maxZoom: 11 });
-            }, 800);
+                    [30.12, -95.78],
+                    [30.88, -95.12]
+                ], { padding: [25, 25], maxZoom: 11 });
+            }, 900);
             
-            // Make map slightly interactive on click
             map.on('click', () => {
-                map.flyTo([conroeLat + 0.08, conroeLng], 11, { duration: 1.2 });
+                map.flyTo([conroeLat + 0.07, conroeLng], 11, { duration: 1.1 });
             });
         }
 
-        // Keyboard shortcuts & accessibility
+        // Keyboard shortcuts
         function initKeyboardControls() {
             document.addEventListener('keydown', function(e) {
                 if (e.key === "Escape") {
                     const serviceModal = document.getElementById('service-modal');
                     const quoteModal = document.getElementById('quote-modal');
                     
-                    if (!serviceModal.classList.contains('hidden') && serviceModal.style.display !== 'none') {
+                    if (serviceModal.style.display === 'flex') {
                         closeServiceModal();
-                    } else if (!quoteModal.classList.contains('hidden') && quoteModal.style.display !== 'none') {
+                    } else if (quoteModal.style.display === 'flex') {
                         closeQuoteModal();
                     }
                 }
-                
-                if (e.key === "?" && document.activeElement.tagName === "BODY") {
-                    e.preventDefault();
-                    const servicesSection = document.getElementById('services');
-                    servicesSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }
-            });
-            
-            // Easter egg: Press "L" to highlight lock icons
-            let keySequence = '';
-            document.addEventListener('keypress', function(e) {
-                keySequence += e.key.toLowerCase();
-                if (keySequence.length > 5) keySequence = keySequence.slice(-5);
-                
-                if (keySequence.includes('lock')) {
-                    document.querySelectorAll('.lock-icon').forEach(el => {
-                        el.style.transitionDuration = '120ms';
-                        el.style.transform = 'rotate(25deg) scale(1.2)';
-                        setTimeout(() => {
-                            el.style.transform = '';
-                            el.style.transitionDuration = '';
-                        }, 650);
-                    });
-                    keySequence = '';
-                }
             });
         }
 
-        // Subtle scroll animations for service cards
-        function initScrollAnimations() {
-            const cards = document.querySelectorAll('.service-card');
-            
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry, index) => {
-                    if (entry.isIntersecting) {
-                        setTimeout(() => {
-                            entry.target.style.transitionDuration = '600ms';
-                            entry.target.style.transitionTimingFunction = 'cubic-bezier(0.23, 1, 0.32, 1)';
-                        }, index * 80);
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.2 });
-            
-            cards.forEach(card => observer.observe(card));
-        }
-
-        // Main initialization
+        // Main init
         function initializeWebsite() {
             initializeTailwind();
             initNavbar();
+            initMasterTurn();
             initMap();
             initKeyboardControls();
-            initScrollAnimations();
             
-            // Preload subtle interaction hint
-            setTimeout(() => {
-                const firstCard = document.querySelector('.service-card');
-                if (firstCard) {
-                    firstCard.style.transitionDuration = '400ms';
-                }
-            }, 1200);
-            
-            // Make sure modals are properly hidden initially
+            // Ensure modals start hidden
             const serviceModal = document.getElementById('service-modal');
             const quoteModal = document.getElementById('quote-modal');
             if (serviceModal) serviceModal.style.display = 'none';
             if (quoteModal) quoteModal.style.display = 'none';
             
-            // Bonus: Console branding
-            console.log('%c[Landry Locksmith Redesign] Modern overhaul complete. Precision UI initialized.', 'color:#555; font-size:9px');
-            
-            // Optional: Show a very subtle toast on first visit (disabled for production feel)
-            // Uncomment if you want a welcome interaction:
-            // setTimeout(() => { if (!localStorage.getItem('landry_visited')) { ... } }, 8500);
+            console.log('%c[Landry Locksmith] Upgraded site initialized with Master Turn interaction.', 'color:#555; font-size:9px');
         }
 
-        // Boot the experience
         window.onload = initializeWebsite;
         
-        // Expose a couple functions globally in case needed
         window.LandryLocksmith = {
             openService: (type) => openServiceModal(type),
-            requestQuote: () => openQuoteModal()
+            requestQuote: () => openQuoteModal(),
+            resetTurn: () => resetMasterTurn()
         };
     </script>
 </body>
