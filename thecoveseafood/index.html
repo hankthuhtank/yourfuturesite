@@ -4,267 +4,153 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Cove Seafood • Paris, Texas</title>
-    <meta name="description" content="Something different. Something special. Made with love. Fresh seafood in the heart of Paris, Texas by Cooper & Reilly Pickle.">
+    <meta name="description" content="Something different. Something special. Made with love. Fresh seafood in Paris, Texas by Cooper & Reilly Pickle.">
     
-    <!-- Google Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap">
     <script src="https://cdn.tailwindcss.com"></script>
     
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap');
+        body { font-family: 'Inter', system_ui, sans-serif; }
+        .heading-font { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: -0.03em; }
         
-        :root {
-            --tide: #0A0F14;
-            --current: #121A21;
-            --oyster: #E8DFD0;
-            --gold: #C9A87C;
-        }
+        .nav-scrolled { background: rgba(10,12,16,0.96); backdrop-filter: blur(16px); }
         
-        body {
-            font-family: 'Inter', system_ui, sans-serif;
+        .menu-item {
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        
-        .heading-font {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-weight: 700;
-            letter-spacing: -0.025em;
+        .menu-item:hover {
+            background-color: #1A2028;
+            padding-left: 1.5rem;
         }
 
-        .section-header {
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 45%;
-            height: 2px;
-            background: linear-gradient(to right, #C9A87C, transparent);
-        }
-
-        .metallic-gold {
-            background: linear-gradient(145deg, #C9A87C 0%, #E8DFD0 45%, #C9A87C 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-size: 200% 200%;
-        }
-
-        .nav-scrolled {
-            background: rgba(10, 15, 20, 0.96);
-            backdrop-filter: blur(16px);
-        }
-
-        .menu-card {
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        
-        .menu-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 20px 40px -15px rgb(0 0 0 / 0.4);
-            border-color: #C9A87C;
-        }
-
-        .wave {
-            animation: gentle-wave 8s ease-in-out infinite;
-        }
-
-        @keyframes gentle-wave {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-8px); }
-        }
-
-        .fish-swim {
-            animation: fish-swim 22s linear infinite;
-        }
-
-        .fish-swim:nth-child(2) {
-            animation-duration: 31s;
-            animation-delay: -12s;
-        }
-
-        .fish-swim:nth-child(3) {
-            animation-duration: 27s;
-            animation-delay: -5s;
-        }
-
-        .cove-svg {
+        .cove-logo {
             transition: filter 0.6s ease;
         }
-
-        .ripple {
-            animation: ripple-expand 1.2s ease-out forwards;
-            opacity: 0;
-        }
-
-        .menu-item {
-            transition: all 0.3s ease;
-        }
         
-        .menu-item:hover {
-            background-color: #1A232B;
-            padding-left: 1.25rem;
+        .cove-logo:hover {
+            filter: brightness(1.05);
         }
 
-        .special-star {
-            color: #C9A87C;
-        }
-
-        .heartfelt {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-style: italic;
+        .subtle-fish {
+            transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
         }
     </style>
 </head>
-<body class="bg-[#0A0F14] text-[#E8DFD0] overflow-x-hidden">
-    
+<body class="bg-[#0A0C10] text-[#EDE4D6]">
+
     <!-- NAV -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-[#0A0F14]/90 backdrop-blur-xl border-b border-white/10">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="flex items-center justify-between py-5">
-                <!-- Logo -->
-                <div class="flex items-center gap-x-3">
-                    <div class="w-9 h-9">
-                        <!-- Mini logo -->
-                        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 28 Q18 8 28 28" fill="none" stroke="#C9A87C" stroke-width="3.5" stroke-linecap="round"/>
-                            <circle cx="18" cy="18" r="4" fill="#C9A87C"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="font-semibold tracking-[-1.5px] text-2xl heading-font">THE COVE</div>
-                        <div class="text-[10px] text-[#C9A87C] -mt-1 tracking-[2px]">SEAFOOD</div>
-                    </div>
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all bg-[#0A0C10]/90 border-b border-white/10">
+        <div class="max-w-screen-2xl mx-auto px-8 flex items-center justify-between py-5">
+            <div class="flex items-center gap-x-3">
+                <!-- Small logo in nav -->
+                <div class="w-8 h-8">
+                    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M8 28 Q18 8 28 28" fill="none" stroke="#C9A87C" stroke-width="4" stroke-linecap="round"/>
+                        <circle cx="18" cy="18" r="4.5" fill="#C9A87C"/>
+                    </svg>
                 </div>
-
-                <div class="hidden md:flex items-center gap-x-9 text-sm font-medium">
-                    <a href="#story" class="hover:text-[#C9A87C] transition-colors">Our Story</a>
-                    <a href="#menu" class="hover:text-[#C9A87C] transition-colors">What We’re Making</a>
-                    <a href="#visit" class="hover:text-[#C9A87C] transition-colors">Visit Us</a>
-                </div>
-
-                <div class="flex items-center gap-x-3">
-                    <a href="tel:9035550199" class="hidden sm:flex items-center gap-x-2 px-5 py-2 rounded-2xl text-sm font-medium border border-white/20 hover:bg-white/5 transition-all">
-                        <span>903-555-0199</span>
-                    </a>
-                    <button onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })" 
-                            class="px-6 py-2 rounded-2xl bg-[#C9A87C] text-[#0A0F14] text-sm font-semibold hover:bg-[#E8DFD0] transition-all active:scale-[0.985]">
-                        See the Catch
-                    </button>
-                </div>
+                <div class="font-semibold tracking-[-1.2px] text-xl heading-font">THE COVE</div>
             </div>
+            
+            <div class="hidden md:flex items-center gap-x-8 text-sm">
+                <a href="#story" class="hover:text-[#C9A87C] transition-colors">Our Story</a>
+                <a href="#menu" class="hover:text-[#C9A87C] transition-colors">What We’re Making</a>
+                <a href="#visit" class="hover:text-[#C9A87C] transition-colors">Visit</a>
+            </div>
+            
+            <a href="tel:9035550199" class="px-5 py-2 text-sm border border-white/20 rounded-2xl hover:bg-white/5 transition-all">903-555-0199</a>
         </div>
     </nav>
 
-    <!-- HERO with Signature Interactive Element -->
-    <header class="min-h-[100dvh] pt-16 flex items-center relative overflow-hidden bg-[#0A0F14]">
-        <!-- Subtle animated water texture -->
-        <div class="absolute inset-0 opacity-30" 
-             style="background-image: url('data:image/svg+xml,%3Csvg width=%22100%22 height=%2220%22 viewBox=%220 0 100 20%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%22M0 10 Q25 0 50 10 Q75 20 100 10%22 fill=%22none%22 stroke=%22%23C9A87C%22 stroke-width=%220.6%22/%3E%3C/svg%27'); background-size: 180px 40px; animation: gentle-wave 9s ease-in-out infinite;"></div>
-
-        <!-- Very subtle swimming fish -->
-        <svg class="fish-swim absolute top-[28%] left-[-60px] w-16 h-8 opacity-[0.07]" viewBox="0 0 64 32" fill="none">
-            <path d="M4 16 Q20 8 40 16 Q52 22 60 16" stroke="#C9A87C" stroke-width="1.5"/>
-            <circle cx="8" cy="16" r="2" fill="#C9A87C"/>
-        </svg>
-        <svg class="fish-swim absolute top-[55%] right-[-40px] w-20 h-9 opacity-[0.05]" viewBox="0 0 64 32" fill="none">
-            <path d="M4 16 Q20 8 40 16 Q52 22 60 16" stroke="#C9A87C" stroke-width="1.5"/>
-            <circle cx="8" cy="16" r="2" fill="#C9A87C"/>
-        </svg>
-
-        <div class="max-w-screen-2xl mx-auto px-8 relative z-10">
-            <div class="max-w-5xl mx-auto text-center">
-                
-                <!-- Main Logo (prominent) -->
-                <div class="flex justify-center mb-6">
-                    <div class="w-[280px] md:w-[340px]">
-                        <svg id="hero-logo" viewBox="0 0 420 220" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
-                            <!-- Horseshoe / Cove shape -->
-                            <path d="M60 180 Q60 60 210 60 Q360 60 360 180" fill="none" stroke="#E8DFD0" stroke-width="38" stroke-linecap="round"/>
-                            <path d="M60 180 Q60 60 210 60 Q360 60 360 180" fill="none" stroke="#C9A87C" stroke-width="14" stroke-linecap="round"/>
-                            
-                            <!-- Inner water details -->
-                            <path d="M85 155 Q140 115 210 155 Q280 115 335 155" fill="none" stroke="#0A0F14" stroke-width="8" stroke-linecap="round" opacity="0.6"/>
-                            
-                            <!-- Fish left -->
-                            <g>
-                                <path d="M95 130 Q115 122 135 130" fill="none" stroke="#E8DFD0" stroke-width="3"/>
-                                <circle cx="92" cy="130" r="3.5" fill="#E8DFD0"/>
-                            </g>
-                            
-                            <!-- Lobster -->
-                            <g transform="translate(175 95)">
-                                <path d="M0 12 Q8 4 16 12" fill="none" stroke="#E8DFD0" stroke-width="2.5"/>
-                                <path d="M4 8 Q8 2 12 8" fill="none" stroke="#E8DFD0" stroke-width="2"/>
-                                <circle cx="8" cy="14" r="5" fill="#C9A87C"/>
-                            </g>
-                            
-                            <!-- Palm right -->
-                            <g transform="translate(295 85)">
-                                <path d="M0 30 Q8 12 18 30" fill="none" stroke="#E8DFD0" stroke-width="2.5"/>
-                                <path d="M6 22 Q12 8 20 22" fill="none" stroke="#E8DFD0" stroke-width="2"/>
-                                <path d="M12 30 L12 48" fill="none" stroke="#E8DFD0" stroke-width="2"/>
-                            </g>
-                            
-                            <!-- Script "The Cove" -->
-                            <text x="210" y="118" text-anchor="middle" fill="#E8DFD0" font-family="Playfair Display, Georgia, serif" font-size="52" font-weight="600" letter-spacing="-1">The Cove</text>
-                            
-                            <!-- SEAFOOD -->
-                            <text x="210" y="155" text-anchor="middle" fill="#C9A87C" font-family="Inter, system-ui, sans-serif" font-size="15" font-weight="600" letter-spacing="6">SEAFOOD</text>
-                            
-                            <!-- Small fish details -->
-                            <circle cx="115" cy="168" r="2.5" fill="#C9A87C"/>
-                            <circle cx="305" cy="165" r="2" fill="#C9A87C"/>
-                        </svg>
-                    </div>
-                </div>
-
-                <div class="mb-8">
-                    <div class="text-[#C9A87C] text-sm tracking-[4px] font-medium mb-1">PARIS, TEXAS</div>
-                    <p class="text-2xl text-[#E8DFD0]/90 max-w-md mx-auto">Something different.<br>Something special.<br>Made with love.</p>
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })" 
-                            class="px-9 py-4 rounded-3xl bg-[#C9A87C] text-[#0A0F14] font-semibold text-lg hover:bg-[#E8DFD0] transition-all active:scale-[0.985]">
-                        See What We’re Making
-                    </button>
-                    <button onclick="document.getElementById('story').scrollIntoView({ behavior: 'smooth' })" 
-                            class="px-9 py-4 rounded-3xl border border-white/30 hover:bg-white/5 font-medium text-lg transition-all">
-                        Meet Cooper &amp; Reilly
-                    </button>
+    <!-- HERO - Logo Forward -->
+    <header class="min-h-[100dvh] flex items-center justify-center pt-16 relative bg-[#0A0C10]">
+        <div class="max-w-2xl mx-auto px-6 text-center">
+            
+            <!-- YOUR EXACT LOGO (detailed recreation) -->
+            <div class="flex justify-center mb-8">
+                <div class="w-[340px] md:w-[420px]">
+                    <svg id="main-logo" viewBox="0 0 420 240" fill="none" xmlns="http://www.w3.org/2000/svg" class="cove-logo w-full h-auto cursor-pointer">
+                        <!-- Main Horseshoe / Arch -->
+                        <path d="M55 195 Q55 55 210 55 Q365 55 365 195" fill="none" stroke="#EDE4D6" stroke-width="42" stroke-linecap="round"/>
+                        <path d="M55 195 Q55 55 210 55 Q365 55 365 195" fill="none" stroke="#C9A87C" stroke-width="16" stroke-linecap="round"/>
+                        
+                        <!-- Inner water curve -->
+                        <path d="M80 168 Q140 125 210 168 Q280 125 340 168" fill="none" stroke="#0A0C10" stroke-width="9" stroke-linecap="round"/>
+                        
+                        <!-- Left Fish -->
+                        <g class="subtle-fish">
+                            <path d="M78 118 Q100 108 122 118" fill="none" stroke="#EDE4D6" stroke-width="3.5"/>
+                            <circle cx="75" cy="118" r="4" fill="#EDE4D6"/>
+                        </g>
+                        
+                        <!-- Lobster -->
+                        <g transform="translate(175 92)">
+                            <path d="M0 18 Q10 6 20 18" fill="none" stroke="#EDE4D6" stroke-width="3"/>
+                            <path d="M5 12 Q10 4 15 12" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
+                            <circle cx="10" cy="20" r="6.5" fill="#C9A87C"/>
+                        </g>
+                        
+                        <!-- Right Palm -->
+                        <g transform="translate(295 82)">
+                            <path d="M0 35 Q10 15 22 35" fill="none" stroke="#EDE4D6" stroke-width="3"/>
+                            <path d="M8 25 Q14 10 24 25" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
+                            <path d="M14 35 L14 55" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
+                        </g>
+                        
+                        <!-- Rocks & Grass at bottom -->
+                        <path d="M70 185 Q95 175 115 185" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
+                        <path d="M300 188 Q325 178 345 188" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
+                        
+                        <!-- Script "The Cove" -->
+                        <text x="210" y="128" text-anchor="middle" fill="#EDE4D6" font-family="Playfair Display, Georgia, serif" font-size="54" font-weight="700" letter-spacing="-1.5">The Cove</text>
+                        
+                        <!-- SEAFOOD -->
+                        <text x="210" y="162" text-anchor="middle" fill="#C9A87C" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" letter-spacing="5.5">SEAFOOD</text>
+                        
+                        <!-- Small decorative dots -->
+                        <circle cx="115" cy="145" r="2.2" fill="#C9A87C"/>
+                        <circle cx="305" cy="145" r="2.2" fill="#C9A87C"/>
+                    </svg>
                 </div>
             </div>
-        </div>
 
-        <!-- Scroll prompt -->
-        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 text-xs tracking-widest text-white/40 hidden md:block">
-            SCROLL TO BEGIN YOUR EVENING
+            <div class="mb-3">
+                <div class="text-[#C9A87C] text-xs tracking-[4px] font-medium">PARIS, TEXAS</div>
+            </div>
+            
+            <div class="text-3xl leading-tight tracking-tight mb-9">
+                Something different.<br>
+                Something special.<br>
+                Made with love.
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <button onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })" 
+                        class="px-8 py-3.5 bg-[#C9A87C] text-[#0A0C10] font-semibold rounded-3xl hover:bg-[#EDE4D6] transition-all">
+                    See What We’re Making
+                </button>
+                <button onclick="document.getElementById('story').scrollIntoView({ behavior: 'smooth' })" 
+                        class="px-8 py-3.5 border border-white/30 rounded-3xl hover:bg-white/5 transition-all">
+                    Meet Cooper &amp; Reilly
+                </button>
+            </div>
         </div>
     </header>
 
-    <!-- OUR STORY -->
-    <section id="story" class="max-w-screen-2xl mx-auto px-8 py-20 border-b border-white/10">
-        <div class="max-w-3xl mx-auto">
-            <div class="uppercase tracking-[3px] text-xs text-[#C9A87C] font-semibold mb-3">FROM OUR FAMILY TO YOURS</div>
+    <!-- STORY -->
+    <section id="story" class="max-w-3xl mx-auto px-8 py-20 border-b border-white/10">
+        <div class="max-w-2xl">
+            <div class="uppercase text-xs tracking-[3px] text-[#C9A87C] mb-3">FROM OUR FAMILY TO YOURS</div>
+            <h2 class="text-6xl heading-font tracking-[-2.5px] mb-8">Cooper &amp; Reilly Pickle</h2>
             
-            <h2 class="text-6xl heading-font tracking-[-2.5px] leading-none mb-8">Cooper &amp; Reilly Pickle</h2>
-            
-            <div class="prose prose-invert text-lg text-[#E8DFD0]/90 max-w-2xl">
-                <p>We’re a couple who decided to bring a little piece of the coast to our hometown. Every dish that leaves our kitchen is made with the same care we’d give our own family.</p>
-                
-                <p class="mt-5">We believe great seafood shouldn’t require a plane ticket. It should feel like a small vacation right here in Paris, Texas — familiar enough to feel like home, special enough to make you slow down and savor it.</p>
-                
-                <p class="mt-5">Fresh, high-quality seafood takes time. We prepare everything with attention to detail, and we’re always happy to adjust spice, swap sides, or create something that reminds you of a favorite trip. Just ask.</p>
+            <div class="space-y-6 text-[17px] text-[#EDE4D6]/90 leading-relaxed">
+                <p>We’re a couple bringing a little piece of the coast to our hometown. Every dish that leaves our kitchen is made with the same care we’d give our own family.</p>
+                <p>We believe great seafood shouldn’t require a plane ticket. It should feel like a small vacation right here in Paris, Texas — familiar enough to feel like home, special enough to make you slow down.</p>
+                <p>Fresh, high-quality seafood takes time. We prepare everything with attention to detail, and we’re always happy to adjust spice or create something that reminds you of a favorite trip. Just ask.</p>
             </div>
             
-            <div class="mt-10 p-8 bg-[#121A21] rounded-3xl border border-white/10">
-                <div class="heartfelt text-2xl leading-tight text-[#E8DFD0]">
-                    “Y’all are everything. Every visit, every order, every kind word helps keep this dream alive.”
-                </div>
+            <div class="mt-10 p-8 bg-[#12161C] rounded-3xl border border-white/10">
+                <div class="text-2xl leading-tight italic">“Y’all are everything. Every visit, every order, every kind word helps keep this dream alive.”</div>
                 <div class="mt-4 text-sm text-[#C9A87C]">— Reilly &amp; Cooper Pickle</div>
             </div>
         </div>
@@ -273,300 +159,136 @@
     <!-- MENU -->
     <section id="menu" class="max-w-screen-2xl mx-auto px-8 py-20">
         <div class="max-w-3xl mb-12">
-            <div class="uppercase tracking-[3px] text-xs text-[#C9A87C] font-semibold mb-3">WHAT WE’RE MAKING RIGHT NOW</div>
-            <h2 class="text-6xl heading-font tracking-[-3px] leading-none">Fresh from the water.<br>Crafted with care.</h2>
-            <p class="mt-4 text-xl text-[#E8DFD0]/80">Here’s what Cooper and Reilly are preparing with the best seafood we can bring to Paris.</p>
+            <div class="text-xs tracking-[3px] text-[#C9A87C] mb-2">WHAT WE’RE MAKING RIGHT NOW</div>
+            <h2 class="text-6xl heading-font tracking-[-3px]">Fresh from the water.<br>Crafted with care.</h2>
         </div>
 
-        <div class="grid md:grid-cols-2 gap-x-8 gap-y-10">
+        <div class="grid md:grid-cols-2 gap-x-10 gap-y-12 max-w-5xl">
             
-            <!-- Po' Boys & Sandwiches -->
-            <div>
-                <div class="flex items-center gap-x-3 mb-5">
-                    <div class="h-px flex-1 bg-white/10"></div>
-                    <div class="uppercase tracking-[2px] text-xs text-[#C9A87C] font-semibold">Po’ Boys &amp; Sandwiches</div>
-                    <div class="h-px flex-1 bg-white/10"></div>
+            <!-- Column 1 -->
+            <div class="space-y-8">
+                <div>
+                    <div class="text-[#C9A87C] text-xs tracking-widest mb-3">PO’ BOYS &amp; SANDWICHES</div>
+                    <div class="space-y-[2px] text-[15px]">
+                        <div class="menu-item px-4 py-3 rounded-2xl">Shrimp Po Boy</div>
+                        <div class="menu-item px-4 py-3 rounded-2xl">Soft Shell Crawfish Po Boy <span class="text-[#C9A87C] text-xs">★</span></div>
+                        <div class="menu-item px-4 py-3 rounded-2xl">Crab Cake Burger</div>
+                        <div class="menu-item px-4 py-3 rounded-2xl">Mahi Burger</div>
+                        <div class="menu-item px-4 py-3 rounded-2xl">Grouper Muffuletta</div>
+                    </div>
                 </div>
                 
-                <div class="space-y-1 text-[15px]">
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Shrimp Po Boy</div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Soft Shell Crawfish Po Boy <span class="special-star text-xs align-super">★</span></div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Crab Cake Burger</div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Mahi Burger</div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Grouper Muffuletta</div>
+                <div>
+                    <div class="text-[#C9A87C] text-xs tracking-widest mb-3">ROLLS &amp; BITES</div>
+                    <div class="space-y-[2px] text-[15px]">
+                        <div class="menu-item px-4 py-3 rounded-2xl">Lobster Rolls (2)</div>
+                        <div class="menu-item px-4 py-3 rounded-2xl">Crab Cake Bites</div>
+                        <div class="menu-item px-4 py-3 rounded-2xl">Soft Shell Crab Sliders <span class="text-[#C9A87C] text-xs">★</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tacos -->
-            <div>
-                <div class="flex items-center gap-x-3 mb-5">
-                    <div class="h-px flex-1 bg-white/10"></div>
-                    <div class="uppercase tracking-[2px] text-xs text-[#C9A87C] font-semibold">Tacos</div>
-                    <div class="h-px flex-1 bg-white/10"></div>
+            <!-- Column 2 -->
+            <div class="space-y-8">
+                <div>
+                    <div class="text-[#C9A87C] text-xs tracking-widest mb-3">TACOS</div>
+                    <div class="space-y-[2px] text-[15px]">
+                        <div class="menu-item px-4 py-3 rounded-2xl">Mahi Tacos (3)</div>
+                        <div class="menu-item px-4 py-3 rounded-2xl">Shrimp Tacos (3)</div>
+                        <div class="menu-item px-4 py-3 rounded-2xl">Grouper Tacos (3)</div>
+                        <div class="menu-item px-4 py-3 rounded-2xl">Smoked Snapper Tacos <span class="text-[#C9A87C] text-xs">★</span></div>
+                    </div>
                 </div>
                 
-                <div class="space-y-1 text-[15px]">
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Mahi Tacos <span class="text-xs text-white/40">(3)</span></div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Shrimp Tacos <span class="text-xs text-white/40">(3)</span></div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Grouper Tacos <span class="text-xs text-white/40">(3)</span></div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Smoked Snapper Tacos <span class="special-star text-xs align-super">★</span></div>
+                <div>
+                    <div class="text-[#C9A87C] text-xs tracking-widest mb-3">FROM THE SKILLET</div>
+                    <div class="space-y-[2px] text-[15px]">
+                        <div class="menu-item px-4 py-3 rounded-2xl">Shrimp Risotto</div>
                     </div>
                 </div>
-            </div>
-
-            <!-- Rolls, Bites & Specials -->
-            <div>
-                <div class="flex items-center gap-x-3 mb-5">
-                    <div class="h-px flex-1 bg-white/10"></div>
-                    <div class="uppercase tracking-[2px] text-xs text-[#C9A87C] font-semibold">Rolls, Bites &amp; More</div>
-                    <div class="h-px flex-1 bg-white/10"></div>
-                </div>
-                
-                <div class="space-y-1 text-[15px]">
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Lobster Rolls <span class="text-xs text-white/40">(2)</span></div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Crab Cake Bites</div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Soft Shell Crab Sliders <span class="special-star text-xs align-super">★</span></div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B]">
-                        <div>Shrimp Risotto</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Special Catches -->
-            <div>
-                <div class="flex items-center gap-x-3 mb-5">
-                    <div class="h-px flex-1 bg-white/10"></div>
-                    <div class="uppercase tracking-[2px] text-xs text-[#C9A87C] font-semibold">Special Catches</div>
-                    <div class="h-px flex-1 bg-white/10"></div>
-                </div>
-                
-                <div class="space-y-1 text-[15px]">
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B] border-l-2 border-[#C9A87C] pl-5">
-                        <div>Soft Shell Crab Sliders</div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B] border-l-2 border-[#C9A87C] pl-5">
-                        <div>Soft Shell Crawfish Po Boy</div>
-                    </div>
-                    <div class="menu-item flex justify-between items-center py-3 px-4 rounded-2xl hover:bg-[#1A232B] border-l-2 border-[#C9A87C] pl-5">
-                        <div>Smoked Snapper Tacos</div>
-                    </div>
-                </div>
-                <p class="text-xs text-[#C9A87C]/70 mt-4 px-1">These change with what’s fresh and what inspires us.</p>
             </div>
         </div>
 
-        <div class="mt-12 text-center">
-            <p class="text-sm text-[#E8DFD0]/60 max-w-md mx-auto">We can adjust spice, swap sides, or create something that reminds you of a favorite vacation. Just let us know.</p>
+        <div class="mt-12 text-center text-sm text-[#EDE4D6]/60 max-w-md mx-auto">
+            We can adjust spice, swap sides, or make something that reminds you of a favorite vacation. Just tell us what you’re craving.
         </div>
     </section>
 
-    <!-- VISIT / CTA -->
-    <section id="visit" class="bg-[#121A21] border-y border-white/10 py-16">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="max-w-2xl mx-auto text-center">
-                <div class="uppercase tracking-[3px] text-xs text-[#C9A87C] font-semibold mb-3">COME SIT WITH US</div>
-                <h2 class="text-5xl heading-font tracking-[-2px] mb-6">A little vacation<br>without leaving Paris.</h2>
-                
-                <div class="text-lg text-[#E8DFD0]/90 mb-8">
-                    Whether you’re craving something familiar or something adventurous,<br>
-                    we’re always happy to make it happen.
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="tel:9035550199" class="inline-flex items-center justify-center gap-x-3 px-10 py-4 rounded-3xl bg-[#C9A87C] text-[#0A0F14] font-semibold text-lg hover:bg-[#E8DFD0] transition-all">
-                        Call to Reserve or Order
-                    </a>
-                    <button onclick="window.location.href='#menu'" class="inline-flex items-center justify-center gap-x-3 px-10 py-4 rounded-3xl border border-white/30 hover:bg-white/5 font-medium text-lg transition-all">
-                        See Today’s Catch
-                    </button>
-                </div>
-                
-                <div class="mt-10 text-sm text-[#E8DFD0]/50">
-                    Paris, Texas • Fresh seafood prepared with care
-                </div>
+    <!-- VISIT -->
+    <section id="visit" class="bg-[#12161C] py-16 border-t border-white/10">
+        <div class="max-w-xl mx-auto px-8 text-center">
+            <div class="text-[#C9A87C] text-xs tracking-[3px] mb-2">COME SIT WITH US</div>
+            <h2 class="text-5xl heading-font tracking-[-2px] mb-6">A little vacation<br>without leaving Paris.</h2>
+            
+            <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
+                <a href="tel:9035550199" class="px-9 py-4 bg-[#C9A87C] text-[#0A0C10] font-semibold rounded-3xl hover:bg-[#EDE4D6]">Call to Reserve or Order</a>
+                <button onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })" class="px-9 py-4 border border-white/30 rounded-3xl">See Today’s Catch</button>
             </div>
+            
+            <div class="mt-8 text-xs text-[#EDE4D6]/50">Paris, Texas • Fresh seafood prepared with care</div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-[#0A0F14] pt-12 pb-8 border-t border-white/10">
-        <div class="max-w-screen-2xl mx-auto px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center gap-y-6 text-sm">
-                <div class="flex items-center gap-x-3">
-                    <div class="w-8 h-8">
-                        <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M8 28 Q18 8 28 28" fill="none" stroke="#C9A87C" stroke-width="3.5" stroke-linecap="round"/>
-                            <circle cx="18" cy="18" r="4" fill="#C9A87C"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <span class="font-semibold">The Cove Seafood</span>
-                        <span class="text-[#C9A87C] text-xs ml-1.5">Paris, Texas</span>
-                    </div>
-                </div>
-                
-                <div class="text-[#E8DFD0]/50 text-xs tracking-wider">
-                    Something different. Something special. Made with love.
-                </div>
-                
-                <div class="text-[#E8DFD0]/40 text-xs">
-                    © Cooper &amp; Reilly Pickle
-                </div>
-            </div>
-        </div>
+    <footer class="py-8 text-center text-xs text-[#EDE4D6]/40 border-t border-white/10">
+        Something different. Something special. Made with love.<br>
+        <span class="text-[#C9A87C]">Cooper &amp; Reilly Pickle • The Cove Seafood</span>
     </footer>
 
     <script>
-        // Navbar scroll
         function initNavbar() {
-            const navbar = document.getElementById('navbar');
+            const nav = document.getElementById('navbar');
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 60) {
-                    navbar.classList.add('nav-scrolled');
-                } else {
-                    navbar.classList.remove('nav-scrolled');
-                }
+                nav.classList.toggle('nav-scrolled', window.scrollY > 50);
             });
         }
 
-        // Interactive Evening Tide (Signature Element)
-        function initEveningTide() {
-            const logo = document.getElementById('hero-logo');
+        // Make the logo interactive (subtle fish movement + quote)
+        function initLogoInteraction() {
+            const logo = document.getElementById('main-logo');
             if (!logo) return;
 
-            let rippleTimeout;
-
-            logo.addEventListener('mousemove', (e) => {
-                const rect = logo.getBoundingClientRect();
-                const x = ((e.clientX - rect.left) / rect.width) * 100;
-                const y = ((e.clientY - rect.top) / rect.height) * 100;
-
-                // Gentle fish movement on mouse position
-                const fishGroups = logo.querySelectorAll('g');
-                fishGroups.forEach((group, i) => {
-                    const offset = (x - 50) * (0.03 + i * 0.01);
-                    group.style.transition = 'transform 0.8s ease-out';
-                    group.style.transform = `translateX(${offset}px)`;
-                });
-            });
-
-            logo.addEventListener('mouseleave', () => {
-                const fishGroups = logo.querySelectorAll('g');
-                fishGroups.forEach(group => {
-                    group.style.transform = 'translateX(0)';
-                });
-            });
-
-            // Click = splash + quote reveal
             logo.addEventListener('click', () => {
-                // Create ripple effect
-                const ripple = document.createElement('div');
-                ripple.className = 'absolute rounded-full border border-[#C9A87C]/40 pointer-events-none';
-                ripple.style.left = '50%';
-                ripple.style.top = '55%';
-                ripple.style.width = '20px';
-                ripple.style.height = '20px';
-                ripple.style.transform = 'translate(-50%, -50%)';
-                ripple.style.animation = 'ripple-expand 1.4s ease-out forwards';
-                
-                logo.style.position = 'relative';
-                logo.appendChild(ripple);
+                // Gentle animation on fish elements
+                const fish = logo.querySelectorAll('.subtle-fish');
+                fish.forEach(f => {
+                    f.style.transitionDuration = '400ms';
+                    f.style.transform = 'translateX(6px)';
+                    setTimeout(() => {
+                        f.style.transform = 'translateX(0)';
+                    }, 450);
+                });
 
-                setTimeout(() => {
-                    ripple.remove();
-                }, 1400);
-
-                // Show heartfelt quote
-                showHeartfeltQuote();
+                // Show quote toast
+                showQuoteToast();
             });
-
-            // Add the ripple keyframes if not present
-            if (!document.getElementById('ripple-style')) {
-                const style = document.createElement('style');
-                style.id = 'ripple-style';
-                style.textContent = `
-                    @keyframes ripple-expand {
-                        0% { width: 20px; height: 20px; opacity: 0.6; }
-                        100% { width: 220px; height: 220px; opacity: 0; }
-                    }
-                `;
-                document.head.appendChild(style);
-            }
         }
 
-        function showHeartfeltQuote() {
-            // Remove existing quote if present
-            const existing = document.getElementById('heartfelt-toast');
+        function showQuoteToast() {
+            const existing = document.getElementById('quote-toast');
             if (existing) existing.remove();
 
             const toast = document.createElement('div');
-            toast.id = 'heartfelt-toast';
-            toast.className = `fixed bottom-8 left-1/2 -translate-x-1/2 z-[60] max-w-md px-8 py-5 rounded-3xl bg-[#121A21] border border-[#C9A87C]/30 shadow-2xl text-center`;
+            toast.id = 'quote-toast';
+            toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#12161C] border border-[#C9A87C]/30 px-8 py-5 rounded-3xl text-center max-w-sm shadow-2xl z-50';
             toast.innerHTML = `
-                <div class="heartfelt text-xl leading-tight">"Something different.<br>Something special.<br>Made with love."</div>
-                <div class="mt-3 text-xs tracking-widest text-[#C9A87C]">— Cooper &amp; Reilly Pickle</div>
+                <div class="text-xl leading-tight">“Something different.<br>Something special.<br>Made with love.”</div>
+                <div class="text-xs text-[#C9A87C] mt-3 tracking-widest">— Cooper &amp; Reilly Pickle</div>
             `;
-            
             document.body.appendChild(toast);
 
             setTimeout(() => {
-                toast.style.transition = 'all 0.6s ease';
+                toast.style.transition = 'all 0.5s ease';
                 toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 600);
-            }, 4200);
+                setTimeout(() => toast.remove(), 400);
+            }, 3800);
         }
 
-        // Keyboard accessibility for the signature element
-        function initKeyboard() {
-            document.addEventListener('keydown', (e) => {
-                if (e.key === "?" && document.activeElement.tagName === "BODY") {
-                    e.preventDefault();
-                    const logo = document.getElementById('hero-logo');
-                    if (logo) logo.click();
-                }
-            });
-        }
-
-        function initializeWebsite() {
+        function initialize() {
             initNavbar();
-            initEveningTide();
-            initKeyboard();
-            
-            // Subtle welcome interaction hint (optional)
-            setTimeout(() => {
-                const logo = document.getElementById('hero-logo');
-                if (logo) {
-                    logo.style.transition = 'filter 1.5s ease';
-                }
-            }, 1800);
-            
-            console.log('%c[The Cove Seafood] Elegant hometown site initialized with interactive Evening Tide.', 'color:#555');
+            initLogoInteraction();
         }
-
-        window.onload = initializeWebsite;
+        
+        window.onload = initialize;
     </script>
 </body>
 </html>
