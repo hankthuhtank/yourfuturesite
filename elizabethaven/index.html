@@ -1,294 +1,929 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elizabeth Aven Photography</title>
-
+    <title>Elizabeth Aven Photography • Navasota, TX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700&amp;family=Outfit:wght@300;400;500&amp;display=swap" rel="stylesheet">
     <style>
-        /* Base Styling & Typography */
-        body { background-color: #FAF8F5; color: #1C1C1C; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
-        h1, h2, h3, h4, .font-serif { font-family: 'Cormorant Garamond', serif; }
+        :root {
+            --cream: #F8F1E3;
+            --taupe: #A8896C;
+            --oak: #2C2522;
+            --ember: #C17F59;
+            --sage: #8B9A7D;
+        }
         
-        /* Clean Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #FAF8F5; }
-        ::-webkit-scrollbar-thumb { background: #A8896C; border-radius: 10px; }
-
-        /* Custom UI Elements */
-        .glass-nav { background: rgba(250, 248, 245, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .capsule-mask { border-radius: 999px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* Accordion Transitions */
-        .accordion-content { transition: max-height 0.5s ease-in-out, opacity 0.5s ease; max-height: 0; opacity: 0; overflow: hidden; }
-        .accordion-content.active { max-height: 400px; opacity: 1; }
-        .accordion-icon { transition: transform 0.3s ease; }
-        .accordion-btn.active .accordion-icon { transform: rotate(45deg); }
+        body {
+            font-family: 'Outfit', system_ui, sans-serif;
+            background-color: var(--cream);
+            color: var(--oak);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, .serif {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 700;
+            line-height: 1.1;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(248, 241, 227, 0.96);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(44, 37, 34, 0.08);
+            z-index: 100;
+            padding: 1rem 1.5rem;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+        
+        .logo img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 9999px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.35rem;
+            letter-spacing: 0.5px;
+            color: var(--oak);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--oak);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            transition: color 0.2s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--ember);
+        }
+        
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+        }
+        
+        .hamburger span {
+            display: block;
+            width: 26px;
+            height: 2px;
+            background: var(--oak);
+            transition: 0.3s;
+        }
+        
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        /* HERO - Clean, no overlap */
+        .hero {
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+            padding-bottom: 4rem;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        @media (min-width: 900px) {
+            .hero-grid {
+                grid-template-columns: 1fr 1.1fr;
+                gap: 4rem;
+            }
+        }
+        
+        .hero-text h1 {
+            font-size: clamp(3.2rem, 8vw, 5.8rem);
+            color: var(--taupe);
+            margin-bottom: 0.6rem;
+            font-weight: 700;
+        }
+        
+        .hero-text .present {
+            font-size: clamp(2.8rem, 7vw, 5.2rem);
+            color: var(--oak);
+            margin-bottom: 2rem;
+        }
+        
+        .hero-text p {
+            font-size: 1.15rem;
+            max-width: 420px;
+            color: #5C5148;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image img {
+            width: 100%;
+            max-height: 680px;
+            object-fit: cover;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px -15px rgb(0 0 0 / 0.25);
+        }
+        
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 24px;
+            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
+        }
+        
+        /* ABOUT - Clean portrait */
+        .about {
+            padding: 6rem 0;
+            background: white;
+        }
+        
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        @media (min-width: 900px) {
+            .about-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 5rem;
+            }
+        }
+        
+        .about-text h2 {
+            font-size: clamp(2.8rem, 5vw, 3.8rem);
+            margin-bottom: 1.5rem;
+        }
+        
+        .about-text .label {
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--taupe);
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .about-text p {
+            font-size: 1.05rem;
+            color: #5C5148;
+            margin-bottom: 1.25rem;
+        }
+        
+        .portrait {
+            position: relative;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+        
+        .portrait img {
+            width: 100%;
+            border-radius: 9999px;
+            box-shadow: 0 30px 70px -20px rgb(0 0 0 / 0.3);
+            aspect-ratio: 1/1;
+            object-fit: cover;
+        }
+        
+        .portrait::before {
+            content: '';
+            position: absolute;
+            inset: -18px;
+            border: 1px solid var(--taupe);
+            border-radius: 9999px;
+            z-index: -1;
+        }
+        
+        /* RECENT WORK */
+        .work {
+            padding: 6rem 0;
+        }
+        
+        .work-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 2.5rem;
+        }
+        
+        .work-header h2 {
+            font-size: clamp(2.6rem, 5vw, 3.6rem);
+        }
+        
+        .masonry {
+            columns: 1;
+            column-gap: 1.25rem;
+        }
+        
+        @media (min-width: 700px) { .masonry { columns: 2; } }
+        @media (min-width: 1000px) { .masonry { columns: 3; } }
+        
+        .masonry-item {
+            break-inside: avoid;
+            margin-bottom: 1.25rem;
+            overflow: hidden;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px -15px rgb(0 0 0 / 0.15);
+        }
+        
+        .masonry-item img {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .masonry-item:hover img {
+            transform: scale(1.035);
+        }
+        
+        /* PRICING - Fun Vibe Cards */
+        .pricing {
+            padding: 6rem 0;
+            background: #F5EDE0;
+        }
+        
+        .pricing-header {
+            text-align: center;
+            max-width: 620px;
+            margin: 0 auto 3.5rem;
+        }
+        
+        .pricing-header h2 {
+            font-size: clamp(2.6rem, 5vw, 3.6rem);
+            margin-bottom: 0.75rem;
+        }
+        
+        .vibe-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+        }
+        
+        @media (min-width: 700px) { .vibe-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1100px) { .vibe-grid { grid-template-columns: repeat(3, 1fr); } }
+        
+        .vibe-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -15px rgb(0 0 0 / 0.12);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+            border: 1px solid #EDE4D8;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .vibe-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -15px rgb(0 0 0 / 0.18);
+        }
+        
+        .vibe-card.selected {
+            border-color: var(--ember);
+            box-shadow: 0 0 0 3px rgba(193, 127, 89, 0.15);
+        }
+        
+        .vibe-card-header {
+            padding: 1.5rem 1.75rem 1rem;
+        }
+        
+        .vibe-card-header h3 {
+            font-size: 1.65rem;
+            color: var(--oak);
+            margin-bottom: 0.35rem;
+        }
+        
+        .price {
+            font-size: 2.1rem;
+            font-weight: 700;
+            color: var(--ember);
+            display: flex;
+            align-items: baseline;
+            gap: 4px;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #8B7F72;
+        }
+        
+        .vibe-details {
+            padding: 0 1.75rem 1.75rem;
+            flex: 1;
+        }
+        
+        .vibe-details ul {
+            list-style: none;
+            font-size: 0.95rem;
+            color: #5C5148;
+        }
+        
+        .vibe-details li {
+            padding: 6px 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+        
+        .vibe-details li::before {
+            content: "•";
+            color: var(--taupe);
+            font-size: 1.4rem;
+            line-height: 1;
+            margin-top: -2px;
+        }
+        
+        .choose-btn {
+            margin: 0 1.75rem 1.75rem;
+            width: calc(100% - 3.5rem);
+            padding: 14px 24px;
+            background: var(--oak);
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .choose-btn:hover {
+            background: var(--ember);
+            transform: translateY(-2px);
+        }
+        
+        /* CONTACT */
+        .contact {
+            padding: 6rem 0;
+        }
+        
+        .contact-card {
+            max-width: 620px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            padding: 3rem 2.5rem;
+            box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.12);
+        }
+        
+        .contact-card h2 {
+            font-size: 2.4rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-card p {
+            text-align: center;
+            color: #8B7F72;
+            margin-bottom: 2.25rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.35rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 0.4rem;
+            color: #5C5148;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 14px 0;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid #EDE4D8;
+            font-size: 1rem;
+            font-family: 'Outfit', sans-serif;
+            color: var(--oak);
+            transition: border-color 0.2s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-bottom-color: var(--ember);
+        }
+        
+        .form-group textarea {
+            min-height: 110px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: var(--oak);
+            color: white;
+            border: none;
+            border-radius: 9999px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .submit-btn:hover {
+            background: var(--ember);
+        }
+        
+        /* FOOTER */
+        .footer {
+            background: var(--oak);
+            color: #EDE4D8;
+            padding: 4rem 0 2.5rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+            text-align: center;
+        }
+        
+        @media (min-width: 700px) {
+            .footer-content {
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: left;
+            }
+        }
+        
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+        
+        .footer-logo img {
+            width: 64px;
+            height: 64px;
+            border-radius: 9999px;
+            opacity: 0.9;
+        }
+        
+        .footer-logo-text {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .footer-links a {
+            color: #C7B9A8;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--cream);
+                flex-direction: column;
+                padding: 1.5rem;
+                border-bottom: 1px solid rgba(44, 37, 34, 0.1);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+        }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <nav class="fixed top-0 left-0 w-full z-50 glass-nav px-6 py-4 flex justify-between items-center transition-all duration-300" id="navbar">
-        <a href="#" class="flex items-center gap-3">
-            <img src="logo.jpg" alt="Elizabeth Aven" class="w-12 h-12 mix-blend-multiply object-contain" />
-            <span class="font-serif text-xl tracking-widest uppercase hidden md:block">Elizabeth Aven</span>
-        </a>
-        <button class="flex flex-col gap-1.5 p-2 focus:outline-none hover:opacity-70 transition-opacity">
-            <div class="w-8 h-[1px] bg-[#1C1C1C]"></div>
-            <div class="w-8 h-[1px] bg-[#1C1C1C]"></div>
-            <div class="w-6 h-[1px] bg-[#1C1C1C] ml-auto"></div>
-        </button>
+    <!-- NAV -->
+    <nav class="nav">
+        <div class="nav-content">
+            <a href="#" class="logo">
+                <img src="logo.jpg" alt="Elizabeth Aven Photography">
+                <span class="logo-text">Elizabeth Aven</span>
+            </a>
+            
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Work</a></li>
+                <li><a href="#pricing">The Collection</a></li>
+                <li><a href="#contact">Inquire</a></li>
+            </ul>
+            
+            <button class="hamburger" id="hamburger" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
     </nav>
 
-    <section class="relative w-full h-[100svh] flex flex-col items-center justify-center overflow-hidden pt-16">
-        <div class="relative z-10 w-[90%] md:w-[450px] h-[65vh] md:h-[700px] overflow-hidden capsule-mask shadow-2xl hero-image">
-            <img src="couple1.jpg" alt="Couple Photography" class="w-full h-full object-cover hover:scale-105 transition-transform duration-[2s] ease-out" />
-        </div>
-        
-        <div class="absolute top-[20%] left-[-5%] md:left-[10%] z-0 opacity-10 md:opacity-100 mix-blend-multiply pointer-events-none hero-text-left">
-            <h1 class="text-[12vw] font-serif italic text-[#A8896C]">Capturing</h1>
-        </div>
-        <div class="absolute bottom-[15%] right-[-5%] md:right-[10%] z-20 pointer-events-none hero-text-right">
-            <h1 class="text-[10vw] font-serif text-[#1C1C1C]">The Present</h1>
-        </div>
-    </section>
-
-    <section class="relative w-full py-32 bg-white px-6 md:px-20" id="about">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-24">
-            
-            <div class="w-full md:w-1/2 flex flex-col gap-8 gs-reveal order-2 md:order-1">
-                <p class="text-[#A8896C] tracking-[0.3em] uppercase text-sm font-medium">The Artist Behind The Lens</p>
-                <h2 class="text-5xl md:text-7xl font-serif leading-tight">Hi, I’m Elizabeth.</h2>
-                <div class="space-y-6 text-lg md:text-xl font-light leading-relaxed text-gray-600">
-                    <p>Born and raised in Navasota, TX, I’ve had a passion for photography since my junior year of high school. While I took a break to build my family and focus on teaching, I’m thrilled to be back doing what I love.</p>
-                    <p>There’s nothing more rewarding than seeing my clients’ faces light up and capturing the warmth, love, and connection in every photograph. For me, this isn’t just a business—it’s a true source of joy.</p>
-                </div>
+    <!-- HERO - Clean, no overlap -->
+    <section class="hero section">
+        <div class="hero-grid">
+            <div class="hero-text">
+                <h1>Capturing</h1>
+                <div class="present">The Present</div>
+                <p>Intimate portraits and honest moments in the golden light of Texas.</p>
             </div>
-
-            <div class="w-full md:w-1/2 flex justify-center gs-reveal order-1 md:order-2">
-                <div class="w-[85%] md:w-[400px] h-[600px] capsule-mask overflow-hidden shadow-2xl relative group">
-                    <img src="selfdesc.jpg" alt="Elizabeth" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
-                </div>
+            
+            <div class="hero-image">
+                <img src="couple1.jpg" alt="Couple embracing at golden hour in a Texas field">
             </div>
         </div>
     </section>
 
-    <section class="py-32 px-4 md:px-10 max-w-7xl mx-auto border-t border-gray-200">
-        <div class="flex justify-between items-end mb-16 gs-reveal">
-            <h2 class="text-5xl md:text-6xl font-serif">Recent Work</h2>
-            <a href="#" class="hidden md:inline-block border-b border-[#1C1C1C] pb-1 hover:text-[#A8896C] hover:border-[#A8896C] transition-colors">View Full Portfolio</a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
-            <div class="md:col-span-8 overflow-hidden gs-reveal group">
-                <img src="senior1.jpg" alt="Senior" class="w-full h-[600px] object-cover group-hover:scale-105 transition-transform duration-700" />
-            </div>
-            <div class="md:col-span-4 mt-0 md:mt-32 overflow-hidden gs-reveal group">
-                <img src="family1.jpg" alt="Family" class="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700" />
-            </div>
-            
-            <div class="md:col-span-5 overflow-hidden gs-reveal group">
-                <img src="headshot2.jpg" alt="Headshot" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700" />
-            </div>
-            <div class="md:col-span-7 md:-mt-20 overflow-hidden gs-reveal group">
-                <img src="senior3.jpg" alt="Senior" class="w-full h-[700px] object-cover group-hover:scale-105 transition-transform duration-700" />
-            </div>
-        </div>
-    </section>
-
-    <section class="py-32 bg-[#1A1A1A] text-[#FAF8F5] px-6 md:px-10">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-20 gs-reveal">
-                <p class="text-[#A8896C] tracking-[0.3em] uppercase text-sm font-medium mb-4">Pricing & Packages</p>
-                <h2 class="text-5xl md:text-7xl font-serif">The Investment</h2>
-            </div>
-            
-            <div class="space-y-4 gs-reveal">
+    <!-- ABOUT -->
+    <section id="about" class="about">
+        <div class="section about-grid">
+            <div class="about-text">
+                <span class="label">The Artist Behind The Lens</span>
+                <h2>Hi, I’m Elizabeth.</h2>
                 
-                <div class="border-b border-gray-700 pb-4">
-                    <button class="accordion-btn w-full flex justify-between items-center py-4 text-2xl md:text-4xl font-serif hover:text-[#A8896C] transition-colors focus:outline-none">
-                        <span>Couples & Engagements</span>
-                        <span class="accordion-icon text-3xl font-light">+</span>
-                    </button>
-                    <div class="accordion-content grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-300 pt-4">
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Package 1 — <span class="text-[#A8896C]">$250</span></h4>
-                            <p class="font-light text-sm leading-relaxed">30-minute session • 1 location • 1 look • Online gallery • Print release</p>
-                        </div>
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Package 2 — <span class="text-[#A8896C]">$350</span></h4>
-                            <p class="font-light text-sm leading-relaxed">50-60 minute session • 2-3 locations • 3 looks • Online gallery • Print release</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-b border-gray-700 pb-4">
-                    <button class="accordion-btn w-full flex justify-between items-center py-4 text-2xl md:text-4xl font-serif hover:text-[#A8896C] transition-colors focus:outline-none">
-                        <span>Family Sessions</span>
-                        <span class="accordion-icon text-3xl font-light">+</span>
-                    </button>
-                    <div class="accordion-content grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-300 pt-4">
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Pkg A — <span class="text-[#A8896C]">$250</span></h4>
-                            <p class="font-light text-sm leading-relaxed">30-minute session • 1 location • 1 look</p>
-                        </div>
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Pkg B — <span class="text-[#A8896C]">$350</span></h4>
-                            <p class="font-light text-sm leading-relaxed">40-50 min session • 2 locations • 2 looks</p>
-                        </div>
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Pkg C — <span class="text-[#A8896C]">$430</span></h4>
-                            <p class="font-light text-sm leading-relaxed">Extended Family (7+) • 60-min session</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-b border-gray-700 pb-4">
-                    <button class="accordion-btn w-full flex justify-between items-center py-4 text-2xl md:text-4xl font-serif hover:text-[#A8896C] transition-colors focus:outline-none">
-                        <span>Seniors</span>
-                        <span class="accordion-icon text-3xl font-light">+</span>
-                    </button>
-                    <div class="accordion-content grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-300 pt-4">
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Package 1 — <span class="text-[#A8896C]">$250</span></h4>
-                            <p class="font-light text-sm leading-relaxed">30-minute session • 1 location • 1 look • Online gallery • Print release</p>
-                        </div>
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Package 2 — <span class="text-[#A8896C]">$350</span></h4>
-                            <p class="font-light text-sm leading-relaxed">50-60 minute session • 2-3 locations • 3 looks • Online gallery • Print release</p>
-                        </div>
-                    </div>
-                </div>
-
+                <p>Born and raised in Navasota, TX, I’ve had a passion for photography since my junior year of high school. While I took a break to build my family and focus on teaching, I’m thrilled to be back doing what I love.</p>
+                
+                <p>There’s nothing more rewarding than seeing my clients’ faces light up and capturing the warmth, love, and connection in every photograph. For me, this isn’t just a business—it’s a true source of joy.</p>
+            </div>
+            
+            <div class="portrait">
+                <img src="lizzie.png" alt="Elizabeth Aven smiling with her camera">
             </div>
         </div>
     </section>
 
-    <section class="py-32 bg-[#E6E1D8] px-6 md:px-10">
-        <div class="max-w-3xl mx-auto bg-white p-10 md:p-16 shadow-2xl rounded-sm gs-reveal">
-            <h2 class="text-4xl md:text-5xl font-serif mb-4 text-center">Let's Create Together</h2>
-            <p class="text-center text-gray-500 mb-10 font-light">Fill out the form below to inquire about dates and availability.</p>
+    <!-- RECENT WORK -->
+    <section id="work" class="work section">
+        <div class="work-header">
+            <h2>Recent Work</h2>
+        </div>
+        
+        <div class="masonry">
+            <div class="masonry-item">
+                <img src="senior1.jpg" alt="High school senior portrait in golden light">
+            </div>
+            <div class="masonry-item">
+                <img src="family1.jpg" alt="Family laughing together outdoors">
+            </div>
+            <div class="masonry-item">
+                <img src="headshot2.jpg" alt="Warm professional headshot">
+            </div>
+            <div class="masonry-item">
+                <img src="senior3.jpg" alt="Senior portrait session">
+            </div>
+        </div>
+    </section>
+
+    <!-- PRICING - Completely redone as fun Vibe Cards -->
+    <section id="pricing" class="pricing">
+        <div class="section">
+            <div class="pricing-header">
+                <span class="label" style="color: var(--ember);">The Memory Collection</span>
+                <h2>How We Capture Your Present</h2>
+                <p style="margin-top: 1rem; color: #5C5148;">Choose the vibe that feels like you. Every package includes an online gallery and print release.</p>
+            </div>
             
-            <form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST" class="space-y-6 font-light">
-                <input type="hidden" name="_subject" value="New Photography Inquiry!">
+            <div class="vibe-grid">
+                
+                <!-- Couples -->
+                <div class="vibe-card" data-package="The Quiet Yes - Couples">
+                    <div class="vibe-card-header">
+                        <h3>The Quiet Yes</h3>
+                        <div class="price">$250 <span>/ 30 min</span></div>
+                    </div>
+                    <div class="vibe-details">
+                        <ul>
+                            <li>1 location • 1 look</li>
+                            <li>Beautiful online gallery</li>
+                            <li>Print release included</li>
+                            <li>Perfect for engagements, anniversaries &amp; just-because love</li>
+                        </ul>
+                    </div>
+                    <button class="choose-btn" onclick="selectPackage(this, 'The Quiet Yes - Couples')">Choose this vibe</button>
+                </div>
+                
+                <div class="vibe-card" data-package="Golden Hour Promises - Couples">
+                    <div class="vibe-card-header">
+                        <h3>Golden Hour Promises</h3>
+                        <div class="price">$350 <span>/ 50-60 min</span></div>
+                    </div>
+                    <div class="vibe-details">
+                        <ul>
+                            <li>2–3 locations • 3 looks</li>
+                            <li>Beautiful online gallery</li>
+                            <li>Print release included</li>
+                            <li>Our most popular choice for couples who want to slow down and savor</li>
+                        </ul>
+                    </div>
+                    <button class="choose-btn" onclick="selectPackage(this, 'Golden Hour Promises - Couples')">Choose this vibe</button>
+                </div>
+                
+                <!-- Family -->
+                <div class="vibe-card" data-package="Little Wildflowers - Family">
+                    <div class="vibe-card-header">
+                        <h3>Little Wildflowers</h3>
+                        <div class="price">$250 <span>/ 30 min</span></div>
+                    </div>
+                    <div class="vibe-details">
+                        <ul>
+                            <li>1 location • 1 look</li>
+                            <li>Beautiful online gallery</li>
+                            <li>Print release included</li>
+                            <li>Ideal for young families who want natural, joyful photos</li>
+                        </ul>
+                    </div>
+                    <button class="choose-btn" onclick="selectPackage(this, 'Little Wildflowers - Family')">Choose this vibe</button>
+                </div>
+                
+                <div class="vibe-card" data-package="Porch Swing Stories - Family">
+                    <div class="vibe-card-header">
+                        <h3>Porch Swing Stories</h3>
+                        <div class="price">$350 <span>/ 40-50 min</span></div>
+                    </div>
+                    <div class="vibe-details">
+                        <ul>
+                            <li>2 locations • 2 looks</li>
+                            <li>Beautiful online gallery</li>
+                            <li>Print release included</li>
+                            <li>Perfect for growing families who want variety and connection</li>
+                        </ul>
+                    </div>
+                    <button class="choose-btn" onclick="selectPackage(this, 'Porch Swing Stories - Family')">Choose this vibe</button>
+                </div>
+                
+                <div class="vibe-card" data-package="The Whole Herd - Extended Family">
+                    <div class="vibe-card-header">
+                        <h3>The Whole Herd</h3>
+                        <div class="price">$430 <span>/ 60 min</span></div>
+                    </div>
+                    <div class="vibe-details">
+                        <ul>
+                            <li>Extended family (7+ people)</li>
+                            <li>Beautiful online gallery</li>
+                            <li>Print release included</li>
+                            <li>One hour to gather everyone you love in one place</li>
+                        </ul>
+                    </div>
+                    <button class="choose-btn" onclick="selectPackage(this, 'The Whole Herd - Extended Family')">Choose this vibe</button>
+                </div>
+                
+                <!-- Seniors -->
+                <div class="vibe-card" data-package="Cap Toss - Seniors">
+                    <div class="vibe-card-header">
+                        <h3>Cap Toss</h3>
+                        <div class="price">$250 <span>/ 30 min</span></div>
+                    </div>
+                    <div class="vibe-details">
+                        <ul>
+                            <li>1 location • 1 look</li>
+                            <li>Beautiful online gallery</li>
+                            <li>Print release included</li>
+                            <li>Clean, confident senior portraits that feel like you</li>
+                        </ul>
+                    </div>
+                    <button class="choose-btn" onclick="selectPackage(this, 'Cap Toss - Seniors')">Choose this vibe</button>
+                </div>
+                
+                <div class="vibe-card" data-package="Road to Forever - Seniors">
+                    <div class="vibe-card-header">
+                        <h3>Road to Forever</h3>
+                        <div class="price">$350 <span>/ 50-60 min</span></div>
+                    </div>
+                    <div class="vibe-details">
+                        <ul>
+                            <li>2–3 locations • 3 looks</li>
+                            <li>Beautiful online gallery</li>
+                            <li>Print release included</li>
+                            <li>The full experience for seniors who want variety and personality</li>
+                        </ul>
+                    </div>
+                    <button class="choose-btn" onclick="selectPackage(this, 'Road to Forever - Seniors')">Choose this vibe</button>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="contact section">
+        <div class="contact-card">
+            <h2>Let’s Create Together</h2>
+            <p>Tell me about the moments you want to remember. I’ll get back to you within 48 hours.</p>
+            
+            <form action="https://formsubmit.co/elizabeth@elizabethavenphotography.com" method="POST">
+                <input type="hidden" name="_subject" value="New Inquiry • Elizabeth Aven Photography">
                 <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
                 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm mb-2 text-gray-700">First Name</label>
-                        <input type="text" name="First Name" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" name="First Name" required>
                     </div>
-                    <div>
-                        <label class="block text-sm mb-2 text-gray-700">Last Name</label>
-                        <input type="text" name="Last Name" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors">
+                    <div class="form-group">
+                        <label>Last Name</label>
+                        <input type="text" name="Last Name" required>
                     </div>
                 </div>
                 
-                <div>
-                    <label class="block text-sm mb-2 text-gray-700">Email Address</label>
-                    <input type="email" name="Email" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors">
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <input type="email" name="Email" required>
                 </div>
-
-                <div>
-                    <label class="block text-sm mb-2 text-gray-700">Session Type (Couples, Family, Seniors, etc.)</label>
-                    <input type="text" name="Session Type" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors">
+                
+                <div class="form-group">
+                    <label>Session Type / Vibe</label>
+                    <input type="text" id="session-type" name="Session Type" placeholder="e.g. Golden Hour Promises - Couples" required>
                 </div>
-
-                <div>
-                    <label class="block text-sm mb-2 text-gray-700">Tell me about your vision!</label>
-                    <textarea name="Message" rows="4" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors resize-none"></textarea>
+                
+                <div class="form-group">
+                    <label>Tell me about your vision</label>
+                    <textarea name="Message" placeholder="What are you celebrating? Any locations or vibes you love?" required></textarea>
                 </div>
-
-                <button type="submit" class="w-full bg-[#1C1C1C] text-white py-4 mt-8 tracking-[0.2em] uppercase text-sm hover:bg-[#A8896C] transition-colors">Send Inquiry</button>
+                
+                <button type="submit" class="submit-btn">Send My Inquiry</button>
             </form>
         </div>
     </section>
 
-    <footer class="bg-[#1C1C1C] text-[#FAF8F5] py-16 px-6 md:px-10 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
-            
-            <div class="flex items-center gap-4">
-                <img src="logo.jpg" alt="Elizabeth Aven" class="w-16 h-16 mix-blend-screen opacity-50 grayscale" />
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="logo.jpg" alt="Elizabeth Aven">
                 <div>
-                    <h3 class="font-serif text-2xl mb-1">Elizabeth Aven</h3>
-                    <p class="text-sm font-light text-gray-500">Photography | Navasota, TX</p>
+                    <div class="footer-logo-text">Elizabeth Aven</div>
+                    <div style="font-size: 0.85rem; opacity: 0.7;">Photography • Navasota, Texas</div>
                 </div>
             </div>
-
-            <div class="flex gap-8 text-sm font-light uppercase tracking-widest text-gray-400">
-                <a href="#" class="hover:text-white transition-colors">Instagram</a>
-                <a href="#" class="hover:text-white transition-colors">Facebook</a>
-            </div>
-
-            <div class="text-sm font-light text-gray-500">
-                &copy; 2026 Elizabeth Aven Photography. All Rights Reserved.
+            
+            <div class="footer-links">
+                <a href="https://instagram.com" target="_blank">Instagram</a>
+                <a href="https://facebook.com" target="_blank">Facebook</a>
             </div>
             
+            <div style="font-size: 0.85rem; opacity: 0.6;">
+                © 2026 Elizabeth Aven Photography
+            </div>
         </div>
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            
-            // --- 1. ACCORDION LOGIC ---
-            const accordions = document.querySelectorAll('.accordion-btn');
-            accordions.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Toggle Active state on button
-                    this.classList.toggle('active');
-                    // Toggle Active state on content panel next to it
-                    const content = this.nextElementSibling;
-                    content.classList.toggle('active');
-                });
+        // Mobile hamburger menu
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('nav-links');
+        
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
             });
-
-            // --- 2. GSAP SCROLL ANIMATIONS ---
-            gsap.registerPlugin(ScrollTrigger);
-
-            // Hero Entrance
-            const tl = gsap.timeline();
-            tl.from(".hero-image", { y: 100, opacity: 0, duration: 1.5, ease: "power3.out" })
-              .from(".hero-text-left", { x: -50, opacity: 0, duration: 1, ease: "power2.out" }, "-=1")
-              .from(".hero-text-right", { x: 50, opacity: 0, duration: 1, ease: "power2.out" }, "-=1");
-
-            // Scroll Reveals
-            const revealElements = document.querySelectorAll(".gs-reveal");
-            revealElements.forEach((elem) => {
-                gsap.fromTo(elem, 
-                    { y: 50, opacity: 0 },
-                    {
-                        scrollTrigger: {
-                            trigger: elem,
-                            start: "top 85%", 
-                        },
-                        y: 0,
-                        opacity: 1,
-                        duration: 1.2,
-                        ease: "power2.out"
-                    }
-                );
-            });
-
-            // Navbar Blur on Scroll
-            const navbar = document.getElementById("navbar");
-            window.addEventListener("scroll", () => {
-                if(window.scrollY > 50) {
-                    navbar.style.background = "rgba(250, 248, 245, 0.95)";
-                    navbar.style.boxShadow = "0 4px 30px rgba(0, 0, 0, 0.05)";
-                } else {
-                    navbar.style.background = "rgba(250, 248, 245, 0.85)";
-                    navbar.style.boxShadow = "none";
+        });
+        
+        // Scroll reveal with IntersectionObserver
+        const reveals = document.querySelectorAll('.reveal');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
                 }
             });
+        }, { threshold: 0.15 });
+        
+        reveals.forEach(el => observer.observe(el));
+        
+        // Signature element: Interactive package selection
+        function selectPackage(button, packageName) {
+            // Deselect all cards
+            document.querySelectorAll('.vibe-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            
+            // Select this card
+            const card = button.closest('.vibe-card');
+            card.classList.add('selected');
+            
+            // Fill the form
+            const sessionInput = document.getElementById('session-type');
+            sessionInput.value = packageName;
+            
+            // Smooth scroll to contact
+            setTimeout(() => {
+                document.getElementById('contact').scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Brief highlight on the input
+                sessionInput.style.transition = 'all 0.3s ease';
+                sessionInput.style.boxShadow = '0 0 0 3px rgba(193, 127, 89, 0.2)';
+                
+                setTimeout(() => {
+                    sessionInput.style.boxShadow = 'none';
+                }, 1600);
+            }, 450);
+        }
+        
+        // Optional: Add subtle parallax to hero image on desktop
+        const heroImg = document.querySelector('.hero-image img');
+        if (heroImg && window.innerWidth > 900) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                heroImg.style.transform = `translateY(${scrolled * 0.03}px)`;
+            });
+        }
+        
+        // Keyboard accessibility for package buttons
+        document.querySelectorAll('.choose-btn').forEach(btn => {
+            btn.setAttribute('aria-label', 'Select this package and go to inquiry form');
         });
     </script>
 </body>
