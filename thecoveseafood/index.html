@@ -316,7 +316,7 @@ section {
   color: var(--gold);
 }
 
-/* Owners section - clean perfect fit */
+/* Owners section - FULL photo with logo visible, clean fit */
 .owners {
   background: var(--panel);
   border-radius: 4px;
@@ -326,7 +326,7 @@ section {
   display: grid;
   grid-template-columns: 5fr 7fr;
   gap: 0;
-  align-items: stretch;
+  align-items: start;
 }
 @media (max-width: 900px) {
   .owners-grid { grid-template-columns: 1fr; }
@@ -338,10 +338,9 @@ section {
 }
 .owners-photo img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
   display: block;
-  min-height: 420px;
+  object-fit: contain;
 }
 .owners-content {
   padding: 3.5rem 3rem;
@@ -488,7 +487,7 @@ footer a { color: var(--gold); text-decoration: none; }
 </head>
 <body>
 
-<!-- Full-page subtle grey particles (everywhere) -->
+<!-- Full-page subtle grey particles (more visible, everywhere) -->
 <canvas id="global-particles"></canvas>
 
 <!-- NAV -->
@@ -581,7 +580,7 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 </section>
 
-<!-- OWNERS - Perfect fit, no black bar underneath -->
+<!-- OWNERS - Full photo with logo completely visible -->
 <section id="owners" class="owners reveal">
   <div class="owners-grid">
     <div class="owners-photo">
@@ -656,7 +655,7 @@ footer a { color: var(--gold); text-decoration: none; }
 </footer>
 
 <script>
-// Full-page subtle grey particles (everywhere, evenly distributed)
+// Full-page subtle grey particles - MORE VISIBLE + evenly spread everywhere
 function initGlobalParticles() {
   const canvas = document.getElementById('global-particles');
   if (!canvas) return;
@@ -674,7 +673,7 @@ function initGlobalParticles() {
   window.addEventListener('resize', resizeCanvas);
 
   let particles = [];
-  const count = 52; // subtle for full page
+  const count = 92; // increased for better visibility
 
   class Particle {
     constructor() {
@@ -683,10 +682,10 @@ function initGlobalParticles() {
     reset() {
       this.x = Math.random() * canvas.width;
       this.y = Math.random() * canvas.height;
-      this.size = Math.random() * 1.5 + 0.5;
-      this.speedX = (Math.random() - 0.5) * 0.18;
-      this.speedY = (Math.random() - 0.5) * 0.09 - 0.02;
-      this.alpha = Math.random() * 0.22 + 0.08;
+      this.size = Math.random() * 1.6 + 0.55;
+      this.speedX = (Math.random() - 0.5) * 0.2;
+      this.speedY = (Math.random() - 0.5) * 0.1 - 0.025;
+      this.alpha = Math.random() * 0.26 + 0.12; // more visible
     }
     update() {
       this.x += this.speedX;
@@ -700,7 +699,7 @@ function initGlobalParticles() {
       if (this.y > canvas.height) this.y = 0;
     }
     draw() {
-      ctx.fillStyle = `rgba(185, 190, 200, ${this.alpha})`;
+      ctx.fillStyle = `rgba(190, 195, 205, ${this.alpha})`;
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
       ctx.fill();
