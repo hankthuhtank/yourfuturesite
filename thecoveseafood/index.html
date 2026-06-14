@@ -1,294 +1,540 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Cove Seafood • Paris, Texas</title>
-    <meta name="description" content="Something different. Something special. Made with love. Fresh seafood in Paris, Texas by Cooper & Reilly Pickle.">
-    
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap">
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <style>
-        body { font-family: 'Inter', system_ui, sans-serif; }
-        .heading-font { font-family: 'Playfair Display', Georgia, serif; font-weight: 700; letter-spacing: -0.03em; }
-        
-        .nav-scrolled { background: rgba(10,12,16,0.96); backdrop-filter: blur(16px); }
-        
-        .menu-item {
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        .menu-item:hover {
-            background-color: #1A2028;
-            padding-left: 1.5rem;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Cove — Fresh Seafood & Community</title>
+<meta name="description" content="The Cove — Local, fresh seafood crafted by Cooper and Reilly Pickle. We believe in great food and an even better community.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+:root {
+  /* Dark Oceanic Palette */
+  --abyss: #080B0E;
+  --deep-water: #121820;
+  --slate: #1F2933;
+  --seafoam: #E0F2FE;
+  --coral: #FF6F59;
+  --coral-glow: rgba(255, 111, 89, 0.2);
+  --sand: #F4F0EA;
+  --text-main: #E2E8F0;
+  --text-muted: #94A3B8;
+  --border: rgba(255,255,255,0.08);
+}
 
-        .cove-logo {
-            transition: filter 0.6s ease;
-        }
-        
-        .cove-logo:hover {
-            filter: brightness(1.05);
-        }
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .subtle-fish {
-            transition: transform 1.2s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-    </style>
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: var(--abyss);
+  color: var(--text-main);
+  line-height: 1.6;
+  overflow-x: hidden;
+  /* Subtle grain overlay */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+}
+
+h1, h2, h3, h4, .serif {
+  font-family: 'Playfair Display', serif;
+  font-weight: 600;
+  color: var(--sand);
+}
+
+/* ===== NAVIGATION ===== */
+nav {
+  position: fixed;
+  top: 0; width: 100%;
+  padding: 1.5rem 5%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  transition: all 0.3s ease;
+}
+nav.solid {
+  background: rgba(8, 11, 14, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 1rem 5%;
+  border-bottom: 1px solid var(--border);
+}
+.logo-container img {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+}
+.nav-links { display: flex; gap: 2rem; }
+.nav-links a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--coral); }
+.menu-btn {
+  display: none;
+  background: none; border: none;
+  color: var(--text-main);
+  font-size: 1.5rem; cursor: pointer;
+}
+
+/* ===== HERO BENTO GRID ===== */
+.bento-section {
+  padding: 120px 5% 4rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: minmax(250px, auto);
+  gap: 1.5rem;
+}
+.bento-card {
+  background: var(--deep-water);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.bento-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+/* Card Specifics */
+.card-hero {
+  grid-column: span 2;
+  grid-row: span 2;
+  background: linear-gradient(135deg, var(--deep-water) 0%, var(--slate) 100%);
+}
+.card-hero h1 {
+  font-size: clamp(3rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+.card-hero p {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  max-width: 80%;
+  margin-bottom: 2rem;
+}
+
+/* Status Pill */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+.indicator {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: #10B981; /* Green for open */
+  box-shadow: 0 0 10px #10B981;
+}
+.status-pill.closed .indicator {
+  background: var(--coral);
+  box-shadow: 0 0 10px var(--coral);
+}
+
+.card-image {
+  padding: 0;
+}
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+  transition: opacity 0.3s;
+}
+.card-image:hover img { opacity: 1; }
+
+.card-story {
+  grid-column: span 2;
+  background: var(--slate);
+}
+.card-story h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: var(--coral);
+}
+.quote-mark {
+  font-family: 'Playfair Display', serif;
+  font-size: 4rem;
+  color: var(--coral-glow);
+  position: absolute;
+  top: 10px; left: 20px;
+  line-height: 1;
+}
+
+.card-owners {
+  grid-row: span 2;
+  text-align: center;
+}
+.card-owners img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 1.5rem;
+  border: 2px solid var(--coral);
+}
+
+/* ===== DYNAMIC MENU SECTION ===== */
+.menu-section {
+  padding: 5rem 5%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+.section-header h2 {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+.menu-note {
+  display: inline-block;
+  color: var(--coral);
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--coral);
+  padding-bottom: 4px;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+.menu-category h3 {
+  font-size: 2rem;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+.menu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+.item-info { flex: 1; padding-right: 1rem; }
+.item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: var(--sand);
+  margin-bottom: 0.25rem;
+}
+.item-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.item-price {
+  font-weight: 500;
+  color: var(--coral);
+  font-size: 1.1rem;
+}
+
+/* ===== TICKER TAPE ===== */
+.ticker-wrap {
+  width: 100%;
+  overflow: hidden;
+  background: var(--coral);
+  padding: 1rem 0;
+  color: var(--abyss);
+}
+.ticker {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: ticker 20s linear infinite;
+}
+.ticker-item {
+  font-weight: 600;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 0 2rem;
+}
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ===== REVEAL ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.in {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .card-hero { grid-column: span 2; }
+  .card-story { grid-column: span 2; }
+}
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%; left: 0; width: 100%;
+    background: var(--deep-water);
+    padding: 2rem 5%;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-links.open { display: flex; }
+  .menu-btn { display: block; }
+  
+  .bento-grid { grid-template-columns: 1fr; }
+  .card-hero, .card-story, .card-owners { grid-column: span 1; }
+  .card-hero h1 { font-size: 2.5rem; }
+  
+  .menu-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
 </head>
-<body class="bg-[#0A0C10] text-[#EDE4D6]">
+<body>
 
-    <!-- NAV -->
-    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all bg-[#0A0C10]/90 border-b border-white/10">
-        <div class="max-w-screen-2xl mx-auto px-8 flex items-center justify-between py-5">
-            <div class="flex items-center gap-x-3">
-                <!-- Small logo in nav -->
-                <div class="w-8 h-8">
-                    <svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8 28 Q18 8 28 28" fill="none" stroke="#C9A87C" stroke-width="4" stroke-linecap="round"/>
-                        <circle cx="18" cy="18" r="4.5" fill="#C9A87C"/>
-                    </svg>
-                </div>
-                <div class="font-semibold tracking-[-1.2px] text-xl heading-font">THE COVE</div>
-            </div>
-            
-            <div class="hidden md:flex items-center gap-x-8 text-sm">
-                <a href="#story" class="hover:text-[#C9A87C] transition-colors">Our Story</a>
-                <a href="#menu" class="hover:text-[#C9A87C] transition-colors">What We’re Making</a>
-                <a href="#visit" class="hover:text-[#C9A87C] transition-colors">Visit</a>
-            </div>
-            
-            <a href="tel:9035550199" class="px-5 py-2 text-sm border border-white/20 rounded-2xl hover:bg-white/5 transition-all">903-555-0199</a>
+<nav id="nav">
+  <div class="logo-container">
+    <img src="logo.png" alt="The Cove Logo" onerror="this.outerHTML='<h2 class=\'serif\'>THE COVE</h2>'">
+  </div>
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle Menu">☰</button>
+  <div class="nav-links" id="navLinks">
+    <a href="#home">Home</a>
+    <a href="#story">Our Story</a>
+    <a href="#menu">Fresh Menu</a>
+    <a href="#visit">Visit Us</a>
+  </div>
+</nav>
+
+<section class="bento-section" id="home">
+  <div class="bento-grid">
+    
+    <div class="bento-card card-hero reveal">
+      <div class="status-pill" id="statusPill">
+        <div class="indicator"></div>
+        <span id="statusText">Calculating Time...</span>
+      </div>
+      <h1 style="margin-top: 2rem;">Coastal flavor, <br>anchored in community.</h1>
+      <p>Welcome to The Cove. Fresh catches, hand-crafted bowls, and signature sandwiches made to order by Cooper and Reilly Pickle.</p>
+    </div>
+
+    <div class="bento-card card-image reveal" style="transition-delay: 0.1s;">
+      <img src="food1.png" alt="Fresh Seafood Sandwich" onerror="this.src='https://images.unsplash.com/photo-1615719413546-198b25453f85?w=500&q=80'">
+    </div>
+
+    <div class="bento-card card-image reveal" style="transition-delay: 0.2s;">
+      <img src="food2.png" alt="Signature Seafood Bowl" onerror="this.src='https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80'">
+    </div>
+
+    <div class="bento-card card-story reveal" id="story">
+      <span class="quote-mark">"</span>
+      <h3>To Our Community</h3>
+      <p style="position: relative; z-index: 2; color: var(--text-main);">
+        "We started The Cove because we believe food is the best way to bring people together. Every plate we serve is a thank you to this community that has supported us from day one. We aren't just serving seafood; we're feeding our neighbors, our friends, and our family. Thank you for making this dream a reality."
+      </p>
+      <p style="margin-top: 1rem; color: var(--coral); font-family: 'Playfair Display', serif; font-style: italic;">
+        —Cooper & Reilly Pickle
+      </p>
+    </div>
+
+    <div class="bento-card card-owners reveal" style="transition-delay: 0.3s;">
+      <img src="pickles.png" alt="Cooper and Reilly Pickle" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'120\' height=\'120\'><rect width=\'120\' height=\'120\' fill=\'%231F2933\'/></svg>'">
+      <h4 style="color: var(--sand); font-size: 1.2rem; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif;">Cooper & Reilly</h4>
+      <p style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Founders</p>
+    </div>
+    
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <div class="ticker-item">Fresh Local Catch</div>
+    <div class="ticker-item">♦</div>
+    <div class="ticker-item">Signature Seafood Bowls</div>
+    <div class="ticker-item">♦</div>
+    <div class="ticker-item">Crafted by Cooper & Reilly</div>
+    <div class="ticker-item">♦</div>
+    <div class="ticker-item">Community First</div>
+    <div class="ticker-item">♦</div>
+    <div class="ticker-item">Fresh Local Catch</div>
+    <div class="ticker-item">♦</div>
+    <div class="ticker-item">Signature Seafood Bowls</div>
+    <div class="ticker-item">♦</div>
+    <div class="ticker-item">Crafted by Cooper & Reilly</div>
+    <div class="ticker-item">♦</div>
+    <div class="ticker-item">Community First</div>
+    <div class="ticker-item">♦</div>
+  </div>
+</div>
+
+<section class="menu-section" id="menu">
+  <div class="section-header reveal">
+    <span class="menu-note" id="menuDate">Menu Updated: Today</span>
+    <h2>The Fresh Catch</h2>
+    <p style="color: var(--text-muted); max-width: 600px; margin: 1rem auto 0;">Our offerings rotate based on what's fresh. Here is what we are serving up today.</p>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-category reveal">
+      <h3 class="serif">Signature Sandwiches</h3>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">The Coastal Catch</div>
+          <div class="item-desc">Freshly seared market fish, house-made remoulade, crisp slaw, toasted brioche.</div>
         </div>
-    </nav>
+        <div class="item-price">$16</div>
+      </div>
 
-    <!-- HERO - Logo Forward -->
-    <header class="min-h-[100dvh] flex items-center justify-center pt-16 relative bg-[#0A0C10]">
-        <div class="max-w-2xl mx-auto px-6 text-center">
-            
-            <!-- YOUR EXACT LOGO (detailed recreation) -->
-            <div class="flex justify-center mb-8">
-                <div class="w-[340px] md:w-[420px]">
-                    <svg id="main-logo" viewBox="0 0 420 240" fill="none" xmlns="http://www.w3.org/2000/svg" class="cove-logo w-full h-auto cursor-pointer">
-                        <!-- Main Horseshoe / Arch -->
-                        <path d="M55 195 Q55 55 210 55 Q365 55 365 195" fill="none" stroke="#EDE4D6" stroke-width="42" stroke-linecap="round"/>
-                        <path d="M55 195 Q55 55 210 55 Q365 55 365 195" fill="none" stroke="#C9A87C" stroke-width="16" stroke-linecap="round"/>
-                        
-                        <!-- Inner water curve -->
-                        <path d="M80 168 Q140 125 210 168 Q280 125 340 168" fill="none" stroke="#0A0C10" stroke-width="9" stroke-linecap="round"/>
-                        
-                        <!-- Left Fish -->
-                        <g class="subtle-fish">
-                            <path d="M78 118 Q100 108 122 118" fill="none" stroke="#EDE4D6" stroke-width="3.5"/>
-                            <circle cx="75" cy="118" r="4" fill="#EDE4D6"/>
-                        </g>
-                        
-                        <!-- Lobster -->
-                        <g transform="translate(175 92)">
-                            <path d="M0 18 Q10 6 20 18" fill="none" stroke="#EDE4D6" stroke-width="3"/>
-                            <path d="M5 12 Q10 4 15 12" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
-                            <circle cx="10" cy="20" r="6.5" fill="#C9A87C"/>
-                        </g>
-                        
-                        <!-- Right Palm -->
-                        <g transform="translate(295 82)">
-                            <path d="M0 35 Q10 15 22 35" fill="none" stroke="#EDE4D6" stroke-width="3"/>
-                            <path d="M8 25 Q14 10 24 25" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
-                            <path d="M14 35 L14 55" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
-                        </g>
-                        
-                        <!-- Rocks & Grass at bottom -->
-                        <path d="M70 185 Q95 175 115 185" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
-                        <path d="M300 188 Q325 178 345 188" fill="none" stroke="#EDE4D6" stroke-width="2.5"/>
-                        
-                        <!-- Script "The Cove" -->
-                        <text x="210" y="128" text-anchor="middle" fill="#EDE4D6" font-family="Playfair Display, Georgia, serif" font-size="54" font-weight="700" letter-spacing="-1.5">The Cove</text>
-                        
-                        <!-- SEAFOOD -->
-                        <text x="210" y="162" text-anchor="middle" fill="#C9A87C" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" letter-spacing="5.5">SEAFOOD</text>
-                        
-                        <!-- Small decorative dots -->
-                        <circle cx="115" cy="145" r="2.2" fill="#C9A87C"/>
-                        <circle cx="305" cy="145" r="2.2" fill="#C9A87C"/>
-                    </svg>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <div class="text-[#C9A87C] text-xs tracking-[4px] font-medium">PARIS, TEXAS</div>
-            </div>
-            
-            <div class="text-3xl leading-tight tracking-tight mb-9">
-                Something different.<br>
-                Something special.<br>
-                Made with love.
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-                <button onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })" 
-                        class="px-8 py-3.5 bg-[#C9A87C] text-[#0A0C10] font-semibold rounded-3xl hover:bg-[#EDE4D6] transition-all">
-                    See What We’re Making
-                </button>
-                <button onclick="document.getElementById('story').scrollIntoView({ behavior: 'smooth' })" 
-                        class="px-8 py-3.5 border border-white/30 rounded-3xl hover:bg-white/5 transition-all">
-                    Meet Cooper &amp; Reilly
-                </button>
-            </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Spicy Fried Shrimp Po'Boy</div>
+          <div class="item-desc">Crispy gulf shrimp, fiery aioli, pickles, shredded lettuce, crusty French bread.</div>
         </div>
-    </header>
+        <div class="item-price">$15</div>
+      </div>
+    </div>
 
-    <!-- STORY -->
-    <section id="story" class="max-w-3xl mx-auto px-8 py-20 border-b border-white/10">
-        <div class="max-w-2xl">
-            <div class="uppercase text-xs tracking-[3px] text-[#C9A87C] mb-3">FROM OUR FAMILY TO YOURS</div>
-            <h2 class="text-6xl heading-font tracking-[-2.5px] mb-8">Cooper &amp; Reilly Pickle</h2>
-            
-            <div class="space-y-6 text-[17px] text-[#EDE4D6]/90 leading-relaxed">
-                <p>We’re a couple bringing a little piece of the coast to our hometown. Every dish that leaves our kitchen is made with the same care we’d give our own family.</p>
-                <p>We believe great seafood shouldn’t require a plane ticket. It should feel like a small vacation right here in Paris, Texas — familiar enough to feel like home, special enough to make you slow down.</p>
-                <p>Fresh, high-quality seafood takes time. We prepare everything with attention to detail, and we’re always happy to adjust spice or create something that reminds you of a favorite trip. Just ask.</p>
-            </div>
-            
-            <div class="mt-10 p-8 bg-[#12161C] rounded-3xl border border-white/10">
-                <div class="text-2xl leading-tight italic">“Y’all are everything. Every visit, every order, every kind word helps keep this dream alive.”</div>
-                <div class="mt-4 text-sm text-[#C9A87C]">— Reilly &amp; Cooper Pickle</div>
-            </div>
+    <div class="menu-category reveal" style="transition-delay: 0.2s;">
+      <h3 class="serif">Fresh Bowls</h3>
+      
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">The Deep Water Bowl</div>
+          <div class="item-desc">Ahi tuna, sticky rice, edamame, fresh mango, sesame dressing, seaweed crunch.</div>
         </div>
-    </section>
+        <div class="item-price">$18</div>
+      </div>
 
-    <!-- MENU -->
-    <section id="menu" class="max-w-screen-2xl mx-auto px-8 py-20">
-        <div class="max-w-3xl mb-12">
-            <div class="text-xs tracking-[3px] text-[#C9A87C] mb-2">WHAT WE’RE MAKING RIGHT NOW</div>
-            <h2 class="text-6xl heading-font tracking-[-3px]">Fresh from the water.<br>Crafted with care.</h2>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Seared Scallop Harvest</div>
+          <div class="item-desc">Pan-seared scallops, quinoa, roasted seasonal veggies, lemon-butter drizzle.</div>
         </div>
+        <div class="item-price">$21</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <div class="grid md:grid-cols-2 gap-x-10 gap-y-12 max-w-5xl">
-            
-            <!-- Column 1 -->
-            <div class="space-y-8">
-                <div>
-                    <div class="text-[#C9A87C] text-xs tracking-widest mb-3">PO’ BOYS &amp; SANDWICHES</div>
-                    <div class="space-y-[2px] text-[15px]">
-                        <div class="menu-item px-4 py-3 rounded-2xl">Shrimp Po Boy</div>
-                        <div class="menu-item px-4 py-3 rounded-2xl">Soft Shell Crawfish Po Boy <span class="text-[#C9A87C] text-xs">★</span></div>
-                        <div class="menu-item px-4 py-3 rounded-2xl">Crab Cake Burger</div>
-                        <div class="menu-item px-4 py-3 rounded-2xl">Mahi Burger</div>
-                        <div class="menu-item px-4 py-3 rounded-2xl">Grouper Muffuletta</div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="text-[#C9A87C] text-xs tracking-widest mb-3">ROLLS &amp; BITES</div>
-                    <div class="space-y-[2px] text-[15px]">
-                        <div class="menu-item px-4 py-3 rounded-2xl">Lobster Rolls (2)</div>
-                        <div class="menu-item px-4 py-3 rounded-2xl">Crab Cake Bites</div>
-                        <div class="menu-item px-4 py-3 rounded-2xl">Soft Shell Crab Sliders <span class="text-[#C9A87C] text-xs">★</span></div>
-                    </div>
-                </div>
-            </div>
+<footer style="background: var(--abyss); border-top: 1px solid var(--border); padding: 4rem 5%; text-align: center; margin-top: 2rem;">
+  <h2 class="serif" style="font-size: 2.5rem; margin-bottom: 1rem; color: var(--coral);">The Cove</h2>
+  <p style="color: var(--text-muted); max-width: 400px; margin: 0 auto 2rem;">
+    Local, fresh seafood crafted with passion. Stop by and see what we caught today.
+  </p>
+  <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
+    <a href="#" style="color: var(--text-main); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Facebook</a>
+    <a href="#" style="color: var(--text-main); text-decoration: none; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;">Instagram</a>
+  </div>
+  <p style="color: rgba(255,255,255,0.2); font-size: 0.8rem;">
+    &copy; <span id="year"></span> The Cove. All rights reserved.
+  </p>
+</footer>
 
-            <!-- Column 2 -->
-            <div class="space-y-8">
-                <div>
-                    <div class="text-[#C9A87C] text-xs tracking-widest mb-3">TACOS</div>
-                    <div class="space-y-[2px] text-[15px]">
-                        <div class="menu-item px-4 py-3 rounded-2xl">Mahi Tacos (3)</div>
-                        <div class="menu-item px-4 py-3 rounded-2xl">Shrimp Tacos (3)</div>
-                        <div class="menu-item px-4 py-3 rounded-2xl">Grouper Tacos (3)</div>
-                        <div class="menu-item px-4 py-3 rounded-2xl">Smoked Snapper Tacos <span class="text-[#C9A87C] text-xs">★</span></div>
-                    </div>
-                </div>
-                
-                <div>
-                    <div class="text-[#C9A87C] text-xs tracking-widest mb-3">FROM THE SKILLET</div>
-                    <div class="space-y-[2px] text-[15px]">
-                        <div class="menu-item px-4 py-3 rounded-2xl">Shrimp Risotto</div>
-                    </div>
-                </div>
-            </div>
-        </div>
+<script>
+  // Dynamic Year
+  document.getElementById('year').textContent = new Date().getFullYear();
 
-        <div class="mt-12 text-center text-sm text-[#EDE4D6]/60 max-w-md mx-auto">
-            We can adjust spice, swap sides, or make something that reminds you of a favorite vacation. Just tell us what you’re craving.
-        </div>
-    </section>
+  // Dynamic Menu Date
+  const dateOptions = { weekday: 'long', month: 'long', day: 'numeric' };
+  document.getElementById('menuDate').textContent = "Menu Updated: " + new Date().toLocaleDateString('en-US', dateOptions);
 
-    <!-- VISIT -->
-    <section id="visit" class="bg-[#12161C] py-16 border-t border-white/10">
-        <div class="max-w-xl mx-auto px-8 text-center">
-            <div class="text-[#C9A87C] text-xs tracking-[3px] mb-2">COME SIT WITH US</div>
-            <h2 class="text-5xl heading-font tracking-[-2px] mb-6">A little vacation<br>without leaving Paris.</h2>
-            
-            <div class="flex flex-col sm:flex-row gap-3 justify-center mt-8">
-                <a href="tel:9035550199" class="px-9 py-4 bg-[#C9A87C] text-[#0A0C10] font-semibold rounded-3xl hover:bg-[#EDE4D6]">Call to Reserve or Order</a>
-                <button onclick="document.getElementById('menu').scrollIntoView({ behavior: 'smooth' })" class="px-9 py-4 border border-white/30 rounded-3xl">See Today’s Catch</button>
-            </div>
-            
-            <div class="mt-8 text-xs text-[#EDE4D6]/50">Paris, Texas • Fresh seafood prepared with care</div>
-        </div>
-    </section>
+  // Mobile Menu Toggle
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => {
+    navLinks.classList.toggle('open');
+    menuBtn.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+  });
 
-    <footer class="py-8 text-center text-xs text-[#EDE4D6]/40 border-t border-white/10">
-        Something different. Something special. Made with love.<br>
-        <span class="text-[#C9A87C]">Cooper &amp; Reilly Pickle • The Cove Seafood</span>
-    </footer>
+  // Close mobile menu on link click
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.textContent = '☰';
+    });
+  });
 
-    <script>
-        function initNavbar() {
-            const nav = document.getElementById('navbar');
-            window.addEventListener('scroll', () => {
-                nav.classList.toggle('nav-scrolled', window.scrollY > 50);
-            });
-        }
+  // Solid Navbar on Scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      nav.classList.add('solid');
+    } else {
+      nav.classList.remove('solid');
+    }
+  });
 
-        // Make the logo interactive (subtle fish movement + quote)
-        function initLogoInteraction() {
-            const logo = document.getElementById('main-logo');
-            if (!logo) return;
+  // Intersection Observer for Reveal Animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: "0px 0px -50px 0px"
+  };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
 
-            logo.addEventListener('click', () => {
-                // Gentle animation on fish elements
-                const fish = logo.querySelectorAll('.subtle-fish');
-                fish.forEach(f => {
-                    f.style.transitionDuration = '400ms';
-                    f.style.transform = 'translateX(6px)';
-                    setTimeout(() => {
-                        f.style.transform = 'translateX(0)';
-                    }, 450);
-                });
+  document.querySelectorAll('.reveal').forEach(el => {
+    observer.observe(el);
+  });
 
-                // Show quote toast
-                showQuoteToast();
-            });
-        }
+  // Dynamic Open/Closed Status Logic
+  function updateStatus() {
+    const statusText = document.getElementById('statusText');
+    const statusPill = document.getElementById('statusPill');
+    
+    // Getting current time in local timezone
+    const now = new Date();
+    const day = now.getDay(); // 0 is Sunday
+    const hour = now.getHours();
 
-        function showQuoteToast() {
-            const existing = document.getElementById('quote-toast');
-            if (existing) existing.remove();
+    // Example Hours: Tuesday - Saturday (Days 2-6), 11 AM - 9 PM (11 - 21)
+    const isOpen = (day >= 2 && day <= 6) && (hour >= 11 && hour < 21);
 
-            const toast = document.createElement('div');
-            toast.id = 'quote-toast';
-            toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 bg-[#12161C] border border-[#C9A87C]/30 px-8 py-5 rounded-3xl text-center max-w-sm shadow-2xl z-50';
-            toast.innerHTML = `
-                <div class="text-xl leading-tight">“Something different.<br>Something special.<br>Made with love.”</div>
-                <div class="text-xs text-[#C9A87C] mt-3 tracking-widest">— Cooper &amp; Reilly Pickle</div>
-            `;
-            document.body.appendChild(toast);
+    if (isOpen) {
+      statusText.textContent = "Open Now • Serving Fresh";
+      statusPill.classList.remove('closed');
+    } else {
+      statusText.textContent = "Closed • Catching Fresh Seafood";
+      statusPill.classList.add('closed');
+    }
+  }
+  
+  updateStatus();
+  // Update every minute
+  setInterval(updateStatus, 60000);
 
-            setTimeout(() => {
-                toast.style.transition = 'all 0.5s ease';
-                toast.style.opacity = '0';
-                setTimeout(() => toast.remove(), 400);
-            }, 3800);
-        }
-
-        function initialize() {
-            initNavbar();
-            initLogoInteraction();
-        }
-        
-        window.onload = initialize;
-    </script>
+</script>
 </body>
 </html>
