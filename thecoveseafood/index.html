@@ -316,7 +316,7 @@ section {
   color: var(--gold);
 }
 
-/* Owners section - FULL photo with logo visible, clean fit */
+/* Owners section - FULL photo with logo visible + vertically centered */
 .owners {
   background: var(--panel);
   border-radius: 4px;
@@ -326,7 +326,7 @@ section {
   display: grid;
   grid-template-columns: 5fr 7fr;
   gap: 0;
-  align-items: start;
+  align-items: center; /* <-- centers the photo vertically with the text */
 }
 @media (max-width: 900px) {
   .owners-grid { grid-template-columns: 1fr; }
@@ -487,7 +487,7 @@ footer a { color: var(--gold); text-decoration: none; }
 </head>
 <body>
 
-<!-- Full-page subtle grey particles (more visible, everywhere) -->
+<!-- Full-page subtle grey particles -->
 <canvas id="global-particles"></canvas>
 
 <!-- NAV -->
@@ -580,7 +580,7 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 </section>
 
-<!-- OWNERS - Full photo with logo completely visible -->
+<!-- OWNERS - Full photo + vertically centered -->
 <section id="owners" class="owners reveal">
   <div class="owners-grid">
     <div class="owners-photo">
@@ -655,7 +655,7 @@ footer a { color: var(--gold); text-decoration: none; }
 </footer>
 
 <script>
-// Full-page subtle grey particles - MORE VISIBLE + evenly spread everywhere
+// Full-page subtle grey particles
 function initGlobalParticles() {
   const canvas = document.getElementById('global-particles');
   if (!canvas) return;
@@ -673,7 +673,7 @@ function initGlobalParticles() {
   window.addEventListener('resize', resizeCanvas);
 
   let particles = [];
-  const count = 92; // increased for better visibility
+  const count = 92;
 
   class Particle {
     constructor() {
@@ -685,7 +685,7 @@ function initGlobalParticles() {
       this.size = Math.random() * 1.6 + 0.55;
       this.speedX = (Math.random() - 0.5) * 0.2;
       this.speedY = (Math.random() - 0.5) * 0.1 - 0.025;
-      this.alpha = Math.random() * 0.26 + 0.12; // more visible
+      this.alpha = Math.random() * 0.26 + 0.12;
     }
     update() {
       this.x += this.speedX;
@@ -820,7 +820,7 @@ document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('active'));
 });
 
-// Text button - reroutes form data into SMS
+// Text button
 const textBtn = document.getElementById('textBtn');
 textBtn.addEventListener('click', () => {
   const name = document.getElementById('name').value.trim() || 'Guest';
@@ -829,7 +829,7 @@ textBtn.addEventListener('click', () => {
   window.location.href = `sms:903-905-4081?body=${body}`;
 });
 
-// Start full-page particles
+// Start particles
 window.addEventListener('load', () => {
   initGlobalParticles();
 });
