@@ -2,294 +2,99 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Elizabeth Aven Photography</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
-
     <script src="https://cdn.tailwindcss.com"></script>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-
     <style>
-        /* Base Styling & Typography */
-        body { background-color: #FAF8F5; color: #1C1C1C; font-family: 'Outfit', sans-serif; overflow-x: hidden; }
-        h1, h2, h3, h4, .font-serif { font-family: 'Cormorant Garamond', serif; }
-        
-        /* Clean Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #FAF8F5; }
-        ::-webkit-scrollbar-thumb { background: #A8896C; border-radius: 10px; }
-
-        /* Custom UI Elements */
-        .glass-nav { background: rgba(250, 248, 245, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .capsule-mask { border-radius: 999px; }
-        
-        /* Accordion Transitions */
-        .accordion-content { transition: max-height 0.5s ease-in-out, opacity 0.5s ease; max-height: 0; opacity: 0; overflow: hidden; }
-        .accordion-content.active { max-height: 400px; opacity: 1; }
-        .accordion-icon { transition: transform 0.3s ease; }
-        .accordion-btn.active .accordion-icon { transform: rotate(45deg); }
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,400&family=Outfit:wght@200;300;400&display=swap');
+        body { background: #FAF8F5; color: #1a1a1a; font-family: 'Outfit', sans-serif; }
+        h1, h2, h3 { font-family: 'Cormorant Garamond', serif; }
+        canvas { position: fixed; top: 0; left: 0; z-index: -1; pointer-events: none; }
     </style>
 </head>
-<body class="antialiased">
+<body>
 
-    <nav class="fixed top-0 left-0 w-full z-50 glass-nav px-6 py-4 flex justify-between items-center transition-all duration-300" id="navbar">
-        <a href="#" class="flex items-center gap-3">
-            <img src="logo.jpg" alt="Elizabeth Aven" class="w-12 h-12 mix-blend-multiply object-contain" />
-            <span class="font-serif text-xl tracking-widest uppercase hidden md:block">Elizabeth Aven</span>
-        </a>
-        <button class="flex flex-col gap-1.5 p-2 focus:outline-none hover:opacity-70 transition-opacity">
-            <div class="w-8 h-[1px] bg-[#1C1C1C]"></div>
-            <div class="w-8 h-[1px] bg-[#1C1C1C]"></div>
-            <div class="w-6 h-[1px] bg-[#1C1C1C] ml-auto"></div>
-        </button>
+    <canvas id="particleCanvas"></canvas>
+
+    <nav class="fixed w-full z-50 flex justify-between px-12 py-8 items-center mix-blend-difference text-white">
+        <img src="logo-circle.jpg" alt="Logo" class="w-20 invert">
+        <div class="text-sm tracking-[0.3em] uppercase">Menu</div>
     </nav>
 
-    <section class="relative w-full h-[100svh] flex flex-col items-center justify-center overflow-hidden pt-16">
-        <div class="relative z-10 w-[90%] md:w-[450px] h-[65vh] md:h-[700px] overflow-hidden capsule-mask shadow-2xl hero-image">
-            <img src="couple1.jpg" alt="Couple Photography" class="w-full h-full object-cover hover:scale-105 transition-transform duration-[2s] ease-out" />
+    <section class="h-screen flex flex-col justify-center items-center">
+        <div class="w-[400px] h-[550px] overflow-hidden rounded-[200px] shadow-2xl">
+            <img src="couple1.jpg" class="w-full h-full object-cover scale-110">
         </div>
+        <h1 class="text-8xl mt-8">Elizabeth Aven</h1>
+    </section>
+
+    <section class="py-32 px-20 flex items-center gap-24 relative">
+        <img src="logo-circle.jpg" class="absolute top-10 right-10 w-64 opacity-5 pointer-events-none">
         
-        <div class="absolute top-[20%] left-[-5%] md:left-[10%] z-0 opacity-10 md:opacity-100 mix-blend-multiply pointer-events-none hero-text-left">
-            <h1 class="text-[12vw] font-serif italic text-[#A8896C]">Capturing</h1>
+        <div class="w-1/2 h-[600px] rounded-[50px] overflow-hidden">
+            <img src="selfdesc.jpg" class="w-full h-full object-cover object-[50%_15%]">
         </div>
-        <div class="absolute bottom-[15%] right-[-5%] md:right-[10%] z-20 pointer-events-none hero-text-right">
-            <h1 class="text-[10vw] font-serif text-[#1C1C1C]">The Present</h1>
-        </div>
-    </section>
-
-    <section class="relative w-full py-32 bg-white px-6 md:px-20" id="about">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16 md:gap-24">
-            
-            <div class="w-full md:w-1/2 flex flex-col gap-8 gs-reveal order-2 md:order-1">
-                <p class="text-[#A8896C] tracking-[0.3em] uppercase text-sm font-medium">The Artist Behind The Lens</p>
-                <h2 class="text-5xl md:text-7xl font-serif leading-tight">Hi, I’m Elizabeth.</h2>
-                <div class="space-y-6 text-lg md:text-xl font-light leading-relaxed text-gray-600">
-                    <p>Born and raised in Navasota, TX, I’ve had a passion for photography since my junior year of high school. While I took a break to build my family and focus on teaching, I’m thrilled to be back doing what I love.</p>
-                    <p>There’s nothing more rewarding than seeing my clients’ faces light up and capturing the warmth, love, and connection in every photograph. For me, this isn’t just a business—it’s a true source of joy.</p>
-                </div>
-            </div>
-
-            <div class="w-full md:w-1/2 flex justify-center gs-reveal order-1 md:order-2">
-                <div class="w-[85%] md:w-[400px] h-[600px] capsule-mask overflow-hidden shadow-2xl relative group">
-                    <img src="selfdesc.jpg" alt="Elizabeth" class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700" />
-                </div>
-            </div>
+        <div class="w-1/2 space-y-6">
+            <h2 class="text-6xl">Capturing the unseen.</h2>
+            <p class="text-xl leading-relaxed text-gray-600">Photography is more than a click—it's a dialogue. Based in Navasota, I strive to turn the fleeting moments of your life into permanent, high-end editorial art.</p>
         </div>
     </section>
 
-    <section class="py-32 px-4 md:px-10 max-w-7xl mx-auto border-t border-gray-200">
-        <div class="flex justify-between items-end mb-16 gs-reveal">
-            <h2 class="text-5xl md:text-6xl font-serif">Recent Work</h2>
-            <a href="#" class="hidden md:inline-block border-b border-[#1C1C1C] pb-1 hover:text-[#A8896C] hover:border-[#A8896C] transition-colors">View Full Portfolio</a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8">
-            <div class="md:col-span-8 overflow-hidden gs-reveal group">
-                <img src="senior1.jpg" alt="Senior" class="w-full h-[600px] object-cover group-hover:scale-105 transition-transform duration-700" />
+    <section class="py-32 bg-[#1a1a1a] text-white px-20">
+        <h2 class="text-7xl text-center mb-20">Experience & Investment</h2>
+        <div class="grid grid-cols-3 gap-10">
+            <div class="space-y-4">
+                <h3 class="text-3xl text-[#A8896C]">The Intimate Session</h3>
+                <p class="text-sm text-gray-400">Perfect for couples and headshots. Minimalist, focused, and high-impact.</p>
+                <div class="text-4xl">$250</div>
             </div>
-            <div class="md:col-span-4 mt-0 md:mt-32 overflow-hidden gs-reveal group">
-                <img src="family1.jpg" alt="Family" class="w-full h-[400px] object-cover group-hover:scale-105 transition-transform duration-700" />
+            <div class="space-y-4">
+                <h3 class="text-3xl text-[#A8896C]">The Signature Session</h3>
+                <p class="text-sm text-gray-400">Our most popular choice. More time, more locations, and a comprehensive storytelling approach.</p>
+                <div class="text-4xl">$350</div>
             </div>
-            
-            <div class="md:col-span-5 overflow-hidden gs-reveal group">
-                <img src="headshot2.jpg" alt="Headshot" class="w-full h-[500px] object-cover group-hover:scale-105 transition-transform duration-700" />
-            </div>
-            <div class="md:col-span-7 md:-mt-20 overflow-hidden gs-reveal group">
-                <img src="senior3.jpg" alt="Senior" class="w-full h-[700px] object-cover group-hover:scale-105 transition-transform duration-700" />
+            <div class="space-y-4">
+                <h3 class="text-3xl text-[#A8896C]">The Legacy Collection</h3>
+                <p class="text-sm text-gray-400">For extended families and full-scale narrative projects. Everything captured, every memory kept.</p>
+                <div class="text-4xl">$430</div>
             </div>
         </div>
     </section>
 
-    <section class="py-32 bg-[#1A1A1A] text-[#FAF8F5] px-6 md:px-10">
-        <div class="max-w-4xl mx-auto">
-            <div class="text-center mb-20 gs-reveal">
-                <p class="text-[#A8896C] tracking-[0.3em] uppercase text-sm font-medium mb-4">Pricing & Packages</p>
-                <h2 class="text-5xl md:text-7xl font-serif">The Investment</h2>
-            </div>
-            
-            <div class="space-y-4 gs-reveal">
-                
-                <div class="border-b border-gray-700 pb-4">
-                    <button class="accordion-btn w-full flex justify-between items-center py-4 text-2xl md:text-4xl font-serif hover:text-[#A8896C] transition-colors focus:outline-none">
-                        <span>Couples & Engagements</span>
-                        <span class="accordion-icon text-3xl font-light">+</span>
-                    </button>
-                    <div class="accordion-content grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-300 pt-4">
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Package 1 — <span class="text-[#A8896C]">$250</span></h4>
-                            <p class="font-light text-sm leading-relaxed">30-minute session • 1 location • 1 look • Online gallery • Print release</p>
-                        </div>
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Package 2 — <span class="text-[#A8896C]">$350</span></h4>
-                            <p class="font-light text-sm leading-relaxed">50-60 minute session • 2-3 locations • 3 looks • Online gallery • Print release</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-b border-gray-700 pb-4">
-                    <button class="accordion-btn w-full flex justify-between items-center py-4 text-2xl md:text-4xl font-serif hover:text-[#A8896C] transition-colors focus:outline-none">
-                        <span>Family Sessions</span>
-                        <span class="accordion-icon text-3xl font-light">+</span>
-                    </button>
-                    <div class="accordion-content grid grid-cols-1 md:grid-cols-3 gap-6 text-gray-300 pt-4">
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Pkg A — <span class="text-[#A8896C]">$250</span></h4>
-                            <p class="font-light text-sm leading-relaxed">30-minute session • 1 location • 1 look</p>
-                        </div>
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Pkg B — <span class="text-[#A8896C]">$350</span></h4>
-                            <p class="font-light text-sm leading-relaxed">40-50 min session • 2 locations • 2 looks</p>
-                        </div>
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Pkg C — <span class="text-[#A8896C]">$430</span></h4>
-                            <p class="font-light text-sm leading-relaxed">Extended Family (7+) • 60-min session</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="border-b border-gray-700 pb-4">
-                    <button class="accordion-btn w-full flex justify-between items-center py-4 text-2xl md:text-4xl font-serif hover:text-[#A8896C] transition-colors focus:outline-none">
-                        <span>Seniors</span>
-                        <span class="accordion-icon text-3xl font-light">+</span>
-                    </button>
-                    <div class="accordion-content grid grid-cols-1 md:grid-cols-2 gap-8 text-gray-300 pt-4">
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Package 1 — <span class="text-[#A8896C]">$250</span></h4>
-                            <p class="font-light text-sm leading-relaxed">30-minute session • 1 location • 1 look • Online gallery • Print release</p>
-                        </div>
-                        <div class="p-6 border border-gray-700 rounded-sm">
-                            <h4 class="text-xl text-white mb-2">Package 2 — <span class="text-[#A8896C]">$350</span></h4>
-                            <p class="font-light text-sm leading-relaxed">50-60 minute session • 2-3 locations • 3 looks • Online gallery • Print release</p>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
+    <section class="py-32 max-w-2xl mx-auto">
+        <form action="https://formsubmit.co/YOUR_EMAIL" method="POST" class="space-y-8">
+            <input type="text" placeholder="Name" class="w-full bg-transparent border-b border-black py-4 outline-none">
+            <input type="email" placeholder="Email" class="w-full bg-transparent border-b border-black py-4 outline-none">
+            <textarea placeholder="Tell me about your vision" class="w-full bg-transparent border-b border-black py-4 outline-none h-32"></textarea>
+            <button class="bg-black text-white px-12 py-4">Inquire</button>
+        </form>
     </section>
-
-    <section class="py-32 bg-[#E6E1D8] px-6 md:px-10">
-        <div class="max-w-3xl mx-auto bg-white p-10 md:p-16 shadow-2xl rounded-sm gs-reveal">
-            <h2 class="text-4xl md:text-5xl font-serif mb-4 text-center">Let's Create Together</h2>
-            <p class="text-center text-gray-500 mb-10 font-light">Fill out the form below to inquire about dates and availability.</p>
-            
-            <form action="https://formsubmit.co/YOUR_EMAIL_HERE" method="POST" class="space-y-6 font-light">
-                <input type="hidden" name="_subject" value="New Photography Inquiry!">
-                <input type="hidden" name="_captcha" value="false">
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
-                        <label class="block text-sm mb-2 text-gray-700">First Name</label>
-                        <input type="text" name="First Name" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors">
-                    </div>
-                    <div>
-                        <label class="block text-sm mb-2 text-gray-700">Last Name</label>
-                        <input type="text" name="Last Name" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors">
-                    </div>
-                </div>
-                
-                <div>
-                    <label class="block text-sm mb-2 text-gray-700">Email Address</label>
-                    <input type="email" name="Email" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors">
-                </div>
-
-                <div>
-                    <label class="block text-sm mb-2 text-gray-700">Session Type (Couples, Family, Seniors, etc.)</label>
-                    <input type="text" name="Session Type" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors">
-                </div>
-
-                <div>
-                    <label class="block text-sm mb-2 text-gray-700">Tell me about your vision!</label>
-                    <textarea name="Message" rows="4" required class="w-full border-b border-gray-300 py-2 bg-transparent focus:outline-none focus:border-[#A8896C] transition-colors resize-none"></textarea>
-                </div>
-
-                <button type="submit" class="w-full bg-[#1C1C1C] text-white py-4 mt-8 tracking-[0.2em] uppercase text-sm hover:bg-[#A8896C] transition-colors">Send Inquiry</button>
-            </form>
-        </div>
-    </section>
-
-    <footer class="bg-[#1C1C1C] text-[#FAF8F5] py-16 px-6 md:px-10 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left">
-            
-            <div class="flex items-center gap-4">
-                <img src="logo.jpg" alt="Elizabeth Aven" class="w-16 h-16 mix-blend-screen opacity-50 grayscale" />
-                <div>
-                    <h3 class="font-serif text-2xl mb-1">Elizabeth Aven</h3>
-                    <p class="text-sm font-light text-gray-500">Photography | Navasota, TX</p>
-                </div>
-            </div>
-
-            <div class="flex gap-8 text-sm font-light uppercase tracking-widest text-gray-400">
-                <a href="#" class="hover:text-white transition-colors">Instagram</a>
-                <a href="#" class="hover:text-white transition-colors">Facebook</a>
-            </div>
-
-            <div class="text-sm font-light text-gray-500">
-                &copy; 2026 Elizabeth Aven Photography. All Rights Reserved.
-            </div>
-            
-        </div>
-    </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            
-            // --- 1. ACCORDION LOGIC ---
-            const accordions = document.querySelectorAll('.accordion-btn');
-            accordions.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // Toggle Active state on button
-                    this.classList.toggle('active');
-                    // Toggle Active state on content panel next to it
-                    const content = this.nextElementSibling;
-                    content.classList.toggle('active');
-                });
+        // Particle Background Logic
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        for(let i=0; i<30; i++) {
+            particles.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, size: Math.random()*2 });
+        }
+
+        function animate() {
+            ctx.clearRect(0,0, canvas.width, canvas.height);
+            ctx.fillStyle = '#A8896C';
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.size, 0, Math.PI*2);
+                ctx.fill();
+                p.y -= 0.5;
+                if(p.y < 0) p.y = canvas.height;
             });
-
-            // --- 2. GSAP SCROLL ANIMATIONS ---
-            gsap.registerPlugin(ScrollTrigger);
-
-            // Hero Entrance
-            const tl = gsap.timeline();
-            tl.from(".hero-image", { y: 100, opacity: 0, duration: 1.5, ease: "power3.out" })
-              .from(".hero-text-left", { x: -50, opacity: 0, duration: 1, ease: "power2.out" }, "-=1")
-              .from(".hero-text-right", { x: 50, opacity: 0, duration: 1, ease: "power2.out" }, "-=1");
-
-            // Scroll Reveals
-            const revealElements = document.querySelectorAll(".gs-reveal");
-            revealElements.forEach((elem) => {
-                gsap.fromTo(elem, 
-                    { y: 50, opacity: 0 },
-                    {
-                        scrollTrigger: {
-                            trigger: elem,
-                            start: "top 85%", 
-                        },
-                        y: 0,
-                        opacity: 1,
-                        duration: 1.2,
-                        ease: "power2.out"
-                    }
-                );
-            });
-
-            // Navbar Blur on Scroll
-            const navbar = document.getElementById("navbar");
-            window.addEventListener("scroll", () => {
-                if(window.scrollY > 50) {
-                    navbar.style.background = "rgba(250, 248, 245, 0.95)";
-                    navbar.style.boxShadow = "0 4px 30px rgba(0, 0, 0, 0.05)";
-                } else {
-                    navbar.style.background = "rgba(250, 248, 245, 0.85)";
-                    navbar.style.boxShadow = "none";
-                }
-            });
-        });
+            requestAnimationFrame(animate);
+        }
+        animate();
     </script>
 </body>
 </html>
