@@ -104,7 +104,7 @@ nav {
   cursor: pointer;
 }
 
-/* Hero with particles */
+/* Hero with full-background particles */
 .hero {
   min-height: 100dvh;
   display: flex;
@@ -128,16 +128,16 @@ nav {
   z-index: 2;
 }
 .hero .logo-hero {
-  width: 210px;
+  width: 260px;
   height: auto;
-  margin: 0 auto 2.25rem;
+  margin: 0 auto 2.1rem;
   filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6));
 }
 .hero-tagline {
   font-size: clamp(1.1rem, 2.8vw, 1.35rem);
   color: var(--text-muted);
   max-width: 620px;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 2.4rem;
   font-weight: 400;
 }
 .hero-sub {
@@ -177,14 +177,20 @@ section {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 2.25rem;
+  margin-bottom: 2rem;
   flex-wrap: wrap;
   gap: 1rem;
 }
 .menu-note {
   font-size: 0.9rem;
   color: var(--text-muted);
-  max-width: 420px;
+  max-width: 460px;
+}
+.spice-note {
+  font-size: 0.95rem;
+  color: #D4C4A8;
+  font-style: italic;
+  margin-top: 0.6rem;
 }
 .menu-container {
   display: grid;
@@ -304,7 +310,7 @@ section {
   color: var(--gold);
 }
 
-/* Owners section (now carries the community gratitude) */
+/* Owners section */
 .owners {
   background: var(--panel);
   border-radius: 4px;
@@ -320,12 +326,13 @@ section {
 }
 .owners-photo {
   position: relative;
+  background: #0A0E12;
 }
 .owners-photo img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  min-height: 460px;
+  height: auto;
+  max-height: 540px;
+  object-fit: contain;
   display: block;
 }
 .owners-content {
@@ -344,17 +351,12 @@ section {
 }
 .community-quote {
   font-family: 'Playfair Display', serif;
-  font-size: 1.35rem;
+  font-size: 1.32rem;
   line-height: 1.35;
   color: var(--gold);
-  margin: 1.6rem 0 1.6rem;
+  margin: 1.5rem 0 1.5rem;
   padding-left: 1.25rem;
   border-left: 3px solid var(--gold);
-}
-.community-attribution {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  font-style: italic;
 }
 
 /* Reserve form */
@@ -499,7 +501,6 @@ footer a { color: var(--gold); text-decoration: none; }
 
 <!-- HERO -->
 <header class="hero">
-  <!-- Subtle animated grey particles -->
   <canvas id="particles"></canvas>
   
   <div class="hero-content">
@@ -509,7 +510,7 @@ footer a { color: var(--gold); text-decoration: none; }
     <h1 class="display">A little vacation<br>without leaving town.</h1>
     <p class="hero-tagline">Fresh Gulf seafood. Warm hospitality.<br>Something different. Something special. Made with love.</p>
     
-    <div style="margin-top: 2.25rem;">
+    <div style="margin-top: 2.1rem;">
       <a href="#menu" class="btn">Explore the Menu</a>
     </div>
   </div>
@@ -525,7 +526,8 @@ footer a { color: var(--gold); text-decoration: none; }
   <div class="menu-header">
     <div>
       <h2 class="section-title">The Menu</h2>
-      <p style="color:var(--text-muted); margin-top:0.4rem;">A living collection. Always evolving with the catch.</p>
+      <p style="color:var(--text-muted); margin-top:0.35rem;">A living collection. Always evolving with the catch.</p>
+      <p class="spice-note">If you love spice, hate spice, or fall somewhere in between, let us know. We can adjust nearly anything to fit your taste.</p>
     </div>
     <div class="menu-note">
       Menu changes daily with the freshest product available.<br>
@@ -570,7 +572,7 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 </section>
 
-<!-- OWNERS (now with community gratitude from Facebook post) -->
+<!-- OWNERS -->
 <section id="owners" class="owners reveal">
   <div class="owners-grid">
     <div class="owners-photo">
@@ -581,29 +583,27 @@ footer a { color: var(--gold); text-decoration: none; }
       <p>We started The Cove because we believe great seafood and genuine hospitality can turn an ordinary evening in Paris, Texas into something you’ll remember for a long time.</p>
       
       <div class="community-quote">
-        “Thank you to everyone who came out and filled every table, every chair… The support means more to us than you’ll ever know.”
+        “Hearing guests tell us it was the best plate they’ve ever had is one of the greatest compliments we could receive. We don’t take those words lightly, and they inspire us to keep raising the bar every single day.”
       </div>
       
-      <p>Hearing guests tell us it was the best plate they’ve ever had inspires us to keep raising the bar every single day.</p>
-      
-      <div class="community-quote" style="font-size:1.25rem; margin:1.4rem 0;">
-        “To everyone who continues to support us, thank you. Every visit, every order, every recommendation, and every kind word helps keep this dream alive.<br><br>Y’all are everything.”
-      </div>
+      <p>Every visit, every order, every recommendation, and every kind word helps keep this dream alive.</p>
     </div>
   </div>
 </section>
 
 <!-- RESERVE -->
 <section id="reserve" class="reveal" style="padding-bottom:5rem;">
-  <div style="text-align:center; max-width:620px; margin:0 auto 2.5rem;">
+  <div style="text-align:center; max-width:620px; margin:0 auto 2.25rem;">
     <h2 class="section-title">Let’s make it happen.</h2>
-    <p style="color:var(--text-muted); margin-top:0.75rem;">
-      Text us at <a href="sms:903-905-4081" style="color:var(--gold); text-decoration:underline;">903-905-4081</a><br>
-      or email cooperpickle684@gmail.com
+    <p style="color:var(--text-muted); margin-top:0.6rem; font-size:1.05rem;">
+      Something different.<br>
+      Something special.<br>
+      Made with love.<br>
+      <span style="color:var(--gold);">Y’all are everything.</span>
     </p>
   </div>
 
-  <form class="reserve-form" action="https://formsubmit.co/cooperpickle684@gmail.com" method="POST">
+  <form class="reserve-form" id="reserveForm" action="https://formsubmit.co/cooperpickle684@gmail.com" method="POST">
     <input type="hidden" name="_subject" value="New inquiry from The Cove Seafood website">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">
@@ -630,10 +630,14 @@ footer a { color: var(--gold); text-decoration: none; }
       <textarea id="message" name="message" placeholder="I'd love to reserve for this weekend... or tell me about today's catch!" required></textarea>
     </div>
     
-    <div style="text-align:center; margin-top:1.5rem;">
-      <button type="submit" class="btn">Send Message</button>
-      <p style="margin-top:1rem; font-size:0.8rem; color:var(--text-muted);">We’ll get back to you within a few hours.</p>
+    <div style="display:flex; flex-wrap:wrap; gap:1rem; justify-content:center; margin-top:1.5rem;">
+      <button type="submit" class="btn">Send via Email</button>
+      <button type="button" id="textBtn" class="btn btn-outline">Send via Text</button>
     </div>
+    
+    <p style="margin-top:1.1rem; font-size:0.8rem; color:var(--text-muted); text-align:center;">
+      Email goes straight to Cooper • Text opens your messages app
+    </p>
   </form>
 </section>
 
@@ -643,7 +647,7 @@ footer a { color: var(--gold); text-decoration: none; }
 </footer>
 
 <script>
-// Subtle animated grey particles in hero
+// Full-hero subtle grey particles (evenly distributed)
 function initParticles() {
   const canvas = document.getElementById('particles');
   if (!canvas) return;
@@ -658,7 +662,7 @@ function initParticles() {
   canvas.height = h;
 
   let particles = [];
-  const count = 52;
+  const count = 68;
 
   class Particle {
     constructor() {
@@ -667,10 +671,10 @@ function initParticles() {
     reset() {
       this.x = Math.random() * w;
       this.y = Math.random() * h;
-      this.size = Math.random() * 1.7 + 0.55;
-      this.speedX = (Math.random() - 0.5) * 0.22;
-      this.speedY = (Math.random() - 0.5) * 0.12 - 0.04;
-      this.alpha = Math.random() * 0.32 + 0.11;
+      this.size = Math.random() * 1.65 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.28;
+      this.speedY = (Math.random() - 0.5) * 0.13 - 0.03;
+      this.alpha = Math.random() * 0.33 + 0.12;
     }
     update() {
       this.x += this.speedX;
@@ -811,6 +815,15 @@ window.addEventListener('scroll', () => {
 // Close mobile menu on link click
 document.querySelectorAll('.nav-links a').forEach(link => {
   link.addEventListener('click', () => navLinks.classList.remove('active'));
+});
+
+// Text button - reroutes form data into SMS
+const textBtn = document.getElementById('textBtn');
+textBtn.addEventListener('click', () => {
+  const name = document.getElementById('name').value.trim() || 'Guest';
+  const message = document.getElementById('message').value.trim() || 'I would love to visit The Cove Seafood.';
+  const body = encodeURIComponent(`Hi, this is ${name}. ${message}`);
+  window.location.href = `sms:903-905-4081?body=${body}`;
 });
 
 // Start particles
