@@ -9,13 +9,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0F0F0F;
-  --panel: #161616;
+  --bg: #0C0C0C;
+  --panel: #141414;
   --sage: #7D8B6A;
   --gold: #C5A46E;
   --cream: #F5F0E6;
   --text: #EDE6D9;
-  --text-muted: #A89B8A;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -27,8 +26,7 @@ body {
   line-height: 1.7;
 }
 
-/* Elegant serif for display */
-h1, h2, .display, .section-title {
+h1, h2, .display {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
   line-height: 1.05;
@@ -40,7 +38,7 @@ nav {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(15,15,15,0.92);
+  background: rgba(12,12,12,0.95);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(125,139,106,0.1);
 }
@@ -53,7 +51,7 @@ nav {
   justify-content: space-between;
 }
 .logo img {
-  height: 48px;
+  height: 46px;
   width: auto;
   display: block;
 }
@@ -67,20 +65,18 @@ nav {
   color: var(--text);
   text-decoration: none;
   font-size: 0.95rem;
-  letter-spacing: 0.5px;
   transition: color 0.2s ease;
 }
 .nav-links a:hover { color: var(--gold); }
 
-/* HERO with particles */
+/* HERO */
 .hero {
   min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 0 2rem;
-  background: #0F0F0F;
+  background: #0C0C0C;
   overflow: hidden;
 }
 #particles {
@@ -93,20 +89,22 @@ nav {
   position: relative;
   z-index: 2;
   text-align: center;
-  max-width: 820px;
+  max-width: 780px;
+  padding: 0 2rem;
 }
 .hero .logo-hero {
-  width: 210px;
-  margin: 0 auto 2.25rem;
+  width: 190px;
+  margin: 0 auto 2rem;
   display: block;
+  filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
 }
 .hero h1 {
-  font-size: clamp(2.8rem, 7vw, 4.6rem);
+  font-size: clamp(2.9rem, 7vw, 4.8rem);
   margin-bottom: 1.25rem;
 }
 .hero p {
   font-size: 1.25rem;
-  color: var(--text-muted);
+  color: #A89B8A;
   max-width: 520px;
   margin: 0 auto 2.5rem;
 }
@@ -114,29 +112,18 @@ nav {
 section {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 6rem 2rem;
+  padding: 5.5rem 2rem;
 }
 
 .section-title {
-  font-size: 2.35rem;
-  margin-bottom: 2.5rem;
-  position: relative;
-  display: inline-block;
-}
-.section-title:after {
-  content: '';
-  position: absolute;
-  bottom: -10px;
-  left: 0;
-  width: 60px;
-  height: 2px;
-  background: linear-gradient(to right, var(--sage), var(--gold));
+  font-size: 2.25rem;
+  margin-bottom: 2.25rem;
 }
 
-/* About - Modern editorial */
+/* About - Clean with Elizabeth's portrait */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1.1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 4rem;
   align-items: center;
 }
@@ -146,87 +133,76 @@ section {
 .about-text p {
   font-size: 1.08rem;
   color: #D4C9B8;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.35rem;
 }
 .about-text .highlight {
   font-family: 'Playfair Display', serif;
-  font-size: 1.35rem;
   color: var(--gold);
   font-style: italic;
+  font-size: 1.3rem;
 }
 
-/* Modern Gallery with Tabs */
-.gallery-tabs {
-  display: flex;
-  gap: 0.75rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-.tab-btn {
-  padding: 0.6rem 1.5rem;
-  background: transparent;
-  border: 1px solid rgba(125,139,106,0.3);
-  color: var(--text);
-  border-radius: 50px;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-.tab-btn.active, .tab-btn:hover {
-  background: var(--sage);
-  color: #0F0F0F;
-  border-color: var(--sage);
-}
-
+/* Creative Scattered Masonry Gallery */
 .gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1rem;
+  column-count: 3;
+  column-gap: 1rem;
+}
+@media (max-width: 900px) {
+  .gallery-grid { column-count: 2; }
 }
 .gallery-grid img {
   width: 100%;
-  height: 380px;
-  object-fit: cover;
+  margin-bottom: 1rem;
   border-radius: 6px;
+  display: block;
   transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  break-inside: avoid;
 }
 .gallery-grid img:hover {
   transform: scale(1.015);
 }
 
-/* Investment - Modern & Creative */
-.investment-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
+/* Creative Investment Section */
+.investment {
+  background: var(--panel);
+  border-radius: 12px;
+  padding: 3.5rem;
 }
 .chapter {
-  background: var(--panel);
-  border-radius: 8px;
-  padding: 2.25rem;
-  border: 1px solid rgba(125,139,106,0.15);
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  align-items: center;
 }
-.chapter:hover {
-  transform: translateY(-6px);
-  border-color: var(--sage);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
+.chapter:last-child {
+  margin-bottom: 0;
 }
-.chapter h4 {
-  font-size: 1.45rem;
+.chapter-info h4 {
+  font-size: 1.5rem;
   color: var(--gold);
   margin-bottom: 1rem;
 }
-.chapter ul {
+.chapter-info ul {
   list-style: none;
   color: #D4C9B8;
 }
-.chapter ul li {
-  padding: 0.45rem 0;
+.chapter-info ul li {
+  padding: 0.5rem 0;
   border-bottom: 1px solid rgba(255,255,255,0.06);
 }
-.chapter ul li:last-child {
-  border-bottom: none;
+.chapter-info ul li:last-child { border-bottom: none; }
+
+.chapter-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+}
+.chapter-preview img {
+  width: 100%;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 6px;
 }
 
 /* Contact */
@@ -236,43 +212,29 @@ section {
 }
 input, textarea {
   width: 100%;
-  padding: 1.1rem 1.4rem;
+  padding: 1.15rem 1.4rem;
   background: #161616;
   border: 1px solid rgba(125,139,106,0.2);
   color: var(--text);
   border-radius: 6px;
   font-family: 'Inter', sans-serif;
-  font-size: 1rem;
   margin-bottom: 1.1rem;
 }
-input:focus, textarea:focus {
-  outline: none;
-  border-color: var(--sage);
-}
-
 .btn {
   background: var(--sage);
-  color: #0F0F0F;
+  color: #0C0C0C;
   border: none;
-  padding: 1.15rem 2.8rem;
+  padding: 1.2rem 2.8rem;
   font-size: 1rem;
   font-weight: 600;
   border-radius: 6px;
   cursor: pointer;
-  transition: all 0.3s ease;
   font-family: 'Playfair Display', serif;
-  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 .btn:hover {
   background: #6B7A5A;
   transform: translateY(-2px);
-}
-
-footer {
-  text-align: center;
-  padding: 4rem 2rem 3rem;
-  color: var(--text-muted);
-  font-size: 0.9rem;
 }
 </style>
 </head>
@@ -300,7 +262,7 @@ footer {
     <img src="logo.jpg" alt="Elizabeth Aven Photography" class="logo-hero">
     <h1>Timeless moments.<br>Honestly told.</h1>
     <p>Navasota, Texas based photographer capturing the warmth, love, and quiet beauty of real life.</p>
-    <a href="#investment" class="btn" style="text-decoration:none; display:inline-block; margin-top:1rem;">View Investment</a>
+    <a href="#investment" class="btn" style="text-decoration:none; display:inline-block; margin-top:1rem;">Explore Investment</a>
   </div>
 </header>
 
@@ -311,91 +273,105 @@ footer {
       <h2 class="section-title">Hi, I’m Elizabeth.</h2>
       <div class="about-text">
         <p>Born and raised in Navasota, TX, I’ve had a passion for photography since my junior year of high school. After stepping away to build my family and focus on teaching, I’m thrilled to be back doing what I love most.</p>
-        
         <p>Photography has always been my creative outlet. There’s nothing more rewarding than seeing my clients’ faces light up and capturing the warmth, love, and connection in every photograph.</p>
-        
         <p class="highlight">For me, this isn’t just a business — it’s a true source of joy.</p>
-        
-        <p>I’m honored to help you create memories that last a lifetime. Let’s capture something beautiful together.</p>
+        <p>I’m honored to help you create memories that last a lifetime.</p>
       </div>
     </div>
     <div>
-      <img src="headshot3.jpg" alt="Elizabeth Aven" style="width:100%; border-radius:8px; box-shadow:0 20px 50px rgba(0,0,0,0.4);">
+      <img src="selfdesc.png" alt="Elizabeth Aven" style="width:100%; border-radius:12px; box-shadow:0 20px 50px rgba(0,0,0,0.4);">
     </div>
   </div>
 </section>
 
-<!-- WORK -->
+<!-- WORK - Creative Scattered Masonry -->
 <section id="work">
   <h2 class="section-title">The Work</h2>
-  
-  <div class="gallery-tabs">
-    <button class="tab-btn active" onclick="filterGallery('all')">All</button>
-    <button class="tab-btn" onclick="filterGallery('senior')">Seniors</button>
-    <button class="tab-btn" onclick="filterGallery('couple')">Couples</button>
-    <button class="tab-btn" onclick="filterGallery('family')">Families</button>
-    <button class="tab-btn" onclick="filterGallery('portrait')">Portraits</button>
-  </div>
-
-  <div class="gallery-grid" id="gallery">
-    <img src="senior1.jpg" data-category="senior" alt="Senior Session">
-    <img src="senior2.jpg" data-category="senior" alt="Senior Session">
-    <img src="senior3.jpg" data-category="senior" alt="Senior Session">
-    <img src="couple1.jpg" data-category="couple" alt="Couple Session">
-    <img src="family1.jpg" data-category="family" alt="Family Session">
-    <img src="family2.jpg" data-category="family" alt="Family Session">
-    <img src="family3.jpg" data-category="family" alt="Family Session">
-    <img src="family4.jpg" data-category="family" alt="Family Session">
-    <img src="family5.jpg" data-category="family" alt="Family Session">
-    <img src="headshot1.jpg" data-category="portrait" alt="Portrait">
-    <img src="headshot2.jpg" data-category="portrait" alt="Portrait">
-    <img src="headshot3.jpg" data-category="portrait" alt="Portrait">
-    <img src="prom1.jpg" data-category="senior" alt="Prom Session">
+  <div class="gallery-grid">
+    <img src="senior1.jpg" alt="">
+    <img src="senior2.jpg" alt="">
+    <img src="senior3.jpg" alt="">
+    <img src="couple1.jpg" alt="">
+    <img src="family1.jpg" alt="">
+    <img src="family2.jpg" alt="">
+    <img src="family3.jpg" alt="">
+    <img src="family4.jpg" alt="">
+    <img src="family5.jpg" alt="">
+    <img src="headshot1.jpg" alt="">
+    <img src="headshot2.jpg" alt="">
+    <img src="headshot3.jpg" alt="">
+    <img src="prom1.jpg" alt="">
   </div>
 </section>
 
-<!-- INVESTMENT - Modern Creative Display -->
+<!-- INVESTMENT - Creative Linked Presentation -->
 <section id="investment">
   <h2 class="section-title">Investment</h2>
-  <p style="max-width:620px; margin-bottom:3rem; color:var(--text-muted);">Every session is thoughtfully designed around your story. Choose the chapter that feels right for you.</p>
+  <p style="max-width:620px; margin-bottom:3rem; color:#A89B8A;">Every session is thoughtfully designed around your story. Here’s how we can work together.</p>
 
-  <div class="investment-grid">
-    <!-- Seniors -->
-    <div class="chapter">
+  <!-- Seniors -->
+  <div class="chapter">
+    <div class="chapter-info">
       <h4>Senior Sessions</h4>
       <ul>
-        <li><strong>Essence — $250</strong><br>30 minutes • 1 location • 1 look</li>
-        <li><strong>Legacy — $350</strong><br>50–60 minutes • 2–3 locations • Up to 3 wardrobe changes</li>
+        <li><strong>Essence — $250</strong><br>30 min • 1 location • 1 look</li>
+        <li><strong>Legacy — $350</strong><br>50–60 min • 2–3 locations • Up to 3 wardrobe changes</li>
       </ul>
     </div>
+    <div class="chapter-preview">
+      <img src="senior1.jpg" alt="">
+      <img src="senior2.jpg" alt="">
+      <img src="senior3.jpg" alt="">
+    </div>
+  </div>
 
-    <!-- Couples -->
-    <div class="chapter">
+  <!-- Couples -->
+  <div class="chapter">
+    <div class="chapter-info">
       <h4>Couples &amp; Engagements</h4>
       <ul>
-        <li><strong>Essence — $250</strong><br>30 minutes • 1 location • 1 look</li>
-        <li><strong>Legacy — $350</strong><br>50–60 minutes • 2–3 locations • Up to 3 wardrobe changes</li>
+        <li><strong>Essence — $250</strong><br>30 min • 1 location • 1 look</li>
+        <li><strong>Legacy — $350</strong><br>50–60 min • 2–3 locations • Up to 3 wardrobe changes</li>
       </ul>
     </div>
+    <div class="chapter-preview">
+      <img src="couple1.jpg" alt="">
+      <img src="couple1.jpg" alt="">
+      <img src="couple1.jpg" alt="">
+    </div>
+  </div>
 
-    <!-- Families -->
-    <div class="chapter">
+  <!-- Families -->
+  <div class="chapter">
+    <div class="chapter-info">
       <h4>Family Sessions</h4>
       <ul>
-        <li><strong>Essence — $250</strong><br>30 minutes • 1 location • 1 look</li>
-        <li><strong>Legacy — $350</strong><br>40–50 minutes • 2 locations • Two looks</li>
-        <li><strong>Heritage — $430</strong><br>Extended family (7+) • 60 minutes • 1 location</li>
+        <li><strong>Essence — $250</strong><br>30 min • 1 location • 1 look</li>
+        <li><strong>Legacy — $350</strong><br>40–50 min • 2 locations • Two looks</li>
+        <li><strong>Heritage — $430</strong><br>Extended family (7+) • 60 min</li>
       </ul>
     </div>
+    <div class="chapter-preview">
+      <img src="family1.jpg" alt="">
+      <img src="family3.jpg" alt="">
+      <img src="family5.jpg" alt="">
+    </div>
+  </div>
 
-    <!-- Portraits / Headshots -->
-    <div class="chapter">
+  <!-- Portraits -->
+  <div class="chapter">
+    <div class="chapter-info">
       <h4>Portraits &amp; Headshots</h4>
       <ul>
-        <li><strong>Signature — $100</strong><br>10–15 minutes • 5–10 images • 1 location</li>
-        <li><strong>Entrepreneur — $250</strong><br>Up to 5 people • 40 minutes • 2 looks</li>
+        <li><strong>Signature — $100</strong><br>10–15 min • 5–10 images</li>
+        <li><strong>Entrepreneur — $250</strong><br>Up to 5 people • 40 min • 2 looks</li>
       </ul>
-      <p style="font-size:0.85rem; margin-top:1rem; color:var(--text-muted);">+$20 per additional person</p>
+      <p style="font-size:0.85rem; margin-top:1rem; color:#A89B8A;">+$20 per additional person</p>
+    </div>
+    <div class="chapter-preview">
+      <img src="headshot1.jpg" alt="">
+      <img src="headshot2.jpg" alt="">
+      <img src="headshot3.jpg" alt="">
     </div>
   </div>
 </section>
@@ -404,8 +380,6 @@ footer {
 <section id="contact">
   <div class="contact-form">
     <h2 class="section-title" style="text-align:center;">Let’s Create Something Beautiful</h2>
-    <p style="text-align:center; margin-bottom:2.5rem; color:var(--text-muted);">I’d love to hear about the story you want to tell.</p>
-    
     <form action="https://formsubmit.co/elizabeth@elizabethavenphotography.com" method="POST">
       <input type="hidden" name="_subject" value="New inquiry from Elizabeth Aven Photography">
       <input type="text" name="name" placeholder="Your Name" required>
@@ -417,16 +391,14 @@ footer {
   </div>
 </section>
 
-<footer>
-  <p>Elizabeth Aven Photography • Navasota, Texas</p>
+<footer style="text-align:center; padding:3rem 2rem; color:#A89B8A; font-size:0.9rem;">
+  Elizabeth Aven Photography • Navasota, Texas
 </footer>
 
 <script>
-// Full-page subtle moving particles
+// Full-page moving particles
 function initParticles() {
   const canvas = document.getElementById('particles');
-  if (!canvas) return;
-
   const ctx = canvas.getContext('2d');
   let w = window.innerWidth;
   let h = window.innerHeight;
@@ -434,16 +406,19 @@ function initParticles() {
   canvas.height = h;
 
   let particles = [];
-  const count = 85;
+  const count = 95;
 
   class Particle {
     constructor() {
+      this.reset();
+    }
+    reset() {
       this.x = Math.random() * w;
       this.y = Math.random() * h;
-      this.size = Math.random() * 1.8 + 0.6;
-      this.speedX = (Math.random() - 0.5) * 0.25;
-      this.speedY = (Math.random() - 0.5) * 0.12;
-      this.alpha = Math.random() * 0.35 + 0.15;
+      this.size = Math.random() * 1.7 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.22;
+      this.speedY = (Math.random() - 0.5) * 0.11;
+      this.alpha = Math.random() * 0.4 + 0.15;
     }
     update() {
       this.x += this.speedX;
@@ -485,37 +460,8 @@ function initParticles() {
   });
 }
 
-// Gallery filter
-function filterGallery(category) {
-  const items = document.querySelectorAll('#gallery img');
-  const buttons = document.querySelectorAll('.tab-btn');
-
-  buttons.forEach(btn => btn.classList.remove('active'));
-  event.currentTarget.classList.add('active');
-
-  items.forEach(img => {
-    if (category === 'all') {
-      img.style.display = 'block';
-    } else {
-      img.style.display = img.dataset.category === category ? 'block' : 'none';
-    }
-  });
-}
-
-// Simple active tab on click
-document.querySelectorAll('.tab-btn').forEach(btn => {
-  btn.addEventListener('click', function() {
-    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-
-// Initialize everything
 window.onload = function() {
   initParticles();
-  
-  // Show all gallery items initially
-  document.querySelectorAll('#gallery img').forEach(img => img.style.display = 'block');
 };
 </script>
 
