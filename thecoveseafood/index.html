@@ -25,6 +25,18 @@ body {
   font-family: 'Lora', Georgia, serif;
   line-height: 1.7;
   overflow-x: hidden;
+  position: relative;
+}
+
+/* Full-page subtle particles background */
+#global-particles {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
 }
 
 h1, h2, h3, .display {
@@ -104,7 +116,7 @@ nav {
   cursor: pointer;
 }
 
-/* Hero with full-background particles */
+/* Hero */
 .hero {
   min-height: 100dvh;
   display: flex;
@@ -114,12 +126,6 @@ nav {
   padding: 0 2rem;
   background: radial-gradient(circle at 50% 30%, #101418 0%, #06080A 70%);
   overflow: hidden;
-}
-#particles {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
 }
 .hero-content {
   text-align: center;
@@ -310,7 +316,7 @@ section {
   color: var(--gold);
 }
 
-/* Owners section */
+/* Owners section - clean perfect fit */
 .owners {
   background: var(--panel);
   border-radius: 4px;
@@ -320,20 +326,22 @@ section {
   display: grid;
   grid-template-columns: 5fr 7fr;
   gap: 0;
+  align-items: stretch;
 }
 @media (max-width: 900px) {
   .owners-grid { grid-template-columns: 1fr; }
 }
 .owners-photo {
   position: relative;
-  background: #0A0E12;
+  overflow: hidden;
+  background: #0F1318;
 }
 .owners-photo img {
   width: 100%;
-  height: auto;
-  max-height: 540px;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   display: block;
+  min-height: 420px;
 }
 .owners-content {
   padding: 3.5rem 3rem;
@@ -480,6 +488,9 @@ footer a { color: var(--gold); text-decoration: none; }
 </head>
 <body>
 
+<!-- Full-page subtle grey particles (everywhere) -->
+<canvas id="global-particles"></canvas>
+
 <!-- NAV -->
 <nav>
   <div class="nav-container">
@@ -501,8 +512,6 @@ footer a { color: var(--gold); text-decoration: none; }
 
 <!-- HERO -->
 <header class="hero">
-  <canvas id="particles"></canvas>
-  
   <div class="hero-content">
     <img src="logo.png" alt="The Cove Seafood" class="logo-hero">
     
@@ -572,7 +581,7 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 </section>
 
-<!-- OWNERS -->
+<!-- OWNERS - Perfect fit, no black bar underneath -->
 <section id="owners" class="owners reveal">
   <div class="owners-grid">
     <div class="owners-photo">
@@ -647,45 +656,48 @@ footer a { color: var(--gold); text-decoration: none; }
 </footer>
 
 <script>
-// Full-hero subtle grey particles (evenly distributed)
-function initParticles() {
-  const canvas = document.getElementById('particles');
+// Full-page subtle grey particles (everywhere, evenly distributed)
+function initGlobalParticles() {
+  const canvas = document.getElementById('global-particles');
   if (!canvas) return;
 
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
   const ctx = canvas.getContext('2d', { alpha: true });
-  let w = canvas.offsetWidth;
-  let h = canvas.offsetHeight;
-  canvas.width = w;
-  canvas.height = h;
+  
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
 
   let particles = [];
-  const count = 68;
+  const count = 52; // subtle for full page
 
   class Particle {
     constructor() {
       this.reset();
     }
     reset() {
-      this.x = Math.random() * w;
-      this.y = Math.random() * h;
-      this.size = Math.random() * 1.65 + 0.5;
-      this.speedX = (Math.random() - 0.5) * 0.28;
-      this.speedY = (Math.random() - 0.5) * 0.13 - 0.03;
-      this.alpha = Math.random() * 0.33 + 0.12;
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.size = Math.random() * 1.5 + 0.5;
+      this.speedX = (Math.random() - 0.5) * 0.18;
+      this.speedY = (Math.random() - 0.5) * 0.09 - 0.02;
+      this.alpha = Math.random() * 0.22 + 0.08;
     }
     update() {
       this.x += this.speedX;
       this.y += this.speedY;
 
-      if (this.x < 0 || this.x > w) this.speedX *= -1;
+      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
       if (this.y < 0) {
-        this.y = h;
-        this.x = Math.random() * w;
+        this.y = canvas.height;
+        this.x = Math.random() * canvas.width;
       }
-      if (this.y > h) this.y = 0;
+      if (this.y > canvas.height) this.y = 0;
     }
     draw() {
       ctx.fillStyle = `rgba(185, 190, 200, ${this.alpha})`;
@@ -703,7 +715,7 @@ function initParticles() {
   }
 
   function animate() {
-    ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let p of particles) {
       p.update();
       p.draw();
@@ -713,14 +725,6 @@ function initParticles() {
 
   createParticles();
   animate();
-
-  window.addEventListener('resize', () => {
-    w = canvas.offsetWidth;
-    h = canvas.offsetHeight;
-    canvas.width = w;
-    canvas.height = h;
-    createParticles();
-  });
 }
 
 // Mobile hamburger
@@ -826,9 +830,9 @@ textBtn.addEventListener('click', () => {
   window.location.href = `sms:903-905-4081?body=${body}`;
 });
 
-// Start particles
+// Start full-page particles
 window.addEventListener('load', () => {
-  initParticles();
+  initGlobalParticles();
 });
 </script>
 
