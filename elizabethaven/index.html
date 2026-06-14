@@ -1,38 +1,38 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elizabeth Aven Photography • Navasota, TX</title>
+<title>Elizabeth Aven Photography</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&amp;family=Lora:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
 <style>
 :root {
-  --cream: #F8F5ED;
+  --bg: #0F0F0F;
+  --panel: #161616;
   --sage: #7D8B6A;
-  --taupe: #8C7B6B;
-  --brown: #3C2F2A;
   --gold: #C5A46E;
+  --cream: #F5F0E6;
+  --text: #EDE6D9;
+  --text-muted: #A89B8A;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
 body {
-  background: var(--cream);
-  color: var(--brown);
-  font-family: 'Lora', Georgia, serif;
-  line-height: 1.75;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', system_ui, sans-serif;
+  line-height: 1.7;
 }
 
-/* Elegant typography */
-h1, h2, h3, .display {
+/* Elegant serif for display */
+h1, h2, .display, .section-title {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.05;
 }
-.display { font-size: clamp(2.8rem, 7vw, 4.8rem); }
 
 nav {
   position: fixed;
@@ -40,34 +40,39 @@ nav {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(248,245,237,0.95);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(125,139,106,0.15);
+  background: rgba(15,15,15,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(125,139,106,0.1);
 }
 .nav-container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 1.25rem 2rem;
+  padding: 1.1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.logo img { height: 52px; width: auto; }
+.logo img {
+  height: 48px;
+  width: auto;
+  display: block;
+}
 
 .nav-links {
   display: flex;
-  gap: 2.5rem;
+  gap: 2.75rem;
   list-style: none;
 }
 .nav-links a {
-  color: var(--brown);
+  color: var(--text);
   text-decoration: none;
   font-size: 0.95rem;
   letter-spacing: 0.5px;
   transition: color 0.2s ease;
 }
-.nav-links a:hover { color: var(--sage); }
+.nav-links a:hover { color: var(--gold); }
 
+/* HERO with particles */
 .hero {
   min-height: 100dvh;
   display: flex;
@@ -75,18 +80,33 @@ nav {
   justify-content: center;
   position: relative;
   padding: 0 2rem;
-  background: linear-gradient(rgba(248,245,237,0.65), rgba(248,245,237,0.75)), url('prom1.jpg') center/cover no-repeat;
+  background: #0F0F0F;
+  overflow: hidden;
+}
+#particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 .hero-content {
-  text-align: center;
-  max-width: 780px;
   position: relative;
   z-index: 2;
+  text-align: center;
+  max-width: 820px;
 }
-.hero .logo-hero { width: 180px; margin-bottom: 2rem; }
-.hero-tagline {
-  font-size: 1.35rem;
-  color: var(--taupe);
+.hero .logo-hero {
+  width: 210px;
+  margin: 0 auto 2.25rem;
+  display: block;
+}
+.hero h1 {
+  font-size: clamp(2.8rem, 7vw, 4.6rem);
+  margin-bottom: 1.25rem;
+}
+.hero p {
+  font-size: 1.25rem;
+  color: var(--text-muted);
   max-width: 520px;
   margin: 0 auto 2.5rem;
 }
@@ -97,140 +117,133 @@ section {
   padding: 6rem 2rem;
 }
 
-.about {
+.section-title {
+  font-size: 2.35rem;
+  margin-bottom: 2.5rem;
+  position: relative;
+  display: inline-block;
+}
+.section-title:after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(to right, var(--sage), var(--gold));
+}
+
+/* About - Modern editorial */
+.about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.1fr;
   gap: 4rem;
   align-items: center;
 }
 @media (max-width: 900px) {
-  .about { grid-template-columns: 1fr; }
-}
-.about-text h2 {
-  font-size: 2.4rem;
-  margin-bottom: 1.5rem;
-  color: var(--brown);
+  .about-grid { grid-template-columns: 1fr; }
 }
 .about-text p {
-  margin-bottom: 1.35rem;
-  font-size: 1.05rem;
+  font-size: 1.08rem;
+  color: #D4C9B8;
+  margin-bottom: 1.4rem;
+}
+.about-text .highlight {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  color: var(--gold);
+  font-style: italic;
 }
 
-.gallery-chapter {
-  margin-bottom: 5rem;
-}
-.chapter-header {
+/* Modern Gallery with Tabs */
+.gallery-tabs {
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid rgba(125,139,106,0.2);
-  padding-bottom: 0.75rem;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
 }
-.chapter-header h3 {
-  font-size: 1.85rem;
-  color: var(--sage);
+.tab-btn {
+  padding: 0.6rem 1.5rem;
+  background: transparent;
+  border: 1px solid rgba(125,139,106,0.3);
+  color: var(--text);
+  border-radius: 50px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.tab-btn.active, .tab-btn:hover {
+  background: var(--sage);
+  color: #0F0F0F;
+  border-color: var(--sage);
 }
 
-.film-reel {
-  display: flex;
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1rem;
-  overflow-x: auto;
-  padding-bottom: 1rem;
-  scroll-snap-type: x mandatory;
 }
-.film-reel img {
+.gallery-grid img {
+  width: 100%;
   height: 380px;
-  width: auto;
-  border-radius: 4px;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  scroll-snap-align: start;
-  flex-shrink: 0;
-  transition: transform 0.4s ease;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.film-reel img:hover {
+.gallery-grid img:hover {
   transform: scale(1.015);
 }
 
-.packages {
-  background: white;
-  border-radius: 8px;
-  padding: 4rem 3rem;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-}
-.package-grid {
+/* Investment - Modern & Creative */
+.investment-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2rem;
-  margin-top: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
 }
-.package-card {
+.chapter {
+  background: var(--panel);
+  border-radius: 8px;
+  padding: 2.25rem;
   border: 1px solid rgba(125,139,106,0.15);
-  border-radius: 6px;
-  overflow: hidden;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  background: var(--cream);
 }
-.package-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 45px rgba(0,0,0,0.1);
+.chapter:hover {
+  transform: translateY(-6px);
+  border-color: var(--sage);
+  box-shadow: 0 20px 45px rgba(0,0,0,0.3);
 }
-.package-card img {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
-}
-.package-content {
-  padding: 1.75rem;
-}
-.package-content h4 {
-  font-size: 1.35rem;
-  color: var(--sage);
-  margin-bottom: 0.75rem;
-}
-.package-content ul {
-  list-style: none;
-  font-size: 0.98rem;
-  color: var(--taupe);
-}
-.package-content ul li {
-  margin-bottom: 0.4rem;
-  padding-left: 1.2rem;
-  position: relative;
-}
-.package-content ul li:before {
-  content: "•";
-  position: absolute;
-  left: 0;
-  color: var(--sage);
-}
-
-.contact {
-  max-width: 620px;
-  margin: 0 auto;
-  text-align: center;
-}
-.contact h2 {
-  font-size: 2.3rem;
+.chapter h4 {
+  font-size: 1.45rem;
+  color: var(--gold);
   margin-bottom: 1rem;
 }
-.contact p {
-  color: var(--taupe);
-  margin-bottom: 2rem;
+.chapter ul {
+  list-style: none;
+  color: #D4C9B8;
+}
+.chapter ul li {
+  padding: 0.45rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.chapter ul li:last-child {
+  border-bottom: none;
 }
 
-form {
-  display: grid;
-  gap: 1.25rem;
+/* Contact */
+.contact-form {
+  max-width: 620px;
+  margin: 0 auto;
 }
 input, textarea {
   width: 100%;
-  padding: 1rem 1.25rem;
-  border: 1px solid rgba(125,139,106,0.25);
-  border-radius: 4px;
-  font-family: 'Lora', serif;
+  padding: 1.1rem 1.4rem;
+  background: #161616;
+  border: 1px solid rgba(125,139,106,0.2);
+  color: var(--text);
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
   font-size: 1rem;
-  background: white;
+  margin-bottom: 1.1rem;
 }
 input:focus, textarea:focus {
   outline: none;
@@ -239,15 +252,16 @@ input:focus, textarea:focus {
 
 .btn {
   background: var(--sage);
-  color: white;
+  color: #0F0F0F;
   border: none;
-  padding: 1.1rem 2.5rem;
+  padding: 1.15rem 2.8rem;
   font-size: 1rem;
-  border-radius: 4px;
+  font-weight: 600;
+  border-radius: 6px;
   cursor: pointer;
+  transition: all 0.3s ease;
   font-family: 'Playfair Display', serif;
   letter-spacing: 0.5px;
-  transition: all 0.3s ease;
 }
 .btn:hover {
   background: #6B7A5A;
@@ -256,8 +270,8 @@ input:focus, textarea:focus {
 
 footer {
   text-align: center;
-  padding: 3rem 2rem;
-  color: var(--taupe);
+  padding: 4rem 2rem 3rem;
+  color: var(--text-muted);
   font-size: 0.9rem;
 }
 </style>
@@ -273,7 +287,7 @@ footer {
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
-      <li><a href="#packages">Investment</a></li>
+      <li><a href="#investment">Investment</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
@@ -281,189 +295,228 @@ footer {
 
 <!-- HERO -->
 <header class="hero">
+  <canvas id="particles"></canvas>
   <div class="hero-content">
     <img src="logo.jpg" alt="Elizabeth Aven Photography" class="logo-hero">
-    <h1 class="display">Capturing the warmth,<br>love, and connection<br>in every photograph.</h1>
-    <p class="hero-tagline">Navasota, Texas • Timeless moments, beautifully told.</p>
-    <a href="#packages" class="btn" style="margin-top:1rem; display:inline-block; text-decoration:none; color:white;">Explore Investment</a>
+    <h1>Timeless moments.<br>Honestly told.</h1>
+    <p>Navasota, Texas based photographer capturing the warmth, love, and quiet beauty of real life.</p>
+    <a href="#investment" class="btn" style="text-decoration:none; display:inline-block; margin-top:1rem;">View Investment</a>
   </div>
 </header>
 
 <!-- ABOUT -->
-<section id="about" class="about">
-  <div class="about-text">
-    <h2>Hi, I’m Elizabeth.</h2>
-    <p>Hi, I’m Elizabeth Schuelke! Born and raised in Navasota, TX, I’ve had a passion for photography since my junior year of high school. While I took a break to build my family and focus on teaching, I’m thrilled to be back doing what I love.</p>
-    
-    <p>Photography has always been my creative outlet. There’s nothing more rewarding than seeing my clients’ faces light up and capturing the warmth, love, and connection in every photograph. For me, this isn’t just a business—it’s a true source of joy. I’m honored to help you create memories that last a lifetime!</p>
-    
-    <p style="font-style:italic; color:var(--sage);">Let’s capture something beautiful together.</p>
-  </div>
-  
-  <div>
-    <img src="selfdesc.png" alt="Elizabeth Aven Schuelke" style="width:100%; border-radius:8px; box-shadow:0 15px 40px rgba(0,0,0,0.1);">
+<section id="about">
+  <div class="about-grid">
+    <div>
+      <h2 class="section-title">Hi, I’m Elizabeth.</h2>
+      <div class="about-text">
+        <p>Born and raised in Navasota, TX, I’ve had a passion for photography since my junior year of high school. After stepping away to build my family and focus on teaching, I’m thrilled to be back doing what I love most.</p>
+        
+        <p>Photography has always been my creative outlet. There’s nothing more rewarding than seeing my clients’ faces light up and capturing the warmth, love, and connection in every photograph.</p>
+        
+        <p class="highlight">For me, this isn’t just a business — it’s a true source of joy.</p>
+        
+        <p>I’m honored to help you create memories that last a lifetime. Let’s capture something beautiful together.</p>
+      </div>
+    </div>
+    <div>
+      <img src="headshot3.jpg" alt="Elizabeth Aven" style="width:100%; border-radius:8px; box-shadow:0 20px 50px rgba(0,0,0,0.4);">
+    </div>
   </div>
 </section>
 
 <!-- WORK -->
 <section id="work">
-  <h2 style="text-align:center; font-size:2.6rem; margin-bottom:3rem;">Stories I Tell</h2>
-
-  <!-- Seniors -->
-  <div class="gallery-chapter">
-    <div class="chapter-header">
-      <h3>Senior Sessions</h3>
-      <span style="color:var(--sage); font-size:0.95rem;">Class of 2026 • Timeless &amp; You</span>
-    </div>
-    <div class="film-reel">
-      <img src="senior1.jpg" alt="Senior portrait">
-      <img src="senior2.jpg" alt="Senior portrait with truck">
-      <img src="senior3.jpg" alt="Senior portrait in barn">
-    </div>
+  <h2 class="section-title">The Work</h2>
+  
+  <div class="gallery-tabs">
+    <button class="tab-btn active" onclick="filterGallery('all')">All</button>
+    <button class="tab-btn" onclick="filterGallery('senior')">Seniors</button>
+    <button class="tab-btn" onclick="filterGallery('couple')">Couples</button>
+    <button class="tab-btn" onclick="filterGallery('family')">Families</button>
+    <button class="tab-btn" onclick="filterGallery('portrait')">Portraits</button>
   </div>
 
-  <!-- Couples -->
-  <div class="gallery-chapter">
-    <div class="chapter-header">
-      <h3>Couples &amp; Engagements</h3>
-      <span style="color:var(--sage); font-size:0.95rem;">Love that feels like golden hour</span>
-    </div>
-    <div class="film-reel">
-      <img src="couple1.jpg" alt="Couple at sunset">
-    </div>
-  </div>
-
-  <!-- Families -->
-  <div class="gallery-chapter">
-    <div class="chapter-header">
-      <h3>Family Sessions</h3>
-      <span style="color:var(--sage); font-size:0.95rem;">The moments you’ll want to hold forever</span>
-    </div>
-    <div class="film-reel">
-      <img src="family1.jpg" alt="Maternity family">
-      <img src="family2.jpg" alt="Family with toddler">
-      <img src="family3.jpg" alt="Large family outdoors">
-      <img src="family4.jpg" alt="Family portrait">
-      <img src="family5.jpg" alt="Grandmother, mother and baby">
-    </div>
-  </div>
-
-  <!-- Portraits & Headshots -->
-  <div class="gallery-chapter">
-    <div class="chapter-header">
-      <h3>Portraits &amp; Headshots</h3>
-      <span style="color:var(--sage); font-size:0.95rem;">Professional • Personal • Powerful</span>
-    </div>
-    <div class="film-reel">
-      <img src="headshot1.jpg" alt="Maternity portrait">
-      <img src="headshot2.jpg" alt="Professional headshot">
-      <img src="headshot3.jpg" alt="Bridal portrait">
-    </div>
+  <div class="gallery-grid" id="gallery">
+    <img src="senior1.jpg" data-category="senior" alt="Senior Session">
+    <img src="senior2.jpg" data-category="senior" alt="Senior Session">
+    <img src="senior3.jpg" data-category="senior" alt="Senior Session">
+    <img src="couple1.jpg" data-category="couple" alt="Couple Session">
+    <img src="family1.jpg" data-category="family" alt="Family Session">
+    <img src="family2.jpg" data-category="family" alt="Family Session">
+    <img src="family3.jpg" data-category="family" alt="Family Session">
+    <img src="family4.jpg" data-category="family" alt="Family Session">
+    <img src="family5.jpg" data-category="family" alt="Family Session">
+    <img src="headshot1.jpg" data-category="portrait" alt="Portrait">
+    <img src="headshot2.jpg" data-category="portrait" alt="Portrait">
+    <img src="headshot3.jpg" data-category="portrait" alt="Portrait">
+    <img src="prom1.jpg" data-category="senior" alt="Prom Session">
   </div>
 </section>
 
-<!-- PACKAGES - Signature "Choose Your Chapter" -->
-<section id="packages" class="packages">
-  <div style="text-align:center; max-width:620px; margin:0 auto 3rem;">
-    <h2 style="font-size:2.5rem;">Investment</h2>
-    <p style="color:var(--taupe);">Choose the chapter that feels right for your story. Every session is thoughtfully crafted and includes a beautiful online gallery + full print release.</p>
-  </div>
+<!-- INVESTMENT - Modern Creative Display -->
+<section id="investment">
+  <h2 class="section-title">Investment</h2>
+  <p style="max-width:620px; margin-bottom:3rem; color:var(--text-muted);">Every session is thoughtfully designed around your story. Choose the chapter that feels right for you.</p>
 
-  <div class="package-grid">
-    <!-- Senior -->
-    <div class="package-card">
-      <img src="seniorpack.jpg" alt="Senior Packages">
-      <div class="package-content">
-        <h4>Senior Packages</h4>
-        <ul>
-          <li><strong>Package 1 — $250</strong><br>30 min • 1 location • 1 look</li>
-          <li><strong>Package 2 — $350</strong><br>50-60 min • 2-3 locations • Up to 3 wardrobe changes</li>
-        </ul>
-      </div>
+  <div class="investment-grid">
+    <!-- Seniors -->
+    <div class="chapter">
+      <h4>Senior Sessions</h4>
+      <ul>
+        <li><strong>Essence — $250</strong><br>30 minutes • 1 location • 1 look</li>
+        <li><strong>Legacy — $350</strong><br>50–60 minutes • 2–3 locations • Up to 3 wardrobe changes</li>
+      </ul>
     </div>
 
-    <!-- Couple -->
-    <div class="package-card">
-      <img src="couplepack.jpg" alt="Couple Packages">
-      <div class="package-content">
-        <h4>Couple Packages</h4>
-        <ul>
-          <li><strong>Package 1 — $250</strong><br>30 min • 1 location • 1 look</li>
-          <li><strong>Package 2 — $350</strong><br>50-60 min • 2-3 locations • Up to 3 wardrobe changes</li>
-        </ul>
-      </div>
+    <!-- Couples -->
+    <div class="chapter">
+      <h4>Couples &amp; Engagements</h4>
+      <ul>
+        <li><strong>Essence — $250</strong><br>30 minutes • 1 location • 1 look</li>
+        <li><strong>Legacy — $350</strong><br>50–60 minutes • 2–3 locations • Up to 3 wardrobe changes</li>
+      </ul>
     </div>
 
-    <!-- Family -->
-    <div class="package-card">
-      <img src="familypack.jpg" alt="Family Packages">
-      <div class="package-content">
-        <h4>Family Packages</h4>
-        <ul>
-          <li><strong>Package A — $250</strong><br>30 min • 1 location • 1 look</li>
-          <li><strong>Package B — $350</strong><br>40-50 min • 2 locations • Two looks</li>
-          <li><strong>Package C — $430</strong><br>Extended Family (7+) • 60 min • 1 location</li>
-        </ul>
-      </div>
+    <!-- Families -->
+    <div class="chapter">
+      <h4>Family Sessions</h4>
+      <ul>
+        <li><strong>Essence — $250</strong><br>30 minutes • 1 location • 1 look</li>
+        <li><strong>Legacy — $350</strong><br>40–50 minutes • 2 locations • Two looks</li>
+        <li><strong>Heritage — $430</strong><br>Extended family (7+) • 60 minutes • 1 location</li>
+      </ul>
     </div>
 
-    <!-- Headshot / Portrait -->
-    <div class="package-card">
-      <img src="headshotpack.jpg" alt="Headshot Packages">
-      <div class="package-content">
-        <h4>Headshot &amp; Portrait Packages</h4>
-        <ul>
-          <li><strong>Basic — $100</strong><br>10-15 min • 5-10 photos • 1 location</li>
-          <li><strong>Entrepreneur — $250</strong><br>Up to 5 people • 40 min • 2 looks</li>
-        </ul>
-        <p style="font-size:0.85rem; margin-top:1rem; color:var(--taupe);">+$20 per additional person</p>
-      </div>
+    <!-- Portraits / Headshots -->
+    <div class="chapter">
+      <h4>Portraits &amp; Headshots</h4>
+      <ul>
+        <li><strong>Signature — $100</strong><br>10–15 minutes • 5–10 images • 1 location</li>
+        <li><strong>Entrepreneur — $250</strong><br>Up to 5 people • 40 minutes • 2 looks</li>
+      </ul>
+      <p style="font-size:0.85rem; margin-top:1rem; color:var(--text-muted);">+$20 per additional person</p>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
-<section id="contact" class="contact">
-  <h2>Let’s Create Something Beautiful Together</h2>
-  <p>I would love to hear about the story you want to tell. Fill out the form below and I’ll be in touch within 48 hours.</p>
-  
-  <form action="https://formsubmit.co/elizabeth@elizabethavenphotography.com" method="POST">
-    <input type="hidden" name="_subject" value="New inquiry from Elizabeth Aven Photography website">
-    <input type="text" name="name" placeholder="Your Name" required>
-    <input type="email" name="email" placeholder="Email Address" required>
-    <input type="tel" name="phone" placeholder="Phone Number">
-    <textarea name="message" rows="6" placeholder="Tell me about the session you’re dreaming of..." required></textarea>
-    <button type="submit" class="btn" style="width:100%; margin-top:0.5rem;">Send Message</button>
-  </form>
-  
-  <p style="margin-top:2rem; font-size:0.9rem;">Based in Navasota, Texas • Willing to travel for love stories</p>
+<section id="contact">
+  <div class="contact-form">
+    <h2 class="section-title" style="text-align:center;">Let’s Create Something Beautiful</h2>
+    <p style="text-align:center; margin-bottom:2.5rem; color:var(--text-muted);">I’d love to hear about the story you want to tell.</p>
+    
+    <form action="https://formsubmit.co/elizabeth@elizabethavenphotography.com" method="POST">
+      <input type="hidden" name="_subject" value="New inquiry from Elizabeth Aven Photography">
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Email Address" required>
+      <input type="tel" name="phone" placeholder="Phone Number">
+      <textarea name="message" rows="6" placeholder="Tell me about the session you're dreaming of..." required></textarea>
+      <button type="submit" class="btn" style="width:100%;">Send Message</button>
+    </form>
+  </div>
 </section>
 
 <footer>
-  <p>© Elizabeth Aven Photography • Navasota, Texas</p>
-  <p style="margin-top:0.5rem; font-size:0.8rem;">Capturing the warmth, love, and connection in every photograph.</p>
+  <p>Elizabeth Aven Photography • Navasota, Texas</p>
 </footer>
 
 <script>
-// Simple scroll reveal
-const reveals = document.querySelectorAll('.gallery-chapter, .package-card, .about');
+// Full-page subtle moving particles
+function initParticles() {
+  const canvas = document.getElementById('particles');
+  if (!canvas) return;
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.transition = 'all 0.7s ease';
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-      observer.unobserve(entry.target);
+  const ctx = canvas.getContext('2d');
+  let w = window.innerWidth;
+  let h = window.innerHeight;
+  canvas.width = w;
+  canvas.height = h;
+
+  let particles = [];
+  const count = 85;
+
+  class Particle {
+    constructor() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.size = Math.random() * 1.8 + 0.6;
+      this.speedX = (Math.random() - 0.5) * 0.25;
+      this.speedY = (Math.random() - 0.5) * 0.12;
+      this.alpha = Math.random() * 0.35 + 0.15;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+      if (this.x < 0 || this.x > w) this.speedX *= -1;
+      if (this.y < 0 || this.y > h) this.speedY *= -1;
+    }
+    draw() {
+      ctx.fillStyle = `rgba(197, 164, 110, ${this.alpha})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function createParticles() {
+    particles = [];
+    for (let i = 0; i < count; i++) particles.push(new Particle());
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      p.update();
+      p.draw();
+    });
+    requestAnimationFrame(animate);
+  }
+
+  createParticles();
+  animate();
+
+  window.addEventListener('resize', () => {
+    w = window.innerWidth;
+    h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+    createParticles();
+  });
+}
+
+// Gallery filter
+function filterGallery(category) {
+  const items = document.querySelectorAll('#gallery img');
+  const buttons = document.querySelectorAll('.tab-btn');
+
+  buttons.forEach(btn => btn.classList.remove('active'));
+  event.currentTarget.classList.add('active');
+
+  items.forEach(img => {
+    if (category === 'all') {
+      img.style.display = 'block';
+    } else {
+      img.style.display = img.dataset.category === category ? 'block' : 'none';
     }
   });
-}, { threshold: 0.15 });
+}
 
-reveals.forEach(el => {
-  el.style.opacity = '0';
-  el.style.transform = 'translateY(30px)';
-  observer.observe(el);
+// Simple active tab on click
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
 });
+
+// Initialize everything
+window.onload = function() {
+  initParticles();
+  
+  // Show all gallery items initially
+  document.querySelectorAll('#gallery img').forEach(img => img.style.display = 'block');
+};
 </script>
 
 </body>
