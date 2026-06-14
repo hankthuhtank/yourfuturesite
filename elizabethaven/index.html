@@ -6,7 +6,7 @@
     <title>Elizabeth Aven Photography • Navasota, TX</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700&amp;family=Outfit:wght@300;400;500&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&amp;family=Outfit:wght@300;400;500&amp;display=swap" rel="stylesheet">
     <style>
         :root {
             --cream: #F8F1E3;
@@ -22,14 +22,15 @@
             font-family: 'Outfit', system_ui, sans-serif;
             background-color: var(--cream);
             color: var(--oak);
-            line-height: 1.6;
+            line-height: 1.65;
             overflow-x: hidden;
         }
         
         h1, h2, h3, .serif {
-            font-family: 'Playfair Display', Georgia, serif;
+            font-family: 'Cinzel', Georgia, serif;
             font-weight: 700;
-            line-height: 1.1;
+            line-height: 1.05;
+            letter-spacing: -0.02em;
         }
         
         .nav {
@@ -38,7 +39,7 @@
             left: 0;
             right: 0;
             background: rgba(248, 241, 227, 0.96);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(14px);
             border-bottom: 1px solid rgba(44, 37, 34, 0.08);
             z-index: 100;
             padding: 1rem 1.5rem;
@@ -55,28 +56,28 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
         }
         
         .logo img {
-            width: 56px;
-            height: 56px;
+            width: 72px;
+            height: 72px;
             object-fit: contain;
             border-radius: 9999px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.12);
         }
         
         .logo-text {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.35rem;
-            letter-spacing: 0.5px;
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.45rem;
+            letter-spacing: 1px;
             color: var(--oak);
         }
         
         .nav-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.25rem;
             list-style: none;
         }
         
@@ -84,13 +85,10 @@
             color: var(--oak);
             text-decoration: none;
             font-size: 0.95rem;
-            font-weight: 400;
             transition: color 0.2s ease;
         }
         
-        .nav-links a:hover {
-            color: var(--ember);
-        }
+        .nav-links a:hover { color: var(--ember); }
         
         .hamburger {
             display: none;
@@ -107,7 +105,6 @@
             width: 26px;
             height: 2px;
             background: var(--oak);
-            transition: 0.3s;
         }
         
         .section {
@@ -116,13 +113,23 @@
             padding: 0 1.5rem;
         }
         
-        /* HERO - Clean, no overlap */
+        /* HERO - Clean + Logo + Particles */
         .hero {
             min-height: 100dvh;
             display: flex;
             align-items: center;
-            padding-top: 80px;
-            padding-bottom: 4rem;
+            padding-top: 90px;
+            padding-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        #hero-canvas {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            opacity: 0.65;
         }
         
         .hero-grid {
@@ -130,57 +137,59 @@
             grid-template-columns: 1fr;
             gap: 3rem;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
         
         @media (min-width: 900px) {
             .hero-grid {
-                grid-template-columns: 1fr 1.1fr;
-                gap: 4rem;
+                grid-template-columns: 1fr 1.15fr;
+                gap: 4.5rem;
             }
         }
         
         .hero-text h1 {
-            font-size: clamp(3.2rem, 8vw, 5.8rem);
+            font-size: clamp(3.4rem, 8.5vw, 6.2rem);
             color: var(--taupe);
-            margin-bottom: 0.6rem;
-            font-weight: 700;
+            margin-bottom: 0.4rem;
         }
         
         .hero-text .present {
-            font-size: clamp(2.8rem, 7vw, 5.2rem);
+            font-size: clamp(3rem, 7.5vw, 5.6rem);
             color: var(--oak);
-            margin-bottom: 2rem;
+            margin-bottom: 1.75rem;
         }
         
         .hero-text p {
-            font-size: 1.15rem;
-            max-width: 420px;
+            font-size: 1.1rem;
+            max-width: 440px;
             color: #5C5148;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-logo {
+            width: 168px;
+            height: 168px;
+            margin-top: 1rem;
+            opacity: 0.95;
         }
         
         .hero-image {
             position: relative;
+            z-index: 2;
         }
         
         .hero-image img {
             width: 100%;
-            max-height: 680px;
+            max-height: 720px;
             object-fit: cover;
-            border-radius: 24px;
-            box-shadow: 0 25px 60px -15px rgb(0 0 0 / 0.25);
+            border-radius: 28px;
+            box-shadow: 0 30px 70px -20px rgb(0 0 0 / 0.28);
         }
         
-        .hero-image::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 24px;
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.4);
-        }
-        
-        /* ABOUT - Clean portrait */
+        /* ABOUT - Full portrait, no crop */
         .about {
-            padding: 6rem 0;
+            padding: 7rem 0;
             background: white;
         }
         
@@ -193,19 +202,19 @@
         
         @media (min-width: 900px) {
             .about-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 5rem;
+                grid-template-columns: 1fr 1.05fr;
+                gap: 5.5rem;
             }
         }
         
         .about-text h2 {
-            font-size: clamp(2.8rem, 5vw, 3.8rem);
-            margin-bottom: 1.5rem;
+            font-size: clamp(2.9rem, 5.2vw, 4rem);
+            margin-bottom: 1.6rem;
         }
         
         .about-text .label {
-            font-size: 0.85rem;
-            letter-spacing: 3px;
+            font-size: 0.82rem;
+            letter-spacing: 3.5px;
             text-transform: uppercase;
             color: var(--taupe);
             margin-bottom: 1rem;
@@ -215,51 +224,44 @@
         .about-text p {
             font-size: 1.05rem;
             color: #5C5148;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.35rem;
         }
         
-        .portrait {
+        .portrait-frame {
             position: relative;
-            max-width: 420px;
+            max-width: 520px;
             margin: 0 auto;
         }
         
-        .portrait img {
+        .portrait-frame img {
             width: 100%;
             border-radius: 9999px;
-            box-shadow: 0 30px 70px -20px rgb(0 0 0 / 0.3);
-            aspect-ratio: 1/1;
-            object-fit: cover;
+            box-shadow: 0 35px 80px -25px rgb(0 0 0 / 0.32);
+            display: block;
         }
         
-        .portrait::before {
+        .portrait-frame::before {
             content: '';
             position: absolute;
-            inset: -18px;
+            inset: -22px;
             border: 1px solid var(--taupe);
             border-radius: 9999px;
             z-index: -1;
         }
         
-        /* RECENT WORK */
-        .work {
-            padding: 6rem 0;
+        /* MEMORY COLLECTION (was Recent Work) */
+        .memory {
+            padding: 6.5rem 0;
         }
         
-        .work-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+        .memory-header h2 {
+            font-size: clamp(2.7rem, 5vw, 3.8rem);
             margin-bottom: 2.5rem;
-        }
-        
-        .work-header h2 {
-            font-size: clamp(2.6rem, 5vw, 3.6rem);
         }
         
         .masonry {
             columns: 1;
-            column-gap: 1.25rem;
+            column-gap: 1.35rem;
         }
         
         @media (min-width: 700px) { .masonry { columns: 2; } }
@@ -267,53 +269,66 @@
         
         .masonry-item {
             break-inside: avoid;
-            margin-bottom: 1.25rem;
+            margin-bottom: 1.35rem;
             overflow: hidden;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px -15px rgb(0 0 0 / 0.15);
+            border-radius: 18px;
+            box-shadow: 0 12px 35px -18px rgb(0 0 0 / 0.16);
         }
         
         .masonry-item img {
             width: 100%;
             display: block;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         .masonry-item:hover img {
-            transform: scale(1.035);
+            transform: scale(1.04);
         }
         
-        /* PRICING - Fun Vibe Cards */
+        /* PRICING - Divided by category + fun names + Package A/B/C */
         .pricing {
-            padding: 6rem 0;
+            padding: 6.5rem 0;
             background: #F5EDE0;
         }
         
         .pricing-header {
             text-align: center;
-            max-width: 620px;
-            margin: 0 auto 3.5rem;
+            max-width: 640px;
+            margin: 0 auto 3.75rem;
         }
         
         .pricing-header h2 {
-            font-size: clamp(2.6rem, 5vw, 3.6rem);
-            margin-bottom: 0.75rem;
+            font-size: clamp(2.7rem, 5vw, 3.8rem);
+            margin-bottom: 0.6rem;
+        }
+        
+        .category {
+            margin-bottom: 3.25rem;
+        }
+        
+        .category-header {
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.35rem;
+            color: var(--ember);
+            margin-bottom: 1.1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #E2D6C4;
         }
         
         .vibe-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 1.75rem;
+            gap: 1.5rem;
         }
         
-        @media (min-width: 700px) { .vibe-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 720px) { .vibe-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1100px) { .vibe-grid { grid-template-columns: repeat(3, 1fr); } }
         
         .vibe-card {
             background: white;
             border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px -15px rgb(0 0 0 / 0.12);
+            box-shadow: 0 10px 30px -15px rgb(0 0 0 / 0.1);
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
             border: 1px solid #EDE4D8;
             display: flex;
@@ -321,42 +336,39 @@
         }
         
         .vibe-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 50px -15px rgb(0 0 0 / 0.18);
+            transform: translateY(-6px);
+            box-shadow: 0 22px 45px -12px rgb(0 0 0 / 0.15);
         }
         
         .vibe-card.selected {
             border-color: var(--ember);
-            box-shadow: 0 0 0 3px rgba(193, 127, 89, 0.15);
+            box-shadow: 0 0 0 4px rgba(193, 127, 89, 0.12);
         }
         
         .vibe-card-header {
-            padding: 1.5rem 1.75rem 1rem;
+            padding: 1.6rem 1.85rem 1.1rem;
         }
         
         .vibe-card-header h3 {
-            font-size: 1.65rem;
+            font-size: 1.55rem;
             color: var(--oak);
-            margin-bottom: 0.35rem;
+            margin-bottom: 0.3rem;
         }
         
         .price {
-            font-size: 2.1rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--ember);
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
         }
         
         .price span {
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 400;
             color: #8B7F72;
         }
         
         .vibe-details {
-            padding: 0 1.75rem 1.75rem;
+            padding: 0 1.85rem 1.6rem;
             flex: 1;
         }
         
@@ -367,31 +379,29 @@
         }
         
         .vibe-details li {
-            padding: 6px 0;
+            padding: 5px 0;
             display: flex;
-            align-items: flex-start;
-            gap: 10px;
+            gap: 9px;
         }
         
         .vibe-details li::before {
             content: "•";
             color: var(--taupe);
-            font-size: 1.4rem;
+            font-size: 1.35rem;
             line-height: 1;
-            margin-top: -2px;
         }
         
         .choose-btn {
-            margin: 0 1.75rem 1.75rem;
-            width: calc(100% - 3.5rem);
-            padding: 14px 24px;
+            margin: 0 1.85rem 1.85rem;
+            width: calc(100% - 3.7rem);
+            padding: 15px 26px;
             background: var(--oak);
             color: white;
             border: none;
             border-radius: 9999px;
             font-size: 0.95rem;
             font-weight: 500;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.6px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -403,20 +413,20 @@
         
         /* CONTACT */
         .contact {
-            padding: 6rem 0;
+            padding: 6.5rem 0;
         }
         
         .contact-card {
-            max-width: 620px;
+            max-width: 640px;
             margin: 0 auto;
             background: white;
-            border-radius: 24px;
-            padding: 3rem 2.5rem;
-            box-shadow: 0 20px 50px -20px rgb(0 0 0 / 0.12);
+            border-radius: 26px;
+            padding: 3.2rem 2.6rem;
+            box-shadow: 0 25px 60px -20px rgb(0 0 0 / 0.12);
         }
         
         .contact-card h2 {
-            font-size: 2.4rem;
+            font-size: 2.45rem;
             text-align: center;
             margin-bottom: 0.5rem;
         }
@@ -424,28 +434,28 @@
         .contact-card p {
             text-align: center;
             color: #8B7F72;
-            margin-bottom: 2.25rem;
+            margin-bottom: 2.4rem;
         }
         
         .form-group {
-            margin-bottom: 1.35rem;
+            margin-bottom: 1.4rem;
         }
         
         .form-group label {
             display: block;
             font-size: 0.9rem;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.45rem;
             color: #5C5148;
         }
         
         .form-group input,
         .form-group textarea {
             width: 100%;
-            padding: 14px 0;
+            padding: 15px 0;
             background: transparent;
             border: none;
             border-bottom: 2px solid #EDE4D8;
-            font-size: 1rem;
+            font-size: 1.02rem;
             font-family: 'Outfit', sans-serif;
             color: var(--oak);
             transition: border-color 0.2s ease;
@@ -458,21 +468,21 @@
         }
         
         .form-group textarea {
-            min-height: 110px;
+            min-height: 120px;
             resize: vertical;
         }
         
         .submit-btn {
             width: 100%;
-            padding: 18px;
+            padding: 19px;
             background: var(--oak);
             color: white;
             border: none;
             border-radius: 9999px;
             font-size: 1rem;
             font-weight: 500;
-            letter-spacing: 1px;
-            margin-top: 1rem;
+            letter-spacing: 1.2px;
+            margin-top: 1.1rem;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -485,7 +495,7 @@
         .footer {
             background: var(--oak);
             color: #EDE4D8;
-            padding: 4rem 0 2.5rem;
+            padding: 4.2rem 0 2.8rem;
         }
         
         .footer-content {
@@ -495,11 +505,11 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 2rem;
+            gap: 2.2rem;
             text-align: center;
         }
         
-        @media (min-width: 700px) {
+        @media (min-width: 720px) {
             .footer-content {
                 flex-direction: row;
                 justify-content: space-between;
@@ -510,41 +520,39 @@
         .footer-logo {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
         }
         
         .footer-logo img {
-            width: 64px;
-            height: 64px;
+            width: 68px;
+            height: 68px;
             border-radius: 9999px;
-            opacity: 0.9;
+            opacity: 0.92;
         }
         
         .footer-logo-text {
-            font-family: 'Playfair Display', Georgia, serif;
-            font-size: 1.5rem;
+            font-family: 'Cinzel', Georgia, serif;
+            font-size: 1.55rem;
             color: white;
         }
         
         .footer-links {
             display: flex;
-            gap: 2rem;
+            gap: 2.1rem;
         }
         
         .footer-links a {
             color: #C7B9A8;
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.92rem;
         }
         
-        .footer-links a:hover {
-            color: white;
-        }
+        .footer-links a:hover { color: white; }
         
         .reveal {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            transform: translateY(45px);
+            transition: all 0.75s cubic-bezier(0.23, 1, 0.32, 1);
         }
         
         .reveal.visible {
@@ -561,17 +569,11 @@
                 right: 0;
                 background: var(--cream);
                 flex-direction: column;
-                padding: 1.5rem;
+                padding: 1.6rem;
                 border-bottom: 1px solid rgba(44, 37, 34, 0.1);
             }
-            
-            .nav-links.active {
-                display: flex;
-            }
-            
-            .hamburger {
-                display: flex;
-            }
+            .nav-links.active { display: flex; }
+            .hamburger { display: flex; }
         }
     </style>
 </head>
@@ -581,41 +583,44 @@
     <nav class="nav">
         <div class="nav-content">
             <a href="#" class="logo">
-                <img src="logo.jpg" alt="Elizabeth Aven Photography">
+                <img src="logo.jpg" alt="Elizabeth Aven Photography logo">
                 <span class="logo-text">Elizabeth Aven</span>
             </a>
             
             <ul class="nav-links" id="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#work">Work</a></li>
-                <li><a href="#pricing">The Collection</a></li>
+                <li><a href="#memory">The Memory Collection</a></li>
+                <li><a href="#pricing">Packages</a></li>
                 <li><a href="#contact">Inquire</a></li>
             </ul>
             
             <button class="hamburger" id="hamburger" aria-label="Menu">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
         </div>
     </nav>
 
-    <!-- HERO - Clean, no overlap -->
+    <!-- HERO with particles + enlarged logo -->
     <section class="hero section">
+        <canvas id="hero-canvas"></canvas>
+        
         <div class="hero-grid">
             <div class="hero-text">
                 <h1>Capturing</h1>
                 <div class="present">The Present</div>
                 <p>Intimate portraits and honest moments in the golden light of Texas.</p>
+                
+                <!-- Enlarged logo under tagline -->
+                <img src="logo.jpg" alt="Elizabeth Aven Photography" class="hero-logo">
             </div>
             
             <div class="hero-image">
-                <img src="couple1.jpg" alt="Couple embracing at golden hour in a Texas field">
+                <img src="couple1.jpg" alt="Couple embracing at golden hour">
             </div>
         </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT - Full portrait, no cropping -->
     <section id="about" class="about">
         <div class="section about-grid">
             <div class="about-text">
@@ -627,161 +632,158 @@
                 <p>There’s nothing more rewarding than seeing my clients’ faces light up and capturing the warmth, love, and connection in every photograph. For me, this isn’t just a business—it’s a true source of joy.</p>
             </div>
             
-            <div class="portrait">
+            <div class="portrait-frame">
                 <img src="lizzie.png" alt="Elizabeth Aven smiling with her camera">
             </div>
         </div>
     </section>
 
-    <!-- RECENT WORK -->
-    <section id="work" class="work section">
-        <div class="work-header">
-            <h2>Recent Work</h2>
+    <!-- THE MEMORY COLLECTION (replaced Recent Work) -->
+    <section id="memory" class="memory section">
+        <div class="memory-header">
+            <h2>The Memory Collection</h2>
         </div>
         
         <div class="masonry">
-            <div class="masonry-item">
-                <img src="senior1.jpg" alt="High school senior portrait in golden light">
-            </div>
-            <div class="masonry-item">
-                <img src="family1.jpg" alt="Family laughing together outdoors">
-            </div>
-            <div class="masonry-item">
-                <img src="headshot2.jpg" alt="Warm professional headshot">
-            </div>
-            <div class="masonry-item">
-                <img src="senior3.jpg" alt="Senior portrait session">
-            </div>
+            <div class="masonry-item"><img src="senior1.jpg" alt="Senior portrait"></div>
+            <div class="masonry-item"><img src="family1.jpg" alt="Family session"></div>
+            <div class="masonry-item"><img src="headshot2.jpg" alt="Headshot"></div>
+            <div class="masonry-item"><img src="senior3.jpg" alt="Senior portrait"></div>
         </div>
     </section>
 
-    <!-- PRICING - Completely redone as fun Vibe Cards -->
+    <!-- PRICING - Divided by category + fun names + Package A/B/C -->
     <section id="pricing" class="pricing">
         <div class="section">
             <div class="pricing-header">
                 <span class="label" style="color: var(--ember);">The Memory Collection</span>
-                <h2>How We Capture Your Present</h2>
-                <p style="margin-top: 1rem; color: #5C5148;">Choose the vibe that feels like you. Every package includes an online gallery and print release.</p>
+                <h2>Packages &amp; Investment</h2>
+                <p style="margin-top: 0.9rem; color: #5C5148;">Every session includes a beautiful online gallery and print release.</p>
             </div>
             
-            <div class="vibe-grid">
-                
-                <!-- Couples -->
-                <div class="vibe-card" data-package="The Quiet Yes - Couples">
-                    <div class="vibe-card-header">
-                        <h3>The Quiet Yes</h3>
-                        <div class="price">$250 <span>/ 30 min</span></div>
+            <!-- Couples -->
+            <div class="category">
+                <div class="category-header">Couples &amp; Engagements</div>
+                <div class="vibe-grid">
+                    <div class="vibe-card" data-package="Package A — The Quiet Yes">
+                        <div class="vibe-card-header">
+                            <h3>Package A — The Quiet Yes</h3>
+                            <div class="price">$250</div>
+                        </div>
+                        <div class="vibe-details">
+                            <ul>
+                                <li>30-minute session</li>
+                                <li>1 location • 1 look</li>
+                                <li>Online gallery + print release</li>
+                            </ul>
+                        </div>
+                        <button class="choose-btn" onclick="selectPackage(this, 'Package A — The Quiet Yes (Couples)')">Choose this package</button>
                     </div>
-                    <div class="vibe-details">
-                        <ul>
-                            <li>1 location • 1 look</li>
-                            <li>Beautiful online gallery</li>
-                            <li>Print release included</li>
-                            <li>Perfect for engagements, anniversaries &amp; just-because love</li>
-                        </ul>
+                    
+                    <div class="vibe-card" data-package="Package B — Golden Hour Promises">
+                        <div class="vibe-card-header">
+                            <h3>Package B — Golden Hour Promises</h3>
+                            <div class="price">$350</div>
+                        </div>
+                        <div class="vibe-details">
+                            <ul>
+                                <li>50–60 minute session</li>
+                                <li>2–3 locations • 3 looks</li>
+                                <li>Online gallery + print release</li>
+                            </ul>
+                        </div>
+                        <button class="choose-btn" onclick="selectPackage(this, 'Package B — Golden Hour Promises (Couples)')">Choose this package</button>
                     </div>
-                    <button class="choose-btn" onclick="selectPackage(this, 'The Quiet Yes - Couples')">Choose this vibe</button>
                 </div>
-                
-                <div class="vibe-card" data-package="Golden Hour Promises - Couples">
-                    <div class="vibe-card-header">
-                        <h3>Golden Hour Promises</h3>
-                        <div class="price">$350 <span>/ 50-60 min</span></div>
-                    </div>
-                    <div class="vibe-details">
-                        <ul>
-                            <li>2–3 locations • 3 looks</li>
-                            <li>Beautiful online gallery</li>
-                            <li>Print release included</li>
-                            <li>Our most popular choice for couples who want to slow down and savor</li>
-                        </ul>
-                    </div>
-                    <button class="choose-btn" onclick="selectPackage(this, 'Golden Hour Promises - Couples')">Choose this vibe</button>
-                </div>
-                
-                <!-- Family -->
-                <div class="vibe-card" data-package="Little Wildflowers - Family">
-                    <div class="vibe-card-header">
-                        <h3>Little Wildflowers</h3>
-                        <div class="price">$250 <span>/ 30 min</span></div>
-                    </div>
-                    <div class="vibe-details">
-                        <ul>
-                            <li>1 location • 1 look</li>
-                            <li>Beautiful online gallery</li>
-                            <li>Print release included</li>
-                            <li>Ideal for young families who want natural, joyful photos</li>
-                        </ul>
-                    </div>
-                    <button class="choose-btn" onclick="selectPackage(this, 'Little Wildflowers - Family')">Choose this vibe</button>
-                </div>
-                
-                <div class="vibe-card" data-package="Porch Swing Stories - Family">
-                    <div class="vibe-card-header">
-                        <h3>Porch Swing Stories</h3>
-                        <div class="price">$350 <span>/ 40-50 min</span></div>
-                    </div>
-                    <div class="vibe-details">
-                        <ul>
-                            <li>2 locations • 2 looks</li>
-                            <li>Beautiful online gallery</li>
-                            <li>Print release included</li>
-                            <li>Perfect for growing families who want variety and connection</li>
-                        </ul>
-                    </div>
-                    <button class="choose-btn" onclick="selectPackage(this, 'Porch Swing Stories - Family')">Choose this vibe</button>
-                </div>
-                
-                <div class="vibe-card" data-package="The Whole Herd - Extended Family">
-                    <div class="vibe-card-header">
-                        <h3>The Whole Herd</h3>
-                        <div class="price">$430 <span>/ 60 min</span></div>
-                    </div>
-                    <div class="vibe-details">
-                        <ul>
-                            <li>Extended family (7+ people)</li>
-                            <li>Beautiful online gallery</li>
-                            <li>Print release included</li>
-                            <li>One hour to gather everyone you love in one place</li>
-                        </ul>
-                    </div>
-                    <button class="choose-btn" onclick="selectPackage(this, 'The Whole Herd - Extended Family')">Choose this vibe</button>
-                </div>
-                
-                <!-- Seniors -->
-                <div class="vibe-card" data-package="Cap Toss - Seniors">
-                    <div class="vibe-card-header">
-                        <h3>Cap Toss</h3>
-                        <div class="price">$250 <span>/ 30 min</span></div>
-                    </div>
-                    <div class="vibe-details">
-                        <ul>
-                            <li>1 location • 1 look</li>
-                            <li>Beautiful online gallery</li>
-                            <li>Print release included</li>
-                            <li>Clean, confident senior portraits that feel like you</li>
-                        </ul>
-                    </div>
-                    <button class="choose-btn" onclick="selectPackage(this, 'Cap Toss - Seniors')">Choose this vibe</button>
-                </div>
-                
-                <div class="vibe-card" data-package="Road to Forever - Seniors">
-                    <div class="vibe-card-header">
-                        <h3>Road to Forever</h3>
-                        <div class="price">$350 <span>/ 50-60 min</span></div>
-                    </div>
-                    <div class="vibe-details">
-                        <ul>
-                            <li>2–3 locations • 3 looks</li>
-                            <li>Beautiful online gallery</li>
-                            <li>Print release included</li>
-                            <li>The full experience for seniors who want variety and personality</li>
-                        </ul>
-                    </div>
-                    <button class="choose-btn" onclick="selectPackage(this, 'Road to Forever - Seniors')">Choose this vibe</button>
-                </div>
-                
             </div>
+            
+            <!-- Family -->
+            <div class="category">
+                <div class="category-header">Family Sessions</div>
+                <div class="vibe-grid">
+                    <div class="vibe-card" data-package="Package A — Little Wildflowers">
+                        <div class="vibe-card-header">
+                            <h3>Package A — Little Wildflowers</h3>
+                            <div class="price">$250</div>
+                        </div>
+                        <div class="vibe-details">
+                            <ul>
+                                <li>30-minute session</li>
+                                <li>1 location • 1 look</li>
+                                <li>Online gallery + print release</li>
+                            </ul>
+                        </div>
+                        <button class="choose-btn" onclick="selectPackage(this, 'Package A — Little Wildflowers (Family)')">Choose this package</button>
+                    </div>
+                    
+                    <div class="vibe-card" data-package="Package B — Porch Swing Stories">
+                        <div class="vibe-card-header">
+                            <h3>Package B — Porch Swing Stories</h3>
+                            <div class="price">$350</div>
+                        </div>
+                        <div class="vibe-details">
+                            <ul>
+                                <li>40–50 minute session</li>
+                                <li>2 locations • 2 looks</li>
+                                <li>Online gallery + print release</li>
+                            </ul>
+                        </div>
+                        <button class="choose-btn" onclick="selectPackage(this, 'Package B — Porch Swing Stories (Family)')">Choose this package</button>
+                    </div>
+                    
+                    <div class="vibe-card" data-package="Package C — The Whole Herd">
+                        <div class="vibe-card-header">
+                            <h3>Package C — The Whole Herd</h3>
+                            <div class="price">$430</div>
+                        </div>
+                        <div class="vibe-details">
+                            <ul>
+                                <li>60-minute session</li>
+                                <li>Extended family (7+)</li>
+                                <li>Online gallery + print release</li>
+                            </ul>
+                        </div>
+                        <button class="choose-btn" onclick="selectPackage(this, 'Package C — The Whole Herd (Family)')">Choose this package</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seniors -->
+            <div class="category">
+                <div class="category-header">Seniors</div>
+                <div class="vibe-grid">
+                    <div class="vibe-card" data-package="Package A — Cap Toss">
+                        <div class="vibe-card-header">
+                            <h3>Package A — Cap Toss</h3>
+                            <div class="price">$250</div>
+                        </div>
+                        <div class="vibe-details">
+                            <ul>
+                                <li>30-minute session</li>
+                                <li>1 location • 1 look</li>
+                                <li>Online gallery + print release</li>
+                            </ul>
+                        </div>
+                        <button class="choose-btn" onclick="selectPackage(this, 'Package A — Cap Toss (Seniors)')">Choose this package</button>
+                    </div>
+                    
+                    <div class="vibe-card" data-package="Package B — Road to Forever">
+                        <div class="vibe-card-header">
+                            <h3>Package B — Road to Forever</h3>
+                            <div class="price">$350</div>
+                        </div>
+                        <div class="vibe-details">
+                            <ul>
+                                <li>50–60 minute session</li>
+                                <li>2–3 locations • 3 looks</li>
+                                <li>Online gallery + print release</li>
+                            </ul>
+                        </div>
+                        <button class="choose-btn" onclick="selectPackage(this, 'Package B — Road to Forever (Seniors)')">Choose this package</button>
+                    </div>
+                </div>
+            </div>
+            
         </div>
     </section>
 
@@ -789,14 +791,14 @@
     <section id="contact" class="contact section">
         <div class="contact-card">
             <h2>Let’s Create Together</h2>
-            <p>Tell me about the moments you want to remember. I’ll get back to you within 48 hours.</p>
+            <p>Tell me about the moments you want to remember. I’ll reply within 48 hours.</p>
             
             <form action="https://formsubmit.co/elizabeth@elizabethavenphotography.com" method="POST">
                 <input type="hidden" name="_subject" value="New Inquiry • Elizabeth Aven Photography">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_template" value="table">
                 
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem;">
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.3rem;">
                     <div class="form-group">
                         <label>First Name</label>
                         <input type="text" name="First Name" required>
@@ -813,13 +815,13 @@
                 </div>
                 
                 <div class="form-group">
-                    <label>Session Type / Vibe</label>
-                    <input type="text" id="session-type" name="Session Type" placeholder="e.g. Golden Hour Promises - Couples" required>
+                    <label>Session Type / Package</label>
+                    <input type="text" id="session-type" name="Session Type" placeholder="e.g. Package B — Golden Hour Promises (Couples)" required>
                 </div>
                 
                 <div class="form-group">
                     <label>Tell me about your vision</label>
-                    <textarea name="Message" placeholder="What are you celebrating? Any locations or vibes you love?" required></textarea>
+                    <textarea name="Message" placeholder="What are you celebrating? Any locations or feelings you love?" required></textarea>
                 </div>
                 
                 <button type="submit" class="submit-btn">Send My Inquiry</button>
@@ -834,13 +836,13 @@
                 <img src="logo.jpg" alt="Elizabeth Aven">
                 <div>
                     <div class="footer-logo-text">Elizabeth Aven</div>
-                    <div style="font-size: 0.85rem; opacity: 0.7;">Photography • Navasota, Texas</div>
+                    <div style="font-size: 0.85rem; opacity: 0.65;">Photography • Navasota, Texas</div>
                 </div>
             </div>
             
             <div class="footer-links">
-                <a href="https://instagram.com" target="_blank">Instagram</a>
-                <a href="https://facebook.com" target="_blank">Facebook</a>
+                <a href="#" target="_blank">Instagram</a>
+                <a href="#" target="_blank">Facebook</a>
             </div>
             
             <div style="font-size: 0.85rem; opacity: 0.6;">
@@ -850,25 +852,20 @@
     </footer>
 
     <script>
-        // Mobile hamburger menu
+        // Mobile menu
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('nav-links');
         
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
-            hamburger.classList.toggle('active');
         });
         
-        // Close mobile menu when clicking a link
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
+            link.addEventListener('click', () => navLinks.classList.remove('active'));
         });
         
-        // Scroll reveal with IntersectionObserver
+        // Scroll reveal
         const reveals = document.querySelectorAll('.reveal');
-        
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -876,54 +873,103 @@
                     observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 0.15 });
+        }, { threshold: 0.12 });
         
         reveals.forEach(el => observer.observe(el));
         
-        // Signature element: Interactive package selection
+        // Signature: Package selection that fills form + scrolls
         function selectPackage(button, packageName) {
-            // Deselect all cards
-            document.querySelectorAll('.vibe-card').forEach(card => {
-                card.classList.remove('selected');
-            });
+            document.querySelectorAll('.vibe-card').forEach(card => card.classList.remove('selected'));
+            button.closest('.vibe-card').classList.add('selected');
             
-            // Select this card
-            const card = button.closest('.vibe-card');
-            card.classList.add('selected');
+            const input = document.getElementById('session-type');
+            input.value = packageName;
             
-            // Fill the form
-            const sessionInput = document.getElementById('session-type');
-            sessionInput.value = packageName;
-            
-            // Smooth scroll to contact
             setTimeout(() => {
-                document.getElementById('contact').scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+                document.getElementById('contact').scrollIntoView({ behavior: 'smooth', block: 'start' });
                 
-                // Brief highlight on the input
-                sessionInput.style.transition = 'all 0.3s ease';
-                sessionInput.style.boxShadow = '0 0 0 3px rgba(193, 127, 89, 0.2)';
-                
+                input.style.boxShadow = '0 0 0 4px rgba(193, 127, 89, 0.18)';
                 setTimeout(() => {
-                    sessionInput.style.boxShadow = 'none';
-                }, 1600);
-            }, 450);
+                    input.style.boxShadow = 'none';
+                }, 1400);
+            }, 420);
         }
         
-        // Optional: Add subtle parallax to hero image on desktop
-        const heroImg = document.querySelector('.hero-image img');
-        if (heroImg && window.innerWidth > 900) {
-            window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                heroImg.style.transform = `translateY(${scrolled * 0.03}px)`;
-            });
+        // Elegant subtle golden particles in hero only
+        function initParticles() {
+            const canvas = document.getElementById('hero-canvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d', { alpha: true });
+            let particles = [];
+            let w, h;
+            
+            function resize() {
+                w = canvas.width = canvas.offsetWidth;
+                h = canvas.height = canvas.offsetHeight;
+            }
+            
+            window.addEventListener('resize', resize);
+            resize();
+            
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * w;
+                    this.y = Math.random() * h * 1.1;
+                    this.size = Math.random() * 2.2 + 0.8;
+                    this.speed = Math.random() * 0.35 + 0.12;
+                    this.opacity = Math.random() * 0.35 + 0.15;
+                    this.angle = Math.random() * Math.PI * 2;
+                }
+                update() {
+                    this.y -= this.speed;
+                    this.x += Math.sin(this.angle) * 0.25;
+                    this.angle += 0.008;
+                    
+                    if (this.y < -10) {
+                        this.reset();
+                        this.y = h + 10;
+                    }
+                }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(200, 140, 90, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+            
+            for (let i = 0; i < 28; i++) {
+                particles.push(new Particle());
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, w, h);
+                particles.forEach(p => {
+                    p.update();
+                    p.draw();
+                });
+                requestAnimationFrame(animate);
+            }
+            
+            // Respect reduced motion
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                animate();
+            } else {
+                canvas.style.display = 'none';
+            }
         }
         
-        // Keyboard accessibility for package buttons
+        window.onload = function() {
+            initParticles();
+        };
+        
+        // Keyboard accessibility
         document.querySelectorAll('.choose-btn').forEach(btn => {
-            btn.setAttribute('aria-label', 'Select this package and go to inquiry form');
+            btn.setAttribute('aria-label', 'Select this package and scroll to inquiry form');
         });
     </script>
 </body>
