@@ -10,12 +10,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&amp;family=Lora:wght@400;500;700&amp;display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0A0C0F;
-  --panel: #161B20;
+  --bg: #06080A;
+  --panel: #0F1318;
   --gold: #C9B38A;
   --ivory: #F4F0E6;
-  --teal: #0F2C3A;
-  --text-muted: #C9B8A8;
+  --text-muted: #B8A99A;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -28,14 +27,12 @@ body {
   overflow-x: hidden;
 }
 
-/* Elegant typography & spacing */
 h1, h2, h3, .display {
   font-family: 'Playfair Display', Georgia, serif;
   font-weight: 700;
   line-height: 1.1;
 }
 .display { font-size: clamp(3.2rem, 8vw, 5.8rem); letter-spacing: -0.02em; }
-h2 { font-size: clamp(2.1rem, 5vw, 2.8rem); margin-bottom: 1rem; }
 .section-title {
   font-size: clamp(1.65rem, 4vw, 2.1rem);
   position: relative;
@@ -58,7 +55,7 @@ nav {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(10,12,15,0.92);
+  background: rgba(6,8,10,0.94);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid rgba(201,179,138,0.1);
   transition: all 0.3s ease;
@@ -107,7 +104,7 @@ nav {
   cursor: pointer;
 }
 
-/* Hero */
+/* Hero with particles */
 .hero {
   min-height: 100dvh;
   display: flex;
@@ -115,7 +112,14 @@ nav {
   justify-content: center;
   position: relative;
   padding: 0 2rem;
-  background: radial-gradient(circle at 50% 30%, #161B20 0%, #0A0C0F 70%);
+  background: radial-gradient(circle at 50% 30%, #101418 0%, #06080A 70%);
+  overflow: hidden;
+}
+#particles {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 .hero-content {
   text-align: center;
@@ -124,7 +128,7 @@ nav {
   z-index: 2;
 }
 .hero .logo-hero {
-  width: 168px;
+  width: 210px;
   height: auto;
   margin: 0 auto 2.25rem;
   filter: drop-shadow(0 10px 30px rgba(0,0,0,0.6));
@@ -150,11 +154,12 @@ nav {
   transform: translateX(-50%);
   font-size: 0.8rem;
   letter-spacing: 2px;
-  opacity: 0.6;
+  opacity: 0.55;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  z-index: 2;
 }
 
 /* General sections */
@@ -167,48 +172,7 @@ section {
   section { padding: 4rem 1.5rem; }
 }
 
-/* Story section - editorial feel */
-.story {
-  background: var(--panel);
-  border-radius: 4px;
-  padding: 4.5rem 3.5rem;
-  position: relative;
-}
-.story::before {
-  content: '';
-  position: absolute;
-  top: 40px;
-  left: 3.5rem;
-  width: 1px;
-  height: calc(100% - 120px);
-  background: linear-gradient(to bottom, var(--gold), transparent);
-  opacity: 0.25;
-}
-.story-text {
-  font-size: 1.08rem;
-  max-width: 780px;
-  margin-left: 2.5rem;
-}
-.story-text p {
-  margin-bottom: 1.35rem;
-  color: #EDE8DF;
-}
-.pull-quote {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.65rem;
-  line-height: 1.25;
-  color: var(--gold);
-  margin: 2.25rem 0 2.25rem 2.5rem;
-  padding-left: 1.5rem;
-  border-left: 3px solid var(--gold);
-}
-.post-attribution {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-  margin-top: 1.5rem;
-}
-
-/* Menu - signature interactive element */
+/* Menu */
 .menu-header {
   display: flex;
   align-items: flex-end;
@@ -249,7 +213,7 @@ section {
   gap: 1rem;
 }
 .menu-item:hover, .menu-item.active {
-  background: #1F252B;
+  background: #161B20;
   border-color: rgba(201,179,138,0.2);
   transform: translateX(4px);
 }
@@ -295,7 +259,7 @@ section {
   font-style: italic;
 }
 
-/* Gallery - asymmetric bento */
+/* Gallery */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -325,7 +289,7 @@ section {
 .gallery-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to bottom, transparent, rgba(10,12,15,0.65));
+  background: linear-gradient(to bottom, transparent, rgba(6,8,10,0.7));
   display: flex;
   align-items: flex-end;
   padding: 1.5rem;
@@ -340,7 +304,7 @@ section {
   color: var(--gold);
 }
 
-/* Owners section */
+/* Owners section (now carries the community gratitude) */
 .owners {
   background: var(--panel);
   border-radius: 4px;
@@ -361,7 +325,7 @@ section {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  min-height: 420px;
+  min-height: 460px;
   display: block;
 }
 .owners-content {
@@ -372,11 +336,25 @@ section {
 }
 .owners-content h3 {
   font-size: 1.55rem;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.1rem;
 }
 .owners-content p {
   color: #E8E0D0;
-  margin-bottom: 1.1rem;
+  margin-bottom: 1.15rem;
+}
+.community-quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  line-height: 1.35;
+  color: var(--gold);
+  margin: 1.6rem 0 1.6rem;
+  padding-left: 1.25rem;
+  border-left: 3px solid var(--gold);
+}
+.community-attribution {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  font-style: italic;
 }
 
 /* Reserve form */
@@ -405,7 +383,7 @@ section {
 .input-group input,
 .input-group textarea {
   width: 100%;
-  background: #111518;
+  background: #0A0E12;
   border: 1px solid rgba(201,179,138,0.2);
   color: var(--ivory);
   padding: 0.95rem 1.15rem;
@@ -428,7 +406,7 @@ section {
   justify-content: center;
   gap: 10px;
   background: var(--gold);
-  color: #0A0C0F;
+  color: #06080A;
   font-weight: 600;
   font-size: 0.95rem;
   padding: 1rem 2.35rem;
@@ -455,7 +433,7 @@ section {
 }
 .btn-outline:hover {
   background: var(--gold);
-  color: #0A0C0F;
+  color: #06080A;
 }
 
 /* Scroll reveals */
@@ -487,7 +465,7 @@ footer a { color: var(--gold); text-decoration: none; }
     top: 100%;
     left: 0;
     right: 0;
-    background: #0A0C0F;
+    background: #06080A;
     flex-direction: column;
     padding: 2rem;
     gap: 1.5rem;
@@ -509,7 +487,6 @@ footer a { color: var(--gold); text-decoration: none; }
     </a>
     
     <ul class="nav-links" id="navLinks">
-      <li><a href="#story">Our Story</a></li>
       <li><a href="#menu">The Menu</a></li>
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#owners">The Pickles</a></li>
@@ -522,6 +499,9 @@ footer a { color: var(--gold); text-decoration: none; }
 
 <!-- HERO -->
 <header class="hero">
+  <!-- Subtle animated grey particles -->
+  <canvas id="particles"></canvas>
+  
   <div class="hero-content">
     <img src="logo.png" alt="The Cove Seafood" class="logo-hero">
     
@@ -540,25 +520,6 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 </header>
 
-<!-- STORY -->
-<section id="story" class="story reveal">
-  <h2 class="section-title" style="margin-left:2.5rem;">What a Friday night felt like.</h2>
-  
-  <div class="story-text">
-    <p>Thank you to everyone who came out and filled every table, every chair, even our take-out orders. The support means more to us than you’ll ever know.</p>
-    
-    <p>Hearing guests tell us that it was the best plate they’ve ever had is one of the greatest compliments we could receive. We don’t take those words lightly, and they inspire us to keep raising the bar every single day.</p>
-    
-    <div class="pull-quote">
-      “If you’re looking for a little vacation without leaving Paris, Texas, there must be something special happening here.”
-    </div>
-    
-    <p>We kindly ask for a little patience with specialty orders. Fresh, high-quality seafood takes time, and every plate is prepared with care. If you love spice, hate spice, or fall somewhere in between, let us know. We can adjust anything to fit your taste.</p>
-    
-    <p class="post-attribution">— Reilly Pickle, The Cove Seafood</p>
-  </div>
-</section>
-
 <!-- MENU -->
 <section id="menu" class="reveal">
   <div class="menu-header">
@@ -573,16 +534,14 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 
   <div class="menu-container">
-    <!-- Menu List -->
     <div class="menu-list" id="menuList">
       <!-- Populated by JS -->
     </div>
 
-    <!-- Live Preview Pane -->
     <div class="preview-pane" id="previewPane">
       <h4 id="previewTitle">Hover or tap an item</h4>
       <div class="preview-desc" id="previewDesc">
-        Each dish tells a small story — from nostalgic favorites to bold new adventures. 
+        Each dish tells a small story — from nostalgic favorites to bold new adventures.<br>
         Let us know how you like it prepared.
       </div>
       <div class="preview-hint">Fresh • Honest • Made with care</div>
@@ -611,7 +570,7 @@ footer a { color: var(--gold); text-decoration: none; }
   </div>
 </section>
 
-<!-- OWNERS -->
+<!-- OWNERS (now with community gratitude from Facebook post) -->
 <section id="owners" class="owners reveal">
   <div class="owners-grid">
     <div class="owners-photo">
@@ -620,21 +579,32 @@ footer a { color: var(--gold); text-decoration: none; }
     <div class="owners-content">
       <h3>Reilly &amp; Cooper Pickle</h3>
       <p>We started The Cove because we believe great seafood and genuine hospitality can turn an ordinary evening in Paris, Texas into something you’ll remember for a long time.</p>
-      <p>Every lobster roll, every taco, every risotto is made with the same intention: to give you a reason to slow down and feel taken care of.</p>
-      <p style="margin-top:1.5rem; font-style:italic; color:var(--gold);">Y’all are everything.</p>
+      
+      <div class="community-quote">
+        “Thank you to everyone who came out and filled every table, every chair… The support means more to us than you’ll ever know.”
+      </div>
+      
+      <p>Hearing guests tell us it was the best plate they’ve ever had inspires us to keep raising the bar every single day.</p>
+      
+      <div class="community-quote" style="font-size:1.25rem; margin:1.4rem 0;">
+        “To everyone who continues to support us, thank you. Every visit, every order, every recommendation, and every kind word helps keep this dream alive.<br><br>Y’all are everything.”
+      </div>
     </div>
   </div>
 </section>
 
 <!-- RESERVE -->
 <section id="reserve" class="reveal" style="padding-bottom:5rem;">
-  <div style="text-align:center; max-width:620px; margin:0 auto 3rem;">
-    <h2 class="section-title">Ready to join us?</h2>
-    <p style="color:var(--text-muted); margin-top:0.75rem;">Whether it’s a table for two or a special celebration, we’d love to have you.</p>
+  <div style="text-align:center; max-width:620px; margin:0 auto 2.5rem;">
+    <h2 class="section-title">Let’s make it happen.</h2>
+    <p style="color:var(--text-muted); margin-top:0.75rem;">
+      Text us at <a href="sms:903-905-4081" style="color:var(--gold); text-decoration:underline;">903-905-4081</a><br>
+      or email cooperpickle684@gmail.com
+    </p>
   </div>
 
-  <form class="reserve-form" action="https://formsubmit.co/reservations@thecoveseafood.com" method="POST">
-    <input type="hidden" name="_subject" value="New reservation inquiry from The Cove Seafood website">
+  <form class="reserve-form" action="https://formsubmit.co/cooperpickle684@gmail.com" method="POST">
+    <input type="hidden" name="_subject" value="New inquiry from The Cove Seafood website">
     <input type="hidden" name="_template" value="table">
     <input type="hidden" name="_captcha" value="false">
     <input type="text" name="_honey" style="display:none">
@@ -657,7 +627,7 @@ footer a { color: var(--gold); text-decoration: none; }
     
     <div class="input-group">
       <label for="message">How can we help you?</label>
-      <textarea id="message" name="message" placeholder="I'd love to reserve a table for Friday night... or tell me about today's catch!" required></textarea>
+      <textarea id="message" name="message" placeholder="I'd love to reserve for this weekend... or tell me about today's catch!" required></textarea>
     </div>
     
     <div style="text-align:center; margin-top:1.5rem;">
@@ -673,6 +643,82 @@ footer a { color: var(--gold); text-decoration: none; }
 </footer>
 
 <script>
+// Subtle animated grey particles in hero
+function initParticles() {
+  const canvas = document.getElementById('particles');
+  if (!canvas) return;
+
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
+  const ctx = canvas.getContext('2d', { alpha: true });
+  let w = canvas.offsetWidth;
+  let h = canvas.offsetHeight;
+  canvas.width = w;
+  canvas.height = h;
+
+  let particles = [];
+  const count = 52;
+
+  class Particle {
+    constructor() {
+      this.reset();
+    }
+    reset() {
+      this.x = Math.random() * w;
+      this.y = Math.random() * h;
+      this.size = Math.random() * 1.7 + 0.55;
+      this.speedX = (Math.random() - 0.5) * 0.22;
+      this.speedY = (Math.random() - 0.5) * 0.12 - 0.04;
+      this.alpha = Math.random() * 0.32 + 0.11;
+    }
+    update() {
+      this.x += this.speedX;
+      this.y += this.speedY;
+
+      if (this.x < 0 || this.x > w) this.speedX *= -1;
+      if (this.y < 0) {
+        this.y = h;
+        this.x = Math.random() * w;
+      }
+      if (this.y > h) this.y = 0;
+    }
+    draw() {
+      ctx.fillStyle = `rgba(185, 190, 200, ${this.alpha})`;
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  function createParticles() {
+    particles = [];
+    for (let i = 0; i < count; i++) {
+      particles.push(new Particle());
+    }
+  }
+
+  function animate() {
+    ctx.clearRect(0, 0, w, h);
+    for (let p of particles) {
+      p.update();
+      p.draw();
+    }
+    requestAnimationFrame(animate);
+  }
+
+  createParticles();
+  animate();
+
+  window.addEventListener('resize', () => {
+    w = canvas.offsetWidth;
+    h = canvas.offsetHeight;
+    canvas.width = w;
+    canvas.height = h;
+    createParticles();
+  });
+}
+
 // Mobile hamburger
 const hamburger = document.getElementById('hamburger');
 const navLinks = document.getElementById('navLinks');
@@ -681,147 +727,69 @@ hamburger.addEventListener('click', () => {
   navLinks.classList.toggle('active');
 });
 
-// Menu data with elegant descriptions
+// Menu data
 const menuItems = [
-  {
-    id: 1,
-    name: "Lobster Rolls (2)",
-    category: "Signature",
-    desc: "Sweet, tender lobster lightly dressed and piled into two buttery toasted rolls. A taste of the coast that feels like a vacation."
-  },
-  {
-    id: 2,
-    name: "Crab Cake Bites",
-    category: "Bites",
-    desc: "Golden, delicate crab cakes with just the right seasoning. Small bites that deliver big coastal flavor."
-  },
-  {
-    id: 3,
-    name: "Crab Cake Burger",
-    category: "Sandwich",
-    desc: "Our signature crab cake on a brioche bun with crisp slaw and house remoulade. The ultimate seafood sandwich."
-  },
-  {
-    id: 4,
-    name: "Mahi Burger",
-    category: "Sandwich",
-    desc: "Flaky grilled mahi-mahi with bright slaw and zesty sauce on a toasted bun. Clean, fresh, and satisfying."
-  },
-  {
-    id: 5,
-    name: "Grouper Muffuletta",
-    category: "Sandwich",
-    desc: "A New Orleans classic reimagined with fresh grouper, olive salad, and crusty bread. Nostalgic and bold."
-  },
-  {
-    id: 6,
-    name: "Shrimp Po’ Boy",
-    category: "Sandwich",
-    desc: "Crispy Gulf shrimp piled high on French bread with lettuce, tomato, and our house remoulade."
-  },
-  {
-    id: 7,
-    name: "Mahi Tacos (3)",
-    category: "Tacos",
-    desc: "Grilled mahi with vibrant slaw, pico, and a drizzle of chipotle crema. Bright and full of life."
-  },
-  {
-    id: 8,
-    name: "Shrimp Tacos (3)",
-    category: "Tacos",
-    desc: "Succulent seasoned shrimp tucked into warm tortillas with cabbage, avocado, and fresh lime."
-  },
-  {
-    id: 9,
-    name: "Grouper Tacos (3)",
-    category: "Tacos",
-    desc: "Flaky grouper with light batter or grilled, served with tangy slaw and house salsa."
-  },
-  {
-    id: 10,
-    name: "Shrimp Risotto",
-    category: "From the Kitchen",
-    desc: "Creamy Arborio rice with plump Gulf shrimp, finished with parmesan, herbs, and a bright touch of lemon."
-  },
-  {
-    id: 11,
-    name: "Softshell Crab Sliders",
-    category: "Special",
-    desc: "Delicate softshell crabs lightly fried and nestled in soft buns. A seasonal delicacy done right."
-  },
-  {
-    id: 12,
-    name: "Soft Shell Crawfish Po’ Boy",
-    category: "Special",
-    desc: "Louisiana-inspired crispy crawfish tails on classic po’boy bread, dressed with care."
-  },
-  {
-    id: 13,
-    name: "Smoked Snapper Tacos",
-    category: "Special",
-    desc: "Smoky, tender snapper with vibrant toppings. A bold, unforgettable twist."
-  }
+  { id: 1, name: "Lobster Rolls (2)", category: "Signature", desc: "Sweet, tender lobster lightly dressed and piled into two buttery toasted rolls. A taste of the coast that feels like a vacation." },
+  { id: 2, name: "Crab Cake Bites", category: "Bites", desc: "Golden, delicate crab cakes with just the right seasoning. Small bites that deliver big coastal flavor." },
+  { id: 3, name: "Crab Cake Burger", category: "Sandwich", desc: "Our signature crab cake on a brioche bun with crisp slaw and house remoulade. The ultimate seafood sandwich." },
+  { id: 4, name: "Mahi Burger", category: "Sandwich", desc: "Flaky grilled mahi-mahi with bright slaw and zesty sauce on a toasted bun. Clean, fresh, and satisfying." },
+  { id: 5, name: "Grouper Muffuletta", category: "Sandwich", desc: "A New Orleans classic reimagined with fresh grouper, olive salad, and crusty bread. Nostalgic and bold." },
+  { id: 6, name: "Shrimp Po’ Boy", category: "Sandwich", desc: "Crispy Gulf shrimp piled high on French bread with lettuce, tomato, and our house remoulade." },
+  { id: 7, name: "Mahi Tacos (3)", category: "Tacos", desc: "Grilled mahi with vibrant slaw, pico, and a drizzle of chipotle crema. Bright and full of life." },
+  { id: 8, name: "Shrimp Tacos (3)", category: "Tacos", desc: "Succulent seasoned shrimp tucked into warm tortillas with cabbage, avocado, and fresh lime." },
+  { id: 9, name: "Grouper Tacos (3)", category: "Tacos", desc: "Flaky grouper with light batter or grilled, served with tangy slaw and house salsa." },
+  { id: 10, name: "Shrimp Risotto", category: "From the Kitchen", desc: "Creamy Arborio rice with plump Gulf shrimp, finished with parmesan, herbs, and a bright touch of lemon." },
+  { id: 11, name: "Softshell Crab Sliders", category: "Special", desc: "Delicate softshell crabs lightly fried and nestled in soft buns. A seasonal delicacy done right." },
+  { id: 12, name: "Soft Shell Crawfish Po’ Boy", category: "Special", desc: "Louisiana-inspired crispy crawfish tails on classic po’boy bread, dressed with care." },
+  { id: 13, name: "Smoked Snapper Tacos", category: "Special", desc: "Smoky, tender snapper with vibrant toppings. A bold, unforgettable twist." }
 ];
 
-// Render menu list
 const menuList = document.getElementById('menuList');
 const previewTitle = document.getElementById('previewTitle');
 const previewDesc = document.getElementById('previewDesc');
 
 function renderMenu() {
   menuList.innerHTML = '';
-  
   menuItems.forEach(item => {
     const el = document.createElement('div');
     el.className = 'menu-item';
     el.innerHTML = `
-      <div>
-        <span class="name">${item.name}</span>
-      </div>
+      <div><span class="name">${item.name}</span></div>
       <span class="category">${item.category}</span>
     `;
-    
-    // Hover / tap interaction
     el.addEventListener('mouseenter', () => updatePreview(item, el));
     el.addEventListener('click', () => {
       updatePreview(item, el);
-      // On mobile, keep it highlighted briefly
       if (window.innerWidth < 900) {
-        setTimeout(() => el.classList.remove('active'), 1800);
+        setTimeout(() => el.classList.remove('active'), 1600);
       }
     });
-    
     menuList.appendChild(el);
   });
 }
 
 function updatePreview(item, activeEl) {
-  // Clear previous active states
   document.querySelectorAll('.menu-item').forEach(el => el.classList.remove('active'));
-  
   if (activeEl) activeEl.classList.add('active');
-  
   previewTitle.textContent = item.name;
   previewDesc.innerHTML = item.desc;
 }
 
-// Initialize menu
 renderMenu();
 
-// Set initial preview
+// Initial preview
 setTimeout(() => {
-  const firstItem = document.querySelector('.menu-item');
-  if (firstItem) {
-    const firstData = menuItems[0];
-    previewTitle.textContent = firstData.name;
-    previewDesc.innerHTML = firstData.desc;
-    firstItem.classList.add('active');
+  const first = document.querySelector('.menu-item');
+  if (first) {
+    const data = menuItems[0];
+    previewTitle.textContent = data.name;
+    previewDesc.innerHTML = data.desc;
+    first.classList.add('active');
   }
-}, 800);
+}, 700);
 
-// Scroll reveal with IntersectionObserver
+// Scroll reveals
 const reveals = document.querySelectorAll('.reveal');
-
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
@@ -829,37 +797,25 @@ const observer = new IntersectionObserver((entries) => {
       observer.unobserve(entry.target);
     }
   });
-}, {
-  threshold: 0.12,
-  rootMargin: "0px 0px -80px 0px"
-});
-
+}, { threshold: 0.12, rootMargin: "0px 0px -80px 0px" });
 reveals.forEach(section => observer.observe(section));
 
-// Navbar background on scroll
+// Navbar scroll effect
 const nav = document.querySelector('nav');
 window.addEventListener('scroll', () => {
-  if (window.scrollY > 80) {
-    nav.style.background = 'rgba(10,12,15,0.96)';
-  } else {
-    nav.style.background = 'rgba(10,12,15,0.92)';
-  }
+  nav.style.background = window.scrollY > 80 
+    ? 'rgba(6,8,10,0.97)' 
+    : 'rgba(6,8,10,0.94)';
 });
 
-// Close mobile nav when clicking a link
+// Close mobile menu on link click
 document.querySelectorAll('.nav-links a').forEach(link => {
-  link.addEventListener('click', () => {
-    navLinks.classList.remove('active');
-  });
+  link.addEventListener('click', () => navLinks.classList.remove('active'));
 });
 
-// Keyboard accessibility for menu items
-document.addEventListener('keydown', (e) => {
-  if (e.key === '/' && document.activeElement.tagName === 'BODY') {
-    e.preventDefault();
-    const firstMenuItem = document.querySelector('.menu-item');
-    if (firstMenuItem) firstMenuItem.focus();
-  }
+// Start particles
+window.addEventListener('load', () => {
+  initParticles();
 });
 </script>
 
