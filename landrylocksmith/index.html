@@ -236,6 +236,23 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
+
+        .marquee {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            animation: marquee-scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .marquee:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee-scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
     </style>
 </head>
 <body class="bg-[#0B0B0B] text-[#F0EDE6] overflow-x-hidden">
@@ -345,58 +362,6 @@
                     <div class="text-[#C9A962]/70 text-xs tracking-widest">TRUSTED BY HUNDREDS OF LOCALS</div>
                 </div>
 
-                <!-- Horizontal Trust Scroller -->
-                <div class="mt-6 -mx-8 px-8 overflow-x-auto pb-3 hide-scrollbar">
-                    <div class="flex gap-x-3 min-w-max">
-                        <div class="flex items-center gap-x-3 bg-[#111111] border border-white/10 rounded-2xl px-4 py-[13px] flex-shrink-0">
-                            <div class="w-8 h-8 rounded-xl bg-[#C9A962]/10 flex items-center justify-center flex-shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#C9A962]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M12 8v4l3 3m6-3a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-xs tracking-tight">24/7 EMERGENCY</div>
-                                <div class="text-[10px] text-white/50 -mt-0.5">Always on call</div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-x-3 bg-[#111111] border border-white/10 rounded-2xl px-4 py-[13px] flex-shrink-0">
-                            <div class="w-8 h-8 rounded-xl bg-[#C9A962]/10 flex items-center justify-center flex-shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#C9A962]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 12l2 2 4-4m6 2a9 9 0 01-9 9 9 9 0 01-9-9 9 9 0 019-9 9 9 0 019 9z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-xs tracking-tight">NO HIDDEN FEES</div>
-                                <div class="text-[10px] text-white/50 -mt-0.5">Transparent pricing</div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-x-3 bg-[#111111] border border-white/10 rounded-2xl px-4 py-[13px] flex-shrink-0">
-                            <div class="w-8 h-8 rounded-xl bg-[#C9A962]/10 flex items-center justify-center flex-shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#C9A962]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 8.944 11.922a11.96 11.96 0 01-1.944-.072" />
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-xs tracking-tight">LICENSED • BONDED</div>
-                                <div class="text-[10px] text-white/50 -mt-0.5">Fully insured</div>
-                            </div>
-                        </div>
-
-                        <div class="flex items-center gap-x-3 bg-[#111111] border border-white/10 rounded-2xl px-4 py-[13px] flex-shrink-0">
-                            <div class="w-8 h-8 rounded-xl bg-[#C9A962]/10 flex items-center justify-center flex-shrink-0">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#C9A962]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.25" d="M17 20h5v-2a3 3 0 01-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
-                                </svg>
-                            </div>
-                            <div>
-                                <div class="font-semibold text-xs tracking-tight">FAMILY OWNED</div>
-                                <div class="text-[10px] text-white/50 -mt-0.5">Mason Landry</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
 
@@ -408,6 +373,35 @@
             </svg>
         </div>
     </header>
+
+    <!-- TRUST MARQUEE -->
+    <div class="bg-[#111111] border-b border-white/10 overflow-hidden py-[13px]">
+        <div class="marquee text-sm font-medium text-white/80 tracking-[0.5px]">
+            <!-- First set -->
+            <div class="flex items-center gap-x-3 flex-shrink-0">
+                <span class="text-[#C9A962]">24/7</span> EMERGENCY SERVICE
+            </div>
+            <div class="text-white/30">•</div>
+            <div class="flex-shrink-0">NO HIDDEN FEES</div>
+            <div class="text-white/30">•</div>
+            <div class="flex-shrink-0">LICENSED • BONDED • INSURED</div>
+            <div class="text-white/30">•</div>
+            <div class="flex-shrink-0">FAMILY OWNED &amp; OPERATED</div>
+            <div class="text-white/30">•</div>
+
+            <!-- Duplicate set for seamless loop -->
+            <div class="flex items-center gap-x-3 flex-shrink-0">
+                <span class="text-[#C9A962]">24/7</span> EMERGENCY SERVICE
+            </div>
+            <div class="text-white/30">•</div>
+            <div class="flex-shrink-0">NO HIDDEN FEES</div>
+            <div class="text-white/30">•</div>
+            <div class="flex-shrink-0">LICENSED • BONDED • INSURED</div>
+            <div class="text-white/30">•</div>
+            <div class="flex-shrink-0">FAMILY OWNED &amp; OPERATED</div>
+            <div class="text-white/30">•</div>
+        </div>
+    </div>
 
     <!-- SERVICES SECTION -->
     <section id="services" class="max-w-screen-2xl mx-auto px-8 pt-20 pb-16">
