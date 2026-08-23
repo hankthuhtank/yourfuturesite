@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brassline Barber Co. — Barber Shop Concept</title>
+<meta name="description" content="Brassline Barber Co. — a sharp editorial barbershop concept with service booking, team profiles, shop hours, and a premium neighborhood feel.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#0A0A0A;--paper:#F2EFE7;--brass:#C7A363;--brass2:#E4C88F;--steel:#8F989E;--muted:#A7A49D;--line:rgba(242,239,231,.14);--panel:#111214;--panel2:#17191C;--red:#A84639;--head:'Barlow Condensed',sans-serif;--body:'Manrope',sans-serif}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);background:var(--ink);color:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+::selection{background:var(--brass);color:var(--ink)}
+.wrap{width:min(1160px,92%);margin:0 auto}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.2,.7,.2,1),transform .75s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+.eyebrow{font-family:var(--head);font-size:.78rem;letter-spacing:.28em;text-transform:uppercase;color:var(--brass2)}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(10,10,10,.78);backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:.3s}
+nav.scrolled{border-bottom-color:var(--line)}
+.nav-in{height:74px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-family:var(--head);font-weight:900;font-size:1.55rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;display:flex;align-items:center;gap:10px}
+.brand i{width:24px;height:2px;background:var(--brass);display:inline-block;position:relative}
+.brand i::after{content:"";position:absolute;right:0;top:-4px;width:10px;height:10px;border:2px solid var(--brass);border-radius:50%}
+.nav-links{list-style:none;display:flex;gap:28px;align-items:center}
+.nav-links a{text-decoration:none;text-transform:uppercase;font-family:var(--head);font-weight:600;letter-spacing:.14em;font-size:.82rem;color:rgba(242,239,231,.74);transition:.2s}
+.nav-links a:hover{color:var(--brass2)}
+.nav-book{border:1px solid var(--brass);padding:9px 16px;color:var(--brass2)!important}
+.menu-btn{display:none;background:none;border:1px solid var(--line);color:var(--paper);padding:8px 12px;font-family:var(--head);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+.hero{min-height:100vh;padding:126px 0 66px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(199,163,99,.08) 1px,transparent 1px),linear-gradient(rgba(199,163,99,.05) 1px,transparent 1px);background-size:72px 72px;mask-image:linear-gradient(to bottom,#000,transparent 84%)}
+.hero::after{content:"";position:absolute;width:680px;height:680px;border:1px solid rgba(199,163,99,.13);border-radius:50%;right:-220px;top:80px;box-shadow:0 0 0 80px rgba(199,163,99,.025),0 0 0 160px rgba(199,163,99,.018)}
+.hero-grid{position:relative;z-index:2;display:grid;grid-template-columns:1.1fr .9fr;gap:60px;align-items:center}
+.hero h1{font-family:var(--head);font-size:clamp(4.8rem,11vw,9rem);font-weight:900;text-transform:uppercase;line-height:.78;letter-spacing:-.035em;margin:18px 0 28px}
+.hero h1 span{display:block;color:var(--brass2);padding-left:.48em}
+.hero p{max-width:520px;color:rgba(242,239,231,.64);font-size:1rem}
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;text-transform:uppercase;font-family:var(--head);font-weight:700;letter-spacing:.14em;font-size:.86rem;padding:13px 22px;border:1px solid var(--brass);transition:.25s}
+.btn-fill{background:var(--brass);color:var(--ink)}
+.btn-fill:hover{background:var(--brass2);border-color:var(--brass2);transform:translateY(-2px)}
+.btn-line{color:var(--paper)}.btn-line:hover{color:var(--brass2);transform:translateY(-2px)}
+.shop-card{background:linear-gradient(145deg,var(--panel2),#0d0e10);border:1px solid var(--line);padding:22px;position:relative;box-shadow:0 32px 80px rgba(0,0,0,.45)}
+.shop-card::before{content:"";position:absolute;inset:12px;border:1px solid rgba(199,163,99,.14);pointer-events:none}
+.poster{aspect-ratio:4/5;border:1px solid var(--line);position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,rgba(199,163,99,.14),transparent 38%),#0e0f11;display:grid;place-items:center}
+.poster-lines{position:absolute;inset:0;background:repeating-linear-gradient(115deg,transparent 0 24px,rgba(242,239,231,.025) 24px 26px)}
+.poster-mark{position:relative;width:64%;aspect-ratio:1;display:grid;place-items:center}
+.poster-mark::before,.poster-mark::after{content:"";position:absolute;width:72%;height:12px;background:var(--brass);border-radius:99px;transform-origin:center}
+.poster-mark::before{transform:rotate(42deg)}.poster-mark::after{transform:rotate(-42deg)}
+.ring{position:absolute;width:38px;height:38px;border:7px solid var(--paper);border-radius:50%}
+.r1{left:6%;bottom:19%}.r2{right:6%;bottom:19%}
+.poster-copy{position:absolute;left:24px;right:24px;bottom:24px;border-top:1px solid var(--line);padding-top:14px;display:flex;justify-content:space-between;align-items:end}
+.poster-copy b{font-family:var(--head);font-size:2.2rem;text-transform:uppercase;line-height:.9}.poster-copy span{font-family:var(--head);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:var(--brass2);text-align:right}
+.ticker{border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;background:#0d0e10}
+.ticker-track{display:flex;width:max-content;animation:scroll 28s linear infinite;padding:11px 0}
+.ticker-track span{font-family:var(--head);font-weight:600;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;white-space:nowrap;padding:0 22px;color:rgba(242,239,231,.68)}
+.ticker-track span::after{content:"";display:inline-block;width:28px;height:1px;background:var(--brass);margin-left:44px;vertical-align:middle}
+@keyframes scroll{to{transform:translateX(-50%)}}
+section{padding:92px 0}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:38px}
+.section-head h2{font-family:var(--head);font-size:clamp(2.6rem,6vw,4.2rem);text-transform:uppercase;line-height:.9;max-width:600px}
+.section-head p{max-width:430px;color:rgba(242,239,231,.58);font-size:.92rem}
+.services{background:var(--panel)}
+.service-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.service{padding:28px 24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);min-height:220px;display:flex;flex-direction:column;transition:.25s;position:relative;overflow:hidden}
+.service::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--brass);transform:scaleX(0);transform-origin:left;transition:.3s}
+.service:hover{background:#17181b}.service:hover::after{transform:scaleX(1)}
+.service .num{font-family:var(--head);font-size:.8rem;color:var(--brass2);letter-spacing:.16em}
+.service h3{font-family:var(--head);font-size:1.5rem;text-transform:uppercase;margin-top:auto;margin-bottom:8px}
+.service p{color:rgba(242,239,231,.52);font-size:.82rem;line-height:1.55}
+.team-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:16px}
+.chair{background:var(--panel);border:1px solid var(--line);padding:34px;min-height:360px;position:relative;overflow:hidden}
+.chair.big{display:grid;grid-template-columns:1fr .8fr;gap:30px;align-items:end}
+.chair h3{font-family:var(--head);font-size:clamp(2rem,4vw,3.2rem);text-transform:uppercase;line-height:.9}
+.chair p{color:rgba(242,239,231,.55);font-size:.88rem;margin-top:14px;max-width:420px}
+.profile-art{height:100%;min-height:250px;position:relative;background:linear-gradient(145deg,#17191c,#0c0d0f);border:1px solid var(--line);overflow:hidden}
+.profile-art::before{content:"";position:absolute;width:180px;height:180px;border-radius:50%;border:32px solid rgba(199,163,99,.2);left:50%;top:44%;transform:translate(-50%,-50%)}
+.profile-art::after{content:"";position:absolute;width:130px;height:220px;background:linear-gradient(var(--brass),#6d5735);left:50%;bottom:-76px;transform:translateX(-50%);border-radius:70px 70px 12px 12px;opacity:.68}
+.small-stack{display:grid;grid-template-rows:1fr 1fr;gap:16px}
+.chair.small{min-height:172px}
+.chair small{font-family:var(--head);text-transform:uppercase;letter-spacing:.14em;color:var(--brass2)}
+.booking{background:linear-gradient(120deg,#161719,#0d0e10);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.booking-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:54px;align-items:start}
+.hours{list-style:none;margin-top:26px;border-top:1px solid var(--line)}
+.hours li{display:flex;justify-content:space-between;gap:18px;padding:14px 0;border-bottom:1px solid var(--line);font-size:.9rem}
+.hours b{font-family:var(--head);text-transform:uppercase;letter-spacing:.12em;color:var(--brass2)}
+.book-panel{border:1px solid var(--line);background:var(--panel);padding:30px}
+.book-panel h3{font-family:var(--head);font-size:2rem;text-transform:uppercase;margin-bottom:6px}
+.book-panel>p{color:rgba(242,239,231,.52);font-size:.86rem;margin-bottom:22px}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice{border:1px solid var(--line);padding:14px 15px;cursor:pointer;transition:.2s}
+.choice:hover,.choice.active{border-color:var(--brass);background:rgba(199,163,99,.07)}
+.choice b{font-family:var(--head);display:block;text-transform:uppercase}.choice span{font-size:.75rem;color:rgba(242,239,231,.48)}
+.book-panel .btn{width:100%;margin-top:18px}
+footer{padding:42px 0;border-top:1px solid var(--line)}
+.foot{display:flex;justify-content:space-between;gap:20px;align-items:end;flex-wrap:wrap}
+.foot .brand{font-size:1.25rem}.foot p{font-size:.76rem;color:rgba(242,239,231,.38);max-width:520px;text-align:right}
+@media(max-width:900px){
+.nav-links{display:none}.menu-btn{display:block}.nav-links.open{display:flex;position:fixed;top:74px;left:4%;right:4%;background:var(--panel);border:1px solid var(--line);padding:18px;flex-direction:column;align-items:stretch}.nav-links.open a{display:block;padding:8px 0}
+.hero-grid,.booking-grid{grid-template-columns:1fr}.hero{min-height:auto}.shop-card{max-width:620px}.service-grid{grid-template-columns:1fr 1fr}.team-grid{grid-template-columns:1fr}.chair.big{grid-template-columns:1fr}.small-stack{grid-template-columns:1fr 1fr;grid-template-rows:auto}.section-head{align-items:flex-start;flex-direction:column}.foot p{text-align:left}
+}
+@media(max-width:560px){.service-grid{grid-template-columns:1fr}.choice-grid,.small-stack{grid-template-columns:1fr}.hero h1{font-size:clamp(4rem,22vw,6.4rem)}.poster-copy b{font-size:1.7rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.ticker-track{animation:none;flex-wrap:wrap;width:100%}*{transition-duration:.001s!important}}
+</style>
+</head>
+<body>
+<nav id="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><i></i>BRASSLINE</a>
+    <button class="menu-btn" id="menuBtn">Menu</button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#barbers">Barbers</a></li>
+      <li><a href="#book">Book</a></li>
+      <li><a class="nav-book" href="#book">Reserve a Chair</a></li>
+    </ul>
+  </div>
+</nav>
+<header class="hero" id="top">
+  <div class="wrap hero-grid">
+    <div class="reveal">
+      <span class="eyebrow">Independent cuts · modern craft</span>
+      <h1>Cut with<span>intent.</span></h1>
+      <p>Brassline is a barbershop concept built around sharp editorial typography, straightforward booking, and the feeling of a neighborhood shop that takes the details seriously.</p>
+      <div class="actions">
+        <a class="btn btn-fill" href="#book">Reserve a Chair</a>
+        <a class="btn btn-line" href="#services">View Services</a>
+      </div>
+    </div>
+    <div class="shop-card reveal">
+      <div class="poster">
+        <div class="poster-lines"></div>
+        <div class="poster-mark"><span class="ring r1"></span><span class="ring r2"></span></div>
+        <div class="poster-copy"><b>BRASS<br>LINE</b><span>Barber Co.<br>Est. 2026</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="ticker" aria-hidden="true"><div class="ticker-track">
+  <span>Classic cuts</span><span>Skin fades</span><span>Beard work</span><span>Hot towel finish</span><span>Walk-ins when available</span>
+  <span>Classic cuts</span><span>Skin fades</span><span>Beard work</span><span>Hot towel finish</span><span>Walk-ins when available</span>
+</div></div>
+<main>
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal"><div><span class="eyebrow">The service board</span><h2>No complicated menu. Just good work.</h2></div><p>A premium shop can still be simple to understand. Every service is clear, bookable, and built for mobile.</p></div>
+    <div class="service-grid">
+      <div class="service reveal"><span class="num">01 / 45 MIN</span><h3>Signature Cut</h3><p>Consultation, tailored cut, wash, style, and finish.</p></div>
+      <div class="service reveal"><span class="num">02 / 50 MIN</span><h3>Skin Fade</h3><p>Detailed fade with clean transitions and razor finish.</p></div>
+      <div class="service reveal"><span class="num">03 / 30 MIN</span><h3>Beard Shape</h3><p>Line work, shaping, hot towel, and conditioning.</p></div>
+      <div class="service reveal"><span class="num">04 / 65 MIN</span><h3>Full Service</h3><p>Cut, beard work, wash, hot towel, and finish.</p></div>
+    </div>
+  </div>
+</section>
+<section id="barbers">
+  <div class="wrap">
+    <div class="section-head reveal"><div><span class="eyebrow">The chairs</span><h2>Pick a barber, not a dropdown.</h2></div><p>Profiles give each chair a point of view while keeping the page clean and easy to scan.</p></div>
+    <div class="team-grid">
+      <article class="chair big reveal"><div><small>Chair 01 · shop lead</small><h3>Mason Reid</h3><p>Precision fades, classic taper work, and low-maintenance cuts that still look intentional three weeks later.</p></div><div class="profile-art"></div></article>
+      <div class="small-stack">
+        <article class="chair small reveal"><small>Chair 02</small><h3>Jules Carter</h3><p>Textured cuts and beard work.</p></article>
+        <article class="chair small reveal"><small>Chair 03</small><h3>Andre Cole</h3><p>Traditional barbering and clean tapers.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="booking" id="book">
+  <div class="wrap booking-grid">
+    <div class="reveal">
+      <span class="eyebrow">Book the chair</span>
+      <div class="section-head" style="margin:10px 0 0"><h2>Make the next cut easy to schedule.</h2></div>
+      <ul class="hours"><li><b>Tue–Fri</b><span>9 AM – 7 PM</span></li><li><b>Saturday</b><span>9 AM – 5 PM</span></li><li><b>Sunday</b><span>By appointment</span></li><li><b>Monday</b><span>Closed</span></li></ul>
+    </div>
+    <div class="book-panel reveal">
+      <h3>Choose a service</h3><p>This concept uses a lightweight in-page selector to show how a booking flow can feel native to the brand.</p>
+      <div class="choice-grid" id="choices">
+        <div class="choice active"><b>Signature Cut</b><span>45 minutes</span></div>
+        <div class="choice"><b>Skin Fade</b><span>50 minutes</span></div>
+        <div class="choice"><b>Beard Shape</b><span>30 minutes</span></div>
+        <div class="choice"><b>Full Service</b><span>65 minutes</span></div>
+      </div>
+      <a class="btn btn-fill" href="#top">Continue to Appointment</a>
+    </div>
+  </div>
+</section>
+</main>
+<footer><div class="wrap foot"><a class="brand" href="#top"><i></i>BRASSLINE</a><p>Portfolio concept created for demonstration purposes. Brassline Barber Co. is a fictional brand.</p></div></footer>
+<script>
+const nav=document.getElementById('nav'),btn=document.getElementById('menuBtn'),links=document.getElementById('navLinks');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>20),{passive:true});
+btn.addEventListener('click',()=>links.classList.toggle('open'));
+links.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>links.classList.remove('open')));
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+document.querySelectorAll('.choice').forEach(c=>c.addEventListener('click',()=>{document.querySelectorAll('.choice').forEach(x=>x.classList.remove('active'));c.classList.add('active')}));
+</script>
+</body>
+</html>
