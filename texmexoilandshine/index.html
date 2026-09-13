@@ -167,7 +167,10 @@
             background: rgba(4,4,5,.82);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
-            border-bottom: 1px solid var(--line);
+            /* no border-bottom: that 1px rgba(255,255,255,.085) hairline was the
+               white line sitting across the top of the hero photo on mobile.
+               A soft drop shadow separates the bar without drawing a line. */
+            box-shadow: 0 14px 34px rgba(0,0,0,.55);
         }
         .brand-logo {
             width: 80px;
@@ -203,6 +206,7 @@
             background: #050506;
             /* phone: fill the 4:3 band, focus on the truck */
             --hero-fit: cover;
+            --hero-top: 0px;
             --hero-size: cover;
             --hero-pos: 62% 45%;
             --hero-fx: 62%;
@@ -282,31 +286,39 @@
         }
         @media (min-width: 1024px) {
             .hero-shell {
+                /* The photo is 1672x941. Give it a stage of exactly that shape,
+                   capped at 1600px and CENTRED, then derive the section height
+                   from it. Nothing is ever cropped, and the picture sits in the
+                   middle of the page instead of being shoved against the right
+                   edge with a field of black on the left. */
+                --hero-w: min(100vw, 1600px);
+                --hero-top: 80px;
                 display: flex;
                 align-items: center;
-                /* height tracks width so the photo never has to zoom in to fill
-                   a box wider than 16:9. A fixed max height is exactly what was
-                   cropping the sign and the wet asphalt on wide monitors. */
-                min-height: clamp(660px, 44vw, 940px);
+                min-height: calc(var(--hero-w) / 1.777 + var(--hero-top));
                 padding-top: 80px;
                 overflow: hidden;
             }
             .hero-media {
                 position: absolute;
-                inset: 0;
+                top: 0;
+                bottom: 0;
+                left: 50%;
+                width: var(--hero-w);
+                transform: translateX(-50%);
                 margin-top: 0;
                 aspect-ratio: auto;
-                /* fit the FULL height of the photo, anchored right, and let the
-                   ink background run out to the left under the copy. Nothing is
-                   ever cropped off the top or bottom: whole sign, whole truck,
-                   whole reflection, on every desktop width. */
                 --hero-fit: height;
-                --hero-size: auto 100%;
-                --hero-pos: right center;
+                /* bottom-anchored and short by the nav height, so the top of the
+                   shield sign clears the bar instead of hiding behind it */
+                --hero-size: auto calc(100% - 80px);
+                --hero-pos: center bottom;
             }
             .hero-veil {
                 background:
-                    linear-gradient(90deg, rgba(3,3,4,.97) 0%, rgba(3,3,4,.94) 30%, rgba(3,3,4,.70) 48%, rgba(3,3,4,.12) 70%, rgba(3,3,4,.26) 100%),
+                    /* first and last stops feather the stage edges into the page ink,
+                       so the photo does not stop against a hard vertical seam on wide screens */
+                    linear-gradient(90deg, rgba(5,5,6,1) 0%, rgba(3,3,4,.95) 7%, rgba(3,3,4,.92) 30%, rgba(3,3,4,.70) 48%, rgba(3,3,4,.12) 72%, rgba(3,3,4,.30) 95%, rgba(5,5,6,1) 100%),
                     linear-gradient(0deg, rgba(4,4,5,.88) 0%, transparent 22%);
             }
             .hero-body {
@@ -791,7 +803,9 @@
             if (!media || !canvas) return;
             if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-            const PIXEL_BUDGET = 2400000;   // keeps phones cool
+            // Raised: at 2.4M a 1600x900 hero on a 1.5x screen was rendering
+            // below its CSS size and getting upscaled, which read as extra blur.
+            const PIXEL_BUDGET = 3500000;
             const frame  = document.createElement('canvas');
             const fctx   = frame.getContext('2d');
             const img    = new Image();
@@ -818,7 +832,7 @@
 
             function renderSize() {
                 const r = media.getBoundingClientRect();
-                let dpr = Math.min(window.devicePixelRatio || 1, 2);
+                let dpr = Math.min(window.devicePixelRatio || 1, 1.75);
                 let w = Math.max(1, Math.round(r.width  * dpr));
                 let h = Math.max(1, Math.round(r.height * dpr));
                 if (w * h > PIXEL_BUDGET) {
@@ -836,12 +850,16 @@
                 frame.width = w;
                 frame.height = h;
                 const iw = img.naturalWidth, ih = img.naturalHeight;
-                const mode = getComputedStyle(media).getPropertyValue('--hero-fit').trim();
+                const cs = getComputedStyle(media);
+                const mode = cs.getPropertyValue('--hero-fit').trim();
                 let scale, x, y;
                 if (mode === 'height') {
-                    scale = h / ih;
-                    x = w - iw * scale;   // right anchored
-                    y = 0;
+                    // device px per CSS px, so the nav inset converts correctly
+                    const k = h / Math.max(1, media.getBoundingClientRect().height);
+                    const top = (parseFloat(cs.getPropertyValue('--hero-top')) || 0) * k;
+                    scale = (h - top) / ih;
+                    x = (w - iw * scale) / 2;   // centred
+                    y = top;                    // bottom anchored below the nav
                 } else {
                     const [ox, oy] = focalPoint();
                     scale = Math.max(w / iw, h / ih);
@@ -891,8 +909,11 @@
                         evaporate: 14,
                         trailDropDensity: 0.16,
                         trailDistance: [26, 42],
-                        dropletsPerSeconds: 220,
-                        dropletSize: [8, 22],
+                        // the fine droplet layer is what was hazing the photo:
+                        // every speck refracts through the blurred copy, and they
+                        // build up between passing drops. Thinned right down.
+                        dropletsPerSeconds: 70,
+                        dropletSize: [6, 16],
                         // mist off and blur down: the library draws the SHARP
                         // photo as the base and only bends light inside the
                         // drops themselves, so the truck, the sign and the
